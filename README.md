@@ -9,14 +9,14 @@ added mysql and PHP version information to Admin Index<br />
 added prosilver & prosilver_se templates for better mobile access<br />
 added a bootstrap version of the subSilver template. (FIsubSilver + FIsubIce)<br />
 FIsubSilver is built with:<br />
-  *bootstrap ver 5.2.3<br />
-  *font-awesome ver 6.4.0<br />
+&nbsp;&nbsp;*bootstrap ver 5.2.3<br />
+&nbsp;&nbsp;*font-awesome ver 6.4.0<br />
 updated the user social links to include:<br />
-  *Facebook<br />
-  *Instagram<br />
-  *Pinterest<br />
-  *Twitter<br />
-  *Skype<br />
-  *Telegram<br />
-  *LinkedIn<br />
-  *TikTok<br />
+&nbsp;&nbsp;*Facebook<br />
+&nbsp;&nbsp;*Instagram<br />
+&nbsp;&nbsp;*Pinterest<br />
+&nbsp;&nbsp;*Twitter<br />
+&nbsp;&nbsp;*Skype<br />
+&nbsp;&nbsp;*Telegram<br />
+&nbsp;&nbsp;*LinkedIn<br />
+&nbsp;&nbsp;*TikTok<br />
