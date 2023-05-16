@@ -31,79 +31,81 @@
 <div class="container-fluid mx-0"> 
   <div class="row"> 
     <div class="col mx-2 my-2">
-        
        <div class="container-fluid bodyline mx-0 px-0 pt-0 pb-2">
           <div class="row justify-content-center"> 
 			<div class="col">
-
-<!-- Navbar start -->  
-              <nav class="navbar navbar-expand-sm navbar-light rowpic mt-0 mb-2" aria-label="{SITENAME}">
+            <!-- Navbar begin -->				    
+              <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+                <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+                    id="bd-theme"
+                    type="button"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                    aria-label="Toggle theme (auto)">
+                  <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                  <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                  <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                      <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                      Auto
+                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <nav class="navbar navbar-expand-lg navbar-light rowpic" aria-label="{SITENAME}">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="{U_INDEX}">{SITENAME}</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  <div class="collapse navbar-collapse" id="navbarsExample03">
-                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-                      <li class="nav-item d-xs-block d-sm-none  d-lg-block">
-                        <a class="nav-link text-nowrap navbr" href="{U_INDEX}"><i class="fa-solid fa-house"></i>&nbsp;{L_HOME}</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-nowrap navbr" href="{U_FAQ}"><i class="fa-regular fa-circle-question"></i>&nbsp;{L_FAQ}</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-nowrap navbr" href="{U_SEARCH}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;{L_SEARCH}</a>
-                      </li>
-            		  <!-- BEGIN switch_user_logged_out -->
-                      <li class="nav-item">
-                        <a class="nav-link text-nowrap navbr" href="{U_REGISTER}"><i class="fa-solid fa-door-open fa-fade"></i>&nbsp;{L_REGISTER}</a>
-                      </li>		  
-            		  <!-- END switch_user_logged_out -->
-                      <li class="nav-item">
-                        <a class="nav-link text-nowrap navbr" href="{U_LOGIN_LOGOUT}">
-            				<!-- BEGIN switch_user_logged_in -->
-            				<i class="fa-solid fa-right-from-bracket"></i>
-            				<!-- END switch_user_logged_in -->
-            				<!-- BEGIN switch_user_logged_out -->
-            				<i class="fa-solid fa-right-to-bracket"></i>
-            				<!-- END switch_user_logged_out -->
-            				{L_LOGIN_LOGOUT}
-            			</a>
-                      </li>	
-                      <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-square-caret-down fa fa-2xl"></i></a>
-                        <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item navbr" href="{U_MEMBERLIST}"><i class="fa-regular fa-rectangle-list"></i>&nbsp;{L_MEMBERLIST}</a></li>
-                          <li><a class="dropdown-item navbr" href="{U_GROUP_CP}"><i class="fa-solid fa-users"></i>&nbsp;{L_USERGROUPS}</a></li>
-            		  <!-- BEGIN switch_user_logged_in -->              
-                          <li><a class="dropdown-item navbr" href="{U_PROFILE}"><i class="fa-solid fa-user"></i>&nbsp;{L_PROFILE}</a></li>
-                          <li><a class="dropdown-item navbr" href="{U_PRIVATEMSGS}"><i class="fa-solid fa-message"></i>&nbsp;{PRIVATE_MESSAGE_INFO}</a></li>
-            		  <!-- END switch_user_logged_in -->
-                          <li><a class="dropdown-item navbr" href="#"><i class="fa-solid fa-question"></i>&nbsp;Something else here</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <form action="{U_SEARCH}" method="get" id="search">
-                    <fieldset>
-                      <input name="search_keywords" id="keywords" class="form-control" type="text" placeholder="Search" aria-label="Search">
-                      {S_HIDDEN_FIELDS}
-                    </fieldset>
-                   </form>
+                  <div class="offcanvas offcanvas-end row1" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 align-items-center">
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_INDEX}"><i class="fa-solid fa-house"></i>&nbsp;{L_HOME}</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_FAQ}"><i class="fa-regular fa-circle-question"></i>&nbsp;{L_FAQ}</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_SEARCH}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;{L_SEARCH}</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_MEMBERLIST}"><i class="fa-regular fa-rectangle-list"></i>&nbsp;{L_MEMBERLIST}</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_GROUP_CP}"><i class="fa-solid fa-users"></i>&nbsp;{L_USERGROUPS}</a></li>
+                        <!-- BEGIN switch_user_logged_in -->              
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_PROFILE}"><i class="fa-solid fa-user"></i>&nbsp;{L_PROFILE}</a></li>
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_PRIVATEMSGS}"><i class="fa-solid fa-message"></i>&nbsp;{PRIVATE_MESSAGE_INFO}</a></li>
+                        <!-- END switch_user_logged_in -->
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_LOGIN_LOGOUT}">
+                          <!-- BEGIN switch_user_logged_in -->
+                          <i class="fa-solid fa-right-from-bracket"></i>
+                          <!-- END switch_user_logged_in -->
+                          <!-- BEGIN switch_user_logged_out -->
+                          <i class="fa-solid fa-right-to-bracket"></i>
+                          <!-- END switch_user_logged_out -->
+                          {L_LOGIN_LOGOUT}
+                        </a></li>
+                        <!-- BEGIN switch_user_logged_out -->
+                        <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_REGISTER}"><i class="fa-solid fa-door-open fa-fade"></i>&nbsp;{L_REGISTER}</a></li>		  
+                        <!-- END switch_user_logged_out -->                        
+                      </ul>
+                      <form action="{U_SEARCH}" method="get" id="search">
+                        <fieldset>
+                        <input name="search_keywords" id="keywords" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                        {S_HIDDEN_FIELDS}
+                        </fieldset>
+                      </form>          
+                    </div>
                   </div>
                 </div>
-              </nav>			    
-<!-- Navbar end -->				    
-			    
-			    
-			    
-			    
-
-                        <div class="container-fluid"><a class="navbar-brand" href="{U_INDEX}"><img src="templates/FIsubIce/images/logo_phpBB.gif" alt="{L_INDEX}"></a></div>
-
-
-
-		                <div class="col text-center mb-3"><span class="maintitle align-text-bottom">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}</span></div>
-
+              </nav>
+            <!-- Navbar end -->				    
+            <div class="container-fluid pt-3">
+             <div class="row d-flex align-items-center">
+               <div class="col"><a class="navbar-brand" href="{U_INDEX}"><img src="templates/FIsubIce/images/logo_phpBB.gif" alt="{L_INDEX}"></a></div>
+               <div class="col text-start"><span class="maintitle align-text-bottom">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}</span></div>
+		     </div>
+		    </div>
 		  </div>
 		</div>
 <br />

@@ -3,8 +3,8 @@
 <head>
 {META}
 <meta http-equiv="Content-Type" content="text/html; charset={S_CONTENT_ENCODING}">
-<link rel="stylesheet" href="../templates/FIFIsubIce/css/stylesheet.css" type="text/css">
-<link rel="stylesheet" href="../templates/FIFIsubIce/css/admin.css" type="text/css">
+<link rel="stylesheet" href="../templates/FIsubIce/css/stylesheet.css" type="text/css">
+<link rel="stylesheet" href="../templates/FIsubIce/css/admin.css" type="text/css">
 
 <title>{SITENAME} - {L_PHPBB_ADMIN}</title>
 <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
