@@ -20,7 +20,10 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 $phpbb_root_path = './';
 include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
@@ -372,7 +375,7 @@ $s_auth_can .= ( ( $is_auth['auth_vote'] ) ? $lang['Rules_vote_can'] : $lang['Ru
 
 if ( $is_auth['auth_mod'] )
 {
-	$s_auth_can .= sprintf($lang['Rules_moderate'], '<a href="' . append_sid("modcp.$phpEx?" . POST_FORUM_URL . "=$forum_id&amp;start=" . $start . "&amp;p_sid=" . $userdata['priv_session_id']) . '">', '</a>');
+	$s_auth_can .= sprintf($lang['Rules_moderate'], "<a href=\"modcp.$phpEx?" . POST_FORUM_URL . "=$forum_id&amp;start=" . $start . "&amp;sid=" . $userdata['session_id'] . '">', '</a>');
 }
 
 //
@@ -431,6 +434,8 @@ $template->assign_vars(array(
 	'L_POSTED' => $lang['Posted'],
 	'L_JOINED' => $lang['Joined'],
 	'L_AUTHOR' => $lang['Author'],
+	'L_BUTTON_TOPIC_NEW' => ( $forum_row['forum_status'] == FORUM_LOCKED ) ? $lang['Forum_locked'] : $lang['button_topic_new'], 
+	'L_BUTTON_TOPIC_LOCKED' => $lang['button_topic_locked'],
 
 	'S_AUTH_LIST' => $s_auth_can, 
 

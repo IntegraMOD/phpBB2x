@@ -28,7 +28,10 @@
 *	adapted from the unoficial phpMyAdmin 2.2.0.
 ***************************************************************************/
 
-define('IN_PHPBB', 1);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', 1);
+}
 
 if( !empty($setmodules) )
 {
@@ -209,7 +212,7 @@ function get_table_def_postgresql($table, $crlf)
 
 		$schema_create .= '	' . $row['field'] . ' ' . $row['type'];
 
-		if (eregi('char', $row['type']))
+		if (preg_match('/char/i', $row['type']))
 		{
 			if ($row['lengthvar'] > 0)
 			{
@@ -217,7 +220,7 @@ function get_table_def_postgresql($table, $crlf)
 			}
 		}
 
-		if (eregi('numeric', $row['type']))
+		if (preg_match('/numeric/i', $row['type']))
 		{
 			$schema_create .= '(';
 			$schema_create .= sprintf("%s,%s", (($row['lengthvar'] >> 16) & 0xffff), (($row['lengthvar'] - 4) & 0xffff));
@@ -287,7 +290,7 @@ function get_table_def_postgresql($table, $crlf)
 	{
 		while(list($idx_name, $props) = each($index_rows))
 		{
-			$props['column_names'] = ereg_replace(", $", "" , $props['column_names']);
+			$props['column_names'] = preg_replace("/, $/", "" , $props['column_names']);
 			$index_create .= 'CREATE ' . $props['unique'] . " INDEX $idx_name ON $table (" . $props['column_names'] . ");$crlf";
 		}
 	}
@@ -327,8 +330,8 @@ function get_table_def_postgresql($table, $crlf)
 		$schema_create .= '	CONSTRAINT ' . $row['index_name'] . ' CHECK ' . $row['rcsrc'] . ",$crlf";
 	}
 
-	$schema_create = ereg_replace(',' . $crlf . '$', '', $schema_create);
-	$index_create = ereg_replace(',' . $crlf . '$', '', $index_create);
+	$schema_create = preg_replace('/,/' . $crlf . '$', '', $schema_create);
+	$index_create = preg_replace('/,/' . $crlf . '$', '', $index_create);
 
 	$schema_create .= "$crlf);$crlf";
 
@@ -399,7 +402,7 @@ function get_table_def_mysql($table, $crlf)
 	//
 	// Drop the last ',$crlf' off ;)
 	//
-	$schema_create = ereg_replace(',' . $crlf . '$', "", $schema_create);
+	$schema_create = preg_replace('/,/' . $crlf . '$', "", $schema_create);
 
 	//
 	// Get any Indexed fields from the database...
@@ -447,7 +450,7 @@ function get_table_def_mysql($table, $crlf)
 
 	$schema_create .= "$crlf);";
 
-	if(get_magic_quotes_runtime())
+	if(false)
 	{
 		return(stripslashes($schema_create));
 	}
@@ -508,13 +511,13 @@ function get_table_content_postgresql($table, $handler)
 		for($i = 0; $i < $i_num_fields; $i++)
 		{
 			$strVal = $row[$aryName[$i]];
-			if (eregi("char|text|bool", $aryType[$i]))
+			if (preg_match("/char|text|bool/i", $aryType[$i]))
 			{
 				$strQuote = "'";
 				$strEmpty = "";
 				$strVal = addslashes($strVal);
 			}
-			elseif (eregi("date|timestamp", $aryType[$i]))
+			elseif (preg_match("/date|timestamp/i", $aryType[$i]))
 			{
 				if (empty($strVal))
 				{
@@ -541,10 +544,10 @@ function get_table_content_postgresql($table, $handler)
 
 		}
 
-		$schema_vals = ereg_replace(",$", "", $schema_vals);
-		$schema_vals = ereg_replace("^ ", "", $schema_vals);
-		$schema_fields = ereg_replace(",$", "", $schema_fields);
-		$schema_fields = ereg_replace("^ ", "", $schema_fields);
+		$schema_vals = preg_replace("/,$/", "", $schema_vals);
+		$schema_vals = preg_replace("/^ /", "", $schema_vals);
+		$schema_fields = preg_replace("/,$/", "", $schema_fields);
+		$schema_fields = preg_replace("/^ /", "", $schema_fields);
 
 		//
 		// Take the ordered fields and their associated data and build it
@@ -705,9 +708,9 @@ if( isset($HTTP_GET_VARS['perform']) || isset($HTTP_POST_VARS['perform']) )
 
 			if(!empty($additional_tables))
 			{
-				if(ereg(",", $additional_tables))
+				if(preg_match("/,/", $additional_tables))
 				{
-					$additional_tables = split(",", $additional_tables);
+					$additional_tables = explode(",", $additional_tables);
 
 					for($i = 0; $i < count($additional_tables); $i++)
 					{
@@ -828,6 +831,7 @@ if( isset($HTTP_GET_VARS['perform']) || isset($HTTP_POST_VARS['perform']) )
 
 					case 'mysql':
 					case 'mysql4':
+					case 'mysqli':
 						$table_def_function = "get_table_def_mysql";
 						$table_content_function = "get_table_content_mysql";
 						break;
@@ -975,7 +979,7 @@ if( isset($HTTP_GET_VARS['perform']) || isset($HTTP_POST_VARS['perform']) )
 
 							$result = $db->sql_query($sql);
 
-							if(!$result && ( !(SQL_LAYER == 'postgresql' && eregi("drop table", $sql) ) ) )
+							if(!$result && ( !(SQL_LAYER == 'postgresql' && preg_match("/drop table/i", $sql) ) ) )
 							{
 								message_die(GENERAL_ERROR, "Error importing backup file", "", __LINE__, __FILE__, $sql);
 							}

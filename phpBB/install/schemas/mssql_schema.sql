@@ -2,7 +2,7 @@
 
   mssql_schema.sql for phpBB2 (c) 2001, phpBB Group
 
- $Id$
+ $Id: mssql_schema.sql 5532 2006-02-06 21:32:42Z grahamje $
 
 */
 
@@ -193,7 +193,6 @@ CREATE TABLE [phpbb_sessions] (
 	[session_page] [int] NULL ,
 	[session_logged_in] [smallint] NULL,
 	[session_admin] [smallint] NULL
-	[priv_session_id] [char] (32) NOT NULL ,
 ) ON [PRIMARY]
 GO
 
@@ -370,6 +369,14 @@ CREATE TABLE [phpbb_users] (
 	[user_aim] [varchar] (255) NULL ,
 	[user_yim] [varchar] (255) NULL ,
 	[user_msnm] [varchar] (255) NULL ,
+	[user_fb] [varchar] (255) NULL ,
+	[user_ig] [varchar] (255) NULL ,
+	[user_pt] [varchar] (255) NULL ,
+	[user_twr] [varchar] (255) NULL ,
+	[user_skp] [varchar] (255) NULL ,
+	[user_tg] [varchar] (255) NULL ,
+	[user_li] [varchar] (255) NULL ,
+	[user_tt] [varchar] (255) NULL ,
 	[user_interests] [varchar] (255) NULL ,
 	[user_actkey] [varchar] (32) NULL ,
 	[user_newpasswd] [varchar] (32) NULL ,

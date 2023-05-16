@@ -749,7 +749,9 @@ $lang['Current_version_info'] = 'You are running <b>phpBB %s</b>.';
 $lang['Connect_socket_error'] = 'Unable to open connection to phpBB Server, reported error is:<br />%s';
 $lang['Socket_functions_disabled'] = 'Unable to use socket functions.';
 $lang['Mailing_list_subscribe_reminder'] = 'For the latest information on updates to phpBB, why not <a href="http://www.phpbb.com/support/" target="_new">subscribe to our mailing list</a>.';
-$lang['Version_information'] = 'Version Information';
+$lang['Version_information'] = '<a href="#" onclick="toggle_visibility( \'ver\' );" title="Click for more Information">Version Information</a>';
+$lang['Version_of_PHP'] = 'Version of PHP';
+$lang['Version_of_MySQL'] = 'Version of MySQL';
 
 //
 // Login attempts configuration

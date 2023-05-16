@@ -24,9 +24,12 @@ if ( !defined('IN_PHPBB') )
 	die("Hacking attempt");
 }
 
+//ini_set('display_startup_errors',1); 
+//ini_set('display_errors',1);
+//error_reporting(-1);
+
 //
 error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
-set_magic_quotes_runtime(0); // Disable magic_quotes_runtime
 
 // The following code (unsetting globals)
 // Thanks to Matt Kavanagh and Stefan Esser for providing feedback as well as patch files
@@ -97,7 +100,7 @@ if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals
 // this is a security precaution to prevent someone
 // trying to break out of a SQL statement.
 //
-if( !get_magic_quotes_gpc() )
+if( true )
 {
 	if( is_array($HTTP_GET_VARS) )
 	{

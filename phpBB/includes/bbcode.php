@@ -92,7 +92,7 @@ function prepare_bbcode_template($bbcode_tpl)
 
 	$bbcode_tpl['code_open'] = str_replace('{L_CODE}', $lang['Code'], $bbcode_tpl['code_open']);
 
-	$bbcode_tpl['img'] = str_replace('{URL}', '\\1', get_image_tag_replacement($bbcode_tpl));
+	$bbcode_tpl['img'] = str_replace('{URL}', '\\1', $bbcode_tpl['img']);
 
 	// We do URLs in several different ways..
 	$bbcode_tpl['url1'] = str_replace('{URL}', '\\1', $bbcode_tpl['url']);
@@ -114,31 +114,6 @@ function prepare_bbcode_template($bbcode_tpl)
 	return $bbcode_tpl;
 }
 
-
-/**
-* Disables the img tag for privileged pages. It also implements a compability hack for old templates.
-*/
-function get_image_tag_replacement($bbcode_tpl)
-{
-	global $lang, $HTTP_POST_VARS, $HTTP_GET_VARS;
-	$bb_tmpl = '';
-	if (isset($HTTP_POST_VARS['p_sid']))
-	{
-		if (isset($bbcode_tpl['p_img']))
-		{
-			$bb_tmpl = str_replace('{L_PRIV_IMG}', $lang['Priv_Img'], $bbcode_tpl['p_img']);
-		}
-		else
-		{
-			$bb_tmpl = $lang['Priv_Img'] . ': {URL}';
-		}
-	}
-	else
-	{
-		$bb_tmpl = $bbcode_tpl['img'];
-	}
-	return $bb_tmpl;
-}
 
 /**
  * Does second-pass bbencoding. This should be used before displaying the message in
@@ -253,6 +228,9 @@ function bbencode_second_pass($text, $uid)
 
 } // bbencode_second_pass()
 
+// Need to initialize the random numbers only ONCE
+mt_srand( (double) microtime() * 1000000);
+
 function make_bbcode_uid()
 {
 	// Unique ID for this message..
@@ -305,7 +283,12 @@ function bbencode_first_pass($text, $uid)
 	$text = preg_replace("#\[i\](.*?)\[/i\]#si", "[i:$uid]\\1[/i:$uid]", $text);
 
 	// [img]image_url_here[/img] code..
-	$text = preg_replace("#\[img\]((http|ftp|https|ftps)://)([^ \?&=\#\"\n\r\t<]*?(\.(jpg|jpeg|gif|png)))\[/img\]#sie", "'[img:$uid]\\1' . str_replace(' ', '%20', '\\3') . '[/img:$uid]'", $text);
+	$text = preg_replace_callback("#\[img\]((http|ftp|https|ftps)://)([^\?&=\#\"\n\r\t<]*?(\.(jpg|jpeg|gif|png)))\[/img\]#si",
+		function($matches) use ($uid)
+		{
+			return "[img:$uid]" . $matches[1] . str_replace(" ", "%20", $matches[3]) . "[/img:$uid]";
+	        },
+		$text);
 
 	// Remove our padding from the string..
 	return substr($text, 1);;

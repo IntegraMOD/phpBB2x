@@ -79,6 +79,38 @@
 		  
 		  //--></script><noscript>{ICQ_IMG}</noscript></td>
 		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_FACEBOOK}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{FB_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_INSTAGRAM}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{IG_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_PINTEREST}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{PT_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_TWITTER}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{TWR_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_SKYPE}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{SKP_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_TELEGRAM}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{TG_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_LINKEDIN}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{LI_IMG}</span></td>
+		</tr>
+		<tr> 
+		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_TIKTOK}:</span></td>
+		  <td class="row1" valign="middle"><span class="gen">{TT_IMG}</span></td>
+		</tr>		
 	  </table>
 	</td>
   </tr>

@@ -20,7 +20,10 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 $phpbb_root_path = './';
 include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
@@ -387,7 +390,7 @@ $select_post_order .= '</select>';
 //
 // Go ahead and pull all data for this topic
 //
-$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_regdate, u.user_msnm, u.user_viewemail, u.user_rank, u.user_sig, u.user_sig_bbcode_uid, u.user_avatar, u.user_avatar_type, u.user_allowavatar, u.user_allowsmile, p.*,  pt.post_text, pt.post_subject, pt.bbcode_uid
+$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt, u.user_regdate, u.user_msnm, u.user_viewemail, u.user_rank, u.user_sig, u.user_sig_bbcode_uid, u.user_avatar, u.user_avatar_type, u.user_allowavatar, u.user_allowsmile, p.*,  pt.post_text, pt.post_subject, pt.bbcode_uid
 	FROM " . POSTS_TABLE . " p, " . USERS_TABLE . " u, " . POSTS_TEXT_TABLE . " pt
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
@@ -590,15 +593,15 @@ $topic_mod = '';
 
 if ( $is_auth['auth_mod'] )
 {
-	$s_auth_can .= sprintf($lang['Rules_moderate'], '<a href="' . append_sid("modcp.$phpEx?" . POST_FORUM_URL . "=$forum_id&amp;p_sid=" . $userdata['priv_session_id']) . '">', '</a>');
+	$s_auth_can .= sprintf($lang['Rules_moderate'], "<a href=\"modcp.$phpEx?" . POST_FORUM_URL . "=$forum_id&amp;sid=" . $userdata['session_id'] . '">', '</a>');
 
-	$topic_mod .= '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;p_sid=" . $userdata['priv_session_id']) . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . $lang['Delete_topic'] . '" title="' . $lang['Delete_topic'] . '" border="0" /></a>&nbsp;';
+	$topic_mod .= "<a href=\"modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . $lang['Delete_topic'] . '" title="' . $lang['Delete_topic'] . '" border="0" /></a>&nbsp;';
 
-	$topic_mod .= '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;p_sid=" . $userdata['priv_session_id']) . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['Move_topic'] . '" title="' . $lang['Move_topic'] . '" border="0" /></a>&nbsp;';
+	$topic_mod .= "<a href=\"modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['Move_topic'] . '" title="' . $lang['Move_topic'] . '" border="0" /></a>&nbsp;';
 
-	$topic_mod .= ( $forum_topic_data['topic_status'] == TOPIC_UNLOCKED ) ? '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;p_sid=" . $userdata['priv_session_id']) . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . $lang['Lock_topic'] . '" title="' . $lang['Lock_topic'] . '" border="0" /></a>&nbsp;' : '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;p_sid=" . $userdata['priv_session_id']) . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . $lang['Unlock_topic'] . '" title="' . $lang['Unlock_topic'] . '" border="0" /></a>&nbsp;';
+	$topic_mod .= ( $forum_topic_data['topic_status'] == TOPIC_UNLOCKED ) ? "<a href=\"modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . $lang['Lock_topic'] . '" title="' . $lang['Lock_topic'] . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . $lang['Unlock_topic'] . '" title="' . $lang['Unlock_topic'] . '" border="0" /></a>&nbsp;';
 
-	$topic_mod .= '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;p_sid=" . $userdata['priv_session_id']) . '"><img src="' . $images['topic_mod_split'] . '" alt="' . $lang['Split_topic'] . '" title="' . $lang['Split_topic'] . '" border="0" /></a>&nbsp;';
+	$topic_mod .= "<a href=\"modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_split'] . '" alt="' . $lang['Split_topic'] . '" title="' . $lang['Split_topic'] . '" border="0" /></a>&nbsp;';
 }
 
 //
@@ -655,6 +658,11 @@ $template->assign_vars(array(
 	'L_SPLIT_TOPIC' => $lang['Split_topic'],
 	'L_DELETE_TOPIC' => $lang['Delete_topic'],
 	'L_GOTO_PAGE' => $lang['Goto_page'],
+	'L_BUTTON_TOPIC_LOCKED' => $lang['button_topic_locked'],
+	'L_BUTTON_TOPIC_NEW' 	=> $lang['button_topic_new'],
+	'L_BUTTON_TOPIC_REPLY' 	=> $lang['button_topic_reply'],
+	'L_BUTTON_POST_EDIT' 	=> $lang['icon_post_edit'],
+	'L_BUTTON_POST_QUOTE' 	=> $lang['icon_post_quote'],
 
 	'S_TOPIC_LINK' => POST_TOPIC_URL,
 	'S_SELECT_POST_DAYS' => $select_post_days,
@@ -964,6 +972,30 @@ for($i = 0; $i < $total_posts; $i++)
 
 		$yim_img = ( $postrow[$i]['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $postrow[$i]['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
 		$yim = ( $postrow[$i]['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $postrow[$i]['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
+
+		$fb_img = ( $postrow[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $postrow[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+		$fb = ( $postrow[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $postrow[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+
+		$ig_img = ( $postrow[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $postrow[$i]['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+		$ig = ( $postrow[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $postrow[$i]['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+
+		$pt_img = ( $postrow[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $postrow[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+		$pt = ( $postrow[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $postrow[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+
+		$twr_img = ( $postrow[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $postrow[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+		$twr = ( $postrow[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $postrow[$i]['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+
+		$skp_img = ( $postrow[$i]['user_skp'] ) ? '<a href="skype:' . $postrow[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	    $skp = ( $postrow[$i]['user_skp'] ) ? '<a href="skype:' . $postrow[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+
+		$tg_img = ( $postrow[$i]['user_tg'] ) ? '<a href="https://t.me/' . $postrow[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+		$tg = ( $postrow[$i]['user_tg'] ) ? '<a href="https://t,me/' . $postrow[$i]['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+
+		$li_img = ( $postrow[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $postrow[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+		$li = ( $postrow[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $postrow[$i]['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+
+		$tt_img = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+		$tt = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
 	}
 	else
 	{
@@ -984,6 +1016,22 @@ for($i = 0; $i < $total_posts; $i++)
 		$msn = '';
 		$yim_img = '';
 		$yim = '';
+		$fb_img = '';
+		$fb = '';
+		$ig_img = '';
+		$ig = '';
+		$pt_img = '';
+		$pt = '';
+		$twr_img = '';
+		$twr = '';	
+		$skp_img = '';
+		$skp = '';
+		$tg_img = '';
+		$tg = '';
+		$li_img = '';
+		$li = '';
+		$tt_img = '';
+		$tt = '';		
 	}
 
 	$temp_url = append_sid("posting.$phpEx?mode=quote&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
@@ -1008,13 +1056,13 @@ for($i = 0; $i < $total_posts; $i++)
 
 	if ( $is_auth['auth_mod'] )
 	{
-		$temp_url = "modcp.$phpEx?mode=ip&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;" . POST_TOPIC_URL . "=" . $topic_id . "&amp;p_sid=" . $userdata['priv_session_id'];
+		$temp_url = "modcp.$phpEx?mode=ip&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;" . POST_TOPIC_URL . "=" . $topic_id . "&amp;sid=" . $userdata['session_id'];
 		$ip_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_ip'] . '" alt="' . $lang['View_IP'] . '" title="' . $lang['View_IP'] . '" border="0" /></a>';
 		$ip = '<a href="' . $temp_url . '">' . $lang['View_IP'] . '</a>';
 
-		$temp_url = "posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;p_sid=" . $userdata['priv_session_id'];
+		$temp_url = "posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;sid=" . $userdata['session_id'];
 		$delpost_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['Delete_post'] . '" title="' . $lang['Delete_post'] . '" border="0" /></a>';
-		$delpost = '<a href="' . append_sid($temp_url) . '">' . $lang['Delete_post'] . '</a>';
+		$delpost = '<a href="' . $temp_url . '">' . $lang['Delete_post'] . '</a>';
 	}
 	else
 	{
@@ -1023,9 +1071,9 @@ for($i = 0; $i < $total_posts; $i++)
 
 		if ( $userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $forum_topic_data['topic_last_post_id'] == $postrow[$i]['post_id'] )
 		{
-			$temp_url = "posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;p_sid=" . $userdata['priv_session_id'];
+			$temp_url = "posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;sid=" . $userdata['session_id'];
 			$delpost_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['Delete_post'] . '" title="' . $lang['Delete_post'] . '" border="0" /></a>';
-			$delpost = '<a href="' . append_sid($temp_url) . '">' . $lang['Delete_post'] . '</a>';
+			$delpost = '<a href="' . $temp_url . '">' . $lang['Delete_post'] . '</a>';
 		}
 		else
 		{
@@ -1191,6 +1239,22 @@ for($i = 0; $i < $total_posts; $i++)
 		'MSN' => $msn,
 		'YIM_IMG' => $yim_img,
 		'YIM' => $yim,
+		'FB_IMG' => $fb_img,
+		'FB' => $fb,
+		'IG_IMG' => $ig_img,
+		'IG' => $ig,
+		'PT_IMG' => $pt_img,
+		'PT' => $pt,
+		'TWR_IMG' => $twr_img,
+		'TWR' => $twr,		
+		'SKP_IMG' => $skp_img,
+		'SKP' => $skp,
+		'TG_IMG' => $tg_img,
+		'TG' => $tg,
+		'LI_IMG' => $li_img,
+		'LI' => $li,
+		'TT_IMG' => $tt_img,
+		'TT' => $tt,
 		'EDIT_IMG' => $edit_img,
 		'EDIT' => $edit,
 		'QUOTE_IMG' => $quote_img,
@@ -1201,6 +1265,15 @@ for($i = 0; $i < $total_posts; $i++)
 		'DELETE' => $delpost,
 
 		'L_MINI_POST_ALT' => $mini_post_alt,
+		'U_EDIT' => $temp_url = append_sid("posting.$phpEx?mode=editpost&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']),
+		'U_QUOTE' => $temp_url = append_sid("posting.$phpEx?mode=quote&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']),
+		'U_DELETE' => $temp_url = "posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;p_sid=" . $userdata['priv_session_id'],
+		'U_VIEW_IP' => 	$temp_url = "modcp.$phpEx?mode=ip&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;" . POST_TOPIC_URL . "=" . $topic_id . "&amp;p_sid=" . $userdata['priv_session_id'],
+
+		'U_EDIT' => $temp_url = append_sid("posting.$phpEx?mode=editpost&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']),
+		'U_QUOTE' => $temp_url = append_sid("posting.$phpEx?mode=quote&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']),
+		'U_DELETE' => $temp_url = "posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;p_sid=" . $userdata['priv_session_id'],
+		'U_VIEW_IP' => 	$temp_url = "modcp.$phpEx?mode=ip&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;" . POST_TOPIC_URL . "=" . $topic_id . "&amp;p_sid=" . $userdata['priv_session_id'],
 
 		'U_MINI_POST' => $mini_post_url,
 		'U_POST_ID' => $postrow[$i]['post_id'])

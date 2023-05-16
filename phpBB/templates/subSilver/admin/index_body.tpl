@@ -42,6 +42,12 @@
 	<td class="row1" nowrap="nowrap">{L_GZIP_COMPRESSION}:</td>
 	<td class="row2"><b>{GZIP_COMPRESSION}</b></td>
   </tr>
+  <tr> 
+	<td class="row1" nowrap="nowrap">{L_PHP_VERSION}:</td>
+	<td class="row2"><b>{PHP_VERSION}</b></td>
+	<td class="row1" nowrap="nowrap">{L_MYSQL_VERSION}:</td>
+	<td class="row2"><b>{MYSQL_VERSION}</b></td>
+  </tr>
 </table>
 
 <h1>{L_VERSION_INFORMATION}</h1>

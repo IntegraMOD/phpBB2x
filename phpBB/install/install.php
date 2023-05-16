@@ -223,7 +223,6 @@ function guess_lang()
 
 // Begin
 error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
-set_magic_quotes_runtime(0); // Disable magic_quotes_runtime
 
 // PHP5 with register_long_arrays off?
 if (!isset($HTTP_POST_VARS) && isset($_POST))
@@ -243,7 +242,7 @@ if (!isset($HTTP_POST_VARS) && isset($_POST))
 }
 
 // Slash data if it isn't slashed
-if (!get_magic_quotes_gpc())
+if (true)
 {
 	if (is_array($HTTP_GET_VARS))
 	{
@@ -307,7 +306,10 @@ if (!get_magic_quotes_gpc())
 }
 
 // Begin main prog
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 // Uncomment the following line to completely disable the ftp option...
 // define('NO_FTP', true);
 $phpbb_root_path = './../';
@@ -336,6 +338,13 @@ $available_dbms = array(
 		'LABEL'			=> 'MySQL 4.x/5.x',
 		'SCHEMA'		=> 'mysql', 
 		'DELIM'			=> ';', 
+		'DELIM_BASIC'	=> ';',
+		'COMMENTS'		=> 'remove_remarks'
+	), 
+	'mysqli' => array(
+		'LABEL'			=> 'MySQLi',
+		'SCHEMA'		=> 'mysql',
+		'DELIM'			=> ';',
 		'DELIM_BASIC'	=> ';',
 		'COMMENTS'		=> 'remove_remarks'
 	), 
@@ -786,8 +795,9 @@ else
 
 			case 'mysql':
 			case 'mysql4':
-				$check_exts = 'mysql';
-				$check_other = 'mysql';
+			case 'mysqli':
+				$check_exts = 'mysqli';
+				$check_other = 'mysqli';
 				break;
 
 			case 'postgres':

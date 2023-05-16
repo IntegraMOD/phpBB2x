@@ -19,14 +19,16 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 
 $phpbb_root_path = './../';
 
 if ( !defined('INSTALLING') )
 {
 	error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
-	set_magic_quotes_runtime(0); // Disable magic_quotes_runtime
 
 	//
 	// If we are being called from the install script then we don't need these
@@ -46,7 +48,7 @@ if ( !defined('INSTALLING') )
 //
 // Force the DB type to be MySQL
 //
-$dbms = 'mysql';
+$dbms = 'mysqli';
 
 include($phpbb_root_path . 'includes/db.'.$phpEx);
 include($phpbb_root_path . 'includes/bbcode.'.$phpEx);

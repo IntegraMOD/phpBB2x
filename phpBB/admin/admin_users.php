@@ -20,7 +20,10 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', 1);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', 1);
+}
 
 if( !empty($setmodules) )
 {
@@ -223,6 +226,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		$aim = ( !empty($HTTP_POST_VARS['aim']) ) ? trim(strip_tags( $HTTP_POST_VARS['aim'] ) ) : '';
 		$msn = ( !empty($HTTP_POST_VARS['msn']) ) ? trim(strip_tags( $HTTP_POST_VARS['msn'] ) ) : '';
 		$yim = ( !empty($HTTP_POST_VARS['yim']) ) ? trim(strip_tags( $HTTP_POST_VARS['yim'] ) ) : '';
+		$fb = ( !empty($HTTP_POST_VARS['fb']) ) ? trim(strip_tags( $HTTP_POST_VARS['fb'] ) ) : '';
+		$ig = ( !empty($HTTP_POST_VARS['ig']) ) ? trim(strip_tags( $HTTP_POST_VARS['ig'] ) ) : '';
+		$pt = ( !empty($HTTP_POST_VARS['pt']) ) ? trim(strip_tags( $HTTP_POST_VARS['pt'] ) ) : '';
+		$twr = ( !empty($HTTP_POST_VARS['twr']) ) ? trim(strip_tags( $HTTP_POST_VARS['twr'] ) ) : '';
+		$skp = ( !empty($HTTP_POST_VARS['skp']) ) ? trim(strip_tags( $HTTP_POST_VARS['skp'] ) ) : '';
+		$tg = ( !empty($HTTP_POST_VARS['tg']) ) ? trim(strip_tags( $HTTP_POST_VARS['tg'] ) ) : '';
+		$li = ( !empty($HTTP_POST_VARS['li']) ) ? trim(strip_tags( $HTTP_POST_VARS['li'] ) ) : '';
+		$tt = ( !empty($HTTP_POST_VARS['tt']) ) ? trim(strip_tags( $HTTP_POST_VARS['tt'] ) ) : '';		
 
 		$website = ( !empty($HTTP_POST_VARS['website']) ) ? trim(strip_tags( $HTTP_POST_VARS['website'] ) ) : '';
 		$location = ( !empty($HTTP_POST_VARS['location']) ) ? trim(strip_tags( $HTTP_POST_VARS['location'] ) ) : '';
@@ -230,7 +241,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		$interests = ( !empty($HTTP_POST_VARS['interests']) ) ? trim(strip_tags( $HTTP_POST_VARS['interests'] ) ) : '';
 		$signature = ( !empty($HTTP_POST_VARS['signature']) ) ? trim(str_replace('<br />', "\n", $HTTP_POST_VARS['signature'] ) ) : '';
 
-		validate_optional_fields($icq, $aim, $msn, $yim, $website, $location, $occupation, $interests, $signature);
+		validate_optional_fields($icq, $aim, $msn, $yim, $fb, $ig, $pt, $twr, $skp, $tg, $li, $tt, $website, $location, $occupation, $interests, $signature);
 
 		$viewemail = ( isset( $HTTP_POST_VARS['viewemail']) ) ? ( ( $HTTP_POST_VARS['viewemail'] ) ? TRUE : 0 ) : 0;
 		$allowviewonline = ( isset( $HTTP_POST_VARS['hideonline']) ) ? ( ( $HTTP_POST_VARS['hideonline'] ) ? 0 : TRUE ) : TRUE;
@@ -277,6 +288,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			$aim = htmlspecialchars(stripslashes($aim));
 			$msn = htmlspecialchars(stripslashes($msn));
 			$yim = htmlspecialchars(stripslashes($yim));
+			$fb = htmlspecialchars(stripslashes($fb));
+			$ig = htmlspecialchars(stripslashes($ig));
+			$pt = htmlspecialchars(stripslashes($pt));
+			$twr = htmlspecialchars(stripslashes($twr));
+			$skp = htmlspecialchars(stripslashes($skp));
+			$tg = htmlspecialchars(stripslashes($tg));			
+			$li = htmlspecialchars(stripslashes($li));
+			$tt = htmlspecialchars(stripslashes($tt));
 
 			$website = htmlspecialchars(stripslashes($website));
 			$location = htmlspecialchars(stripslashes($location));
@@ -650,7 +669,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		if( !$error )
 		{
 			$sql = "UPDATE " . USERS_TABLE . "
-				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) . "', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_viewemail = $viewemail, user_aim = '" . str_replace("\'", "''", $aim) . "', user_yim = '" . str_replace("\'", "''", $yim) . "', user_msnm = '" . str_replace("\'", "''", $msn) . "', user_attachsig = $attachsig, user_sig_bbcode_uid = '$signature_bbcode_uid', user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowavatar = $user_allowavatar, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_allow_pm = $user_allowpm, user_notify_pm = $notifypm, user_popup_pm = $popuppm, user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_active = $user_status, user_rank = $user_rank" . $avatar_sql . "
+				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) . "', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_viewemail = $viewemail, user_aim = '" . str_replace("\'", "''", $aim) . "', user_yim = '" . str_replace("\'", "''", $yim) . "', user_msnm = '" . str_replace("\'", "''", $msn) . "', user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_attachsig = $attachsig, user_sig_bbcode_uid = '$signature_bbcode_uid', user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowavatar = $user_allowavatar, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_allow_pm = $user_allowpm, user_notify_pm = $notifypm, user_popup_pm = $popuppm, user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_active = $user_status, user_rank = $user_rank" . $avatar_sql . "
 				WHERE user_id = $user_id";
 
 			if( $result = $db->sql_query($sql) )
@@ -717,6 +736,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			$aim = htmlspecialchars(str_replace('+', ' ', stripslashes($aim)));
 			$msn = htmlspecialchars(stripslashes($msn));
 			$yim = htmlspecialchars(stripslashes($yim));
+			$fb = htmlspecialchars(stripslashes($fb));
+			$ig = htmlspecialchars(stripslashes($ig));
+			$pt = htmlspecialchars(stripslashes($pt));
+			$twr = htmlspecialchars(stripslashes($twr));
+			$skp = htmlspecialchars(stripslashes($skp));
+			$tg = htmlspecialchars(stripslashes($tg));
+			$li = htmlspecialchars(stripslashes($li));
+			$tt = htmlspecialchars(stripslashes($tt));
 
 			$website = htmlspecialchars(stripslashes($website));
 			$location = htmlspecialchars(stripslashes($location));
@@ -761,6 +788,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		$aim = htmlspecialchars(str_replace('+', ' ', $this_userdata['user_aim'] ));
 		$msn = htmlspecialchars($this_userdata['user_msnm']);
 		$yim = htmlspecialchars($this_userdata['user_yim']);
+		$fb = htmlspecialchars($this_userdata['user_fb']);
+		$ig = htmlspecialchars($this_userdata['user_ig']);
+		$pt = htmlspecialchars($this_userdata['user_pt']);
+		$twr = htmlspecialchars($this_userdata['user_twr']);
+		$skp = htmlspecialchars($this_userdata['user_skp']);
+		$tg = htmlspecialchars($this_userdata['user_tg']);
+		$li = htmlspecialchars($this_userdata['user_li']);
+		$tt = htmlspecialchars($this_userdata['user_tt']);
 
 		$website = htmlspecialchars($this_userdata['user_website']);
 		$location = htmlspecialchars($this_userdata['user_from']);
@@ -889,6 +924,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			$s_hidden_fields .= '<input type="hidden" name="aim" value="' . str_replace("\"", "&quot;", $aim) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="msn" value="' . str_replace("\"", "&quot;", $msn) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="yim" value="' . str_replace("\"", "&quot;", $yim) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="fb" value="' . str_replace("\"", "&quot;", $fb) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="ig" value="' . str_replace("\"", "&quot;", $ig) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="pt" value="' . str_replace("\"", "&quot;", $pt) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="twr" value="' . str_replace("\"", "&quot;", $twr) . '" />';			
+			$s_hidden_fields .= '<input type="hidden" name="skp" value="' . str_replace("\"", "&quot;", $skp) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="tg" value="' . str_replace("\"", "&quot;", $tg) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="li" value="' . str_replace("\"", "&quot;", $li) . '" />';
+			$s_hidden_fields .= '<input type="hidden" name="tt" value="' . str_replace("\"", "&quot;", $tt) . '" />';			
 			$s_hidden_fields .= '<input type="hidden" name="website" value="' . str_replace("\"", "&quot;", $website) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="location" value="' . str_replace("\"", "&quot;", $location) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="occupation" value="' . str_replace("\"", "&quot;", $occupation) . '" />';
@@ -947,7 +990,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 					$avatar = '<img src="../' . $board_config['avatar_path'] . '/' . $user_avatar . '" alt="" />';
 					break;
 				case USER_AVATAR_REMOTE:
-					$avatar = (isset($HTTP_GET_VARS['p_sid'])) ? $lang['Priv_Img'] . " $user_avatar" : '<img src="' . $user_avatar . '" alt="" />';
+					$avatar = '<img src="' . $user_avatar . '" alt="" />';
 					break;
 				case USER_AVATAR_GALLERY:
 					$avatar = '<img src="../' . $board_config['avatar_gallery_path'] . '/' . $user_avatar . '" alt="" />';
@@ -995,6 +1038,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			'ICQ' => $icq,
 			'MSN' => $msn,
 			'AIM' => $aim,
+			'FB' => $fb,
+			'IG' => $ig,
+			'PT' => $pt,
+			'TWR' => $twr,			
+			'SKP' => $skp,
+			'TG' => $tg,
+			'LI' => $li,
+			'TT' => $tt,			
 			'OCCUPATION' => $occupation,
 			'INTERESTS' => $interests,
 			'LOCATION' => $location,
@@ -1043,6 +1094,14 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			'L_ICQ_NUMBER' => $lang['ICQ'],
 			'L_MESSENGER' => $lang['MSNM'],
 			'L_YAHOO' => $lang['YIM'],
+			'L_FACEBOOK' => $lang['FB'],
+			'L_INSTAGRAM' => $lang['IG'],
+			'L_PINTEREST' => $lang['PT'],
+			'L_TWITTER' => $lang['TWR'],
+			'L_SKYPE' => $lang['SKP'],
+			'L_TELEGRAM' => $lang['TG'],
+			'L_LINKEDIN' => $lang['LI'],
+			'L_TIKTOK' => $lang['TT'],			
 			'L_WEBSITE' => $lang['Website'],
 			'L_AIM' => $lang['AIM'],
 			'L_LOCATION' => $lang['Location'],
@@ -1143,9 +1202,8 @@ else
 
 		'U_SEARCH_USER' => append_sid("./../search.$phpEx?mode=searchuser"), 
 
-		'S_USER_ACTION' => "admin_users.$phpEx?sid=" . $userdata['session_id'],
-		'S_USER_SELECT' => $select_list,
-        'S_HIDDEN_FIELDS' => '<input type="hidden" name="p_sid" value="' . $userdata['priv_session_id'] . '"/>')
+		'S_USER_ACTION' => append_sid("admin_users.$phpEx"),
+		'S_USER_SELECT' => $select_list)
 	);
 	$template->pparse('body');
 

@@ -178,11 +178,10 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	if ( !$db->sql_query($sql) || !$db->sql_affectedrows() )
 	{
 		$session_id = md5(dss_rand());
-        $priv_session_id = md5(dss_rand());
 
 		$sql = "INSERT INTO " . SESSIONS_TABLE . "
-			(session_id, session_user_id, session_start, session_time, session_ip, session_page, session_logged_in, session_admin, priv_session_id)
-			VALUES ('$session_id', $user_id, $current_time, $current_time, '$user_ip', $page_id, $login, $admin, '$priv_session_id')";
+			(session_id, session_user_id, session_start, session_time, session_ip, session_page, session_logged_in, session_admin)
+			VALUES ('$session_id', $user_id, $current_time, $current_time, '$user_ip', $page_id, $login, $admin)";
 		if ( !$db->sql_query($sql) )
 		{
 			message_die(CRITICAL_ERROR, 'Error creating new session', '', __LINE__, __FILE__, $sql);
@@ -243,7 +242,6 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	}
 
 	$userdata['session_id'] = $session_id;
-    $userdata['priv_session_id'] = $priv_session_id;
 	$userdata['session_ip'] = $user_ip;
 	$userdata['session_user_id'] = $user_id;
 	$userdata['session_logged_in'] = $login;
@@ -268,7 +266,7 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 function session_pagestart($user_ip, $thispage_id)
 {
 	global $db, $lang, $board_config;
-	global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $SID, $P_SID;
+	global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $SID;
 
 	$cookiename = $board_config['cookie_name'];
 	$cookiepath = $board_config['cookie_path'];
@@ -335,7 +333,7 @@ function session_pagestart($user_ip, $thispage_id)
 			if ($ip_check_s == $ip_check_u)
 			{
 				$SID = ($sessionmethod == SESSION_METHOD_GET || defined('IN_ADMIN')) ? 'sid=' . $session_id : '';
- 				$P_SID = (defined('IN_ADMIN')) ? 'p_sid=' . $userdata['priv_session_id'] : '';
+
 				//
 				// Only update session DB a minute or so after last update
 				//
@@ -567,15 +565,11 @@ function session_reset_keys($user_id, $user_ip)
 //
 function append_sid($url, $non_html_amp = false)
 {
-	global $SID, $P_SID;
+	global $SID;
 
 	if ( !empty($SID) && !preg_match('#sid=#', $url) )
 	{
 		$url .= ( ( strpos($url, '?') !== false ) ?  ( ( $non_html_amp ) ? '&' : '&amp;' ) : '?' ) . $SID;
-	}
-    if ( !empty($P_SID) && !preg_match('#p_sid=#', $url) )
-	{
-		$url .= ( ( strpos($url, '?') !== false ) ?  ( ( $non_html_amp ) ? '&' : '&amp;' ) : '?' ) . $P_SID;
 	}
 
 	return $url;

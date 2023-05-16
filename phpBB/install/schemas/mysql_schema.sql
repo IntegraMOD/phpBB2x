@@ -1,7 +1,7 @@
 #
 # phpBB2 - MySQL schema
 #
-# $Id$
+# $Id: mysql_schema.sql 6749 2006-12-11 23:30:12Z naderman $
 #
 
 #
@@ -520,6 +520,14 @@ CREATE TABLE phpbb_users (
    user_aim varchar(255),
    user_yim varchar(255),
    user_msnm varchar(255),
+   user_fb varchar (255),
+   user_ig varchar (255),
+   user_pt varchar (255),
+   user_twr varchar (255),
+   user_skp varchar (255),
+   user_tg varchar (255),
+   user_li varchar (255),
+   user_tt varchar (255),
    user_occ varchar(100),
    user_interests varchar(255),
    user_actkey varchar(32),

@@ -219,7 +219,19 @@ input.liteoption {
 @import url("../templates/subSilver/formIE.css"); 
 -->
 </style>
+
 <title>{SITENAME} - {L_PHPBB_ADMIN}</title>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
 </head>
 <body bgcolor="{T_BODY_BGCOLOR}" text="{T_BODY_TEXT}" link="{T_BODY_LINK}" vlink="{T_BODY_VLINK}">
 

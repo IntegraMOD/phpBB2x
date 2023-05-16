@@ -364,6 +364,7 @@ $template->assign_vars(array(
 	'L_LOGIN' => $lang['Login'],
 	'L_LOG_ME_IN' => $lang['Log_me_in'],
 	'L_AUTO_LOGIN' => $lang['Log_me_in'],
+	'L_HOME' => $lang['Home'],
 	'L_INDEX' => sprintf($lang['Forum_Index'], $board_config['sitename']),
 	'L_REGISTER' => $lang['Register'],
 	'L_PROFILE' => $lang['Profile'],

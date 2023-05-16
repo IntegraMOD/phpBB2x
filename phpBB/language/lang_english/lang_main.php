@@ -33,7 +33,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'iso-8859-1';
+$lang['ENCODING'] = 'utf-8';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -103,6 +103,14 @@ $lang['ICQ'] = 'ICQ Number';
 $lang['AIM'] = 'AIM Address';
 $lang['MSNM'] = 'MSN Messenger';
 $lang['YIM'] = 'Yahoo Messenger';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'Twitter';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
 
 $lang['Forum_Index'] = '%s Forum Index';  // eg. sitename Forum Index, %s can be removed if you prefer
 
@@ -283,7 +291,6 @@ $lang['Delete_post'] = 'Delete this post';
 $lang['wrote'] = 'wrote'; // proceeds the username and is followed by the quoted text
 $lang['Quote'] = 'Quote'; // comes before bbcode quote output.
 $lang['Code'] = 'Code'; // comes before bbcode code output.
-$lang['Priv_Img'] = 'Image display disabled'; // Explanation for missing images in the ModCP.
 
 $lang['Edited_time_total'] = 'Last edited by %s on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
 $lang['Edited_times_total'] = 'Last edited by %s on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
@@ -836,6 +843,7 @@ $lang['Forum_Location'] = 'Forum Location';
 $lang['Last_updated'] = 'Last Updated';
 
 $lang['Forum_index'] = 'Forum index';
+$lang['Home'] = 'Home';
 $lang['Logging_on'] = 'Logging on';
 $lang['Posting_message'] = 'Posting a message';
 $lang['Searching_forums'] = 'Searching forums';
@@ -1020,6 +1028,17 @@ $lang['Login_attempts_exceeded'] = 'The maximum number of %s login attempts has 
 $lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and contrib/ directories are deleted';
 
 $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
+
+//
+// language buttons
+//
+$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
+$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
+$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
+$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
+$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
+$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
+$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
 //
 // That's all, Folks!

@@ -20,14 +20,17 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 $phpbb_root_path = './';
 include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
 
 // -------------------------
 //
-function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$poster_avatar, &$profile_img, &$profile, &$search_img, &$search, &$pm_img, &$pm, &$email_img, &$email, &$www_img, &$www, &$icq_status_img, &$icq_img, &$icq, &$aim_img, &$aim, &$msn_img, &$msn, &$yim_img, &$yim)
+function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$poster_avatar, &$profile_img, &$profile, &$search_img, &$search, &$pm_img, &$pm, &$email_img, &$email, &$www_img, &$www, &$icq_status_img, &$icq_img, &$icq, &$aim_img, &$aim, &$msn_img, &$msn, &$yim_img, &$yim, &$fb_img, &$fb, &$ig_img, &$ig, &$pt_img, &$pt, &$twr_img, &$twr, &$skp_img, &$skp, &$tg_img, &$tg, &$li_img, &$li, &$tt_img, &$tt)
 {
 	global $lang, $images, $board_config, $phpEx;
 
@@ -98,6 +101,30 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 
 	$yim_img = ( $row['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
 	$yim = ( $row['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
+
+	$fb_img = ( $row[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+	$fb = ( $row[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+
+	$ig_img = ( $row[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row[$i]['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+	$ig = ( $row[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row[$i]['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+
+	$pt_img = ( $row[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $row[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+	$pt = ( $row[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $row[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+
+	$twr_img = ( $row[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $row[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+	$twr = ( $row[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $row[$i]['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+
+	$skp_img = ( $row[$i]['user_skp'] ) ? '<a href="skype:' . $row[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	$skp = ( $row[$i]['user_skp'] ) ? '<a href="skype:' . $row[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+
+	$tg_img = ( $row[$i]['user_tg'] ) ? '<a href="https://t.me/' . $row[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+	$tg = ( $row[$i]['user_tg'] ) ? '<a href="https://t,me/' . $row[$i]['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+
+	$li_img = ( $row[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+	$li = ( $row[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row[$i]['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+
+	$tt_img = ( $row[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+	$tt = ( $row[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row[$i]['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
 
 	$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($row['username']) . "&amp;showresults=posts");
 	$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $row['username']) . '" title="' . sprintf($lang['Search_user_posts'], $row['username']) . '" border="0" /></a>';
@@ -779,7 +806,7 @@ else if ( $group_id )
 	//
 	// Get moderator details for this group
 	//
-	$sql = "SELECT username, user_id, user_viewemail, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_aim, user_yim, user_msnm  
+	$sql = "SELECT username, user_id, user_viewemail, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_aim, user_yim, user_msnm, user_fb, user_ig, user_pt, user_twr, user_skp, user_tg, user_li, user_tt  
 		FROM " . USERS_TABLE . " 
 		WHERE user_id = " . $group_info['group_moderator'];
 	if ( !($result = $db->sql_query($sql)) )
@@ -792,7 +819,7 @@ else if ( $group_id )
 	//
 	// Get user information for this group
 	//
-	$sql = "SELECT u.username, u.user_id, u.user_viewemail, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_msnm, ug.user_pending 
+	$sql = "SELECT u.username, u.user_id, u.user_viewemail, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_msnm, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt
 		FROM " . USERS_TABLE . " u, " . USER_GROUP_TABLE . " ug
 		WHERE ug.group_id = $group_id
 			AND u.user_id = ug.user_id
@@ -808,7 +835,7 @@ else if ( $group_id )
 	$members_count = count($group_members);
 	$db->sql_freeresult($result);
 
-	$sql = "SELECT u.username, u.user_id, u.user_viewemail, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_msnm
+	$sql = "SELECT u.username, u.user_id, u.user_viewemail, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_msnm, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt
 		FROM " . GROUPS_TABLE . " g, " . USER_GROUP_TABLE . " ug, " . USERS_TABLE . " u
 		WHERE ug.group_id = $group_id
 			AND g.group_id = ug.group_id
@@ -913,7 +940,7 @@ else if ( $group_id )
 	$username = $group_moderator['username'];
 	$user_id = $group_moderator['user_id'];
 
-	generate_user_info($group_moderator, $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $aim_img, $aim, $msn_img, $msn, $yim_img, $yim);
+	generate_user_info($group_moderator, $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $aim_img, $aim, $msn_img, $msn, $yim_img, $yim, $fb_img, $fb, $ig_img, $ig, $pt_img, $pt, $twr_img, $twr, $skp_img, $skp, $tg_img, $tg, $li_img, $li, $tt_img, $tt);
 
 	$s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
 
@@ -947,6 +974,14 @@ else if ( $group_id )
 		'L_YIM' => $lang['YIM'],
 		'L_MSNM' => $lang['MSNM'],
 		'L_ICQ' => $lang['ICQ'],
+		'L_FB' => $lang['FB'],
+		'L_IG' => $lang['IG'],
+		'L_PT' => $lang['PT'],
+		'L_TWR' => $lang['TWR'],
+		'L_SKP' => $lang['SKP'],
+		'L_TG' => $lang['TG'],
+		'L_LI' => $lang['LI'],
+		'L_TT' => $lang['TT'],		
 		'L_SELECT' => $lang['Select'],
 		'L_REMOVE_SELECTED' => $lang['Remove_selected'],
 		'L_ADD_MEMBER' => $lang['Add_member'],
@@ -981,6 +1016,22 @@ else if ( $group_id )
 		'MOD_MSN' => $msn,
 		'MOD_YIM_IMG' => $yim_img,
 		'MOD_YIM' => $yim,
+		'MOD_FB_IMG' => $fb_img, 
+		'MOD_FB' => $fb, 
+		'MOD_IG_IMG' => $ig_img,
+		'MOD_IG' => $ig,
+		'MOD_PT_IMG' => $pt_img,
+		'MOD_PT' => $pt,
+		'MOD_TWR_IMG' => $twr_img,
+		'MOD_TWR' => $twr,
+		'MOD_SKP_IMG' => $skp_img, 
+		'MOD_SKP' => $skp, 
+		'MOD_TG_IMG' => $tg_img,
+		'MOD_TG' => $tg,
+		'MOD_LI_IMG' => $li_img,
+		'MOD_LI' => $li,
+		'MOD_TT_IMG' => $tt_img,
+		'MOD_TT' => $tt,
 
 		'U_MOD_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id"), 
 		'U_SEARCH_USER' => append_sid("search.$phpEx?mode=searchuser"), 
@@ -1005,7 +1056,7 @@ else if ( $group_id )
 		$username = $group_members[$i]['username'];
 		$user_id = $group_members[$i]['user_id'];
 
-		generate_user_info($group_members[$i], $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $aim_img, $aim, $msn_img, $msn, $yim_img, $yim);
+		generate_user_info($group_members[$i], $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $aim_img, $aim, $msn_img, $msn, $yim_img, $yim, $fb_img, $fb, $ig_img, $ig, $pt_img, $pt, $twr_img, $twr, $skp_img, $skp, $tg_img, $tg, $li_img, $li, $tt_img, $tt );
 
 		if ( $group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator )
 		{
@@ -1040,6 +1091,22 @@ else if ( $group_id )
 				'MSN' => $msn,
 				'YIM_IMG' => $yim_img,
 				'YIM' => $yim,
+				'FB_IMG' => $fb_img, 
+				'FB' => $fb, 
+				'IG_IMG' => $ig_img,
+				'IG' => $ig,
+				'PT_IMG' => $pt_img,
+				'PT' => $pt,
+				'TWR_IMG' => $twr_img,
+				'TWR' => $twr,
+				'SKP_IMG' => $skp_img, 
+				'SKP' => $skp, 
+				'TG_IMG' => $tg_img,
+				'TG' => $tg,
+				'LI_IMG' => $li_img,
+				'LI' => $li,
+				'TT_IMG' => $tt_img,
+				'TT' => $tt,
 				
 				'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id"))
 			);
@@ -1098,7 +1165,7 @@ else if ( $group_id )
 				$username = $modgroup_pending_list[$i]['username'];
 				$user_id = $modgroup_pending_list[$i]['user_id'];
 
-				generate_user_info($modgroup_pending_list[$i], $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $aim_img, $aim, $msn_img, $msn, $yim_img, $yim);
+				generate_user_info($modgroup_pending_list[$i], $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $aim_img, $aim, $msn_img, $msn, $yim_img, $yim, $fb_img, $fb, $ig_img, $ig, $pt_img, $pt, $twr_img, $twr, $skp_img, $skp, $tg_img, $tg, $li_img, $li, $tt_img, $tt);
 
 				$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
@@ -1133,6 +1200,22 @@ else if ( $group_id )
 					'MSN' => $msn,
 					'YIM_IMG' => $yim_img,
 					'YIM' => $yim,
+					'FB_IMG' => $fb_img, 
+					'FB' => $fb, 
+					'IG_IMG' => $ig_img,
+					'IG' => $ig,
+					'PT_IMG' => $pt_img,
+					'PT' => $pt,
+					'TWR_IMG' => $twr_img,
+					'TWR' => $twr,
+					'SKP_IMG' => $skp_img, 
+					'SKP' => $skp, 
+					'TG_IMG' => $tg_img,
+					'TG' => $tg,
+					'LI_IMG' => $li_img,
+					'LI' => $li,
+					'TT_IMG' => $tt_img,
+					'TT' => $tt,
 					
 					'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id"))
 				);

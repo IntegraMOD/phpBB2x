@@ -78,7 +78,7 @@ function clean_words($mode, &$entry, &$stopword_list, &$synonym_list)
 	{
 		for ($j = 0; $j < count($synonym_list); $j++)
 		{
-			list($replace_synonym, $match_synonym) = split(' ', trim(strtolower($synonym_list[$j])));
+			list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_list[$j])));
 			if ( $mode == 'post' || ( $match_synonym != 'not' && $match_synonym != 'and' && $match_synonym != 'or' ) )
 			{
 				$entry =  str_replace(' ' . trim($match_synonym) . ' ', ' ' . trim($replace_synonym) . ' ', $entry);
@@ -195,6 +195,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 				{
 					case 'mysql':
 					case 'mysql4':
+					case 'mysqli':
 						$value_sql .= ( ( $value_sql != '' ) ? ', ' : '' ) . '(\'' . $word[$i] . '\', 0)';
 						break;
 					case 'mssql':
@@ -219,6 +220,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 			{
 				case 'mysql':
 				case 'mysql4':
+				case 'mysqli':
 					$sql = "INSERT IGNORE INTO " . SEARCH_WORD_TABLE . " (word_text, word_common) 
 						VALUES $value_sql"; 
 					break;
@@ -245,8 +247,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 			$sql = "INSERT INTO " . SEARCH_MATCH_TABLE . " (post_id, word_id, title_match) 
 				SELECT $post_id, word_id, $title_match  
 					FROM " . SEARCH_WORD_TABLE . " 
-					WHERE word_text IN ($match_sql)
-					AND word_common <> 1";
+					WHERE word_text IN ($match_sql)"; 
 			if ( !$db->sql_query($sql) )
 			{
 				message_die(GENERAL_ERROR, 'Could not insert new word matches', '', __LINE__, __FILE__, $sql);
@@ -349,6 +350,7 @@ function remove_search_post($post_id_sql)
 	{
 		case 'mysql':
 		case 'mysql4':
+		case 'mysqli':
 			$sql = "SELECT word_id 
 				FROM " . SEARCH_MATCH_TABLE . " 
 				WHERE post_id IN ($post_id_sql) 

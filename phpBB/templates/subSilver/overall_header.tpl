@@ -6,6 +6,7 @@
 {META}
 {NAV_LINKS}
 <title>{SITENAME} :: {PAGE_TITLE}</title>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <!-- link rel="stylesheet" href="templates/subSilver/{T_HEAD_STYLESHEET}" type="text/css" -->
 <style type="text/css">
 <!--

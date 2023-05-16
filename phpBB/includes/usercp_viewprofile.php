@@ -164,6 +164,30 @@ $msn = $msn_img;
 $yim_img = ( $profiledata['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $profiledata['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
 $yim = ( $profiledata['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $profiledata['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
 
+$fb_img = ( $profiledata['user_fb'] ) ? '<a href="https://www.facebook.com/' . $profiledata['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+$fb = ( $profiledata['user_fb'] ) ? '<a href="https://www.facebook.com/' . $profiledata['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+
+$ig_img = ( $profiledata['user_ig'] ) ? '<a href="https://www.instagram.com/' . $profiledata['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+$ig = ( $profiledata['user_ig'] ) ? '<a href="https://www.instagram.com/' . $profiledata['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+
+$pt_img = ( $profiledata['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $profiledata['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+$pt = ( $profiledata['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $profiledata['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+
+$twr_img = ( $profiledata['user_twr'] ) ? '<a href="https://twitter.com/' . $profiledata['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+$twr = ( $profiledata['user_twr'] ) ? '<a href="https://twitter.com/' . $profiledata['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+
+$skp_img = ( $profiledata['user_skp'] ) ? '<a href="skype:' . $profiledata['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+$skp = ( $profiledata['user_skp'] ) ? '<a href="skype:' . $profiledata['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+
+$tg_img = ( $profiledata['user_tg'] ) ? '<a href="https://t.me/' . $profiledata['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+$tg = ( $profiledata['user_tg'] ) ? '<a href="https://t,me/' . $profiledata['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+
+$li_img = ( $profiledata['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $profiledata['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+$li = ( $profiledata['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $profiledata['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+
+$tt_img = ( $profiledata['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $profiledata['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+$tt = ( $profiledata['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $profiledata['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
+
 $temp_url = append_sid("search.$phpEx?search_author=" . urlencode($profiledata['username']) . "&amp;showresults=posts");
 $search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $profiledata['username']) . '" title="' . sprintf($lang['Search_user_posts'], $profiledata['username']) . '" border="0" /></a>';
 $search = '<a href="' . $temp_url . '">' . sprintf($lang['Search_user_posts'], $profiledata['username']) . '</a>';
@@ -211,7 +235,23 @@ $template->assign_vars(array(
 	'MSN' => $msn,
 	'YIM_IMG' => $yim_img,
 	'YIM' => $yim,
-
+	'FB_IMG' => $fb_img, 
+	'FB' => $fb, 
+	'IG_IMG' => $ig_img,
+	'IG' => $ig,
+	'PT_IMG' => $pt_img,
+	'PT' => $pt,
+	'TWR_IMG' => $twr_img,
+	'TWR' => $twr,
+	'SKP_IMG' => $skp_img, 
+	'SKP' => $skp, 
+	'TG_IMG' => $tg_img,
+	'TG' => $tg,
+	'LI_IMG' => $li_img,
+	'LI' => $li,
+	'TT_IMG' => $tt_img,
+	'TT' => $tt,
+	
 	'LOCATION' => ( $profiledata['user_from'] ) ? $profiledata['user_from'] : '&nbsp;',
 	'OCCUPATION' => ( $profiledata['user_occ'] ) ? $profiledata['user_occ'] : '&nbsp;',
 	'INTERESTS' => ( $profiledata['user_interests'] ) ? $profiledata['user_interests'] : '&nbsp;',
@@ -232,6 +272,14 @@ $template->assign_vars(array(
 	'L_YAHOO' => $lang['YIM'],
 	'L_AIM' => $lang['AIM'],
 	'L_MESSENGER' => $lang['MSNM'],
+	'L_FACEBOOK' => $lang['FB'],
+	'L_INSTAGRAM' => $lang['IG'],
+	'L_PINTEREST' => $lang['PT'],
+	'L_TWITTER' => $lang['TWR'],
+	'L_SKYPE' => $lang['SKP'],
+	'L_TELEGRAM' => $lang['TG'],
+	'L_LINKEDIN' => $lang['LI'],
+	'L_TIKTOK' => $lang['TT'],		
 	'L_WEBSITE' => $lang['Website'],
 	'L_LOCATION' => $lang['Location'],
 	'L_OCCUPATION' => $lang['Occupation'],

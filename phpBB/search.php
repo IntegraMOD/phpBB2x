@@ -20,7 +20,10 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 $phpbb_root_path = './';
 include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
@@ -278,7 +281,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 			$split_search = array();
 			$stripped_keywords = stripslashes($search_keywords);
-			$split_search = ( !strstr($multibyte_charset, $lang['ENCODING']) ) ?  split_words(clean_words('search', $stripped_keywords, $stopword_array, $synonym_array), 'search') : split(' ', $search_keywords);	
+			$split_search = ( !strstr($multibyte_charset, $lang['ENCODING']) ) ?  split_words(clean_words('search', $stripped_keywords, $stopword_array, $synonym_array), 'search') : explode(' ', $search_keywords);
 			unset($stripped_keywords);
 
 			$search_msg_only = ( !$search_fields ) ? "AND m.title_match = 0" : ( ( strstr($multibyte_charset, $lang['ENCODING']) ) ? '' : '' );
@@ -692,7 +695,8 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 		$result_array = serialize($store_search_data);
 		unset($store_search_data);
 
-		$search_id = abs(crc32(dss_rand()));
+		mt_srand ((double) microtime() * 1000000);
+		$search_id = mt_rand();
 
 		$sql = "UPDATE " . SEARCH_TABLE . " 
 			SET search_id = $search_id, search_time = $current_time, search_array = '" . str_replace("\'", "''", $result_array) . "'
@@ -842,7 +846,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 				for ($k = 0; $k < count($synonym_array); $k++)
 				{ 
-					list($replace_synonym, $match_synonym) = split(' ', trim(strtolower($synonym_array[$k]))); 
+					list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_array[$k])));
 
 					if ( $replace_synonym == $split_word )
 					{

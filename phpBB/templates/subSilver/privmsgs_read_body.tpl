@@ -51,7 +51,7 @@
 		<table cellspacing="0" cellpadding="0" border="0" height="18">
 		  <tr> 
 			<td valign="middle" nowrap="nowrap">{PROFILE_IMG} {PM_IMG} {EMAIL_IMG} 
-			  {WWW_IMG} {AIM_IMG} {YIM_IMG} {MSN_IMG}</td><td>&nbsp;</td><td valign="top" nowrap="nowrap"><script language="JavaScript" type="text/javascript"><!-- 
+			  {WWW_IMG} {AIM_IMG} {YIM_IMG} {MSN_IMG} {FB_IMG} {IG_IMG} {PT_IMG} {TWR_IMG} {SKP_IMG} {TG_IMG} {LI_IMG} {TT_IMG}</td><td>&nbsp;</td><td valign="top" nowrap="nowrap"><script language="JavaScript" type="text/javascript"><!-- 
 
 		if ( navigator.userAgent.toLowerCase().indexOf('mozilla') != -1 && navigator.userAgent.indexOf('5.') == -1 && navigator.userAgent.indexOf('6.') == -1 )
 			document.write('{ICQ_IMG}');

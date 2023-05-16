@@ -6,7 +6,7 @@
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
  *
- *   $Id$
+ *   $Id: index.php 5318 2005-12-04 12:55:28Z grahamje $
  *
  *
  ***************************************************************************/
@@ -20,7 +20,10 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', 1);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', 1);
+}
 
 //
 // Load default header
@@ -51,7 +54,7 @@ function inarray($needle, $haystack)
 //
 // Generate relevant output
 //
-if( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'left' )
+if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 {
 	$dir = @opendir(".");
 
@@ -118,7 +121,7 @@ if( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'left' )
 
 	include('./page_footer_admin.'.$phpEx);
 }
-elseif( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'right' )
+elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 {
 
 	include('./page_header_admin.'.$phpEx);
@@ -159,6 +162,7 @@ elseif( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'right' )
 	$total_users = get_db_stat('usercount');
 	$total_topics = get_db_stat('topiccount');
 
+	$board_config['board_startdate'] = (empty($board_config['board_startdate'])) ? '0' : $board_config['board_startdate'];	
 	$start_date = create_date($board_config['default_dateformat'], $board_config['board_startdate'], $board_config['board_timezone']);
 
 	$boarddays = ( time() - $board_config['board_startdate'] ) / 86400;
@@ -234,9 +238,9 @@ elseif( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'right' )
 			$row = $db->sql_fetchrow($result);
 			$version = $row['mysql_version'];
 
-			if( preg_match("/^(3\.23|4\.|5\.)/", $version) )
+			if( preg_match("/^(4\.|5\.|6\.|7\.|8\.)/", $version) )
 			{
-				$db_name = ( preg_match("/^(3\.23\.[6-9])|(3\.23\.[1-9][1-9])|(4\.)|(5\.)/", $version) ) ? "`$dbname`" : $dbname;
+				$db_name = ( preg_match("/^(4\.)|(5\.)|(6\.)|(7\.)|(8\.)/", $version) ) ? "`$dbname`" : $dbname;
 
 				$sql = "SHOW TABLE STATUS 
 					FROM " . $db_name;
@@ -307,18 +311,31 @@ elseif( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'right' )
 			$dbsize = sprintf("%.2f Bytes", $dbsize);
 		}
 	}
-
+	$sql = "SELECT VERSION() AS mysql_version";
+	$result = $db->sql_query($sql);
+	if ( !$result )
+	{
+		throw_error("Couldn't obtain MySQL Version", __LINE__, __FILE__, $sql);
+	}
+	$row = $db->sql_fetchrow($result);
+	$mysql_version = $row['mysql_version'];
+	$db->sql_freeresult($result);
 	$template->assign_vars(array(
+		'MYSQL_VERSION' => $mysql_version,
 		"NUMBER_OF_POSTS" => $total_posts,
 		"NUMBER_OF_TOPICS" => $total_topics,
 		"NUMBER_OF_USERS" => $total_users,
+		'PHP_VERSION' => phpversion(),
 		"START_DATE" => $start_date,
 		"POSTS_PER_DAY" => $posts_per_day,
 		"TOPICS_PER_DAY" => $topics_per_day,
 		"USERS_PER_DAY" => $users_per_day,
 		"AVATAR_DIR_SIZE" => $avatar_dir_size,
 		"DB_SIZE" => $dbsize, 
-		"GZIP_COMPRESSION" => ( $board_config['gzip_compress'] ) ? $lang['ON'] : $lang['OFF'])
+		'GZIP_COMPRESSION' => ( $board_config['gzip_compress'] ) ? $lang['ON'] : $lang['OFF'],
+
+		'L_PHP_VERSION' => $lang['Version_of_PHP'],
+		'L_MYSQL_VERSION' => $lang['Version_of_MySQL'])
 	);
 	//
 	// End forum statistics
@@ -378,6 +395,8 @@ elseif( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'right' )
 				$reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
 
 				$username = $onlinerow_reg[$i]['username'];
+				
+				$onlinerow_reg[$i]['user_allow_viewonline'] = (isset($onlinerow_reg[$i]['user_allow_viewonline'])) ? $onlinerow_reg[$i]['user_allow_viewonline'] : '';
 
 				if( $onlinerow_reg[$i]['user_allow_viewonline'] || $userdata['user_level'] == ADMIN )
 				{
@@ -601,8 +620,14 @@ elseif( isset($HTTP_GET_VARS['pane']) && $HTTP_GET_VARS['pane'] == 'right' )
 		}
 		else
 		{
+			$version_info = '<p><span style="color:green">' . $lang['Version_up_to_date'] . '</span><br />' . $lang['Version_support'] . '<br />';
+			$version_info .= '<br /><a href="https://www.phpbb.com/downloads/" target="_blank">' . sprintf($lang['Latest_version_info'], $latest_version) . '</a> ' . sprintf($lang['Current_version_info'], '2' . $board_config['version']) . '</p>';
+			$html = file_get_contents('../docs/updates.html');
+			  	echo $html;
+/**
 			$version_info = '<p style="color:red">' . $lang['Version_not_up_to_date'];
 			$version_info .= '<br />' . sprintf($lang['Latest_version_info'], $latest_version) . ' ' . sprintf($lang['Current_version_info'], '2' . $board_config['version']) . '</p>';
+**/
 		}
 	}
 	else

@@ -20,7 +20,10 @@
  *
  ***************************************************************************/
 
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 $phpbb_root_path = './';
 include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
@@ -228,7 +231,7 @@ else if ( $mode == 'read' )
 	//
 	// Major query obtains the message ...
 	//
-	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_sig_bbcode_uid, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_regdate, u.user_msnm, u.user_viewemail, u.user_rank, u.user_sig, u.user_avatar, pm.*, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text
+	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_sig_bbcode_uid, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_regdate, u.user_msnm, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt, u.user_viewemail, u.user_rank, u.user_sig, u.user_avatar, pm.*, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text
 		FROM " . PRIVMSGS_TABLE . " pm, " . PRIVMSGS_TEXT_TABLE . " pmt, " . USERS_TABLE . " u, " . USERS_TABLE . " u2 
 		WHERE pm.privmsgs_id = $privmsgs_id
 			AND pmt.privmsgs_text_id = pm.privmsgs_id 
@@ -358,10 +361,10 @@ else if ( $mode == 'read' )
 		'edit' => append_sid("privmsg.$phpEx?mode=edit&amp;" . POST_POST_URL . "=$privmsg_id")
 	);
 	$post_icons = array(
-		'post_img' => '<a href="' . $post_urls['post'] . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['Post_new_pm'] . '" border="0" /></a>',
-		'post' => '<a href="' . $post_urls['post'] . '">' . $lang['Post_new_pm'] . '</a>',
-		'reply_img' => '<a href="' . $post_urls['reply'] . '"><img src="' . $images['pm_replymsg'] . '" alt="' . $lang['Post_reply_pm'] . '" border="0" /></a>',
-		'reply' => '<a href="' . $post_urls['reply'] . '">' . $lang['Post_reply_pm'] . '</a>',
+		'post_img' => '<a href="' . $post_urls['post'] . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['button_pm_new'] . '" border="0" /></a>',
+		'post' => '<a href="' . $post_urls['post'] . '">' . $lang['button_pm_new'] . '</a>',
+		'reply_img' => '<a href="' . $post_urls['reply'] . '"><img src="' . $images['pm_replymsg'] . '" alt="' . $lang['button_pm_reply'] . '" border="0" /></a>',
+		'reply' => '<a href="' . $post_urls['reply'] . '">' . $lang['button_pm_reply'] . '</a>',
 		'quote_img' => '<a href="' . $post_urls['quote'] . '"><img src="' . $images['pm_quotemsg'] . '" alt="' . $lang['Post_quote_pm'] . '" border="0" /></a>',
 		'quote' => '<a href="' . $post_urls['quote'] . '">' . $lang['Post_quote_pm'] . '</a>',
 		'edit_img' => '<a href="' . $post_urls['edit'] . '"><img src="' . $images['pm_editmsg'] . '" alt="' . $lang['Edit_pm'] . '" border="0" /></a>',
@@ -538,6 +541,30 @@ else if ( $mode == 'read' )
 	$yim_img = ( $privmsg['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $privmsg['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
 	$yim = ( $privmsg['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $privmsg['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
 
+	$fb_img = ( $privmsg[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+	$fb = ( $privmsg[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+
+	$ig_img = ( $privmsg[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg[$i]['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+	$ig = ( $privmsg[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg[$i]['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+
+	$pt_img = ( $privmsg[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $privmsg[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+	$pt = ( $privmsg[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $privmsg[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+
+	$twr_img = ( $privmsg[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+	$twr = ( $privmsg[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg[$i]['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+
+	$skp_img = ( $privmsg[$i]['user_skp'] ) ? '<a href="skype:' . $privmsg[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	$skp = ( $privmsg[$i]['user_skp'] ) ? '<a href="skype:' . $privmsg[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+
+	$tg_img = ( $privmsg[$i]['user_tg'] ) ? '<a href="https://t.me/' . $privmsg[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+	$tg = ( $privmsg[$i]['user_tg'] ) ? '<a href="https://t,me/' . $privmsg[$i]['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+
+	$li_img = ( $privmsg[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+	$li = ( $privmsg[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg[$i]['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+
+	$tt_img = ( $privmsg[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+	$tt = ( $privmsg[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg[$i]['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
+
 	$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($username_from) . "&amp;showresults=posts");
 	$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $username_from) . '" title="' . sprintf($lang['Search_user_posts'], $username_from) . '" border="0" /></a>';
 	$search = '<a href="' . $temp_url . '">' . sprintf($lang['Search_user_posts'], $username_from) . '</a>';
@@ -643,7 +670,23 @@ else if ( $mode == 'read' )
 		'MSN_IMG' => $msn_img,
 		'MSN' => $msn,
 		'YIM_IMG' => $yim_img,
-		'YIM' => $yim)
+		'YIM' => $yim,
+		'FB_IMG' => $fb_img, 
+		'FB' => $fb, 
+		'IG_IMG' => $ig_img,
+		'IG' => $ig,
+		'PT_IMG' => $pt_img,
+		'PT' => $pt,
+		'TWR_IMG' => $twr_img,
+		'TWR' => $twr,
+		'SKP_IMG' => $skp_img, 
+		'SKP' => $skp, 
+		'TG_IMG' => $tg_img,
+		'TG' => $tg,
+		'LI_IMG' => $li_img,
+		'LI' => $li,
+		'TT_IMG' => $tt_img,
+		'TT' => $tt)		
 	);
 
 	$template->pparse('body');
