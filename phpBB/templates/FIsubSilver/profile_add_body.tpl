@@ -31,8 +31,8 @@
       </div>
 	<!-- BEGIN switch_edit_profile -->
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_CURRENT_PASSWORD}: *</div>
-        <div class="col-8 row2 py-1 gensmall">{L_CONFIRM_PASSWORD_EXPLAIN}</div>
+        <div class="col-4 row1 py-1">{L_CURRENT_PASSWORD}: *<br /><span class="gensmall">{L_CONFIRM_PASSWORD_EXPLAIN}</span></div>
+        <div class="col-8 row2 py-1"><input type="password" class="post" style="width: 200px" name="cur_password" size="25" maxlength="32" value="{CUR_PASSWORD}" /></div>
       </div>
 	<!-- END switch_edit_profile -->
       <div class="row gen">

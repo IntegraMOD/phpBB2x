@@ -315,3 +315,10 @@ input.liteoption {
       .bd-mode-toggle {
         z-index: 1500;
       }
+      
+    @media (min-width: 576px) {
+  .px-xs-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}

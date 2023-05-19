@@ -14,6 +14,7 @@
             // -->
             Powered by <a class="copyright" href="http://www.phpbb.com/">phpBB</a> &copy; 2001, 2005 phpBB Group<br />{TRANSLATION_INFO}
             </div>
+            <div class="text-center"><img src="templates/FIsubSilver/images/w3c/valid-html5.png" alt="W3C" title="valid header, index and footer   ....so far" width="114" height="50" /></div>
           </div>
         </div>
         <!-- /footer -->

@@ -54,7 +54,7 @@
 
 <div class="forumline row1">
   <div class="row catHead mx-0"> 
-	<div class="col d-flex align-items-center cattitle"><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></div>
+	<div class="col d-flex align-items-center"><a class="cattitle href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></div>
   </div>
   <div class="row mx-0 px-0 hr1">
     <div class="col-1 px-0 text-center my-auto"><a href="{U_VIEWONLINE}"><button class="btn fa- d-inline-block"><span class="fa-solid fa-network-wired" alt="{L_WHO_IS_ONLINE}"  title="{L_WHO_IS_ONLINE}"></span></button></a></div>
