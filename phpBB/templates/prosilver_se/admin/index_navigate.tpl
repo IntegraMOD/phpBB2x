@@ -1,4 +1,4 @@
-				<img src="../templates/prosilver/admin/images/phpbb_logo.gif" alt="phpBB" />
+				<img src="../templates/prosilver_se/admin/images/phpbb_logo.gif" alt="phpBB" />
 				<div id="menu">
 					<ul>
 						<li class="header">{L_ADMIN}</li>

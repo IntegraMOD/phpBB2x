@@ -434,9 +434,8 @@ $template->assign_vars(array(
 	'L_POSTED' => $lang['Posted'],
 	'L_JOINED' => $lang['Joined'],
 	'L_AUTHOR' => $lang['Author'],
-	'L_BUTTON_TOPIC_NEW' => ( $forum_row['forum_status'] == FORUM_LOCKED ) ? $lang['Forum_locked'] : $lang['button_topic_new'], 
+	'L_BUTTON_TOPIC_NEW' 	=> $lang['button_topic_new'],
 	'L_BUTTON_TOPIC_LOCKED' => $lang['button_topic_locked'],
-
 	'S_AUTH_LIST' => $s_auth_can, 
 
 	'U_VIEW_FORUM' => append_sid("viewforum.$phpEx?" . POST_FORUM_URL ."=$forum_id"),

@@ -239,29 +239,29 @@ if ( $row = $db->sql_fetchrow($result) )
 		$yim_img = ( $row['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
 		$yim = ( $row['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
 
-		$fb_img = ( $row[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
-		$fb = ( $row[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+		$fb_img = ( $row['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+		$fb = ( $row['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
 
-		$ig_img = ( $row[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row[$i]['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
-		$ig = ( $row[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row[$i]['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+		$ig_img = ( $row['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+		$ig = ( $row['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
 
-		$pt_img = ( $row[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $row[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
-		$pt = ( $row[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $row[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+		$pt_img = ( $row['user_pt'] ) ? '<a href="/www.pinterest.com/' . $row['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+		$pt = ( $row['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $row['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
 
-		$twr_img = ( $row[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $row[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
-		$twr = ( $row[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $row[$i]['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+		$twr_img = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+		$twr = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
 
-		$skp_img = ( $row[$i]['user_skp'] ) ? '<a href="skype:' . $row[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
-	    $skp = ( $row[$i]['user_skp'] ) ? '<a href="skype:' . $row[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+		$skp_img = ( $row['user_skp'] ) ? '<a href="skype:' . $row['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	    $skp = ( $row['user_skp'] ) ? '<a href="skype:' . $row['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
 
-		$tg_img = ( $row[$i]['user_tg'] ) ? '<a href="https://t.me/' . $row[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
-		$tg = ( $row[$i]['user_tg'] ) ? '<a href="https://t,me/' . $row[$i]['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+		$tg_img = ( $row['user_tg'] ) ? '<a href="https://t.me/' . $row['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+		$tg = ( $row['user_tg'] ) ? '<a href="https://t,me/' . $row['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
 
-		$li_img = ( $row[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
-		$li = ( $row[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row[$i]['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+		$li_img = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+		$li = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
 
-		$tt_img = ( $row[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
-		$tt = ( $row[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row[$i]['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
+		$tt_img = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+		$tt = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
 
 		$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($username) . "&amp;showresults=posts");
 		$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $username) . '" title="' . sprintf($lang['Search_user_posts'], $username) . '" border="0" /></a>';

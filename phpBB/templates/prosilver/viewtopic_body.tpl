@@ -59,7 +59,7 @@
 		</form>
 		<hr />
 		<div class="topic-actions">
-			<div class="lbuttons"><a href="{U_POST_REPLY_TOPIC}" class="button icon-button post-icon" title="{L_POST_REPLY_TOPIC}">{L_BUTTON_TOPIC_REPLY}</a></div>
+			<div class="lbuttons"><a href="{U_POST_NEW_TOPIC}" class="button icon-button post-icon" title="{L_POST_NEW_TOPIC}">{L_BUTTON_TOPIC_NEW}</a><a href="{U_POST_REPLY_TOPIC}" class="button icon-button post-icon" title="{L_POST_REPLY_TOPIC}">{L_BUTTON_TOPIC_REPLY}</a></div>
 			<div class="pagination">{PAGE_NUMBER}&nbsp; <span>{PAGINATION}</span></div>
 		</div>
 		<p></p><p><a href="{U_VIEW_FORUM}" class="left-box left">{FORUM_NAME}</a></p>

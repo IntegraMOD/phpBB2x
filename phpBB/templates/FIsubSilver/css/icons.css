@@ -17,6 +17,43 @@ $images['folder_announce_new'] 	.fa-circle-exclamation
 
 $images['folder_posted'] = "$current_template_images/{$row['body_background']}/folder_own.gif\" width=\"$folder_iw\" height=\"$folder_ih\" class=\"imgfolder"; 
 */
+.butntxt {
+  font-family: danoiseregular !important;
+  text-decoration: none !important;
+}
+
+.pbtn a {font-family: 'BellotaText-Bold', cursive; text-decoration: none !important;}
+
+.pbtn {
+  background: #FFFFFF;
+  background-image: -webkit-linear-gradient(top, #FFFFFF, #E2E2E2);
+  background-image: -moz-linear-gradient(top, #FFFFFF, #E2E2E2);
+  background-image: -ms-linear-gradient(top, #FFFFFF, #E2E2E2);
+  background-image: -o-linear-gradient(top, #FFFFFF, #E2E2E2);
+  background-image: linear-gradient(to bottom, #FFFFFF, #E2E2E2);
+  -webkit-border-radius: 20;
+  -moz-border-radius: 20;
+  border-radius: 20px;
+  font-family: 'BellotaText-Bold', cursive;
+  font-weight: 800;
+  text-transform: lowercase;
+  color: #0D6997;
+  font-size: 1em;
+  padding: 7px 15px 7px 10px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+
+.pbtn:hover {
+  background: #E2E2E2;
+  background-image: -webkit-linear-gradient(top, #E2E2E2, #E2E2E2);
+  background-image: -moz-linear-gradient(top, #E2E2E2, #E2E2E2);
+  background-image: -ms-linear-gradient(top, #E2E2E2, #E2E2E2);
+  background-image: -o-linear-gradient(top, #E2E2E2, #E2E2E2);
+  background-image: linear-gradient(to bottom, #E2E2E2, #E2E2E2);
+  text-decoration: none !important;
+}
+
       .cl1 {
         min-width: 40px !important;
         padding-left: 0px;

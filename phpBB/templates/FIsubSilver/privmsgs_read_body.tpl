@@ -13,8 +13,8 @@
       <br clear="all" />
       <form method="post" action="{S_PRIVMSGS_ACTION}">
       <div class="container-fluid">
-        <div class="row px-0"> 
-          <div class="col-3 mx-0 py-1 pl-0 d-flex flex-nowrap text-start"><button class="btn fa- pb qb"><i class="fa-solid fa-share-from-square"><span class="btx">{REPLY_PM}</span></i></button></div>
+        <div class="row px-0">
+          <div class="col-3 py-1 pl-0 d-flex nw btntxt"><span class="pbtn postbtn"><i class="fa-solid fa-share-from-square"></i>&nbsp;{REPLY_PM}</span></div>
           <div class="col"><span class="text-end navbr"><a href="{U_INDEX}">{L_INDEX}</a></span></div>
         </div>
         <div class="row mx-0"> 
@@ -38,7 +38,7 @@
                 <div class="row genmed row2 hr1">
                   <div class="col-2 py-1">{L_SUBJECT}:</div>
                   <div class="col py-1 hr5">{POST_SUBJECT}</div>
-            	  <div class="col py-1 text-end nw">{QUOTE_PM_IMG} {EDIT_PM_IMG}</div>
+            	  <div class="col-4 text-end"><span class="py-1 pl-0 d-flex nw"><span class="pbtn"><i class="fa-solid fa-pencil"></i>{EDIT_PM_IMG}</span>&nbsp;&nbsp;<span class="pbtn"><i class="fa-solid fa-quote-left"></i>&nbsp;{QUOTE_PM}&nbsp;<i class="fa-solid fa-quote-right"></i></span></span></div>
                 </div>
                 <div class="row row1 hr1">
                   <div class="col p-2 postbody">{MESSAGE}</div>
@@ -57,7 +57,7 @@
     
         <br clear="all" />
         <div class="row px-0"> 
-          <div class="col-3 mx-0 py-1 pl-0 d-flex flex-nowrap text-start"><button class="btn fa- pb qb"><i class="fa-solid fa-share-from-square"><span class="btx">{REPLY_PM}</span></i></button></div>
+          <div class="col-3 py-1 pl-0 d-flex nw btntxt"><span class="pbtn postbtn"><i class="fa-solid fa-share-from-square"></i>&nbsp;{REPLY_PM}</span></div>
           <div class="col pl-0 mb-0 text-end gensmall">{S_TIMEZONE}</div>
         </div>
       </div>

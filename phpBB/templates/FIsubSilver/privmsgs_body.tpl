@@ -54,7 +54,7 @@
     <div class="col pl-0 mb-0 pl-0 text-center navbr"><a href="{U_INDEX}" class="navbr">{L_INDEX}</a></div>
   </div>
   <div class="row mx-0">
-    <div class="col-4 py-1 pl-0 d-flex nw"><button class="btn fa- pb qb"><i class="fa-solid fa-pen-to-square"><span class="btx">{POST_PM}</span></i></button></div>
+    <div class="col py-1 pl-0 d-flex nw btntxt"><span class="pbtn postbtn"><i class="fa-solid fa-pen-to-square"></i>&nbsp;{POST_PM}</span></div>
     <div class="col p-1 text-end"><span class="navbr gensmall">{L_DISPLAY_MESSAGES}: <select name="msgdays">{S_SELECT_MSG_DAYS}</select><input type="submit" value="{L_GO}" name="submit_msgdays" class="liteoption" /></span></div>
   </div>
   <div class="container-fluid forumline mx-0">
@@ -86,7 +86,7 @@
 	</div>
   </div>
   <div class="row mx-0 pb-2">
-    <div class="col-3 py-1 pl-0 d-flex nw"><button class="btn fa- pb qb"><i class="fa-solid fa-pen-to-square"><span class="btx">{POST_PM}</span></i></button></div>
+    <div class="col py-1 pl-0 d-flex nw btntxt"><span class="pbtn postbtn"><i class="fa-solid fa-pen-to-square"></i>&nbsp;{POST_PM}</span></div>
     <div class="col text-start">
       <span class="navbr">{PAGE_NUMBER}</span>
     </div>

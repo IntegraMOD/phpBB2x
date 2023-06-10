@@ -83,17 +83,25 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 
 		"L_FORUM_INDEX" => $lang['Main_index'],
 		"L_ADMIN_INDEX" => $lang['Admin_Index'], 
-		"L_PREVIEW_FORUM" => $lang['Preview_forum'])
+		"L_PREVIEW_FORUM" => $lang['Preview_forum'],
+		
+		"COOKIE_NAME" => $board_config['cookie_name'],
+		"COOKIE_PATH" => $board_config['cookie_path'],
+		"COOKIE_DOMAIN"	=> $board_config['cookie_domain'],
+		"COOKIE_SECURE"	=> $board_config['cookie_secure'])
 	);
 
 	ksort($module);
+	$menu_cat_id = 0;
 
 	while( list($cat, $action_array) = each($module) )
 	{
 		$cat = ( !empty($lang[$cat]) ) ? $lang[$cat] : preg_replace("/_/", " ", $cat);
 
 		$template->assign_block_vars("catrow", array(
-			"ADMIN_CATEGORY" => $cat)
+			"ADMIN_CATEGORY" => $cat,
+			"MENU_CAT_ID" => $menu_cat_id,
+			"MENU_CAT_ROWS" => count($action_array))
 		);
 
 		ksort($action_array);
@@ -109,12 +117,14 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 			$template->assign_block_vars("catrow.modulerow", array(
 				"ROW_COLOR" => "#" . $row_color,
 				"ROW_CLASS" => $row_class, 
+				'ROW_COUNT' => $row_count,
 
 				"ADMIN_MODULE" => $action,
 				"U_ADMIN_MODULE" => append_sid($file))
 			);
 			$row_count++;
 		}
+		$menu_cat_id++;
 	}
 
 	$template->pparse("body");
@@ -492,7 +502,8 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	//
 	// Guest users
 	//
-	if( count($onlinerow_guest) )
+    if ( isset($onlinerow_guest) && count($onlinerow_guest) )
+//	if( count($onlinerow_guest) ) 
 	{
 		$guest_users = 0;
 

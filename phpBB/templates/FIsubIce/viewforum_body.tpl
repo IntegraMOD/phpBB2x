@@ -35,10 +35,8 @@
     	    <div class="col"><span class="gen">{L_NO_TOPICS}</span></div>
     	  </div>
       	  <!-- END switch_no_topics -->
-    	  <div class="row d-flex catBottom align-items-center bdrw mx-0"> 
-    	    <div class="col-1 text-start"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-1x"></i></a></div>
-    	    <div class="col-10 genmed text-center">{L_DISPLAY_TOPICS}:&nbsp;{S_SELECT_TOPIC_DAYS}&nbsp;<input type="submit" class="liteoption" value="{L_GO}" name="submit" /></div>
-    	    <div class="col-1 text-end"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-1x"></i></a></div>
+    	  <div class="row d-flex catBottom align-items-center text-center bdrw mx-0"> 
+    	    <div class="col"><span class="genmed">{L_DISPLAY_TOPICS}:&nbsp;{S_SELECT_TOPIC_DAYS}&nbsp;<input type="submit" class="liteoption" value="{L_GO}" name="submit" /></span></div>
     	  </div>
         </div>
       </div>

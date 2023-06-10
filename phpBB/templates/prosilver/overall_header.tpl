@@ -19,7 +19,7 @@
 //-->
 </script>
 <!-- END switch_enable_pm_popup -->
-<script type="text/javascript" src="templates/prosilver/forum_fn.js"></script>
+<script src="templates/prosilver/forum_fn.js"></script>
 <link href="templates/prosilver/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css" media="screen, projection" />
 </head>
 <body id="phpbb" class="section-index {S_CONTENT_DIRECTION}">

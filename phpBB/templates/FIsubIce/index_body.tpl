@@ -76,12 +76,13 @@
 
 <!-- BEGIN switch_user_logged_out -->
 <form method="post" action="{S_LOGIN_ACTION}">
-  <div class="forumline">
-	<div class="row mx-0"> 
-	  <div class="col"><a name="login"></a><span class="cattitle">{L_LOGIN_LOGOUT}</span></div>
+  <div class="forumline row1">
+    <div class="row catHead mx-0"> 
+	  <div class="col d-flex align-items-center"><a name="login"></a><span class="cattitle">{L_LOGIN_LOGOUT}</span></div>
 	</div>
-	<div class="row mx-0"> 
-	  <div class="col"><span class="gensmall">{L_USERNAME}: 
+	<div class="row mx-0">
+	  <div class="col-1 px-0 text-center my-auto"><button class="btn fa- d-inline-block"><span class="fa-solid fa-right-to-bracket" alt="{L_LOGIN}"  title="{L_LOGIN}"></span></button></div>
+	  <div class="col hr5  py-2"><span class="gensmall">{L_USERNAME}: 
 		<input class="post" type="text" name="username" size="10" />
 		&nbsp;&nbsp;&nbsp;{L_PASSWORD}: 
 		<input class="post" type="password" name="password" size="10" maxlength="32" />
