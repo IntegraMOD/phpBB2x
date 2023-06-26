@@ -1,0 +1,246 @@
+/*
+  Bootstrap subSilver Theme for phpBB version 2x.
+  Created by Helter (integramod.com)
+*/
+
+
+html{
+	font-size:100%;
+	margin-bottom:1px;
+}
+
+body{
+	font-family:Verdana,Helvetica,Arial,sans-serif;
+	font-size:13px;
+	background-color: #E5E5E5;
+}
+
+html,body{
+	color:#000000;
+	background-color:#E5E5E5;
+	line-height: normal;
+	line-height: 1em;
+}
+
+/* 
+div.col, div.col-4, div.col-8, div.col-12 {border: 1px #000000 solid !important; }
+.row  {border: 1px #41b829 solid !important; }
+*/
+
+/* General font families for common tags */
+font,th,td,p { font-family: Verdana, Arial, Helvetica, sans-serif }
+a:link,a:active,a:visited { color : #006699; }
+a:hover		{ text-decoration: underline; color : #DD6900; }
+.hov		{ text-decoration: none; color : #DD6900; }
+hr, .hr		{ border-top:1px solid #D1D7DC;  }
+.hr1 	    { border-top:1px solid #FFF;  }       
+.hr2 	    { border-top: 1px solid #FFFFFF;  }       
+.hr3 	    { border-right:1px solid #FFFFFF !important;  } 
+.hr4 	    { border-width: 1px 0px 1px 0px; border: solid #FFFFFF !important;  } 
+.hr5        { border-left:1px solid #FFFFFF !important;  } 
+
+/* This is the border line & background colour round the entire page */
+.bodyline	{ background-color: #FFFFFF; border: 1px #98AAB1 solid !important; }
+
+/* This is the outline round the main forum tables */
+.forumline	{ background-color: #FFFFFF; border: 2px #006699 solid; }
+
+
+/* Main table cell colours and backgrounds */
+.row1	{ background-color: #EFEFEF; }
+.row2	{ background-color: #DEE3E7; }
+.row3	{ background-color: #D1D7DC; }
+
+
+/*
+  This is for the table cell above the Topics, Post & Last posts on the index.php page
+  By default this is the fading out gradiated silver background.
+  However, you could replace this with a bitmap specific for each forum
+*/
+.rowpic{
+	color:#516a88;
+	background: #D1D8E0; /* Old browsers */
+	background: -moz-linear-gradient(top, #D1D8E0 0%, #F9F9F9 75%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #D1D8E0 0%,#F9F9F9 75%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #D1D8E0 0%,#F9F9F9 75%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D1D8E0', endColorstr='#F9F9F9',GradientType=0 ); /* IE6-9 */border-color:#91a0ae;
+	border-color:#0850BD;
+}
+
+/* Header cells - the blue and silver gradient backgrounds */
+th, .th {
+    font-size: 1em; 
+    font-weight : bold;
+    height: 2.1em !important;
+	color:#FFA34F;
+	background: #e2e9f1; /* Old browsers */
+	background: -moz-linear-gradient(top, #1874A2 0%, #3A95C2 75%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #1874A2 0%,#3A95C2 75%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #1874A2 0%,#3A95C2 75%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1874A2', endColorstr='#3A95C2',GradientType=0 ); /* IE6-9 */border-color:#91a0ae;
+}
+
+.cat, .catHead, .cathead, .catSides, .catLeft, .catRight, .catBottom {
+	color:#516a88;
+	border: #FFFFFF;
+	border-style: solid;
+	height: 2.1em !important;
+	background: #C8D0D6; /* Old browsers */
+	background: -moz-linear-gradient(top, #C8D0D6 0%, #C8D0D6 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #C8D0D6 0%,#C8D0D6 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #C8D0D6 0%,#C8D0D6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C8D0D6', endColorstr='#C8D0D6',GradientType=0 ); /* IE6-9 */
+}
+
+.bdr {border: 1px solid black !important;}
+.bdrw {border: 1px solid #FFFFFF !important;}
+
+/*
+  Setting additional nice inner borders for the main table cells.
+  The names indicate which sides the border will be on.
+  Don't worry if you don't understand this, just ignore it :-)
+*/
+.cat, .catHead, .catBottom {
+	height: 2.1em;
+	border-width: 0px 0px 0px 0px;
+}
+.thHead,.thSides,.thTop,.thLeft,.thRight,.thBottom,.thCornerL,.thCornerR {
+	font-weight: bold; border: #FFFFFF; border-style: solid; height: 2.1em; }
+.thH {line-height: 2em; vertical-align:middle !important;}
+.row3Right, .spaceRow {
+	background-color: #D1D7DC; border: #FFFFFF; border-style: solid; }
+
+.thHead,.catHead { font-size: 0.923em; border-width: 1px 1px 0px 1px; }
+.thSides,.catSides,.spaceRow	 { border-width: 0px 1px 0px 1px; }
+.thRight,.catRight,.row3Right	 { border-width: 0px 1px 0px 0px; }
+.thLeft,.catLeft	  { border-width: 0px 0px 0px 1px; }
+.thBottom,.catBottom  { border-width: 0px 1px 1px 1px; }
+.thTop	 { border-width: 1px 0px 0px 0px; }
+.thCornerL { border-width: 1px 0px 0px 1px; }
+.thCornerR { border-width: 1px 1px 0px 0px; }
+
+/* The largest text used in the index page title and toptic title etc. */
+.maintitle,h1,h2	{
+			font-weight: bold; font-size: 1.692em; font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+			text-decoration: none; line-height : 120%; color : #000000;
+}
+
+
+/* General text */
+.gen { font-size : 1em !important; }
+.genmed { font-size : 0.923em !important; }
+.gensmall { font-size : 0.846em !important; }
+.gen,.genmed,.gensmall { color : #000000; }
+a.gen,a.genmed,a.gensmall { color: #006699; text-decoration: none; }
+a.gen:hover,a.genmed:hover,a.gensmall:hover	{ color: #DD6900; text-decoration: underline; }
+.qb a, .qb a:hover, .qb a:focus {text-transform: capitalize !important; font-size : 0.923em !important; text-decoration: none !important; margin: 0 2px;}
+
+/* The register, login, search etc links at the top of the page */
+.mainmenu	{ font-size : 1em; color : #000000;}
+a.mainmenu		{ text-decoration: none; color : #006699;  }
+a.mainmenu:hover{ text-decoration: underline; color : #DD6900; }
+
+/* Forum category titles */
+.cattitle		{ font-weight: bold; font-size: 1em ; letter-spacing: 1px; color : #006699}
+a.cattitle		{ text-decoration: none; color : #006699; }
+a.cattitle:hover{ text-decoration: underline; }
+
+
+/* Forum title: Text and link to the forums used in: index.php */
+.forumlink		{ font-weight: bold; font-size: 0.91em; color : #006699; }
+a.forumlink 	{ text-decoration: none; color : #006699; }
+a.forumlink:hover{ text-decoration: underline; color : #DD6900; }
+
+
+/* Used for the navigation text, (Page 1,2,3 etc) and the navigation bar when in a forum */
+.nav			{ font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif !important; font-weight: bold; font-size: 1em !important; color : #000000;}
+a.nav			{ text-decoration: none; color : #006699; }
+a.nav:hover		{ text-decoration: underline; }
+
+.navbr			{ font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif !important; font-weight: bold; font-size: 1em !important; color : #000000;}
+a.navbr			{ text-decoration: none; color : #006699 !important; }
+a.navbr:hover   { text-decoration: none; color : #DD6900 !important; }
+
+/* titles for the topics: could specify viewed link colour too */
+.topictitle			{ font-weight: bold; font-size: 0.91em; color : #000000; }
+a.topictitle:link   { text-decoration: none; color : #006699; }
+a.topictitle:visited { text-decoration: none; color : #5493B4; }
+a.topictitle:hover	{ text-decoration: underline; color : #DD6900; }
+
+
+/* Name of poster in viewmsg.php and viewtopic.php and other places */
+.name			{ font-size : 0.846em; color : #000000;}
+
+/* Location, number of posts, post date etc */
+.postdetails		{ font-size : 0.769em; color : #000000; }
+
+
+/* The content of the posts (body of text) */
+.postbody { font-size : 0.923em;}
+a.postlink:link	{ text-decoration: none; color : #006699 }
+a.postlink:visited { text-decoration: none; color : #5493B4; }
+a.postlink:hover { text-decoration: underline; color : #DD6900}
+
+.faimg   {height:2.1em !important; width:2.1em !important;}
+
+
+/* Quote & Code blocks */
+.code {
+	font-family: Courier, 'Courier New', sans-serif; font-size: 0.846em !important; color: #006600 !important; background-color: #FAFAFA !important; border:1px solid #D1D7DC !important;
+}
+
+.quote {
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.846em !important; color: #444444 !important; line-height: 125% !important; background-color: #FAFAFA !important; border:1px solid #D1D7DC !important;
+}
+
+/* Copyright and bottom info */
+.copyright		{ font-size: 0.769em; font-family: Verdana, Arial, Helvetica, sans-serif; color: #444444; letter-spacing: -1px;}
+a.copyright		{ color: #444444; text-decoration: none;}
+a.copyright:hover { color: #000000; text-decoration: underline;}
+
+
+/* Form elements */
+input,textarea, select {
+	color : #000000;
+	font: normal 0.846em Verdana, Arial, Helvetica, sans-serif;
+	border-color : #000000;
+}
+
+/* The text input fields background colour */
+input.post, textarea.post, select {
+	background-color : #FFFFFF;
+}
+
+input { text-indent : 2px; }
+
+/* The buttons used for bbCode styling in message post */
+input.button {
+	background-color : #EFEFEF;
+	color : #000000;
+	font-size: 0.846em; font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* The main submit button option */
+input.mainoption {
+	background-color : #FAFAFA;
+	font-weight : bold;
+}
+
+/* None-bold submit button */
+input.liteoption {
+	background-color : #FAFAFA;
+	font-weight : normal;
+}
+
+/* This is the line in the posting page which shows the rollover
+  help line. This is actually a text box, but if set to be the same
+  colour as the background no one will know ;)
+*/
+.helpline { background-color: #DEE3E7; border-style: none; }
+
+ul.wrapped {
+  display: flex !mportant;  
+  flex-wrap: wrap !mportant;
+}  
+  
+  
