@@ -231,7 +231,7 @@ else if ( $mode == 'read' )
 	//
 	// Major query obtains the message ...
 	//
-	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_sig_bbcode_uid, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_regdate, u.user_msnm, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt, u.user_viewemail, u.user_rank, u.user_sig, u.user_avatar, pm.*, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text
+	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_sig_bbcode_uid, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_regdate, u.user_msnm, u.user_viewemail, u.user_rank, u.user_sig, u.user_avatar, pm.*, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text
 		FROM " . PRIVMSGS_TABLE . " pm, " . PRIVMSGS_TEXT_TABLE . " pmt, " . USERS_TABLE . " u, " . USERS_TABLE . " u2 
 		WHERE pm.privmsgs_id = $privmsgs_id
 			AND pmt.privmsgs_text_id = pm.privmsgs_id 
@@ -482,10 +482,6 @@ else if ( $mode == 'read' )
 		'L_TO' => $lang['To'], 
 		'L_SAVE_MSG' => $lang['Save_message'], 
 		'L_DELETE_MSG' => $lang['Delete_message'], 
-		'L_EDIT_PM' => $lang['Edit_pm'],
-		'L_POST_QUOTE_PM' => $lang['Post_quote_pm'],
-		'L_BUTTON_PM_NEW' => $lang['button_pm_new'], 
-		'L_BUTTON_PM_REPLY' => $lang['button_pm_reply'],
 
 		'S_PRIVMSGS_ACTION' => append_sid("privmsg.$phpEx?folder=$folder"),
 		'S_HIDDEN_FIELDS' => $s_hidden_fields)
@@ -544,30 +540,6 @@ else if ( $mode == 'read' )
 
 	$yim_img = ( $privmsg['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $privmsg['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
 	$yim = ( $privmsg['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $privmsg['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
-
-	$fb_img = ( $privmsg['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
-	$fb = ( $privmsg['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
-
-	$ig_img = ( $privmsg['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
-	$ig = ( $privmsg['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
-
-	$pt_img = ( $privmsg['user_pt'] ) ? '<a href="/www.pinterest.com/' . $privmsg['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
-	$pt = ( $privmsg['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $privmsg['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
-
-	$twr_img = ( $privmsg['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg['user_twr'] . '&amp;.src=pg" title="' . $lang['TWR'] . '"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
-	$twr = ( $privmsg['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
-
-	$skp_img = ( $privmsg['user_skp'] ) ? '<a href="skype:' . $privmsg['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
-	$skp = ( $privmsg['user_skp'] ) ? '<a href="skype:' . $privmsg['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
-
-	$tg_img = ( $privmsg['user_tg'] ) ? '<a href="https://t.me/' . $privmsg['user_tg'] . '&amp;.src=pg" title="' . $lang['TG'] . '"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
-	$tg = ( $privmsg['user_tg'] ) ? '<a href="https://t,me/' . $privmsg['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
-
-	$li_img = ( $privmsg['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg['user_li'] . '&amp;.src=pg" title="' . $lang['LI'] . '"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
-	$li = ( $privmsg['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
-
-	$tt_img = ( $privmsg['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg['user_tt'] . '&amp;.src=pg" title="' . $lang['TT'] . '"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
-	$tt = ( $privmsg['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
 
 	$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($username_from) . "&amp;showresults=posts");
 	$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $username_from) . '" title="' . sprintf($lang['Search_user_posts'], $username_from) . '" border="0" /></a>';
@@ -674,23 +646,7 @@ else if ( $mode == 'read' )
 		'MSN_IMG' => $msn_img,
 		'MSN' => $msn,
 		'YIM_IMG' => $yim_img,
-		'YIM' => $yim,
-		'FB_IMG' => $fb_img, 
-		'FB' => $fb, 
-		'IG_IMG' => $ig_img,
-		'IG' => $ig,
-		'PT_IMG' => $pt_img,
-		'PT' => $pt,
-		'TWR_IMG' => $twr_img,
-		'TWR' => $twr,
-		'SKP_IMG' => $skp_img, 
-		'SKP' => $skp, 
-		'TG_IMG' => $tg_img,
-		'TG' => $tg,
-		'LI_IMG' => $li_img,
-		'LI' => $li,
-		'TT_IMG' => $tt_img,
-		'TT' => $tt)		
+		'YIM' => $yim)
 	);
 
 	$template->pparse('body');
@@ -1838,7 +1794,6 @@ else if ( $submit || $refresh || $mode != '' )
 		'L_DISABLE_BBCODE' => $lang['Disable_BBCode_pm'], 
 		'L_DISABLE_SMILIES' => $lang['Disable_Smilies_pm'], 
 		'L_ATTACH_SIGNATURE' => $lang['Attach_signature'], 
-		'L_BUTTON_PM_NEW' => $lang['button_pm_new'], 
 
 		'L_BBCODE_B_HELP' => $lang['bbcode_b_help'], 
 		'L_BBCODE_I_HELP' => $lang['bbcode_i_help'], 

@@ -92,7 +92,7 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 
 				if( md5($password) == $row['user_password'] && $row['user_active'] )
 				{
-					$autologin = ( isset($HTTP_POST_VARS['autologin']) ) ? TRUE : 0;
+					$autologin = ( isset($_POST['autologin']) ) ? TRUE : 0;
 
 					$admin = (isset($HTTP_POST_VARS['admin'])) ? 1 : 0;
 					$session_id = session_begin($row['user_id'], $user_ip, PAGE_INDEX, FALSE, $autologin, $admin);
@@ -248,6 +248,7 @@ else
 
 			'L_ENTER_PASSWORD' => (isset($HTTP_GET_VARS['admin'])) ? $lang['Admin_reauthenticate'] : $lang['Enter_password'],
 			'L_SEND_PASSWORD' => $lang['Forgotten_password'],
+			'L_NO_ACCOUNT' => $lang['No_Account'],
 
 			'U_SEND_PASSWORD' => append_sid("profile.$phpEx?mode=sendpassword"),
 

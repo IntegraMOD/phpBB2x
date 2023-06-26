@@ -254,6 +254,15 @@ CREATE TABLE [phpbb_themes] (
 	[span_class1] [varchar] (25) NULL ,
 	[span_class2] [varchar] (25) NULL ,
 	[span_class3] [varchar] (25) NULL ,
+	[div_class1] [varchar] (25) NULL ,
+	[div_class2] [varchar] (25) NULL ,
+	[div_class3] [varchar] (25) NULL ,
+	[row_class1] [varchar] (25) NULL ,
+	[row_class2] [varchar] (25) NULL ,
+	[row_class3] [varchar] (25) NULL ,
+	[col_class1] [varchar] (25) NULL ,
+	[col_class2] [varchar] (25) NULL ,
+	[col_class3] [varchar] (25) NULL ,
 	[img_size_poll] [smallint] NULL ,
 	[img_size_privmsg] [smallint] NULL
 ) ON [PRIMARY]
@@ -290,7 +299,16 @@ CREATE TABLE [phpbb_themes_name] (
 	[fontcolor3_name] [varchar] (50) NULL ,
 	[span_class1_name] [varchar] (50) NULL ,
 	[span_class2_name] [varchar] (50) NULL ,
-	[span_class3_name] [varchar] (50) NULL
+	[span_class3_name] [varchar] (50) NULL,
+	[div_class1_name] [varchar] (50) NULL ,
+	[div_class2_name] [varchar] (50) NULL ,
+	[div_class3_name] [varchar] (50) NULL,
+	[row_class1_name] [varchar] (50) NULL ,
+	[row_class2_name] [varchar] (50) NULL ,
+	[row_class3_name] [varchar] (50) NULL,
+	[col_class1_name] [varchar] (50) NULL ,
+	[col_class2_name] [varchar] (50) NULL ,
+	[col_class3_name] [varchar] (50) NULL
 ) ON [PRIMARY]
 GO
 

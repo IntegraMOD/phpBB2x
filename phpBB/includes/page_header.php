@@ -402,6 +402,9 @@ $template->assign_vars(array(
 	'S_CONTENT_DIR_RIGHT' => $lang['RIGHT'],
 	'S_TIMEZONE' => sprintf($lang['All_times'], $l_timezone),
 	'S_LOGIN_ACTION' => append_sid('login.'.$phpEx),
+// Language Anywhere
+	'S_LANG' => 'lang_'.$board_config['default_lang'],
+// Language Anywhere
 
 	'T_HEAD_STYLESHEET' => $theme['head_stylesheet'],
 	'T_BODY_BACKGROUND' => $theme['body_background'],
@@ -441,7 +444,16 @@ $template->assign_vars(array(
 	'T_SPAN_CLASS1' => $theme['span_class1'],
 	'T_SPAN_CLASS2' => $theme['span_class2'],
 	'T_SPAN_CLASS3' => $theme['span_class3'],
-
+	'T_DIV_CLASS1' => $theme['div_class1'],
+	'T_DIV_CLASS2' => $theme['div_class2'],
+	'T_DIV_CLASS3' => $theme['div_class3'],	
+	'T_ROW_CLASS1' => $theme['row_class1'],
+	'T_ROW_CLASS2' => $theme['row_class2'],
+	'T_ROW_CLASS3' => $theme['row_class3'],	
+	'T_COL_CLASS1' => $theme['col_class1'],
+	'T_COL_CLASS2' => $theme['col_class2'],
+	'T_COL_CLASS3' => $theme['col_class3'],
+	
 	'NAV_LINKS' => $nav_links_html)
 );
 

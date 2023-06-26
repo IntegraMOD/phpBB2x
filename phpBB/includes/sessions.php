@@ -242,6 +242,7 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	}
 
 	$userdata['session_id'] = $session_id;
+	
 	$userdata['session_ip'] = $user_ip;
 	$userdata['session_user_id'] = $user_id;
 	$userdata['session_logged_in'] = $login;

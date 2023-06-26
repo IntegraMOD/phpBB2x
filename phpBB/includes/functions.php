@@ -100,7 +100,7 @@ function phpbb_ltrim($str, $charlist = false)
 	// php version < 4.1.0
 	if ((int) $php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
 	{
-		while ($str{0} == $charlist)
+		while ($str[0] == $charlist)
 		{
 			$str = substr($str, 1);
 		}
@@ -126,7 +126,7 @@ function phpbb_rtrim($str, $charlist = false)
 	// php version < 4.1.0
 	if ((int) $php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
 	{
-		while ($str{strlen($str)-1} == $charlist)
+		while ($str[strlen($str)-1] == $charlist)
 		{
 			$str = substr($str, 0, strlen($str)-1);
 		}
@@ -519,13 +519,23 @@ function setup_style($style)
 
 function encode_ip($dotquad_ip)
 {
-	$ip_sep = explode('.', $dotquad_ip);
-	return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	if (strstr($dotquad_ip, "."))
+	{
+		$ip_sep = explode('.', $dotquad_ip);
+		return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	}
+	else
+	{
+		return 0 /* V: TODO ipv6 */;
+	}
 }
 
 function decode_ip($int_ip)
 {
-	$hexipbang = explode('.', chunk_split($int_ip, 2, '.'));
+	if ($int_ip == "0")
+	{ /* V: TODO ipv6 */
+		return "";
+	}
 	return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
 }
 

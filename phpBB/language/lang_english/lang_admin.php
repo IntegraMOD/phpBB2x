@@ -61,8 +61,8 @@ $lang['Restore_DB'] = 'Restore Database';
 //
 $lang['Admin'] = 'Administration';
 $lang['Not_admin'] = 'You are not authorised to administer this board';
-$lang['Welcome_phpBB'] = 'Welcome to phpBB';
-$lang['Admin_intro'] = 'Thank you for choosing phpBB as your forum solution. This screen will give you a quick overview of all the various statistics of your board. You can get back to this page by clicking on the <u>Admin Index</u> link in the left pane. To return to the index of your board, click the phpBB logo also in the left pane. The other links on the left hand side of this screen will allow you to control every aspect of your forum experience. Each screen will have instructions on how to use the tools.';
+$lang['Welcome_phpBB'] = 'Welcome to phpBB2x';
+$lang['Admin_intro'] = 'Thank you for choosing phpBB2x as your forum solution. This screen will give you a quick overview of all the various statistics of your board. You can get back to this page by clicking on the <u>Admin Index</u> link in the left pane. To return to the index of your board, click the phpBB2x logo also in the left pane. The other links on the left hand side of this screen will allow you to control every aspect of your forum experience. Each screen will have instructions on how to use the tools.';
 $lang['Main_index'] = 'Forum Index';
 $lang['Forum_stats'] = 'Forum Statistics';
 $lang['Admin_Index'] = 'Admin Index';
@@ -95,8 +95,8 @@ $lang['Database_Utilities'] = 'Database Utilities';
 
 $lang['Restore'] = 'Restore';
 $lang['Backup'] = 'Backup';
-$lang['Restore_explain'] = 'This will perform a full restore of all phpBB tables from a saved file. If your server supports it, you may upload a gzip-compressed text file and it will automatically be decompressed. <b>WARNING</b>: This will overwrite any existing data. The restore may take a long time to process, so please do not move from this page until it is complete.';
-$lang['Backup_explain'] = 'Here you can back up all your phpBB-related data. If you have any additional custom tables in the same database with phpBB that you would like to back up as well, please enter their names, separated by commas, in the Additional Tables textbox below. If your server supports it you may also gzip-compress the file to reduce its size before download.';
+$lang['Restore_explain'] = 'This will perform a full restore of all phpBB2x tables from a saved file. If your server supports it, you may upload a gzip-compressed text file and it will automatically be decompressed. <b>WARNING</b>: This will overwrite any existing data. The restore may take a long time to process, so please do not move from this page until it is complete.';
+$lang['Backup_explain'] = 'Here you can back up all your phpBB2x-related data. If you have any additional custom tables in the same database with phpBB2x that you would like to back up as well, please enter their names, separated by commas, in the Additional Tables textbox below. If your server supports it you may also gzip-compress the file to reduce its size before download.';
 
 $lang['Backup_options'] = 'Backup options';
 $lang['Start_backup'] = 'Start Backup';
@@ -245,7 +245,7 @@ $lang['General_settings'] = 'General Board Settings';
 $lang['Server_name'] = 'Domain Name';
 $lang['Server_name_explain'] = 'The domain name from which this board runs';
 $lang['Script_path'] = 'Script path';
-$lang['Script_path_explain'] = 'The path where phpBB2 is located relative to the domain name';
+$lang['Script_path_explain'] = 'The path where phpBB2x is located relative to the domain name';
 $lang['Server_port'] = 'Server Port';
 $lang['Server_port_explain'] = 'The port your server is running on, usually 80. Only change if different';
 $lang['Site_name'] = 'Site name';
@@ -280,7 +280,7 @@ $lang['Allowed_tags'] = 'Allowed HTML tags';
 $lang['Allowed_tags_explain'] = 'Separate tags with commas';
 $lang['Allow_smilies'] = 'Allow Smilies';
 $lang['Smilies_path'] = 'Smilies Storage Path';
-$lang['Smilies_path_explain'] = 'Path under your phpBB root dir, e.g. images/smiles';
+$lang['Smilies_path_explain'] = 'Path under your phpBB2x root dir, e.g. images/smiles';
 $lang['Allow_sig'] = 'Allow Signatures';
 $lang['Max_sig_length'] = 'Maximum signature length';
 $lang['Max_sig_length_explain'] = 'Maximum number of characters in user signatures';
@@ -296,9 +296,9 @@ $lang['Max_filesize_explain'] = 'For uploaded avatar files';
 $lang['Max_avatar_size'] = 'Maximum Avatar Dimensions';
 $lang['Max_avatar_size_explain'] = '(Height x Width in pixels)';
 $lang['Avatar_storage_path'] = 'Avatar Storage Path';
-$lang['Avatar_storage_path_explain'] = 'Path under your phpBB root dir, e.g. images/avatars';
+$lang['Avatar_storage_path_explain'] = 'Path under your phpBB2x root dir, e.g. images/avatars';
 $lang['Avatar_gallery_path'] = 'Avatar Gallery Path';
-$lang['Avatar_gallery_path_explain'] = 'Path under your phpBB root dir for pre-loaded images, e.g. images/avatars/gallery';
+$lang['Avatar_gallery_path_explain'] = 'Path under your phpBB2x root dir for pre-loaded images, e.g. images/avatars/gallery';
 
 $lang['COPPA_settings'] = 'COPPA Settings';
 $lang['COPPA_fax'] = 'COPPA Fax Number';
@@ -551,7 +551,7 @@ $lang['Rank_title'] = 'Rank Title';
 $lang['Rank_special'] = 'Set as Special Rank';
 $lang['Rank_minimum'] = 'Minimum Posts';
 $lang['Rank_maximum'] = 'Maximum Posts';
-$lang['Rank_image'] = 'Rank Image (Relative to phpBB2 root path)';
+$lang['Rank_image'] = 'Rank Image (Relative to phpBB2x root path)';
 $lang['Rank_image_explain'] = 'Use this to define a small image associated with the rank';
 
 $lang['Must_select_rank'] = 'You must select a rank';
@@ -594,7 +594,7 @@ $lang['Click_return_disallowadmin'] = 'Click %sHere%s to return to Disallow User
 //
 $lang['Styles_admin'] = 'Styles Administration';
 $lang['Styles_explain'] = 'Using this facility you can add, remove and manage styles (templates and themes) available to your users';
-$lang['Styles_addnew_explain'] = 'The following list contains all the themes that are available for the templates you currently have. The items on this list have not yet been installed into the phpBB database. To install a theme, simply click the install link beside an entry.';
+$lang['Styles_addnew_explain'] = 'The following list contains all the themes that are available for the templates you currently have. The items on this list have not yet been installed into the phpBB2x database. To install a theme, simply click the install link beside an entry.';
 
 $lang['Select_template'] = 'Select a Template';
 
@@ -610,7 +610,7 @@ $lang['Create_theme'] = 'Create Theme';
 $lang['Create_theme_explain'] = 'Use the form below to create a new theme for a selected template. When entering colours (for which you should use hexadecimal notation) you must not include the initial #, i.e.. CCCCCC is valid, #CCCCCC is not';
 
 $lang['Export_themes'] = 'Export Themes';
-$lang['Export_explain'] = 'In this panel you will be able to export the theme data for a selected template. Select the template from the list below and the script will create the theme configuration file and attempt to save it to the selected template directory. If it cannot save the file itself it will give you the option to download it. In order for the script to save the file you must give write access to the webserver for the selected template dir. For more information on this see the phpBB 2 users guide.';
+$lang['Export_explain'] = 'In this panel you will be able to export the theme data for a selected template. Select the template from the list below and the script will create the theme configuration file and attempt to save it to the selected template directory. If it cannot save the file itself it will give you the option to download it. In order for the script to save the file you must give write access to the webserver for the selected template dir. For more information on this see the phpBB2x users guide.';
 
 $lang['Theme_installed'] = 'The selected theme has been installed successfully';
 $lang['Style_removed'] = 'The selected style has been removed from the database. To fully remove this style from your system you must delete the appropriate style from your templates directory.';
@@ -692,9 +692,9 @@ $lang['Installer_Error'] = 'An error has occurred during installation';
 $lang['Previous_Install'] = 'A previous installation has been detected';
 $lang['Install_db_error'] = 'An error occurred trying to update the database';
 
-$lang['Re_install'] = 'Your previous installation is still active.<br /><br />If you would like to re-install phpBB 2 you should click the Yes button below. Please be aware that doing so will destroy all existing data and no backups will be made! The administrator username and password you have used to login in to the board will be re-created after the re-installation and no other settings will be retained.<br /><br />Think carefully before pressing Yes!';
+$lang['Re_install'] = 'Your previous installation is still active.<br /><br />If you would like to re-install phpBB2x you should click the Yes button below. Please be aware that doing so will destroy all existing data and no backups will be made! The administrator username and password you have used to login in to the board will be re-created after the re-installation and no other settings will be retained.<br /><br />Think carefully before pressing Yes!';
 
-$lang['Inst_Step_0'] = 'Thank you for choosing phpBB 2. In order to complete this install please fill out the details requested below. Please note that the database you install into should already exist. If you are installing to a database that uses ODBC, e.g. MS Access you should first create a DSN for it before proceeding.';
+$lang['Inst_Step_0'] = 'Thank you for choosing phpBB2x. In order to complete this install please fill out the details requested below. Please note that the database you install into should already exist. If you are installing to a database that uses ODBC, e.g. MS Access you should first create a DSN for it before proceeding.';
 
 $lang['Start_Install'] = 'Start Install';
 $lang['Finish_Install'] = 'Finish Installation';
@@ -712,18 +712,18 @@ $lang['Admin_Username'] = 'Administrator Username';
 $lang['Admin_Password'] = 'Administrator Password';
 $lang['Admin_Password_confirm'] = 'Administrator Password [ Confirm ]';
 
-$lang['Inst_Step_2'] = 'Your admin username has been created.  At this point your basic installation is complete. You will now be taken to a screen which will allow you to administer your new installation. Please be sure to check the General Configuration details and make any required changes. Thank you for choosing phpBB 2.';
+$lang['Inst_Step_2'] = 'Your admin username has been created.  At this point your basic installation is complete. You will now be taken to a screen which will allow you to administer your new installation. Please be sure to check the General Configuration details and make any required changes. Thank you for choosing phpBB2x.';
 
-$lang['Unwriteable_config'] = 'Your config file is un-writeable at present. A copy of the config file will be downloaded to your computer when you click the button below. You should upload this file to the same directory as phpBB 2. Once this is done you should log in using the administrator name and password you provided on the previous form and visit the admin control center (a link will appear at the bottom of each screen once logged in) to check the general configuration. Thank you for choosing phpBB 2.';
+$lang['Unwriteable_config'] = 'Your config file is un-writeable at present. A copy of the config file will be downloaded to your computer when you click the button below. You should upload this file to the same directory as phpBB2x. Once this is done you should log in using the administrator name and password you provided on the previous form and visit the admin control center (a link will appear at the bottom of each screen once logged in) to check the general configuration. Thank you for choosing phpBB2x.';
 $lang['Download_config'] = 'Download Config';
 
 $lang['ftp_choose'] = 'Choose Download Method';
 $lang['ftp_option'] = '<br />Since FTP extensions are enabled in this version of PHP you may also be given the option of first trying to automatically FTP the config file into place.';
-$lang['ftp_instructs'] = 'You have chosen to FTP the file to the account containing phpBB 2 automatically.  Please enter the information below to facilitate this process. Note that the FTP path should be the exact path via FTP to your phpBB2 installation as if you were FTPing to it using any normal client.';
+$lang['ftp_instructs'] = 'You have chosen to FTP the file to the account containing phpBB2x automatically.  Please enter the information below to facilitate this process. Note that the FTP path should be the exact path via FTP to your phpBB2x installation as if you were FTPing to it using any normal client.';
 $lang['ftp_info'] = 'Enter Your FTP Information';
 $lang['Attempt_ftp'] = 'Attempt to FTP config file into place';
 $lang['Send_file'] = 'Just send the file to me and I\'ll FTP it manually';
-$lang['ftp_path'] = 'FTP path to phpBB 2';
+$lang['ftp_path'] = 'FTP path to phpBB2x';
 $lang['ftp_username'] = 'Your FTP Username';
 $lang['ftp_password'] = 'Your FTP Password';
 $lang['Transfer_config'] = 'Start Transfer';
@@ -737,18 +737,18 @@ $lang['Install_Method'] = 'Choose your installation method';
 
 $lang['Install_No_Ext'] = 'The PHP configuration on your server doesn\'t support the database type that you chose';
 
-$lang['Install_No_PCRE'] = 'phpBB2 Requires the Perl-Compatible Regular Expressions Module for PHP which your PHP configuration doesn\'t appear to support!';
+$lang['Install_No_PCRE'] = 'phpBB2x Requires the Perl-Compatible Regular Expressions Module for PHP which your PHP configuration doesn\'t appear to support!';
 
 //
 // Version Check
 //
-$lang['Version_up_to_date'] = 'Your installation is up to date, no updates are available for your version of phpBB.';
-$lang['Version_not_up_to_date'] = 'Your installation does <b>not</b> seem to be up to date. Updates are available for your version of phpBB, please visit <a href="http://www.phpbb.com/downloads.php" target="_new">http://www.phpbb.com/downloads.php</a> to obtain the latest version.';
-$lang['Latest_version_info'] = 'The latest available version is <b>phpBB %s</b>.';
-$lang['Current_version_info'] = 'You are running <b>phpBB %s</b>.';
-$lang['Connect_socket_error'] = 'Unable to open connection to phpBB Server, reported error is:<br />%s';
+$lang['Version_up_to_date'] = 'Your installation is up to date, no updates are available for your version of phpBB2x.';
+$lang['Version_not_up_to_date'] = 'Your installation does <b>not</b> seem to be up to date. Updates are available for your version of phpBB2x, please visit <a href="http://www.phpbb2x.com/downloads.php" target="_new">http://www.phpbb2x.com/downloads.php</a> to obtain the latest version.';
+$lang['Latest_version_info'] = 'The latest available version is <b>phpBB2x %s</b>.';
+$lang['Current_version_info'] = 'You are running <b>phpBB2x %s</b>.';
+$lang['Connect_socket_error'] = 'Unable to open connection to phpBB2x Server, reported error is:<br />%s';
 $lang['Socket_functions_disabled'] = 'Unable to use socket functions.';
-$lang['Mailing_list_subscribe_reminder'] = 'For the latest information on updates to phpBB, why not <a href="http://www.phpbb.com/support/" target="_new">subscribe to our mailing list</a>.';
+$lang['Mailing_list_subscribe_reminder'] = 'For the latest information on updates to phpBB2x, why not <a href="http://www.phpbb2x.com/support/" target="_new">subscribe to our mailing list</a>.';
 $lang['Version_information'] = '<a href="#" onclick="toggle_visibility( \'ver\' );" title="Click for more Information">Version Information</a>';
 $lang['Version_of_PHP'] = 'Version of PHP';
 $lang['Version_of_MySQL'] = 'Version of MySQL';

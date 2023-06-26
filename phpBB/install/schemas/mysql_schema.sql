@@ -386,6 +386,15 @@ CREATE TABLE phpbb_themes (
    span_class1 varchar(25) default NULL,
    span_class2 varchar(25) default NULL,
    span_class3 varchar(25) default NULL,
+   div_class1 varchar(25) default NULL,
+   div_class2 varchar(25) default NULL,
+   div_class3 varchar(25) default NULL,
+   row_class1 varchar(25) default NULL,
+   row_class2 varchar(25) default NULL,
+   row_class3 varchar(25) default NULL,
+   col_class1 varchar(25) default NULL,
+   col_class2 varchar(25) default NULL,
+   col_class3 varchar(25) default NULL,
    img_size_poll smallint(5) UNSIGNED,
    img_size_privmsg smallint(5) UNSIGNED,
    PRIMARY KEY  (themes_id)
@@ -428,9 +437,17 @@ CREATE TABLE phpbb_themes_name (
    span_class1_name char(50),
    span_class2_name char(50),
    span_class3_name char(50),
+   div_class1_name char(50),
+   div_class2_name char(50),
+   div_class3_name char(50),
+   row_class1_name char(50),
+   row_class2_name char(50),
+   row_class3_name char(50),
+   col_class1_name char(50),
+   col_class2_name char(50),
+   col_class3_name char(50),
    PRIMARY KEY (themes_id)
 );
-
 
 # --------------------------------------------------------
 #

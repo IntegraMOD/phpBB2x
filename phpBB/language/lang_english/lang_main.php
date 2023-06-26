@@ -33,7 +33,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'utf-8';
+$lang['ENCODING'] = 'iso-8859-1';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -160,6 +160,7 @@ $lang['Search_your_posts'] = 'View your posts';
 $lang['Search_unanswered'] = 'View unanswered posts';
 
 $lang['Register'] = 'Register';
+$lang['No_Account'] = 'No Account? Register Here!';
 $lang['Profile'] = 'Profile';
 $lang['Edit_profile'] = 'Edit your profile';
 $lang['Search'] = 'Search';
@@ -1032,14 +1033,15 @@ $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 //
 // language buttons
 //
-$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
-$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
-$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
-$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
-$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
-$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
-$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
+$lang['button_pm_new'] = 'New PM';
+$lang['button_pm_reply'] = 'Send Reply';
+$lang['button_topic_locked'] = 'Locked';
+$lang['button_topic_new'] = 'New Topic';
+$lang['button_topic_reply'] = 'Post Reply';
+$lang['icon_post_edit'] = 'Edit';
+$lang['icon_post_quote'] = 'Quote';
 
+ 
 //
 // That's all, Folks!
 // -------------------------------------------------

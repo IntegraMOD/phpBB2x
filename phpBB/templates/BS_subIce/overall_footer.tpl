@@ -12,7 +12,7 @@
         
         	The phpBB Group : 2002
             // -->
-            Powered by <a href="http://www.phpbb2x.com/">phpBB</a> &copy; 2017, 2023 Integra Team<br />{TRANSLATION_INFO}
+			 Powered by <a href="http://www.phpbb2x.com/">phpBB</a> &copy; 2001, 2005 phpBB Group<br />{TRANSLATION_INFO}
             </div>
             <div class="copyright text-center"><a href="https://www.integramod.com/" title="Style by Integra Team">BS_subIce</a> built with <a href="https://getbootstrap.com">Bootstrap 5.2.3</a></div>
           </div>

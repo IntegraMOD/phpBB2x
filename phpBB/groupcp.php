@@ -832,8 +832,9 @@ else if ( $group_id )
 	}
 
 	$group_members = $db->sql_fetchrowset($result); 
-	$members_count = count($group_members);
-	$db->sql_freeresult($result);
+//	$members_count = count($group_members);
+    $members_count = is_countable($group_members) ? count($group_members) : 0;
+ 	$db->sql_freeresult($result);
 
 	$sql = "SELECT u.username, u.user_id, u.user_viewemail, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_msnm, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt
 		FROM " . GROUPS_TABLE . " g, " . USER_GROUP_TABLE . " ug, " . USERS_TABLE . " u
@@ -848,7 +849,9 @@ else if ( $group_id )
 	}
 
 	$modgroup_pending_list = $db->sql_fetchrowset($result);
-	$modgroup_pending_count = count($modgroup_pending_list);
+//	$modgroup_pending_count = count($modgroup_pending_list);
+	$modgroup_pending_count = is_countable($modgroup_pending_list) ? count($modgroup_pending_list) : 0;
+
 	$db->sql_freeresult($result);
 
 	$is_group_member = 0;
