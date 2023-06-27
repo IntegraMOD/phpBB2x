@@ -6,13 +6,11 @@
       <div class="row mx-0"> 
         <div class="col text-start"><a class="maintitle" href="{U_VIEW_FORUM}">{FORUM_NAME}</a><br /><span class="gensmall"><b>{L_MODERATOR}: {MODERATORS}<br /><br />{LOGGED_IN_USER_LIST}</b></span><span class="gensmall float-right"><b>{PAGINATION}</b></span></div>
       </div>
+
       <div class="row mb-1 py-1 mx-0"> 
-        <div class="col-3 mt-2"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
-        <div class="col navbr">
-		  <div class="genbig text-start"><a href="{U_INDEX}">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></div>
-		  <div class="gensmall text-end"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></div>
-		</div>
-      </div>     	
+        <div class="col-4 mt-2"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
+        <div class="col text-end navbr"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></div>
+      </div>    	
       <div class="forumline px-0 m-2">
         <div class="bdrw">
           <div class="row d-flex th align-items-center hr1 mx-0"> 
@@ -42,12 +40,10 @@
     	  </div>
         </div>
       </div>
-      
       <div class="row mb-1 py-1 mx-0"> 
-        <div class="col-3 mt-1"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
-        <div class="col navbr text-end"><span class="gensmall">{S_TIMEZONE}</span><br /><span class="nav">{PAGINATION}</span></div>
-      </div> 	  
-
+        <div class="col-4 mt-1"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
+        <div class="col navbr text-end gensmall">{S_TIMEZONE}<br />{PAGINATION}</div>
+      </div>   
       </form>
       <div>
         <div class="row mx-0"> 

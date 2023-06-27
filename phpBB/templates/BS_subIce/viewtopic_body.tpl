@@ -7,9 +7,8 @@
           </div>
         </div>
         <div class="row mb-1 py-1 mx-0"> 
-          <div class="col d-flex align-items-center"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" title="{L_BUTTON_TOPIC_REPLY}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a>
-          <span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}" class="navbr">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span>
-          </div>
+          <div class="col-7 col-md-12"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></div>
+          <div class="col col-md-12 text-end navbr"><a href="{U_INDEX}" class="navbr">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></div>
         </div>
         <div class="forumline p-0 mx-1">
           <div class="row m-0">
@@ -48,7 +47,7 @@
 		  </div>        	
 		</div>
 		<div class="row mb-1 pt-2 mx-0"> 
-          <div class="col d-flex align-items-center"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" title="{L_BUTTON_TOPIC_REPLY}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a>
+          <div class="col d-flex align-items-center"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a>
           <span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}" class="navbr">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span>
           </div>
 		</div>
