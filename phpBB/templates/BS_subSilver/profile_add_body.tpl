@@ -271,19 +271,19 @@
 	<!-- BEGIN switch_avatar_local_upload -->
       <div class="row gen">
         <div class="col-8 row1 py-1">{L_UPLOAD_AVATAR_FILE}:</div>
-        <div class="col-4 row2 py-1"><input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" /><input type="file" name="avatar" class="post" style="width:100%" /></div>
+        <div class="col-4 row2 py-1"><input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" /><input type="file" name="avatar" class="post" style="width:200px" /></div>
       </div>
 	<!-- END switch_avatar_local_upload -->
 	<!-- BEGIN switch_avatar_remote_upload -->
       <div class="row gen">
         <div class="col-8 row1 py-1">{L_UPLOAD_AVATAR_URL}:<br /><span class="gensmall">{L_UPLOAD_AVATAR_URL_EXPLAIN}</span></div>
-        <div class="col-4 row2 py-1"><input type="text" name="avatarurl" size="40" class="post" style="width:100%" /></div>
+        <div class="col-4 row2 py-1"><input type="text" name="avatarurl" size="40" class="post" style="width:200px" /></div>
       </div>
 	<!-- END switch_avatar_remote_upload -->
 	<!-- BEGIN switch_avatar_remote_link -->
       <div class="row gen">
         <div class="col-8 row1 py-1">{L_LINK_REMOTE_AVATAR}:<br /><span class="gensmall">{L_LINK_REMOTE_AVATAR_EXPLAIN}</span></div>
-        <div class="col-4 row2 py-1"><input type="text" name="avatarremoteurl" size="40" class="post" style="width:100%" /></div>
+        <div class="col-4 row2 py-1"><input type="text" name="avatarremoteurl" size="40" class="post" style="width:200px" /></div>
       </div>
 	<!-- END switch_avatar_remote_link -->
 	<!-- BEGIN switch_avatar_local_gallery -->
