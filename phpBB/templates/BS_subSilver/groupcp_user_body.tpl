@@ -13,29 +13,35 @@
     <div class="col-md th thH px-0">{L_GROUP_MEMBERSHIP_DETAILS}</div>
   </div>
   <!-- BEGIN switch_groups_member -->
+  <form method="get" action="{S_USERGROUP_ACTION}">
   <div class="row thH">
-    <div class="col-md-4 row1 gen">{L_YOU_BELONG_GROUPS}</div>
-    <form class="col-md row2 text-right gensmall" method="get" action="{S_USERGROUP_ACTION}">
-    {GROUP_MEMBER_SELECT}&nbsp;&nbsp;<input type="submit" value="{L_VIEW_INFORMATION}" class="liteoption" />{S_HIDDEN_FIELDS}
-    </form>
+    <div class="col-4 row1 gen">{L_YOU_BELONG_GROUPS}</div>
+    <div class="col row2 text-right gensmall">
+	{GROUP_MEMBER_SELECT}&nbsp;&nbsp;<input type="submit" value="{L_VIEW_INFORMATION}" class="liteoption" />{S_HIDDEN_FIELDS}
+    </div>
   </div>
+  </form>
   <!-- END switch_groups_member -->
   <!-- BEGIN switch_groups_pending -->
+  <form method="get" action="{S_USERGROUP_ACTION}">
   <div class="row thH">
-    <div class="col-md-4 row1 gen">{L_PENDING_GROUPS}</div>
-    <form class="col-md row2 text-right gensmall" method="get" action="{S_USERGROUP_ACTION}">
-    {GROUP_PENDING_SELECT}&nbsp;&nbsp;<input type="submit" value="{L_VIEW_INFORMATION}" class="liteoption" />{S_HIDDEN_FIELDS}
-    </form>
+    <div class="col-4 row1 gen">{L_PENDING_GROUPS}</div>
+    <div class="col row2 text-right gensmall">
+	{GROUP_PENDING_SELECT}&nbsp;&nbsp;<input type="submit" value="{L_VIEW_INFORMATION}" class="liteoption" />{S_HIDDEN_FIELDS}
+    </div>
   </div>
+  </form>
   <!-- END switch_groups_pending -->
   <!-- END switch_groups_joined -->
   <!-- BEGIN switch_groups_remaining -->
+  <form method="get" action="{S_USERGROUP_ACTION}">
   <div class="row thH">
-    <div class="col-md-4 row1 gen">{L_JOIN_A_GROUP}</div>
-    <form class="col-md row2 text-right gensmall" method="get" action="{S_USERGROUP_ACTION}">
-    {GROUP_LIST_SELECT}&nbsp;&nbsp;<input type="submit" value="{L_VIEW_INFORMATION}" class="liteoption" />{S_HIDDEN_FIELDS}
-    </form>
+    <div class="col-4 row1 gen">{L_JOIN_A_GROUP}</div>
+    <div class="col row2 text-right gensmall">
+	{GROUP_LIST_SELECT}&nbsp;&nbsp;<input type="submit" value="{L_VIEW_INFORMATION}" class="liteoption" />{S_HIDDEN_FIELDS}
+    </div>
   </div>
+  </form> 
   <!-- END switch_groups_remaining -->
 </div>
 

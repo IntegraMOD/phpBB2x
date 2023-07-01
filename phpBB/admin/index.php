@@ -628,6 +628,8 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		if ($latest_head_revision == 2 && $minor_revision == $latest_minor_revision)
 		{
 			$version_info = '<p style="color:green">' . $lang['Version_up_to_date'] . '</p>';
+			$html = file_get_contents('../docs/updates.html');
+			  	echo $html;
 		}
 		else
 		{
