@@ -1,48 +1,54 @@
-<div class="container-fluid">
+<script src="templates/assets/js/faq.js"></script>
+<div align="container-fluid m-0">
   <div class="row">
-    <div class="col"><span class="nowrap"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></span></div>
-  </div>
-<form method="post" action="{S_LOGIN_ACTION}">
-  <div class="container-fluid forumline">
-    <div class="row th">
-      <div class="col py-1 text-center">{L_FAQ_TITLE}</div>
-    </div>
-    <div class="row">
-      <div class="col row1">
-	    <!-- BEGIN faq_block_link -->
-	    <span class="mainmenu"><strong>{faq_block_link.BLOCK_TITLE}</strong></span><br />
-        <!-- BEGIN faq_row_link -->
-        <span class="gen"><a href="{faq_block_link.faq_row_link.U_FAQ_LINK}" class="postlink">{faq_block_link.faq_row_link.FAQ_LINK}</a></span><br />
-        <!-- END faq_row_link -->
-        <br />
-        <!-- END faq_block_link -->
-        </div>
-	  </div>
-      <div class="row">
-        <div class="col catBottom">&nbsp;</div>
-      </div>
-	</div
-    <br clear="all" />
-<!-- BEGIN faq_block -->
-	<div class="container-fluid forumline">
-      <div class="row th">
-        <div class="col pt-1 text-center">{faq_block.BLOCK_TITLE}</div>
-      </div>
-    <!-- BEGIN faq_row -->  
-	  <div class="row {faq_block.faq_row.ROW_CLASS}">
-        <div class="col postbody"><a name="{faq_block.faq_row.U_FAQ_ID}"></a><b>{faq_block.faq_row.FAQ_QUESTION}</b><br />{faq_block.faq_row.FAQ_ANSWER}</div>
-      </div>
-	  <div class="row catBottom pt-1">
-        <div class="col"><a class="postlink fa fa-arrow-up" style="text-decoration: none !important;" href="#top" title="{L_BACK_TO_TOP}"></a></div>
-      </div>
-    <!-- END faq_row -->
-	</div>
-	  <br clear="all" />
-<!-- END faq_block -->
+	<div class="col mx-1">
 
-<div class="container-fluid text-center">
-  <div class="row my-2">
-      <div class="col gensmall">{S_TIMEZONE}</div>
-      <div class="col align-right">{JUMPBOX}</div>
+<div align="container-fluid">
+  <div class="row p-1 navbr">
+	<div class="col"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></div>
+  </div>
+</div>
+<div class="container-fluid forumline">
+  <div class="row th d-flex align-items-center">
+	<div class="col text-center">{L_FAQ_TITLE}</div>
+  </div>
+  <div class="row">
+	<div class="col">
+	  <!-- BEGIN faq_block -->
+	  <div class="" align="center">
+		<div class="row catHead d-flex align-items-center"> 
+		  <div class="col text-center"><span class="cattitle">{faq_block.BLOCK_TITLE}</span></div>
+		</div>
+		<!-- BEGIN faq_row -->  
+		<div class="row {faq_block.faq_row.ROW_CLASS} py-1"> 
+		  <div class="col text-start">
+			<div onclick="return CFAQ.display('faq_a_{faq_block.faq_row.U_FAQ_ID}', false);" style="width:100%;cursor:pointer;cursor:hand;">
+		   	  <span class="gen"><a class="postlink" href="javascript:void(0)" onclick="return CFAQ.display('faq_a_{faq_block.faq_row.U_FAQ_ID}', true);" onfocus="this.blur();"><b>{faq_block.faq_row.FAQ_QUESTION}</b></span></a>
+			</div>
+			<div id="faq_a_{faq_block.faq_row.U_FAQ_ID}" style="display:none;">
+			  <div class="bodyline">
+				<div class="row">
+				  <div class="col text-start m-1"><span class="postbody">{faq_block.faq_row.FAQ_ANSWER}<br /></span></div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	    <!-- END faq_row -->
+	  </div>
+	  <!-- END faq_block -->
+    </div>
+  </div>
+</div>  
+<div align="center">
+  <div class="row">
+	<div class="col text-start"><span class="copyright">DHTML FAQ by phpMiX</span></div>
+	<div class="col text-end"><span class="gensmall">{S_TIMEZONE}</span></div>
+  </div>
+  <div class="row">
+	<div class="col text-end">{JUMPBOX}</div>
+  </div>
+</div>
+    </div>
   </div>
 </div>

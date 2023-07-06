@@ -105,9 +105,6 @@ $template->assign_vars(array(
 	'L_ORDER' => $lang['Order'],
 	'L_SORT' => $lang['Sort'],
 	'L_SUBMIT' => $lang['Sort'],
-	'L_AIM' => $lang['AIM'],
-	'L_YIM' => $lang['YIM'],
-	'L_MSNM' => $lang['MSNM'],
 	'L_ICQ' => $lang['ICQ'], 
 	'L_FB' => $lang['FB'],
 	'L_IG' => $lang['IG'],
@@ -116,7 +113,8 @@ $template->assign_vars(array(
 	'L_SKP' => $lang['SKP'],
 	'L_TG' => $lang['TG'],
 	'L_LI' => $lang['LI'],
-	'L_TT' => $lang['TT'],	
+	'L_TT' => $lang['TT'],
+	'L_DC' => $lang['DC'],	
 	'L_JOINED' => $lang['Joined'], 
 	'L_POSTS' => $lang['Posts'], 
 	'L_PM' => $lang['Private_Message'], 
@@ -154,7 +152,7 @@ switch( $mode )
 		break;
 }
 
-$sql = "SELECT username, user_id, user_viewemail, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_aim, user_yim, user_msnm, user_fb, user_ig, user_pt, user_twr, user_skp, user_tg, user_li, user_tt, user_avatar, user_avatar_type, user_allowavatar 
+$sql = "SELECT username, user_id, user_viewemail, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_fb, user_ig, user_pt, user_twr, user_skp, user_tg, user_li, user_tt, user_dc, user_avatar, user_avatar_type, user_allowavatar 
 	FROM " . USERS_TABLE . "
 	WHERE user_id <> " . ANONYMOUS . "
 	ORDER BY $order_by";
@@ -229,16 +227,6 @@ if ( $row = $db->sql_fetchrow($result) )
 			$icq = '';
 		}
 
-		$aim_img = ( $row['user_aim'] ) ? '<a href="aim:goim?screenname=' . $row['user_aim'] . '&amp;message=Hello+Are+you+there?"><img src="' . $images['icon_aim'] . '" alt="' . $lang['AIM'] . '" title="' . $lang['AIM'] . '" border="0" /></a>' : '';
-		$aim = ( $row['user_aim'] ) ? '<a href="aim:goim?screenname=' . $row['user_aim'] . '&amp;message=Hello+Are+you+there?">' . $lang['AIM'] . '</a>' : '';
-
-		$temp_url = append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id");
-		$msn_img = ( $row['user_msnm'] ) ? '<a href="' . $temp_url . '"><img src="' . $images['icon_msnm'] . '" alt="' . $lang['MSNM'] . '" title="' . $lang['MSNM'] . '" border="0" /></a>' : '';
-		$msn = ( $row['user_msnm'] ) ? '<a href="' . $temp_url . '">' . $lang['MSNM'] . '</a>' : '';
-
-		$yim_img = ( $row['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
-		$yim = ( $row['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
-
 		$fb_img = ( $row['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
 		$fb = ( $row['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
 
@@ -248,20 +236,23 @@ if ( $row = $db->sql_fetchrow($result) )
 		$pt_img = ( $row['user_pt'] ) ? '<a href="/www.pinterest.com/' . $row['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
 		$pt = ( $row['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $row['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
 
-		$twr_img = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
-		$twr = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+		$twr_img = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '" target="blank"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+		$twr = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '" target="blank">' . $lang['TWR'] . '</a>' : '';
 
 		$skp_img = ( $row['user_skp'] ) ? '<a href="skype:' . $row['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
 	    $skp = ( $row['user_skp'] ) ? '<a href="skype:' . $row['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
 
-		$tg_img = ( $row['user_tg'] ) ? '<a href="https://t.me/' . $row['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
-		$tg = ( $row['user_tg'] ) ? '<a href="https://t,me/' . $row['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+		$tg_img = ( $row['user_tg'] ) ? '<a href="https://t.me/' . $row['user_tg'] . '" target="blank"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+		$tg = ( $row['user_tg'] ) ? '<a href="https://t,me/' . $row['user_tg'] . '" target="blank">' . $lang['TG'] . '</a>' : '';
 
-		$li_img = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
-		$li = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+		$li_img = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '" target="blank"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+		$li = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '" target="blank">' . $lang['LI'] . '</a>' : '';
 
-		$tt_img = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
-		$tt = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
+		$tt_img = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '" target="blank"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+		$tt = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '" target="blank">' . $lang['TT'] . '</a>' : '';
+
+		$dc_img = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $row['user_dc'] . '" target="blank"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
+		$dc = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $row['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
 
 		$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($username) . "&amp;showresults=posts");
 		$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $username) . '" title="' . sprintf($lang['Search_user_posts'], $username) . '" border="0" /></a>';
@@ -292,12 +283,6 @@ if ( $row = $db->sql_fetchrow($result) )
 			'ICQ_STATUS_IMG' => $icq_status_img,
 			'ICQ_IMG' => $icq_img, 
 			'ICQ' => $icq, 
-			'AIM_IMG' => $aim_img,
-			'AIM' => $aim,
-			'MSN_IMG' => $msn_img,
-			'MSN' => $msn,
-			'YIM_IMG' => $yim_img,
-			'YIM' => $yim,
 			'FB_IMG' => $fb_img, 
 			'FB' => $fb, 
 			'IG_IMG' => $ig_img,
@@ -314,6 +299,8 @@ if ( $row = $db->sql_fetchrow($result) )
 			'LI' => $li,
 			'TT_IMG' => $tt_img,
 			'TT' => $tt,
+			'DC_IMG' => $dc_img,
+			'DC' => $dc,
 			
 			'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id"))
 		);

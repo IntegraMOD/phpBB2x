@@ -37,7 +37,7 @@
         	</div>
         	<div class="row py-0 mx-0 row1"> 
         	  <div class="col-2 pt-2 pb-1 hr3"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
-        	  <div class="col pt-2 pb-1 gen">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.AIM_IMG} {postrow.YIM_IMG} {postrow.MSN_IMG}</div>
+        	  <div class="col pt-2 pb-1 gen">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG} {postrow.ICQ_IMG}</div>
         	</div>
          	<!-- END postrow -->
 		  <div class="row d-flex catBottom align-items-center text-center bdrw mx-0"> 

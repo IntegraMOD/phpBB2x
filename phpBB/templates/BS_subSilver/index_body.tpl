@@ -32,12 +32,12 @@
 	<div class="col"><a href="{catrow.U_VIEWCAT}" class="cattitle">{catrow.CAT_DESC}</a></div>
   </div>
   <!-- BEGIN forumrow -->
-  <div class="row mx-0 px-0 row1 hr1"> 
-	<div class="col-1 hr3 d-flex align-items-center text-center my-auto"><img src="{catrow.forumrow.FORUM_FOLDER_IMG}" alt="{catrow.forumrow.L_FORUM_FOLDER_ALT}" title="{catrow.forumrow.L_FORUM_FOLDER_ALT}" /></div>
+  <div class="row mx-0 my-auto hr1 row1"> 
+	<div class="col-1 px-0 hr3 text-center my-auto"><img src="{catrow.forumrow.FORUM_FOLDER_IMG}" alt="{catrow.forumrow.L_FORUM_FOLDER_ALT}" title="{catrow.forumrow.L_FORUM_FOLDER_ALT}" /></div>
 	<div class="col-5 hr3"><span class="forumlink"><a href="{catrow.forumrow.U_VIEWFORUM}" class="forumlink">{catrow.forumrow.FORUM_NAME}</a><br /></span><span class="genmed">{catrow.forumrow.FORUM_DESC}<br /></span><span class="gensmall">{catrow.forumrow.L_MODERATOR} {catrow.forumrow.MODERATORS}</span></div>
-	<div class="col-1 row2 hr3 d-flex align-items-center text-center mx-0"><span class="gensmall">{catrow.forumrow.TOPICS}</span></div>
-	<div class="col-1 row2 hr3 d-flex align-items-center text-center mx-0"><span class="gensmall">{catrow.forumrow.POSTS}</span></div>
-	<div class="col-4 row2 px-0 text-center"> <span class="gensmall">{catrow.forumrow.LAST_POST}</span></div>
+	<div class="col-1 row2 hr3 text-center mx-0"><span class="gensmall">{catrow.forumrow.TOPICS}</span></div>
+	<div class="col-1 row2 hr3 text-center mx-0"><span class="gensmall">{catrow.forumrow.POSTS}</span></div>
+	<div class="col-4 row2 text-start"> <span class="gensmall">{catrow.forumrow.LAST_POST}</span></div>
   </div>
   <!-- END forumrow -->
   <!-- END catrow -->
@@ -57,7 +57,7 @@
 	<div class="col d-flex align-items-center"><a class="cattitle" href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></div>
   </div>
   <div class="row mx-0 px-0 hr1">
-    <div class="col-1 text-center my-auto"><a href="{U_VIEWONLINE}"><button class="btn fa- d-inline-block"><span class="fa-solid fa-network-wired" alt="{L_WHO_IS_ONLINE}"  title="{L_WHO_IS_ONLINE}"></span></button></a></div>
+    <div class="col-1 text-center px-0 my-auto"><a href="{U_VIEWONLINE}"><button class="btn fa- d-inline-block"><span class="fa-solid fa-network-wired" alt="{L_WHO_IS_ONLINE}"  title="{L_WHO_IS_ONLINE}"></span></button></a></div>
     <div class="col hr5">
       <div class="row">
 	    <div class="col gensmall"><small>{TOTAL_POSTS}<br />{TOTAL_USERS}<br />{NEWEST_USER}</small></div>

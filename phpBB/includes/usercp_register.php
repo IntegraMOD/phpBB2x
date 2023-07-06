@@ -107,7 +107,7 @@ if (
 		$current_email = trim(htmlspecialchars($HTTP_POST_VARS['current_email']));
 	}
 
-	$strip_var_list = array('email' => 'email', 'icq' => 'icq', 'aim' => 'aim', 'msn' => 'msn', 'yim' => 'yim', 'fb' => 'fb', 'ig' => 'ig', 'pt' => 'pt', 'twr' => 'twr', 'skp' => 'skp', 'tg' => 'tg', 'li' => 'li', 'tt' => 'tt', 'website' => 'website', 'location' => 'location', 'occupation' => 'occupation', 'interests' => 'interests', 'confirm_code' => 'confirm_code');
+	$strip_var_list = array('email' => 'email', 'icq' => 'icq', 'fb' => 'fb', 'ig' => 'ig', 'pt' => 'pt', 'twr' => 'twr', 'skp' => 'skp', 'tg' => 'tg', 'li' => 'li', 'tt' => 'tt', 'dc' => 'dc', 'website' => 'website', 'location' => 'location', 'occupation' => 'occupation', 'interests' => 'interests', 'confirm_code' => 'confirm_code');
 
 	// Strip all tags from data ... may p**s some people off, bah, strip_tags is
 	// doing the job but can still break HTML output ... have no choice, have
@@ -137,7 +137,7 @@ if (
 
 	// Run some validation on the optional fields. These are pass-by-ref, so they'll be changed to
 	// empty strings if they fail.
-	validate_optional_fields($icq, $aim, $msn, $yim, $fb, $ig, $pt, $twr, $skp, $tg, $li, $tt, $website, $location, $occupation, $interests, $signature);
+	validate_optional_fields($icq, $fb, $ig, $pt, $twr, $skp, $tg, $li, $tt, $dc, $website, $location, $occupation, $interests, $signature);
 
 	$viewemail = ( isset($HTTP_POST_VARS['viewemail']) ) ? ( ($HTTP_POST_VARS['viewemail']) ? TRUE : 0 ) : 0;
 	$allowviewonline = ( isset($HTTP_POST_VARS['hideonline']) ) ? ( ($HTTP_POST_VARS['hideonline']) ? 0 : TRUE ) : TRUE;
@@ -216,9 +216,6 @@ if (
 		$password_confirm = htmlspecialchars(stripslashes($password_confirm));
 
 		$icq = stripslashes($icq);
-		$aim = stripslashes($aim);
-		$msn = stripslashes($msn);
-		$yim = stripslashes($yim);
 		$fb = stripslashes($fb);
 		$ig = stripslashes($ig);
 		$pt = stripslashes($pt);
@@ -227,7 +224,8 @@ if (
 		$tg = stripslashes($tg);
 		$li = stripslashes($li);
 		$tt = stripslashes($tt);
-
+		$dc = stripslashes($dc);
+		
 		$website = stripslashes($website);
 		$location = stripslashes($location);
 		$occupation = stripslashes($occupation);
@@ -531,7 +529,7 @@ if ( isset($HTTP_POST_VARS['submit']) )
 			}
 
 			$sql = "UPDATE " . USERS_TABLE . "
-				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) ."', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_sig_bbcode_uid = '$signature_bbcode_uid', user_viewemail = $viewemail, user_aim = '" . str_replace("\'", "''", str_replace(' ', '+', $aim)) . "', user_yim = '" . str_replace("\'", "''", $yim) . "', user_msnm = '" . str_replace("\'", "''", $msn) . "', user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_attachsig = $attachsig, user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_notify_pm = $notifypm, user_popup_pm = $popup_pm, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_active = $user_active, user_actkey = '" . str_replace("\'", "''", $user_actkey) . "'" . $avatar_sql . "
+				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) ."', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_sig_bbcode_uid = '$signature_bbcode_uid', user_viewemail = $viewemail, user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_dc = '" . str_replace("\'", "''", $dc) . "', user_attachsig = $attachsig, user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_notify_pm = $notifypm, user_popup_pm = $popup_pm, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_active = $user_active, user_actkey = '" . str_replace("\'", "''", $user_actkey) . "'" . $avatar_sql . "
 				WHERE user_id = $user_id";
 			if ( !($result = $db->sql_query($sql)) )
 			{
@@ -635,8 +633,10 @@ if ( isset($HTTP_POST_VARS['submit']) )
 			//
 			// Get current date
 			//
-			$sql = "INSERT INTO " . USERS_TABLE . "	(user_id, username, user_regdate, user_password, user_email, user_icq, user_website, user_occ, user_from, user_interests, user_sig, user_sig_bbcode_uid, user_avatar, user_avatar_type, user_viewemail, user_aim, user_yim, user_msnm, user_fb, user_ig, user_pt, user_twr, user_skp, user_tg, user_li, user_tt, user_attachsig, user_allowsmile, user_allowhtml, user_allowbbcode, user_allow_viewonline, user_notify, user_notify_pm, user_popup_pm, user_timezone, user_dateformat, user_lang, user_style, user_level, user_allow_pm, user_active, user_actkey)
-				VALUES ($user_id, '" . str_replace("\'", "''", $username) . "', " . time() . ", '" . str_replace("\'", "''", $new_password) . "', '" . str_replace("\'", "''", $email) . "', '" . str_replace("\'", "''", $icq) . "', '" . str_replace("\'", "''", $website) . "', '" . str_replace("\'", "''", $occupation) . "', '" . str_replace("\'", "''", $location) . "', '" . str_replace("\'", "''", $interests) . "', '" . str_replace("\'", "''", $signature) . "', '$signature_bbcode_uid', $avatar_sql, $viewemail, '" . str_replace("\'", "''", str_replace(' ', '+', $aim)) . "', '" . str_replace("\'", "''", $yim) . "', '" . str_replace("\'", "''", $msn) . "', '" . str_replace("\'", "''", $fb) . "', '" . str_replace("\'", "''", $ig) . "', '" . str_replace("\'", "''", $pt) . "', '" . str_replace("\'", "''", $twr) . "', '" . str_replace("\'", "''", $skp) . "', '" . str_replace("\'", "''", $tg) . "', '" . str_replace("\'", "''", $li) . "', '" . str_replace("\'", "''", $tt) . "', $attachsig, $allowsmilies, $allowhtml, $allowbbcode, $allowviewonline, $notifyreply, $notifypm, $popup_pm, $user_timezone, '" . str_replace("\'", "''", $user_dateformat) . "', '" . str_replace("\'", "''", $user_lang) . "', $user_style, 0, 1, ";
+			
+			
+			$sql = "INSERT INTO " . USERS_TABLE . "	(user_id, username, user_regdate, user_password, user_email, user_icq, user_website, user_occ, user_from, user_interests, user_sig, user_sig_bbcode_uid, user_avatar, user_avatar_type, user_viewemail, user_fb, user_ig, user_pt, user_twr, user_skp, user_tg, user_li, user_tt, user_dc, user_attachsig, user_allowsmile, user_allowhtml, user_allowbbcode, user_allow_viewonline, user_notify, user_notify_pm, user_popup_pm, user_timezone, user_dateformat, user_lang, user_style, user_level, user_allow_pm, user_active, user_actkey)
+				VALUES ($user_id, '" . str_replace("\'", "''", $username) . "', " . time() . ", '" . str_replace("\'", "''", $new_password) . "', '" . str_replace("\'", "''", $email) . "', '" . str_replace("\'", "''", $icq) . "', '" . str_replace("\'", "''", $website) . "', '" . str_replace("\'", "''", $occupation) . "', '" . str_replace("\'", "''", $location) . "', '" . str_replace("\'", "''", $interests) . "', '" . str_replace("\'", "''", $signature) . "', '$signature_bbcode_uid', $avatar_sql, $viewemail, '" . str_replace("\'", "''", $fb) . "', '" . str_replace("\'", "''", $ig) . "', '" . str_replace("\'", "''", $pt) . "', '" . str_replace("\'", "''", $twr) . "', '" . str_replace("\'", "''", $skp) . "', '" . str_replace("\'", "''", $tg) . "', '" . str_replace("\'", "''", $li) . "', '" . str_replace("\'", "''", $tt) . "', '" . str_replace("\'", "''", $dc) . "', $attachsig, $allowsmilies, $allowhtml, $allowbbcode, $allowviewonline, $notifyreply, $notifypm, $popup_pm, $user_timezone, '" . str_replace("\'", "''", $user_dateformat) . "', '" . str_replace("\'", "''", $user_lang) . "', $user_style, 0, 1, ";
 			if ( $board_config['require_activation'] == USER_ACTIVATION_SELF || $board_config['require_activation'] == USER_ACTIVATION_ADMIN || $coppa )
 			{
 				$user_actkey = gen_rand_string(true);
@@ -715,9 +715,6 @@ if ( isset($HTTP_POST_VARS['submit']) )
 					'MAIL_INFO' => $board_config['coppa_mail'],
 					'EMAIL_ADDRESS' => $email,
 					'ICQ' => $icq,
-					'AIM' => $aim,
-					'YIM' => $yim,
-					'MSN' => $msn,
 					'FB' => $fb,
 					'IG' => $ig,
 					'PT' => $pt,
@@ -725,7 +722,8 @@ if ( isset($HTTP_POST_VARS['submit']) )
 					'SKP' => $skp,
 					'TG' => $tg,
 					'LI' => $li,
-					'TT' => $tt,					
+					'TT' => $tt,
+	                'DC' => $dc,					
 					'WEB_SITE' => $website,
 					'FROM' => $location,
 					'OCC' => $occupation,
@@ -800,9 +798,6 @@ if ( $error )
 	$password_confirm = '';
 
 	$icq = stripslashes($icq);
-	$aim = str_replace('+', ' ', stripslashes($aim));
-	$msn = stripslashes($msn);
-	$yim = stripslashes($yim);
 	$fb = stripslashes($fb);
 	$ig = stripslashes($ig);
 	$pt = stripslashes($pt);
@@ -811,7 +806,8 @@ if ( $error )
 	$tg = stripslashes($tg);
 	$li = stripslashes($li);
 	$tt = stripslashes($tt);
-
+	$dc = stripslashes($dc);
+	
 	$website = stripslashes($website);
 	$location = stripslashes($location);
 	$occupation = stripslashes($occupation);
@@ -833,9 +829,6 @@ else if ( $mode == 'editprofile' && !isset($HTTP_POST_VARS['avatargallery']) && 
 	$password_confirm = '';
 
 	$icq = $userdata['user_icq'];
-	$aim = str_replace('+', ' ', $userdata['user_aim']);
-	$msn = $userdata['user_msnm'];
-	$yim = $userdata['user_yim'];
 	$fb = $userdata['user_fb'];
 	$ig = $userdata['user_ig'];
 	$pt = $userdata['user_pt'];
@@ -844,7 +837,8 @@ else if ( $mode == 'editprofile' && !isset($HTTP_POST_VARS['avatargallery']) && 
 	$tg = $userdata['user_tg'];
 	$li = $userdata['user_li'];
 	$tt = $userdata['user_tt'];
-
+	$dc = $userdata['user_dc'];
+	
 	$website = $userdata['user_website'];
 	$location = $userdata['user_from'];
 	$occupation = $userdata['user_occ'];
@@ -899,7 +893,7 @@ if( isset($HTTP_POST_VARS['avatargallery']) && !$error )
 
 	$allowviewonline = !$allowviewonline;
 
-	display_avatar_gallery($mode, $avatar_category, $user_id, $email, $current_email, $coppa, $username, $email, $new_password, $cur_password, $password_confirm, $icq, $aim, $msn, $yim, $fb, $ig, $pt, $twr, $skp, $tg, $li, $tt, $website, $location, $occupation, $interests, $signature, $viewemail, $notifypm, $popup_pm, $notifyreply, $attachsig, $allowhtml, $allowbbcode, $allowsmilies, $allowviewonline, $user_style, $user_lang, $user_timezone, $user_dateformat, $userdata['session_id']);
+	display_avatar_gallery($mode, $avatar_category, $user_id, $email, $current_email, $coppa, $username, $email, $new_password, $cur_password, $password_confirm, $icq, $fb, $ig, $pt, $twr, $skp, $tg, $li, $tt, $dc, $website, $location, $occupation, $interests, $signature, $viewemail, $notifypm, $popup_pm, $notifyreply, $attachsig, $allowhtml, $allowbbcode, $allowsmilies, $allowviewonline, $user_style, $user_lang, $user_timezone, $user_dateformat, $userdata['session_id']);
 }
 else
 {
@@ -1066,10 +1060,7 @@ else
 		'PASSWORD_CONFIRM' => isset($password_confirm) ? $password_confirm : '',
 		'EMAIL' => isset($email) ? $email : '',
 		'CONFIRM_IMG' => $confirm_image, 
-		'YIM' => $yim,
 		'ICQ' => $icq,
-		'MSN' => $msn,
-		'AIM' => $aim,
 		'FB' => $fb,
 		'IG' => $ig,
 		'PT' => $pt,
@@ -1078,7 +1069,8 @@ else
 		'TG' => $tg,
 		'LI' => $li,
 		'TT' => $tt,		
-
+		'DC' => $dc,
+		
 		'OCCUPATION' => $occupation,
 		'INTERESTS' => $interests,
 		'LOCATION' => $location,
@@ -1122,8 +1114,6 @@ else
 		'L_SUBMIT' => $lang['Submit'],
 		'L_RESET' => $lang['Reset'],
 		'L_ICQ_NUMBER' => $lang['ICQ'],
-		'L_MESSENGER' => $lang['MSNM'],
-		'L_YAHOO' => $lang['YIM'],
 		'L_FACEBOOK' => $lang['FB'],
 		'L_INSTAGRAM' => $lang['IG'],
 		'L_PINTEREST' => $lang['PT'],
@@ -1131,9 +1121,9 @@ else
 		'L_SKYPE' => $lang['SKP'],
 		'L_TELEGRAM' => $lang['TG'],
 		'L_LINKEDIN' => $lang['LI'],
-		'L_TIKTOK' => $lang['TT'],		
+		'L_TIKTOK' => $lang['TT'],
+		'L_DISCORD' => $lang['DC'],		
 		'L_WEBSITE' => $lang['Website'],
-		'L_AIM' => $lang['AIM'],
 		'L_LOCATION' => $lang['Location'],
 		'L_OCCUPATION' => $lang['Occupation'],
 		'L_BOARD_LANGUAGE' => $lang['Board_lang'],

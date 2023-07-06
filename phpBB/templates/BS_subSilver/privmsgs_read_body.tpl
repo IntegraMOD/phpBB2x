@@ -38,7 +38,7 @@
                 <div class="row genmed row2 hr1">
                   <div class="col-2 py-1">{L_SUBJECT}:</div>
                   <div class="col py-1 hr5">{POST_SUBJECT}</div>
-            	  <div class="col-4 text-end"><span class="py-1 pl-0 d-flex nw"><div class="pbtn gen"><i class="fa-solid fa-pencil"></i>{L_EDIT_PM}{EDIT_PM_IMG}</div>&nbsp;&nbsp;<span class="pbtn gen"><i class="fa-solid fa-quote-left"></i>&nbsp;{QUOTE_PM}&nbsp;<i class="fa-solid fa-quote-right"></i></span></span></div>
+            	  <div class="col-4 text-end"><span class="navbr">{EDIT_PM_IMG}&nbsp;{QUOTE_PM_IMG}</span></div>
                 </div>
                 <div class="row row1 hr1">
                   <div class="col p-2 postbody">{MESSAGE}</div>

@@ -166,9 +166,9 @@ function validate_email($email)
 // Does supplementary validation of optional profile fields. This expects common stuff like trim() and strip_tags()
 // to have already been run. Params are passed by-ref, so we can set them to the empty string if they fail.
 //
-function validate_optional_fields(&$icq, &$aim, &$msnm, &$yim, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &$li, &$tt, &$website, &$location, &$occupation, &$interests, &$sig)
+function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &$li, &$tt, &$dc, &$website, &$location, &$occupation, &$interests, &$sig)
 {
-	$check_var_length = array('aim', 'msnm', 'yim', 'fb', 'ig', 'pt', 'twr', 'skp', 'tg', 'li', 'tt', 'location', 'occupation', 'interests', 'sig');
+	$check_var_length = array('fb', 'ig', 'pt', 'twr', 'skp', 'tg', 'li', 'tt', 'dc', 'location', 'occupation', 'interests', 'sig');
 
 	for($i = 0; $i < count($check_var_length); $i++)
 	{
@@ -177,6 +177,12 @@ function validate_optional_fields(&$icq, &$aim, &$msnm, &$yim, &$fb, &$ig, &$pt,
 			$$check_var_length[$i] = '';
 		}
 	}
+
+	// Discord ID is only numbers.
+//	if (!preg_match('/^[0-9]+$/', $dc))
+//	{
+//		$dc = '';
+//	}
 
 	// ICQ number has to be only numbers.
 	if (!preg_match('/^[0-9]+$/', $icq))

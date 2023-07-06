@@ -80,10 +80,11 @@
                   </div>
                 </div>
               </nav>
-            <!-- Navbar end -->				    
-            <div class="container-fluid pt-3">
+            <!-- Navbar end -->
+			
+            <div class="container-fluid topbkg">
              <div class="row d-flex align-items-center">
-               <div class="col"><a class="navbar-brand" href="{U_INDEX}"><img src="templates/BS_subIce/images/logo_phpBB.gif" alt="{L_INDEX}"></a></div>
+               <div class="col"><a class="navbar-brand" href="{U_INDEX}"><img src="templates/BS_subIce/images/phpbb2_logo.png" alt="{L_INDEX}"></a></div>
                <div class="col text-start"><span class="maintitle align-text-bottom">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}</span></div>
 		     </div>
 		    </div>

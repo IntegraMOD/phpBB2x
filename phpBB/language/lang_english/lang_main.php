@@ -58,6 +58,7 @@ $lang['Post'] = 'Post';
 $lang['Posts'] = 'Posts';
 $lang['Posted'] = 'Posted';
 $lang['Username'] = 'Username';
+$lang['Userid'] = 'UserID';
 $lang['Password'] = 'Password';
 $lang['Email'] = 'Email';
 $lang['Poster'] = 'Poster';
@@ -100,9 +101,6 @@ $lang['View_newest_post'] = 'View newest post';
 $lang['Page_of'] = 'Page <b>%d</b> of <b>%d</b>'; // Replaces with: Page 1 of 2 for example
 
 $lang['ICQ'] = 'ICQ Number';
-$lang['AIM'] = 'AIM Address';
-$lang['MSNM'] = 'MSN Messenger';
-$lang['YIM'] = 'Yahoo Messenger';
 $lang['FB'] = 'Facebook';
 $lang['IG'] = 'Instagram';
 $lang['PT'] = 'Pinterest';
@@ -111,7 +109,8 @@ $lang['SKP'] = 'Skype';
 $lang['TG'] = 'Telegram';
 $lang['LI'] = 'LinkedIn';
 $lang['TT'] = 'TikTok';
-
+$lang['DC'] = 'Discord';
+$lang['USER_ID_EXPLAIN'] = 'Numbers Only';
 $lang['Forum_Index'] = '%s Forum Index';  // eg. sitename Forum Index, %s can be removed if you prefer
 
 $lang['Post_new_topic'] = 'Post new topic';
@@ -433,9 +432,9 @@ $lang['Styles_tip'] = 'Tip: Styles can be applied quickly to selected text.';
 $lang['Private_Messaging'] = 'Private Messaging';
 
 $lang['Login_check_pm'] = 'Log in to check your private messages';
-$lang['New_pms'] = 'You have %d new messages'; // You have 2 new messages
-$lang['New_pm'] = 'You have %d new message'; // You have 1 new message
-$lang['No_new_pm'] = 'You have no new messages';
+$lang['New_pms'] = '%d new messages'; // You have 2 new messages
+$lang['New_pm'] = '%d new message'; // You have 1 new message
+$lang['No_new_pm'] = 'No new messages';
 $lang['Unread_pms'] = 'You have %d unread messages';
 $lang['Unread_pm'] = 'You have %d unread message';
 $lang['No_unread_pm'] = 'You have no unread messages';
@@ -1033,13 +1032,13 @@ $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 //
 // language buttons
 //
-$lang['button_pm_new'] = 'New PM';
-$lang['button_pm_reply'] = 'Send Reply';
-$lang['button_topic_locked'] = 'Locked';
-$lang['button_topic_new'] = 'New Topic';
-$lang['button_topic_reply'] = 'Post Reply';
-$lang['icon_post_edit'] = 'Edit';
-$lang['icon_post_quote'] = 'Quote';
+$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
+$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
+$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
+$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
+$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
+$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
+$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
  
 //

@@ -69,6 +69,10 @@
                     <div class="col gen text-end">{L_TIKTOK}:</div>
                     <div class="col gen">{TT_IMG}</div>
                     </div>
+                    <div class="row"> 
+                    <div class="col gen text-end">{L_DISCORD}:</div>
+                    <div class="col gen">{DC_IMG}</div>
+                    </div>					
                 </div>
                 
                 <div class="col lh-lg">

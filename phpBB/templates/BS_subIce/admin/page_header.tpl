@@ -9,8 +9,7 @@
 
 <title>{SITENAME} - {L_PHPBB_ADMIN}</title>
 <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-<script">
-<!--
+<script>
     function toggle_visibility(id) {
        var e = document.getElementById(id);
        if(e.style.display == 'block')
@@ -18,7 +17,6 @@
        else
           e.style.display = 'block';
     }
-//-->
 </script>
 </head>
 <body bgcolor="{T_BODY_BGCOLOR}" text="{T_BODY_TEXT}" link="{T_BODY_LINK}" vlink="{T_BODY_VLINK}">

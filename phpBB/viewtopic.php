@@ -390,7 +390,7 @@ $select_post_order .= '</select>';
 //
 // Go ahead and pull all data for this topic
 //
-$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_aim, u.user_yim, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt, u.user_regdate, u.user_msnm, u.user_viewemail, u.user_rank, u.user_sig, u.user_sig_bbcode_uid, u.user_avatar, u.user_avatar_type, u.user_allowavatar, u.user_allowsmile, p.*,  pt.post_text, pt.post_subject, pt.bbcode_uid
+$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_website, u.user_email, u.user_icq, u.user_fb, u.user_ig, u.user_pt, u.user_twr, u.user_skp, u.user_tg, u.user_li, u.user_tt, u.user_dc, u.user_regdate, u.user_viewemail, u.user_rank, u.user_sig, u.user_sig_bbcode_uid, u.user_avatar, u.user_avatar_type, u.user_allowavatar, u.user_allowsmile, p.*,  pt.post_text, pt.post_subject, pt.bbcode_uid
 	FROM " . POSTS_TABLE . " p, " . USERS_TABLE . " u, " . POSTS_TEXT_TABLE . " pt
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
@@ -927,18 +927,18 @@ for($i = 0; $i < $total_posts; $i++)
 	if ( $poster_id != ANONYMOUS )
 	{
 		$temp_url = append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$poster_id");
-		$profile_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Read_profile'] . '" title="' . $lang['Read_profile'] . '" border="0" /></a>';
+		$profile_img = '<a href="' . $temp_url . '" title="' . $lang['Read_profile'] . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Read_profile'] . '" title="' . $lang['Read_profile'] . '" border="0" /></a>';
 		$profile = '<a href="' . $temp_url . '">' . $lang['Read_profile'] . '</a>';
 
 		$temp_url = append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=$poster_id");
-		$pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" border="0" /></a>';
+		$pm_img = '<a href="' . $temp_url . '" title="' . $lang['Send_private_message'] . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" border="0" /></a>';
 		$pm = '<a href="' . $temp_url . '">' . $lang['Send_private_message'] . '</a>';
 
 		if ( !empty($postrow[$i]['user_viewemail']) || $is_auth['auth_mod'] )
 		{
 			$email_uri = ( $board_config['board_email_form'] ) ? append_sid("profile.$phpEx?mode=email&amp;" . POST_USERS_URL .'=' . $poster_id) : 'mailto:' . $postrow[$i]['user_email'];
 
-			$email_img = '<a href="' . $email_uri . '"><img src="' . $images['icon_email'] . '" alt="' . $lang['Send_email'] . '" title="' . $lang['Send_email'] . '" border="0" /></a>';
+			$email_img = '<a href="' . $email_uri . '" title="' . $lang['Send_email'] . '"><img src="' . $images['icon_email'] . '" alt="' . $lang['Send_email'] . '" title="' . $lang['Send_email'] . '" border="0" /></a>';
 			$email = '<a href="' . $email_uri . '">' . $lang['Send_email'] . '</a>';
 		}
 		else
@@ -947,7 +947,7 @@ for($i = 0; $i < $total_posts; $i++)
 			$email = '';
 		}
 
-		$www_img = ( $postrow[$i]['user_website'] ) ? '<a href="' . $postrow[$i]['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['Visit_website'] . '" title="' . $lang['Visit_website'] . '" border="0" /></a>' : '';
+		$www_img = ( $postrow[$i]['user_website'] ) ? '<a href="' . $postrow[$i]['user_website'] . '" target="_userwww" title="' . $lang['Visit_website'] . '"><img src="' . $images['icon_www'] . '" alt="' . $lang['Visit_website'] . '" title="' . $lang['Visit_website'] . '" border="0" /></a>' : '';
 		$www = ( $postrow[$i]['user_website'] ) ? '<a href="' . $postrow[$i]['user_website'] . '" target="_userwww">' . $lang['Visit_website'] . '</a>' : '';
 
 		if ( !empty($postrow[$i]['user_icq']) )
@@ -963,16 +963,6 @@ for($i = 0; $i < $total_posts; $i++)
 			$icq = '';
 		}
 
-		$aim_img = ( $postrow[$i]['user_aim'] ) ? '<a href="aim:goim?screenname=' . $postrow[$i]['user_aim'] . '&amp;message=Hello+Are+you+there?"><img src="' . $images['icon_aim'] . '" alt="' . $lang['AIM'] . '" title="' . $lang['AIM'] . '" border="0" /></a>' : '';
-		$aim = ( $postrow[$i]['user_aim'] ) ? '<a href="aim:goim?screenname=' . $postrow[$i]['user_aim'] . '&amp;message=Hello+Are+you+there?">' . $lang['AIM'] . '</a>' : '';
-
-		$temp_url = append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$poster_id");
-		$msn_img = ( $postrow[$i]['user_msnm'] ) ? '<a href="' . $temp_url . '"><img src="' . $images['icon_msnm'] . '" alt="' . $lang['MSNM'] . '" title="' . $lang['MSNM'] . '" border="0" /></a>' : '';
-		$msn = ( $postrow[$i]['user_msnm'] ) ? '<a href="' . $temp_url . '">' . $lang['MSNM'] . '</a>' : '';
-
-		$yim_img = ( $postrow[$i]['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $postrow[$i]['user_yim'] . '&amp;.src=pg"><img src="' . $images['icon_yim'] . '" alt="' . $lang['YIM'] . '" title="' . $lang['YIM'] . '" border="0" /></a>' : '';
-		$yim = ( $postrow[$i]['user_yim'] ) ? '<a href="http://edit.yahoo.com/config/send_webmesg?.target=' . $postrow[$i]['user_yim'] . '&amp;.src=pg">' . $lang['YIM'] . '</a>' : '';
-
 		$fb_img = ( $postrow[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $postrow[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
 		$fb = ( $postrow[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $postrow[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
 
@@ -982,20 +972,23 @@ for($i = 0; $i < $total_posts; $i++)
 		$pt_img = ( $postrow[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $postrow[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
 		$pt = ( $postrow[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $postrow[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
 
-		$twr_img = ( $postrow[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $postrow[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
-		$twr = ( $postrow[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $postrow[$i]['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+		$twr_img = ( $postrow[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $postrow[$i]['user_twr'] . '" target="blank" title="' . $lang['TWR'] . '"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+		$twr = ( $postrow[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $postrow[$i]['user_twr'] . '" target="blank">' . $lang['TWR'] . '</a>' : '';
 
-		$skp_img = ( $postrow[$i]['user_skp'] ) ? '<a href="skype:' . $postrow[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
-	    $skp = ( $postrow[$i]['user_skp'] ) ? '<a href="skype:' . $postrow[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+		$skp_img = ( $postrow[$i]['user_skp'] ) ? '<a href="skype:' . $postrow[$i]['user_skp'] . '?call" target="blank" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	    $skp = ( $postrow[$i]['user_skp'] ) ? '<a href="skype:' . $postrow[$i]['user_skp'] . '?call" target="blank">' . $lang['SKP'] . '</a>' : ''; 
 
-		$tg_img = ( $postrow[$i]['user_tg'] ) ? '<a href="https://t.me/' . $postrow[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
-		$tg = ( $postrow[$i]['user_tg'] ) ? '<a href="https://t,me/' . $postrow[$i]['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+		$tg_img = ( $postrow[$i]['user_tg'] ) ? '<a href="https://t.me/' . $postrow[$i]['user_tg'] . '" target="blank" title="' . $lang['TG'] . '"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+		$tg = ( $postrow[$i]['user_tg'] ) ? '<a href="https://t,me/' . $postrow[$i]['user_tg'] . '" target="blank">' . $lang['TG'] . '</a>' : '';
 
-		$li_img = ( $postrow[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $postrow[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
-		$li = ( $postrow[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $postrow[$i]['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+		$li_img = ( $postrow[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $postrow[$i]['user_li'] . '" target="blank" title="' . $lang['LI'] . '"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+		$li = ( $postrow[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $postrow[$i]['user_li'] . '" target="blank">' . $lang['LI'] . '</a>' : '';
 
-		$tt_img = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
-		$tt = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
+		$tt_img = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '" target="blank" title="' . $lang['TT'] . '"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+		$tt = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '" target="blank">' . $lang['TT'] . '</a>' : '';
+
+		$dc_img = ( $postrow[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $postrow[$i]['user_dc'] . '" target="blank" title="' . $lang['DC'] . '"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
+		$dc = ( $postrow[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $postrow[$i]['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
 	}
 	else
 	{
@@ -1010,12 +1003,6 @@ for($i = 0; $i < $total_posts; $i++)
 		$icq_status_img = '';
 		$icq_img = '';
 		$icq = '';
-		$aim_img = '';
-		$aim = '';
-		$msn_img = '';
-		$msn = '';
-		$yim_img = '';
-		$yim = '';
 		$fb_img = '';
 		$fb = '';
 		$ig_img = '';
@@ -1031,7 +1018,9 @@ for($i = 0; $i < $total_posts; $i++)
 		$li_img = '';
 		$li = '';
 		$tt_img = '';
-		$tt = '';		
+		$tt = '';
+		$dc_img = '';
+		$dc = '';		
 	}
 
 	$temp_url = append_sid("posting.$phpEx?mode=quote&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
@@ -1233,12 +1222,6 @@ for($i = 0; $i < $total_posts; $i++)
 		'ICQ_STATUS_IMG' => $icq_status_img,
 		'ICQ_IMG' => $icq_img,
 		'ICQ' => $icq,
-		'AIM_IMG' => $aim_img,
-		'AIM' => $aim,
-		'MSN_IMG' => $msn_img,
-		'MSN' => $msn,
-		'YIM_IMG' => $yim_img,
-		'YIM' => $yim,
 		'FB_IMG' => $fb_img,
 		'FB' => $fb,
 		'IG_IMG' => $ig_img,
@@ -1255,6 +1238,8 @@ for($i = 0; $i < $total_posts; $i++)
 		'LI' => $li,
 		'TT_IMG' => $tt_img,
 		'TT' => $tt,
+		'DC_IMG' => $dc_img,
+		'DC' => $dc,		
 		'EDIT_IMG' => $edit_img,
 		'EDIT' => $edit,
 		'QUOTE_IMG' => $quote_img,

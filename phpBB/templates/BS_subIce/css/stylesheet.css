@@ -3,6 +3,7 @@
   Created by Helter (integramod.com)
 */
 @import url("BS_subIce.css");
-@import url("icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@700&display=swap');}
+
 /* Import the fancy styles for IE only (NS4.x doesn't use the @import function) */
 @import url("formIE.css");

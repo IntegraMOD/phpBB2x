@@ -65,24 +65,9 @@
       </div>
 
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_ICQ_NUMBER}&nbsp;{L_USERNAME}:</div>
-        <div class="col-8 row2 py-1"><input type="text" name="icq" class="post" style="width: 200px"  size="10" maxlength="255" value="{ICQ}" /></div>
+        <div class="col-4 row1 py-1">{L_ICQ_NUMBER}:</div>
+        <div class="col-8 row2 py-1"><input type="text" name="icq" class="post" style="width: 200px"  size="10" maxlength="255" value="{ICQ}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" /></div>
       </div>
-
-      <div class="row gen">
-        <div class="col-4 row1 py-1">{L_AIM}&nbsp;{L_USERNAME}:</div>
-        <div class="col-8 row2 py-1"><input type="text" name="aim" class="post" style="width: 200px"  size="10" maxlength="255" value="{AIM}" /></div>
-      </div>
-
-      <div class="row gen">
-        <div class="col-4 row1 py-1">{L_MESSENGER}&nbsp;{L_USERNAME}:</div>
-        <div class="col-8 row2 py-1"><input type="text" name="msn" class="post" style="width: 200px"  size="10" maxlength="255" value="{MSN}" /></div>
-      </div>
-      
-      <div class="row gen">
-        <div class="col-4 row1 py-1">{L_YAHOO}&nbsp;{L_USERNAME}:</div>
-        <div class="col-8 row2 py-1"><input type="text" name="yim" class="post" style="width: 200px"  size="10" maxlength="255" value="{YIM}" /></div>
-      </div>  
 
       <div class="row gen">
         <div class="col-4 row1 py-1">{L_FACEBOOK}&nbsp;{L_USERNAME}:</div>
@@ -129,11 +114,15 @@
         <div class="col-8 row2 py-1"><input type="text" name="tt" class="post" style="width: 200px"  size="10" maxlength="255" value="{TT}" /></div>
       </div>     
       
-     
       <div class="row gen">
+        <div class="col-4 row1 py-1">{L_DISCORD}&nbsp;{L_USERID}:</div>
+        <div class="col-8 row2 py-1"><input type="text" name="DC" class="post" style="width: 200px"  size="10" maxlength="255" value="{DC}" placeholder="{L_USER_ID_EXPLAIN}" /></div>
+      </div> 
+	  
+     <div class="row gen">
         <div class="col-4 row1 py-1">{L_WEBSITE}:</div>
         <div class="col-8 row2 py-1"><input type="text" class="post" style="width: 200px"  name="website" size="25" maxlength="255" value="{WEBSITE}" /></div>
-      </div>
+     </div>
       
       <div class="row gen">
         <div class="col-4 row1 py-1">{L_LOCATION}:</div>

@@ -7,7 +7,7 @@
           </div>
         </div>
         <div class="row mb-1 py-1 mx-0"> 
-          <div class="col-7 col-md-12"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></div>
+          <div class="col-7 col-md-12"><a href="{U_POST_NEW_TOPIC}" class="gen pbtn"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></div>
           <div class="col col-md-12 text-end navbr"><a href="{U_INDEX}" class="navbr">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></div>
         </div>
         <div class="forumline p-0 mx-1">
@@ -36,8 +36,8 @@
         	  </div>
         	</div>
         	<div class="row py-0 mx-0 row1"> 
-        	  <div class="col-2 pt-2 pb-1 hr3"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
-        	  <div class="col pt-2 pb-1 gen">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.AIM_IMG} {postrow.YIM_IMG} {postrow.MSN_IMG}</div>
+        	  <div class="col-2 pt-2 pb-1 hr3"><a class="navbr" href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
+        	  <div class="col pt-2 pb-1 gen">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG} {postrow.ICQ_IMG}</div>
         	</div>
          	<!-- END postrow -->
 		  <div class="row d-flex catBottom align-items-center text-center bdrw mx-0"> 

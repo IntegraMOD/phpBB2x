@@ -8,19 +8,19 @@
 <meta name="copyright" content="2001, 2005 phpBB Group" />
 {META}
 <title>{SITENAME} &bull; {PAGE_TITLE}</title>
+<!-- fontawesome 6.4.0 CSS-->  
+<link rel="stylesheet" href="templates/assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="templates/prosilver/{T_HEAD_STYLESHEET}" type="text/css" media="screen, projection" />
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<script src="templates/prosilver/forum_fn.js"></script>
+
 <!-- BEGIN switch_enable_pm_popup -->
-<script type="text/javascript">
-<!--
-	if ( {PRIVATE_MESSAGE_NEW_FLAG} )
-	{
-		window.open('{U_PRIVATEMSGS_POPUP}', '_phpbbprivmsg', 'height=225,resizable=yes,width=400');;
-	}
-//-->
+<script>
+if ({ PRIVATE_MESSAGE_NEW_FLAG }) {
+  window.open('{U_PRIVATEMSGS_POPUP}', '_phpbbprivmsg', 'height=225, resizable=yes, width=400')
+}
 </script>
 <!-- END switch_enable_pm_popup -->
-<script src="templates/prosilver/forum_fn.js"></script>
-<link href="templates/prosilver/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css" media="screen, projection" />
 </head>
 <body id="phpbb" class="section-index {S_CONTENT_DIRECTION}">
 <div id="wrap">

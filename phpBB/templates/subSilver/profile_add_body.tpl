@@ -77,25 +77,7 @@
 	<tr> 
 	  <td class="row1"><span class="gen">{L_ICQ_NUMBER}:</span></td>
 	  <td class="row2"> 
-		<input type="text" name="icq" class="post" style="width: 100px"  size="10" maxlength="15" value="{ICQ}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_AIM}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="aim" size="20" maxlength="255" value="{AIM}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_MESSENGER}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="msn" size="20" maxlength="255" value="{MSN}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_YAHOO}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="yim" size="20" maxlength="255" value="{YIM}" />
+		<input type="text" name="icq" class="post" style="width: 100px"  size="10" maxlength="15" value="{ICQ}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
 	  </td>
 	</tr>
 	<tr> 
@@ -144,6 +126,12 @@
 	  <td class="row1"><span class="gen">{L_TIKTOK}:</span></td>
 	  <td class="row2"> 
 		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{TT}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_DISCORD}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{DC}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
 	  </td>
 	</tr>	
 	<tr> 

@@ -48,27 +48,63 @@
 	  <td class="row2" colspan="2"><span class="gensmall">{L_PROFILE_INFO_NOTICE}</span></td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_ICQ_NUMBER}</span></td>
+	  <td class="row1"><span class="gen">{L_ICQ_NUMBER}:</span></td>
 	  <td class="row2"> 
-		<input class="post" type="text" name="icq" size="10" maxlength="15" value="{ICQ}" />
+		<input type="text" name="icq" class="post" style="width: 100px"  size="10" maxlength="15" value="{ICQ}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_AIM}</span></td>
+	  <td class="row1"><span class="gen">{L_FACEBOOK}:</span></td>
 	  <td class="row2"> 
-		<input class="post" type="text" name="aim" size="20" maxlength="255" value="{AIM}" />
+		<input type="text" class="post" style="width: 150px"  name="fb" size="20" maxlength="255" value="{FB}" />
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_MESSENGER}</span></td>
+	  <td class="row1"><span class="gen">{L_INSTAGRAM}:</span></td>
 	  <td class="row2"> 
-		<input class="post" type="text" name="msn" size="20" maxlength="255" value="{MSN}" />
+		<input type="text" class="post" style="width: 150px"  name="ig" size="20" maxlength="255" value="{IG}" />
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_YAHOO}</span></td>
+	  <td class="row1"><span class="gen">{L_PINTEREST}:</span></td>
 	  <td class="row2"> 
-		<input class="post" type="text" name="yim" size="20" maxlength="255" value="{YIM}" />
+		<input type="text" class="post" style="width: 150px"  name="pt" size="20" maxlength="255" value="{PT}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_TWITTER}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="twr" size="20" maxlength="255" value="{TWR}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_SKYPE}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="skp" size="20" maxlength="255" value="{SKP}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_TELEGRAM}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="tg" size="20" maxlength="255" value="{TG}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_LINKEDIN}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="li" size="20" maxlength="255" value="{LI}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_TIKTOK}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{TT}" />
+	  </td>
+	</tr>
+	<tr> 
+	  <td class="row1"><span class="gen">{L_DISCORD}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{DC}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
 	  </td>
 	</tr>
 	<tr> 
