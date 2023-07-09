@@ -835,7 +835,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 		$highlight_active = '';
 		$highlight_match = array();
-		for($j = 0; $j < count($split_search); $j++ )
+		for($j = 0; $j < (is_countable($split_search) ? count($split_search) : 0); $j++ )
 		{
 			$split_word = $split_search[$j];
 
@@ -844,9 +844,9 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 				$highlight_match[] = '#\b(' . str_replace("*", "([\w]+)?", $split_word) . ')\b#is';
 				$highlight_active .= " " . $split_word;
 
-				for ($k = 0; $k < count($synonym_array); $k++)
+				for ($k = 0; $k < (is_countable($synonym_array) ? count($synonym_array) : 0); $k++)
 				{ 
-					list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_array[$k])));
+					[$replace_synonym, $match_synonym] = explode(' ', trim(strtolower($synonym_array[$k])));
 
 					if ( $replace_synonym == $split_word )
 					{
@@ -862,7 +862,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 		$tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
 		$tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
 
-		for($i = 0; $i < count($searchset); $i++)
+		for($i = 0; $i < (is_countable($searchset) ? count($searchset) : 0); $i++)
 		{
 			$forum_url = append_sid("viewforum.$phpEx?" . POST_FORUM_URL . '=' . $searchset[$i]['forum_id']);
 			$topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . '=' . $searchset[$i]['topic_id'] . "&amp;highlight=$highlight_active");
@@ -891,7 +891,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 						$message = strip_tags($message);
 						$message = preg_replace("/\[.*?:$bbcode_uid:?.*?\]/si", '', $message);
 						$message = preg_replace('/\[url\]|\[\/url\]/si', '', $message);
-						$message = ( strlen($message) > $return_chars ) ? substr($message, 0, $return_chars) . ' ...' : $message;
+						$message = ( strlen((string) $message) > $return_chars ) ? substr($message, 0, $return_chars) . ' ...' : $message;
 					}
 					else
 					{
@@ -912,7 +912,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 						if ( $highlight_active )
 						{
-							if ( preg_match('/<.*>/', $message) )
+							if ( preg_match('/<.*>/', (string) $message) )
 							{
 								$message = preg_replace($highlight_match, '<!-- #sh -->\1<!-- #eh -->', $message);
 
@@ -986,7 +986,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 						}
 					}
 
-					if ( count($orig_word) )
+					if ( is_countable($orig_word) ? count($orig_word) : 0 )
 					{
 						$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 						$post_subject = ( $searchset[$i]['post_subject'] != "" ) ? preg_replace($orig_word, $replacement_word, $searchset[$i]['post_subject']) : $topic_title;
@@ -1061,7 +1061,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			{
 				$message = '';
 
-				if ( count($orig_word) )
+				if ( is_countable($orig_word) ? count($orig_word) : 0 )
 				{
 					$topic_title = preg_replace($orig_word, $replacement_word, $searchset[$i]['topic_title']);
 				}

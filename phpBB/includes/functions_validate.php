@@ -168,7 +168,7 @@ function validate_email($email)
 //
 function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &$li, &$tt, &$dc, &$website, &$location, &$occupation, &$interests, &$sig)
 {
-	$check_var_length = array('fb', 'ig', 'pt', 'twr', 'skp', 'tg', 'li', 'tt', 'dc', 'location', 'occupation', 'interests', 'sig');
+	$check_var_length = array('fb', 'ig', 'pt', 'twr', 'skp', 'tg', 'li', 'tt', 'location', 'occupation', 'interests', 'sig');
 
 	for($i = 0; $i < count($check_var_length); $i++)
 	{
@@ -177,12 +177,12 @@ function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &
 			$$check_var_length[$i] = '';
 		}
 	}
-
+	
 	// Discord ID is only numbers.
-//	if (!preg_match('/^[0-9]+$/', $dc))
-//	{
-//		$dc = '';
-//	}
+	if (!preg_match('/^[0-9]+$/', $dc))
+	{
+		$dc = '';
+	}
 
 	// ICQ number has to be only numbers.
 	if (!preg_match('/^[0-9]+$/', $icq))

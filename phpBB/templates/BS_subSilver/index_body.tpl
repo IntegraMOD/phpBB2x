@@ -44,12 +44,12 @@
 </div>
 
   <div class="row mx-0"> 
- 	<div class="col">
+ 	<div class="col text-start">
  	<!-- BEGIN switch_user_logged_in -->
  		<span class="gensmall"><a href="{U_MARK_READ}" class="gensmall">{L_MARK_FORUMS_READ}</a></span>
  	<!-- END switch_user_logged_in -->
  	</div>
-	<div class="col"><span class="gensmall">{S_TIMEZONE}</span></div>
+	<div class="col text-end"><span class="gensmall">{S_TIMEZONE}</span></div>
   </div>
 
 <div class="forumline row1">

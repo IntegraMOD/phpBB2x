@@ -360,13 +360,13 @@ function display_avatar_gallery($mode, &$category, &$user_id, &$email, &$current
 	$s_categories .= '</select>';
 
 	$s_colspan = 0;
-	for($i = 0; $i < count($avatar_images[$category]); $i++)
+	for($i = 0; $i < (is_countable($avatar_images[$category]) ? count($avatar_images[$category]) : 0); $i++)
 	{
 		$template->assign_block_vars("avatar_row", array());
 
-		$s_colspan = max($s_colspan, count($avatar_images[$category][$i]));
+		$s_colspan = max($s_colspan, is_countable($avatar_images[$category][$i]) ? count($avatar_images[$category][$i]) : 0);
 
-		for($j = 0; $j < count($avatar_images[$category][$i]); $j++)
+		for($j = 0; $j < (is_countable($avatar_images[$category][$i]) ? count($avatar_images[$category][$i]) : 0); $j++)
 		{
 			$template->assign_block_vars('avatar_row.avatar_column', array(
 				"AVATAR_IMAGE" => $board_config['avatar_gallery_path'] . '/' . $category . '/' . $avatar_images[$category][$i][$j], 
@@ -378,7 +378,6 @@ function display_avatar_gallery($mode, &$category, &$user_id, &$email, &$current
 			);
 		}
 	}
-
 	$params = array('coppa', 'user_id', 'username', 'email', 'current_email', 'cur_password', 'new_password', 'password_confirm', 'icq', 'fb', 'ig', 'pt', 'twr', 'skp', 'tg', 'li', 'tt', 'dc', 'website', 'location', 'occupation', 'interests', 'signature', 'viewemail', 'notifypm', 'popup_pm', 'notifyreply', 'attachsig', 'allowhtml', 'allowbbcode', 'allowsmilies', 'hideonline', 'style', 'language', 'timezone', 'dateformat');
 
 	$s_hidden_vars = '<input type="hidden" name="sid" value="' . $session_id . '" /><input type="hidden" name="agreed" value="true" /><input type="hidden" name="avatarcatname" value="' . $category . '" />';

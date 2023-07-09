@@ -112,11 +112,11 @@ if (
 	// Strip all tags from data ... may p**s some people off, bah, strip_tags is
 	// doing the job but can still break HTML output ... have no choice, have
 	// to use htmlspecialchars ... be prepared to be moaned at.
-	while( list($var, $param) = @each($strip_var_list) )
+	while( [$var, $param] = @each($strip_var_list) )
 	{
 		if ( !empty($HTTP_POST_VARS[$param]) )
 		{
-			$$var = trim(htmlspecialchars($HTTP_POST_VARS[$param]));
+			${$var} = trim(htmlspecialchars($HTTP_POST_VARS[$param]));
 		}
 	}
 
@@ -124,11 +124,11 @@ if (
 
 	$trim_var_list = array('cur_password' => 'cur_password', 'new_password' => 'new_password', 'password_confirm' => 'password_confirm', 'signature' => 'signature');
 
-	while( list($var, $param) = @each($trim_var_list) )
+	while( [$var, $param] = @each($trim_var_list) )
 	{
 		if ( !empty($HTTP_POST_VARS[$param]) )
 		{
-			$$var = trim($HTTP_POST_VARS[$param]);
+			${$var} = trim($HTTP_POST_VARS[$param]);
 		}
 	}
 
@@ -144,7 +144,7 @@ if (
 	$notifyreply = ( isset($HTTP_POST_VARS['notifyreply']) ) ? ( ($HTTP_POST_VARS['notifyreply']) ? TRUE : 0 ) : 0;
 	$notifypm = ( isset($HTTP_POST_VARS['notifypm']) ) ? ( ($HTTP_POST_VARS['notifypm']) ? TRUE : 0 ) : TRUE;
 	$popup_pm = ( isset($HTTP_POST_VARS['popup_pm']) ) ? ( ($HTTP_POST_VARS['popup_pm']) ? TRUE : 0 ) : TRUE;
-	$sid = (isset($HTTP_POST_VARS['sid'])) ? $HTTP_POST_VARS['sid'] : 0;
+	$sid = $HTTP_POST_VARS['sid'] ?? 0;
 
 	if ( $mode == 'register' )
 	{
@@ -167,7 +167,7 @@ if (
 
 	if ( !empty($HTTP_POST_VARS['language']) )
 	{
-		if ( preg_match('/^[a-z_]+$/i', $HTTP_POST_VARS['language']) )
+		if ( preg_match('/^[a-z_]+$/i', (string) $HTTP_POST_VARS['language']) )
 		{
 			$user_lang = htmlspecialchars($HTTP_POST_VARS['language']);
 		}
@@ -344,7 +344,7 @@ if ( isset($HTTP_POST_VARS['submit']) )
 			$error = TRUE;
 			$error_msg .= ( ( isset($error_msg) ) ? '<br />' : '' ) . $lang['Password_mismatch'];
 		}
-		else if ( strlen($new_password) > 32 )
+		else if ( strlen((string) $new_password) > 32 )
 		{
 			$error = TRUE;
 			$error_msg .= ( ( isset($error_msg) ) ? '<br />' : '' ) . $lang['Password_long'];
@@ -448,7 +448,7 @@ if ( isset($HTTP_POST_VARS['submit']) )
 
 	if ( $signature != '' )
 	{
-		if ( strlen($signature) > $board_config['max_sig_chars'] )
+		if ( strlen((string) $signature) > $board_config['max_sig_chars'] )
 		{
 			$error = TRUE;
 			$error_msg .= ( ( isset($error_msg) ) ? '<br />' : '' ) . $lang['Signature_too_long'];
@@ -513,7 +513,7 @@ if ( isset($HTTP_POST_VARS['submit']) )
 				$user_active = 0;
 
 				$user_actkey = gen_rand_string(true);
-				$key_len = 54 - ( strlen($server_url) );
+				$key_len = 54 - ( strlen((string) $server_url) );
 				$key_len = ( $key_len > 6 ) ? $key_len : 6;
 				$user_actkey = substr($user_actkey, 0, $key_len);
 
@@ -529,7 +529,7 @@ if ( isset($HTTP_POST_VARS['submit']) )
 			}
 
 			$sql = "UPDATE " . USERS_TABLE . "
-				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) ."', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_sig_bbcode_uid = '$signature_bbcode_uid', user_viewemail = $viewemail, user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_dc = '" . str_replace("\'", "''", $dc) . "', user_attachsig = $attachsig, user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_notify_pm = $notifypm, user_popup_pm = $popup_pm, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_active = $user_active, user_actkey = '" . str_replace("\'", "''", $user_actkey) . "'" . $avatar_sql . "
+				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) ."', user_icq = '" . str_replace("\'", "''", $icq) . "', user_dc = '" . str_replace("\'", "''", $dc) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_sig_bbcode_uid = '$signature_bbcode_uid', user_viewemail = $viewemail, user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_attachsig = $attachsig, user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_notify_pm = $notifypm, user_popup_pm = $popup_pm, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_active = $user_active, user_actkey = '" . str_replace("\'", "''", $user_actkey) . "'" . $avatar_sql . "
 				WHERE user_id = $user_id";
 			if ( !($result = $db->sql_query($sql)) )
 			{
@@ -636,11 +636,11 @@ if ( isset($HTTP_POST_VARS['submit']) )
 			
 			
 			$sql = "INSERT INTO " . USERS_TABLE . "	(user_id, username, user_regdate, user_password, user_email, user_icq, user_website, user_occ, user_from, user_interests, user_sig, user_sig_bbcode_uid, user_avatar, user_avatar_type, user_viewemail, user_fb, user_ig, user_pt, user_twr, user_skp, user_tg, user_li, user_tt, user_dc, user_attachsig, user_allowsmile, user_allowhtml, user_allowbbcode, user_allow_viewonline, user_notify, user_notify_pm, user_popup_pm, user_timezone, user_dateformat, user_lang, user_style, user_level, user_allow_pm, user_active, user_actkey)
-				VALUES ($user_id, '" . str_replace("\'", "''", $username) . "', " . time() . ", '" . str_replace("\'", "''", $new_password) . "', '" . str_replace("\'", "''", $email) . "', '" . str_replace("\'", "''", $icq) . "', '" . str_replace("\'", "''", $website) . "', '" . str_replace("\'", "''", $occupation) . "', '" . str_replace("\'", "''", $location) . "', '" . str_replace("\'", "''", $interests) . "', '" . str_replace("\'", "''", $signature) . "', '$signature_bbcode_uid', $avatar_sql, $viewemail, '" . str_replace("\'", "''", $fb) . "', '" . str_replace("\'", "''", $ig) . "', '" . str_replace("\'", "''", $pt) . "', '" . str_replace("\'", "''", $twr) . "', '" . str_replace("\'", "''", $skp) . "', '" . str_replace("\'", "''", $tg) . "', '" . str_replace("\'", "''", $li) . "', '" . str_replace("\'", "''", $tt) . "', '" . str_replace("\'", "''", $dc) . "', $attachsig, $allowsmilies, $allowhtml, $allowbbcode, $allowviewonline, $notifyreply, $notifypm, $popup_pm, $user_timezone, '" . str_replace("\'", "''", $user_dateformat) . "', '" . str_replace("\'", "''", $user_lang) . "', $user_style, 0, 1, ";
+				VALUES ($user_id, '" . str_replace("\'", "''", $username) . "', " . time() . ", '" . str_replace("\'", "''", $new_password) . "', '" . str_replace("\'", "''", $email) . "', '" . str_replace("\'", "''", $icq) . "', '" . str_replace("\'", "''", $dc) . "', '" . str_replace("\'", "''", $website) . "', '" . str_replace("\'", "''", $occupation) . "', '" . str_replace("\'", "''", $location) . "', '" . str_replace("\'", "''", $interests) . "', '" . str_replace("\'", "''", $signature) . "', '$signature_bbcode_uid', $avatar_sql, $viewemail, '" . str_replace("\'", "''", $fb) . "', '" . str_replace("\'", "''", $ig) . "', '" . str_replace("\'", "''", $pt) . "', '" . str_replace("\'", "''", $twr) . "', '" . str_replace("\'", "''", $skp) . "', '" . str_replace("\'", "''", $tg) . "', '" . str_replace("\'", "''", $li) . "', '" . str_replace("\'", "''", $tt) . "', $attachsig, $allowsmilies, $allowhtml, $allowbbcode, $allowviewonline, $notifyreply, $notifypm, $popup_pm, $user_timezone, '" . str_replace("\'", "''", $user_dateformat) . "', '" . str_replace("\'", "''", $user_lang) . "', $user_style, 0, 1, ";
 			if ( $board_config['require_activation'] == USER_ACTIVATION_SELF || $board_config['require_activation'] == USER_ACTIVATION_ADMIN || $coppa )
 			{
 				$user_actkey = gen_rand_string(true);
-				$key_len = 54 - (strlen($server_url));
+				$key_len = 54 - (strlen((string) $server_url));
 				$key_len = ( $key_len > 6 ) ? $key_len : 6;
 				$user_actkey = substr($user_actkey, 0, $key_len);
 				$sql .= "0, '" . str_replace("\'", "''", $user_actkey) . "')";
@@ -1054,11 +1054,11 @@ else
 	$form_enctype = ( @$ini_val('file_uploads') == '0' || strtolower(@$ini_val('file_uploads') == 'off') || phpversion() == '4.0.4pl1' || !$board_config['allow_avatar_upload'] || ( phpversion() < '4.0.3' && @$ini_val('open_basedir') != '' ) ) ? '' : 'enctype="multipart/form-data"';
 
 	$template->assign_vars(array(
-		'USERNAME' => isset($username) ? $username : '',
-		'CUR_PASSWORD' => isset($cur_password) ? $cur_password : '',
-		'NEW_PASSWORD' => isset($new_password) ? $new_password : '',
-		'PASSWORD_CONFIRM' => isset($password_confirm) ? $password_confirm : '',
-		'EMAIL' => isset($email) ? $email : '',
+		'USERNAME' => $username ?? '',
+		'CUR_PASSWORD' => $cur_password ?? '',
+		'NEW_PASSWORD' => $new_password ?? '',
+		'PASSWORD_CONFIRM' => $password_confirm ?? '',
+		'EMAIL' => $email ?? '',
 		'CONFIRM_IMG' => $confirm_image, 
 		'ICQ' => $icq,
 		'FB' => $fb,
@@ -1215,5 +1215,4 @@ else
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
 ?>
