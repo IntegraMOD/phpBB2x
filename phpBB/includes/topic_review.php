@@ -145,7 +145,12 @@ function topic_review($topic_id, $is_inline_review)
 				$poster = $lang['Guest'];
 				$poster_rank = '';
 			}
-
+			
+			if (empty($row['post_subject']))
+            {
+                $row['post_subject'] = '';
+            }
+			
 			$post_subject = ( $row['post_subject'] != '' ) ? $row['post_subject'] : '';
 
 			$message = $row['post_text'];

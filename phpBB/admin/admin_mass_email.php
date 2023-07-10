@@ -149,6 +149,8 @@ if ( isset($HTTP_POST_VARS['submit']) )
 	}
 }	
 
+$error = (isset($error)) ? $error : '';
+
 if ( $error )
 {
 	$template->set_filenames(array(
@@ -203,7 +205,7 @@ $template->assign_vars(array(
 	'L_EMAIL_SUBJECT' => $lang['Subject'],
 	'L_EMAIL_MSG' => $lang['Message'],
 	'L_EMAIL' => $lang['Email'],
-	'L_NOTICE' => $notice,
+	'L_NOTICE' => (isset($notice)) ? $notice : '',
 
 	'S_USER_ACTION' => append_sid('admin_mass_email.'.$phpEx),
 	'S_GROUP_SELECT' => $select_list)

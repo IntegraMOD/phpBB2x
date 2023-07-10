@@ -70,6 +70,8 @@ $template->set_filenames(array(
 //
 // Generate logged in/logged out status
 //
+
+$userdata['session_logged_in'] = (isset($userdata['session_logged_in'])) ? $userdata['session_logged_in'] : '';
 if ( $userdata['session_logged_in'] )
 {
 	$u_login_logout = 'login.'.$phpEx.'?logout=true&amp;sid=' . $userdata['session_id'];
@@ -343,6 +345,8 @@ $l_timezone = (count($l_timezone) > 1 && $l_timezone[count($l_timezone)-1] != 0)
 // The following assigns all _common_ variables that may be used at any point
 // in a template.
 //
+$page_title = (empty($page_title)) ? '' : $page_title;
+
 $template->assign_vars(array(
 	'SITENAME' => $board_config['sitename'],
 	'SITE_DESCRIPTION' => $board_config['site_desc'],

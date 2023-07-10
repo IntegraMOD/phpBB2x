@@ -93,7 +93,7 @@ else
 }
 
 $style_select = style_select($new['default_style'], 'default_style', "../templates");
-$lang_select = language_select($new['default_lang'], 'default_lang', "language");
+$lang_select = language_select((( isset($new['default_lang']) ) ? $new['default_lang'] : '') , 'default_lang', "language");
 $timezone_select = tz_select($new['board_timezone'], 'board_timezone');
 
 $disable_board_yes = ( $new['board_disable'] ) ? "checked=\"checked\"" : "";
@@ -289,8 +289,8 @@ $template->assign_vars(array(
 	"ACTIVATION_USER_CHECKED" => $activation_user,
 	"ACTIVATION_ADMIN" => USER_ACTIVATION_ADMIN, 
 	"ACTIVATION_ADMIN_CHECKED" => $activation_admin, 
-	"CONFIRM_ENABLE" => $confirm_yes,
-	"CONFIRM_DISABLE" => $confirm_no,
+	"CONFIRM_ENABLE" => ( isset($confirm_yes) ) ? $confirm_yes : '',
+	"CONFIRM_DISABLE" => ( isset($confirm_no) ) ? $confirm_no : '',
 	'ALLOW_AUTOLOGIN_YES' => $allow_autologin_yes,
 	'ALLOW_AUTOLOGIN_NO' => $allow_autologin_no,
 	'AUTOLOGIN_TIME' => (int) $new['max_autologin_time'],

@@ -367,7 +367,7 @@ $select_post_days .= '</select>';
 //
 if ( !empty($HTTP_POST_VARS['postorder']) || !empty($HTTP_GET_VARS['postorder']) )
 {
-	$post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder']) : htmlspecialchars($HTTP_GET_VARS['postorder']);
+	$post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder'], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS['postorder'], ENT_COMPAT, 'ISO-8859-1');
 	$post_time_order = ($post_order == "asc") ? "ASC" : "DESC";
 }
 else
@@ -488,7 +488,7 @@ $highlight_match = $highlight = '';
 if (isset($HTTP_GET_VARS['highlight']))
 {
 	// Split words and phrases
-	$words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'])));
+	$words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'], ENT_COMPAT, 'ISO-8859-1')));
 
 	for($i = 0; $i < sizeof($words); $i++)
 	{
@@ -1071,7 +1071,7 @@ for($i = 0; $i < $total_posts; $i++)
 		}
 	}
 
-	$post_subject = ( $postrow[$i]['post_subject'] != '' ) ? $postrow[$i]['post_subject'] : '';
+	$post_subject = ( isset($postrow[$i]['post_subject']) && $postrow[$i]['post_subject'] != '' ) ? $postrow[$i]['post_subject'] : '';
 
 	$message = $postrow[$i]['post_text'];
 	$bbcode_uid = $postrow[$i]['bbcode_uid'];

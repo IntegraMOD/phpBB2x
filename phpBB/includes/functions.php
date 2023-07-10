@@ -77,7 +77,7 @@ function get_db_stat($mode)
 // added at phpBB 2.0.11 to properly format the username
 function phpbb_clean_username($username)
 {
-	$username = substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25);
+	$username = substr(htmlspecialchars(str_replace("\'", "'", trim($username)), ENT_COMPAT, 'ISO-8859-1'), 0, 25);
 	$username = phpbb_rtrim($username, "\\");
 	$username = str_replace("'", "\'", $username);
 
@@ -279,10 +279,11 @@ function make_jumpbox($action, $match_forum_id = 0)
 	}
 	else
 	{
+		$boxstring = (isset($boxstring)) ? $boxstring : '';
 		$boxstring .= '<select name="' . POST_FORUM_URL . '" onchange="if(this.options[this.selectedIndex].value != -1){ forms[\'jumpbox\'].submit() }"></select>';
 	}
 
-	// Let the jumpbox work again in sites having additional session id checks.
+// Let the jumpbox work again in sites having additional session id checks.
 //	if ( !empty($SID) )
 //	{
 		$boxstring .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
@@ -331,13 +332,17 @@ function init_userprefs($userdata)
 	}
 	else
 	{
-		$default_lang = phpbb_ltrim(basename(phpbb_rtrim($board_config['default_lang'])), "'");
+		if (isset($board_config['default_lang']))
+		{
+			$default_lang = phpbb_ltrim(basename(phpbb_rtrim($board_config['default_lang'])), "'");
+		}
 	}
 
 	if ( !file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $default_lang . '/lang_main.'.$phpEx)) )
 	{
 		if ( $userdata['user_id'] != ANONYMOUS )
 		{
+			$board_config['default_lang'] = (isset($board_config['default_lang'])) ? $board_config['default_lang'] : 'english';
 			// For logged in users, try the board default language next
 			$default_lang = phpbb_ltrim(basename(phpbb_rtrim($board_config['default_lang'])), "'");
 		}
@@ -370,7 +375,7 @@ function init_userprefs($userdata)
 
 		$userdata['user_lang'] = $default_lang;
 	}
-	elseif ( $userdata['user_id'] == ANONYMOUS && $board_config['default_lang'] !== $default_lang )
+	elseif ( $userdata['user_id'] == ANONYMOUS && isset($board_config['default_lang']) && $board_config['default_lang'] !== $default_lang )
 	{
 		$sql = 'UPDATE ' . CONFIG_TABLE . "
 			SET config_value = '" . $default_lang . "'
@@ -519,25 +524,123 @@ function setup_style($style)
 
 function encode_ip($dotquad_ip)
 {
-	if (strstr($dotquad_ip, "."))
+	if (function_exists('filter_var'))
 	{
-		$ip_sep = explode('.', $dotquad_ip);
-		return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+		if (filter_var($dotquad_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false)
+		{
+			// ipv6 - "::1" => "0000000000000000000000000001"
+			$new_ip = '';
+			if(strstr($dotquad_ip,"::" ))
+			{
+				$ip_sep = array();
+				$e = explode(":", $dotquad_ip);
+				$s = 8-count($e);
+				
+				foreach($e as $value)
+				{
+					if ($value == '')
+					{
+						for($i = 0; $i <= $s; $i++) $ip_sep[] = 0;
+					}
+					else
+					{
+						$ip_sep[] = $value;
+					}
+				}
+			}
+			else
+			{
+				$ip_sep = explode(':', $dotquad_ip);
+			}
+			for ($i = 0; $i <= 7; $i++) $new_ip .= str_pad($ip_sep[$i], 4, '0', STR_PAD_LEFT);
+			return $new_ip;
+		}
+		else if (filter_var($dotquad_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false)
+		{
+			// ipv4 - "127.0.0.1" => "7F000001"
+			$ip_sep = explode('.', $dotquad_ip);
+			return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	   }
 	}
 	else
 	{
-		return 0 /* V: TODO ipv6 */;
+		if (preg_match('/^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(([0-9A-Fa-f]{1,4}:){0,5}:((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(::([0-9A-Fa-f]{1,4}:){0,5}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/', $dotquad_ip))
+		{
+			// ipv6 - "::1" => "0000000000000000000000000001"
+			$new_ip = '';
+			if(strstr($dotquad_ip,"::" ))
+			{
+				$ip_sep = array();
+				$e = explode(":", $dotquad_ip);
+				$s = 8-count($e);
+				
+				foreach($e as $value)
+				{
+					if ($value == '')
+					{
+						for($i = 0; $i <= $s; $i++) $ip_sep[] = 0;
+					}
+					else
+					{
+						$ip_sep[] = $value;
+					}
+				}
+			}
+			else
+			{
+				$ip_sep = explode(':', $dotquad_ip);
+			}
+			for ($i = 0; $i <= 7; $i++) $new_ip .= str_pad($ip_sep[$i], 4, '0', STR_PAD_LEFT);
+			return $new_ip;
+		}
+		else if (preg_match('/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/', $dotquad_ip))
+		{
+			// ipv4 - "127.0.0.1" => "7F000001"
+			$ip_sep = explode('.', $dotquad_ip);
+			return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	   }
+	
 	}
 }
 
 function decode_ip($int_ip)
 {
-	if ($int_ip == "0")
-	{ /* V: TODO ipv6 */
-		return "";
+   if (strlen($int_ip) == 32)
+   {
+		// ipv6 - "0000000000000000000000000001" => "::1"
+		$hexipbang = array();
+		
+		if (function_exists('str_split'))
+		{
+			$e = str_split($int_ip, 4);
+		}
+		else
+		{
+			$e = explode(':', chunk_split($int_ip, 4, ':'));
+		}
+		
+		foreach($e as $key => $value)
+		{
+			$value = ltrim($value, '0');
+			$hexipbang[] = $value ? $value : '0';
+		}
+		
+		$new_ip = implode(':', $hexipbang);
+		if (preg_match_all('/:(0:)+/s', $new_ip, $zeros, PREG_PATTERN_ORDER))
+		{
+			rsort($zeros[0], SORT_STRING);
+			$new_ip = str_replace($zeros[0][0], '::', $new_ip);
+		}
+		return $new_ip;
 	}
-	return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
+	else if (strlen($int_ip) == 8)
+	{
+		// ipv4 - "7F000001" => "127.0.0.1"
+		$hexipbang = explode('.', chunk_split($int_ip, 2, '.'));
+		return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
+	}
 }
+
 
 //
 // Create date/time from format and timezone

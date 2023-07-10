@@ -58,7 +58,7 @@ $forum_auth_ary = array(
 if( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+    $mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -162,6 +162,8 @@ function get_list($mode, $id, $select)
 		{
 			$s = " selected=\"selected\"";
 		}
+		$catlist = ( isset($catlist) ) ? $catlist : '';
+		
 		$catlist .= "<option value=\"$row[$idfield]\"$s>" . $row[$namefield] . "</option>\n";
 	}
 
@@ -244,6 +246,7 @@ if( isset($HTTP_POST_VARS['addforum']) || isset($HTTP_POST_VARS['addcategory']) 
 	}
 }
 
+// stripslashes needs to be run on this because slashes are added when the forum name is posted
 if( !empty($mode) ) 
 {
 	switch($mode)
@@ -312,6 +315,8 @@ if( !empty($mode) )
 			$lang['Status_unlocked'] = isset($lang['Status_unlocked']) ? $lang['Status_unlocked'] : 'Unlocked';
 			$lang['Status_locked'] = isset($lang['Status_locked']) ? $lang['Status_locked'] : 'Locked';
 			
+			$forumunlocked = ( isset($forumunlocked) ) ? $forumunlocked : '';
+			$forumlocked = ( isset($forumlocked) ) ? $forumlocked : '';		
 			$statuslist = "<option value=\"" . FORUM_UNLOCKED . "\" $forumunlocked>" . $lang['Status_unlocked'] . "</option>\n";
 			$statuslist .= "<option value=\"" . FORUM_LOCKED . "\" $forumlocked>" . $lang['Status_locked'] . "</option>\n"; 
 
@@ -402,7 +407,7 @@ if( !empty($mode) )
 				message_die(GENERAL_ERROR, "Couldn't insert row in forums table", "", __LINE__, __FILE__, $sql);
 			}
 
-			if( $HTTP_POST_VARS['prune_enable'] )
+            if( isset($HTTP_POST_VARS['prune_enable']) )
 			{
 
 				if( $HTTP_POST_VARS['prune_days'] == "" || $HTTP_POST_VARS['prune_freq'] == "")
@@ -442,7 +447,7 @@ if( !empty($mode) )
 				message_die(GENERAL_ERROR, "Couldn't update forum information", "", __LINE__, __FILE__, $sql);
 			}
 
-			if( $HTTP_POST_VARS['prune_enable'] == 1 )
+            if( isset ($HTTP_POST_VARS['prune_enable']) && $HTTP_POST_VARS['prune_enable'] == 1 )
 			{
 				if( $HTTP_POST_VARS['prune_days'] == "" || $HTTP_POST_VARS['prune_freq'] == "" )
 				{
@@ -565,6 +570,7 @@ if( !empty($mode) )
 			break;
 			
 		case 'deleteforum':
+			$s = (isset($s)) ? $s : '';
 			// Show form to delete a forum
 			$forum_id = intval($HTTP_GET_VARS[POST_FORUM_URL]);
 
@@ -609,7 +615,7 @@ if( !empty($mode) )
 			//
 			$from_id = intval($HTTP_POST_VARS['from_id']);
 			$to_id = intval($HTTP_POST_VARS['to_id']);
-			$delete_old = intval($HTTP_POST_VARS['delete_old']);
+			$delete_old = (isset($HTTP_POST_VARS['delete_old'])) ? intval($HTTP_POST_VARS['delete_old']) : '0';
 
 			// Either delete or move all posts in a forum
 			if($to_id == -1)
@@ -730,6 +736,8 @@ if( !empty($mode) )
 				$db->sql_freeresult($result);
 
 			}
+			$result2 = (isset($result2)) ? $result2 : '';
+
 			$db->sql_freeresult($result2);
 
 			$sql = "DELETE FROM " . FORUMS_TABLE . "
@@ -919,6 +927,11 @@ if( !empty($mode) )
 			break;
 	}
 
+	if (!isset($show_index))
+	{
+		$show_index = false;
+	}
+	
 	if ($show_index != TRUE)
 	{
 		include('./page_footer_admin.'.$phpEx);
@@ -1004,7 +1017,7 @@ if( $total_categories = $db->sql_numrows($q_categories) )
 				$template->assign_block_vars("catrow.forumrow",	array(
 					'FORUM_NAME' => $forum_rows[$j]['forum_name'],
 					'FORUM_DESC' => $forum_rows[$j]['forum_desc'],
-					'ROW_COLOR' => $row_color,
+					'ROW_COLOR' => (isset($row_color)) ? $row_color : '',
 					'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
 					'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
 

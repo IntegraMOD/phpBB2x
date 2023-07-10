@@ -75,7 +75,7 @@ $l_timezone = (count($l_timezone) > 1 && $l_timezone[count($l_timezone)-1] != 0)
 //
 $template->assign_vars(array(
 	'SITENAME' => $board_config['sitename'],
-	'PAGE_TITLE' => $page_title,
+	'PAGE_TITLE' => (isset($page_title)) ? $page_title : '',
 
 	'L_ADMIN' => $lang['Admin'], 
 	'L_INDEX' => sprintf($lang['Forum_Index'], $board_config['sitename']),

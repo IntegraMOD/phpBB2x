@@ -30,6 +30,8 @@ global $do_gzip_compress;
 //
 // Show the overall footer.
 //
+$userdata['user_level'] = (isset($userdata['user_level'])) ? $userdata['user_level'] : '';
+
 $admin_link = ( $userdata['user_level'] == ADMIN ) ? '<a href="admin/index.' . $phpEx . '?sid=' . $userdata['session_id'] . '">' . $lang['Admin_panel'] . '</a><br /><br />' : '';
 
 $template->set_filenames(array(

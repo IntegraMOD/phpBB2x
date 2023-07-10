@@ -91,8 +91,8 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 		}
 
 		$headers = chop($headers);
-		$cc = explode(', ', $cc);
-		$bcc = explode(', ', $bcc);
+		$cc = explode(', ', (( !empty($cc) ) ? $cc : ''));
+		$bcc = explode(', ', (( !empty($bcc) ) ? $bcc : ''));
 	}
 
 	if (trim($subject) == '')

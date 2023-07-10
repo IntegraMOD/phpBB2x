@@ -60,7 +60,7 @@ while( list($var, $param) = @each($params) )
 $user_id = intval($user_id);
 $group_id = intval($group_id);
 $adv = intval($adv);
-$mode = htmlspecialchars($mode);
+$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 
 //
 // Start program - define vars
@@ -353,6 +353,8 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 
 					if( $forum_access[$i][$auth_field] == AUTH_ACL && isset($change_acl_list[$forum_id][$auth_field]) )
 					{
+						$forum_auth_action[$forum_id] = (isset($forum_auth_action[$forum_id])) ? $forum_auth_action[$forum_id] : '';
+
 						if ( ( empty($auth_access[$forum_id]['auth_mod']) && 
 							( isset($auth_access[$forum_id][$auth_field]) && $change_acl_list[$forum_id][$auth_field] != $auth_access[$forum_id][$auth_field] ) || 
 							( !isset($auth_access[$forum_id][$auth_field]) && !empty($change_acl_list[$forum_id][$auth_field]) ) ) ||
@@ -668,7 +670,10 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 	while( $row = $db->sql_fetchrow($result) )
 	{
 		$auth_access[$row['forum_id']][] = $row; 
-		$auth_access_count[$row['forum_id']]++;
+		if (isset($auth_access_count[$row['forum_id']]))
+		{
+			$auth_access_count[$row['forum_id']]++;
+		}
 	}
 	$db->sql_freeresult($result);
 
@@ -839,6 +844,7 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 		{
 			for($j = 0; $j < count($forum_auth_fields); $j++)
 			{
+				$optionlist_acl_adv[$forum_id][$j] = (isset($optionlist_acl_adv[$forum_id][$j])) ? $optionlist_acl_adv[$forum_id][$j] : '';
 				$template->assign_block_vars('forums.aclvalues', array(
 					'S_ACL_SELECT' => $optionlist_acl_adv[$forum_id][$j])
 				);
@@ -876,7 +882,8 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 		for($i = 0; $i < count($ug_info); $i++)
 		{
 			$ug = ( $mode == 'user' ) ? 'group&amp;' . POST_GROUPS_URL : 'user&amp;' . POST_USERS_URL;
-
+			$id[$i] = (isset($id[$i])) ? $id[$i] : '';
+			$name[$i] = (isset($name[$i])) ? $name[$i] : '';
 			if (!$ug_info[$i]['user_pending'])
 			{
 				$t_usergroup_list .= ( ( $t_usergroup_list != '' ) ? ', ' : '' ) . '<a href="' . append_sid("admin_ug_auth.$phpEx?mode=$ug=" . $id[$i]) . '">' . $name[$i] . '</a>';

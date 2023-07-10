@@ -51,7 +51,7 @@ if ($cancel)
 if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
 	$mode = (isset($HTTP_GET_VARS['mode'])) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else 
 {
@@ -110,8 +110,8 @@ if( $mode != "" )
 		}
 
 		$template->assign_vars(array(
-			"WORD" => htmlspecialchars($word_info['word']),
-			"REPLACEMENT" => htmlspecialchars($word_info['replacement']),
+			"WORD" => htmlspecialchars($word_info['word'], ENT_COMPAT, 'ISO-8859-1'),
+			"REPLACEMENT" => htmlspecialchars($word_info['replacement'], ENT_COMPAT, 'ISO-8859-1'),
 
 			"L_WORDS_TITLE" => $lang['Words_title'],
 			"L_WORDS_TEXT" => $lang['Words_explain'],
@@ -254,14 +254,18 @@ else
 		$replacement = $word_rows[$i]['replacement'];
 		$word_id = $word_rows[$i]['word_id'];
 
+		if ($word_rows[$i]['word']=='')
+        {
+            continue;
+		}
 		$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 		$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
 
 		$template->assign_block_vars("words", array(
 			"ROW_COLOR" => "#" . $row_color,
 			"ROW_CLASS" => $row_class,
-			"WORD" => htmlspecialchars($word),
-			"REPLACEMENT" => htmlspecialchars($replacement),
+			"WORD" => htmlspecialchars($word, ENT_COMPAT, 'ISO-8859-1'),
+			"REPLACEMENT" => htmlspecialchars($replacement, ENT_COMPAT, 'ISO-8859-1'),
 
 			"U_WORD_EDIT" => append_sid("admin_words.$phpEx?mode=edit&amp;id=$word_id"),
 			"U_WORD_DELETE" => append_sid("admin_words.$phpEx?mode=delete&amp;id=$word_id"))

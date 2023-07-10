@@ -78,7 +78,7 @@ function clean_words($mode, &$entry, &$stopword_list, &$synonym_list)
 	{
 		for ($j = 0; $j < count($synonym_list); $j++)
 		{
-			list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_list[$j])));
+            list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_list[$j])));
 			if ( $mode == 'post' || ( $match_synonym != 'not' && $match_synonym != 'and' && $match_synonym != 'or' ) )
 			{
 				$entry =  str_replace(' ' . trim($match_synonym) . ' ', ' ' . trim($replace_synonym) . ' ', $entry);
@@ -476,7 +476,7 @@ function username_search($search_match)
 
 		'L_CLOSE_WINDOW' => $lang['Close_window'], 
 		'L_SEARCH_USERNAME' => $lang['Find_username'], 
-		'L_UPDATE_USERNAME' => $lang['Select_username'], 
+		'L_UPDATE_USERNAME' => isset($lang['Select_username']) ? $lang['Select_username'] : '',
 		'L_SELECT' => $lang['Select'], 
 		'L_SEARCH' => $lang['Search'], 
 		'L_SEARCH_EXPLAIN' => $lang['Search_author_explain'], 

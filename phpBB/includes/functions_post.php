@@ -118,7 +118,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 	// Check subject
 	if (!empty($subject))
 	{
-		$subject = htmlspecialchars(trim($subject));
+		$subject = htmlspecialchars(trim($subject), ENT_COMPAT, 'ISO-8859-1');
 	}
 	else if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
@@ -145,7 +145,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 
 		if (!empty($poll_title))
 		{
-			$poll_title = htmlspecialchars(trim($poll_title));
+			$poll_title = htmlspecialchars(trim($poll_title), ENT_COMPAT, 'ISO-8859-1');
 		}
 
 		if(!empty($poll_options))
@@ -156,7 +156,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 				$option_text = trim($option_text);
 				if (!empty($option_text))
 				{
-					$temp_option_text[intval($option_id)] = htmlspecialchars($option_text);
+					$temp_option_text[intval($option_id)] = htmlspecialchars($option_text, ENT_COMPAT, 'ISO-8859-1');
 				}
 			}
 			$option_text = $temp_option_text;
@@ -220,6 +220,8 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
 		$topic_vote = (!empty($poll_title) && count($poll_options) >= 2) ? 1 : 0;
+
+		$post_data['edit_vote'] = (isset($post_data['edit_vote'])) ? $post_data['edit_vote'] : '';
 
 		$sql  = ($mode != "editpost") ? "INSERT INTO " . TOPICS_TABLE . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_vote) VALUES ('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_vote)" : "UPDATE " . TOPICS_TABLE . " SET topic_title = '$post_subject', topic_type = $topic_type " . (($post_data['edit_vote'] || !empty($poll_title)) ? ", topic_vote = " . $topic_vote : "") . " WHERE topic_id = $topic_id";
 		if (!$db->sql_query($sql))
@@ -299,7 +301,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		{
 			if (!empty($option_text))
 			{
-				$option_text = str_replace("\'", "''", htmlspecialchars($option_text));
+				$option_text = str_replace("\'", "''", htmlspecialchars($option_text, ENT_COMPAT, 'ISO-8859-1'));
 				$poll_result = ($mode == "editpost" && isset($old_poll_result[$option_id])) ? $old_poll_result[$option_id] : 0;
 
 				$sql = ($mode != "editpost" || !isset($old_poll_result[$option_id])) ? "INSERT INTO " . VOTE_RESULTS_TABLE . " (vote_id, vote_option_id, vote_option_text, vote_result) VALUES ($poll_id, $poll_option_id, '$option_text', $poll_result)" : "UPDATE " . VOTE_RESULTS_TABLE . " SET vote_option_text = '$option_text', vote_result = $poll_result WHERE vote_option_id = $option_id AND vote_id = $poll_id";
@@ -323,6 +325,11 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		}
 	}
 
+	if ($mode = 'editpost' )
+    {
+        $db->sql_query('', END_TRANSACTION, false);
+    }
+	
 	$meta = '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_POST_URL . "=" . $post_id) . '#' . $post_id . '">';
 	$message = $lang['Stored'] . '<br /><br />' . sprintf($lang['Click_view_message'], '<a href="' . append_sid("viewtopic.$phpEx?" . POST_POST_URL . "=" . $post_id) . '#' . $post_id . '">', '</a>') . '<br /><br />' . sprintf($lang['Click_return_forum'], '<a href="' . append_sid("viewforum.$phpEx?" . POST_FORUM_URL . "=$forum_id") . '">', '</a>');
 
@@ -346,8 +353,9 @@ function update_post_stats(&$mode, &$post_data, &$forum_id, &$topic_id, &$post_i
 		{
 			if ($post_data['first_post'])
 			{
-				$forum_update_sql .= ', forum_topics = forum_topics - 1';
-			}
+				$forum_update_sql = (isset($forum_update_sql)) ? $forum_update_sql : '';
+				
+				$forum_update_sql .= ', forum_topics = forum_topics - 1';			}
 			else
 			{
 
@@ -849,7 +857,7 @@ function clean_html($tag)
 		}
 		else
 		{
-			return  htmlspecialchars('</' . $matches[1] . '>');
+			return  htmlspecialchars('</' . $matches[1] . '>', ENT_COMPAT, 'ISO-8859-1');
 		}
 	}
 
@@ -866,7 +874,7 @@ function clean_html($tag)
 				{
 					continue;
 				}
-				$attributes .= ' ' . $test[1][$i] . '=' . $test[2][$i] . str_replace(array('[', ']'), array('&#91;', '&#93;'), htmlspecialchars($test[3][$i])) . $test[2][$i];
+				$attributes .= ' ' . $test[1][$i] . '=' . $test[2][$i] . str_replace(array('[', ']'), array('&#91;', '&#93;'), htmlspecialchars($test[3][$i], ENT_COMPAT, 'ISO-8859-1')) . $test[2][$i];
 			}
 		}
 		if (in_array(strtolower($tag[1]), $allowed_html_tags))
@@ -875,13 +883,13 @@ function clean_html($tag)
 		}
 		else
 		{
-			return htmlspecialchars('<' . $tag[1] . $attributes . '>');
+			return htmlspecialchars('<' . $tag[1] . $attributes . '>', ENT_COMPAT, 'ISO-8859-1');
 		}
 	}
 	// Finally, this is not an allowed tag so strip all the attibutes and escape it
 	else
 	{
-		return htmlspecialchars('<' .   $tag[1] . '>');
+		return htmlspecialchars('<' .   $tag[1] . '>', ENT_COMPAT, 'ISO-8859-1');
 	}
 }
 ?>

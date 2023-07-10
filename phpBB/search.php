@@ -451,6 +451,10 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			}
 		}
 
+		if (!isset($total_match_count))
+        {
+            $total_match_count = false;
+        }
 		if ( $total_match_count )
 		{
 			if ( $show_results == 'topics' )
@@ -688,9 +692,16 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 		*/
 
 		for($i = 0; $i < count($store_vars); $i++)
-		{
-			$store_search_data[$store_vars[$i]] = $$store_vars[$i];
-		}
+        {
+            if (isset($$store_vars[$i]))
+            {
+                $store_search_data[$store_vars[$i]] = $$store_vars[$i];
+            }
+			else
+			{
+                $store_search_data[$store_vars[$i]] = '';
+            }
+        }
 
 		$result_array = serialize($store_search_data);
 		unset($store_search_data);
@@ -835,6 +846,8 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 		$highlight_active = '';
 		$highlight_match = array();
+		if (!empty($split_search))
+		{		
 		for($j = 0; $j < (is_countable($split_search) ? count($split_search) : 0); $j++ )
 		{
 			$split_word = $split_search[$j];
@@ -846,8 +859,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 				for ($k = 0; $k < (is_countable($synonym_array) ? count($synonym_array) : 0); $k++)
 				{ 
-					[$replace_synonym, $match_synonym] = explode(' ', trim(strtolower($synonym_array[$k])));
-
+                    list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_array[$k])));
 					if ( $replace_synonym == $split_word )
 					{
 						$highlight_match[] = '#\b(' . str_replace("*", "([\w]+)?", $replace_synonym) . ')\b#is';
@@ -856,7 +868,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 				} 
 			}
 		}
-
+        }
 		$highlight_active = urlencode(trim($highlight_active));
 
 		$tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
@@ -866,11 +878,14 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 		{
 			$forum_url = append_sid("viewforum.$phpEx?" . POST_FORUM_URL . '=' . $searchset[$i]['forum_id']);
 			$topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . '=' . $searchset[$i]['topic_id'] . "&amp;highlight=$highlight_active");
-			$post_url = append_sid("viewtopic.$phpEx?" . POST_POST_URL . '=' . $searchset[$i]['post_id'] . "&amp;highlight=$highlight_active") . '#' . $searchset[$i]['post_id'];
+			if (isset($searchset[$i]['post_id']))
+			{
+				$post_url = append_sid("viewtopic.$phpEx?" . POST_POST_URL . '=' . $searchset[$i]['post_id'] . "&amp;highlight=$highlight_active") . '#' . $searchset[$i]['post_id'];
+			}
 
 			$post_date = create_date($board_config['default_dateformat'], $searchset[$i]['post_time'], $board_config['board_timezone']);
 
-			$message = $searchset[$i]['post_text'];
+			$message = (isset ($searchset[$i]['post_text'])) ? $searchset[$i]['post_text'] : '';
 			$topic_title = $searchset[$i]['topic_title'];
 
 			$forum_id = $searchset[$i]['forum_id'];
@@ -897,7 +912,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 					{
 						if ( !$board_config['allow_html'] )
 						{
-							if ( $postrow[$i]['enable_html'] )
+							if ( $searchset[$i]['enable_html'] )
 							{
 								$message = preg_replace('#(<)([\/]?.*?)(>)#is', '&lt;\\2&gt;', $message);
 							}
@@ -995,7 +1010,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 					}
 					else
 					{
-						$post_subject = ( $searchset[$i]['post_subject'] != '' ) ? $searchset[$i]['post_subject'] : $topic_title;
+						$post_subject = ( isset($searchset[$i]['post_subject']) && $searchset[$i]['post_subject'] != '' ) ? $searchset[$i]['post_subject'] : $topic_title;
 					}
 
 					if ($board_config['allow_smilies'] && $searchset[$i]['enable_smilies'])

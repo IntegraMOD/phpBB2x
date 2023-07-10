@@ -26,6 +26,8 @@ if (!defined('IN_ADMIN'))
 {
     define( 'IN_ADMIN', 1);
 }
+define('CT_SECLEVEL', 'MEDIUM');
+$ct_ignorepvar = array('cookie_domain','cookie_path','cookie_name','server_name','domain_name','script_path','server_port','secure_no','secure_yes','submit');
 
 // PHP5 with register_long_arrays off?
 if (@phpversion() >= '5.0.0' && (!@ini_get('register_long_arrays') || @ini_get('register_long_arrays') == '0' || strtolower(@ini_get('register_long_arrays')) == 'off'))

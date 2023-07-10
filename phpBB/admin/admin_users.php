@@ -50,7 +50,7 @@ $html_entities_replace = array('&lt;', '&gt;');
 if( isset( $HTTP_POST_VARS['mode'] ) || isset( $HTTP_GET_VARS['mode'] ) )
 {
 	$mode = ( isset( $HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -74,7 +74,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			message_die(GENERAL_MESSAGE, $lang['No_user_id_specified'] );
 		}
 
-		if( $HTTP_POST_VARS['deleteuser'] && ( $userdata['user_id'] != $user_id ) )
+		if( isset ($HTTP_POST_VARS['deleteuser']) && $HTTP_POST_VARS['deleteuser'] && ( $userdata['user_id'] != $user_id ) )
 		{
 			$sql = "SELECT g.group_id 
 				FROM " . USER_GROUP_TABLE . " ug, " . GROUPS_TABLE . " g  
@@ -190,6 +190,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			{
 				$mark_list[] = $row_privmsgs['privmsgs_id'];
 			}
+
+			$mark_list = (isset($mark_list)) ? $mark_list : '';
 			
 			if ( count($mark_list) )
 			{
@@ -217,10 +219,10 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		}
 
 		$username = ( !empty($HTTP_POST_VARS['username']) ) ? phpbb_clean_username($HTTP_POST_VARS['username']) : '';
-		$email = ( !empty($HTTP_POST_VARS['email']) ) ? trim(strip_tags(htmlspecialchars( $HTTP_POST_VARS['email'] ) )) : '';
+		$email = ( !empty($HTTP_POST_VARS['email']) ) ? trim(strip_tags(htmlspecialchars( $HTTP_POST_VARS['email'], ENT_COMPAT, 'ISO-8859-1' ) )) : '';
 
-		$password = ( !empty($HTTP_POST_VARS['password']) ) ? trim(strip_tags(htmlspecialchars( $HTTP_POST_VARS['password'] ) )) : '';
-		$password_confirm = ( !empty($HTTP_POST_VARS['password_confirm']) ) ? trim(strip_tags(htmlspecialchars( $HTTP_POST_VARS['password_confirm'] ) )) : '';
+		$password = ( !empty($HTTP_POST_VARS['password']) ) ? trim(strip_tags(htmlspecialchars( $HTTP_POST_VARS['password'], ENT_COMPAT, 'ISO-8859-1' ) )) : '';
+		$password_confirm = ( !empty($HTTP_POST_VARS['password_confirm']) ) ? trim(strip_tags(htmlspecialchars( $HTTP_POST_VARS['password_confirm'], ENT_COMPAT, 'ISO-8859-1' ) )) : '';
 
 		$icq = ( !empty($HTTP_POST_VARS['icq']) ) ? trim(strip_tags( $HTTP_POST_VARS['icq'] ) ) : '';
 		$fb = ( !empty($HTTP_POST_VARS['fb']) ) ? trim(strip_tags( $HTTP_POST_VARS['fb'] ) ) : '';
@@ -258,11 +260,11 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		$user_dateformat = ( $HTTP_POST_VARS['dateformat'] ) ? trim( $HTTP_POST_VARS['dateformat'] ) : $board_config['default_dateformat'];
 
 		$user_avatar_local = ( isset( $HTTP_POST_VARS['avatarselect'] ) && !empty($HTTP_POST_VARS['submitavatar'] ) && $board_config['allow_avatar_local'] ) ? $HTTP_POST_VARS['avatarselect'] : ( ( isset( $HTTP_POST_VARS['avatarlocal'] )  ) ? $HTTP_POST_VARS['avatarlocal'] : '' );
-		$user_avatar_category = ( isset($HTTP_POST_VARS['avatarcatname']) && $board_config['allow_avatar_local'] ) ? htmlspecialchars($HTTP_POST_VARS['avatarcatname']) : '' ;
+		$user_avatar_category = ( isset($HTTP_POST_VARS['avatarcatname']) && $board_config['allow_avatar_local'] ) ? htmlspecialchars($HTTP_POST_VARS['avatarcatname'], ENT_COMPAT, 'ISO-8859-1') : '' ;
 
 		$user_avatar_remoteurl = ( !empty($HTTP_POST_VARS['avatarremoteurl']) ) ? trim( $HTTP_POST_VARS['avatarremoteurl'] ) : '';
 		$user_avatar_url = ( !empty($HTTP_POST_VARS['avatarurl']) ) ? trim( $HTTP_POST_VARS['avatarurl'] ) : '';
-		$user_avatar_loc = ( $HTTP_POST_FILES['avatar']['tmp_name'] != "none") ? $HTTP_POST_FILES['avatar']['tmp_name'] : '';
+		$user_avatar_loc = ( isset($HTTP_POST_FILES['avatar']['tmp_name']) && $HTTP_POST_FILES['avatar']['tmp_name'] != "none") ? $HTTP_POST_FILES['avatar']['tmp_name'] : '';
 		$user_avatar_name = ( !empty($HTTP_POST_FILES['avatar']['name']) ) ? $HTTP_POST_FILES['avatar']['name'] : '';
 		$user_avatar_size = ( !empty($HTTP_POST_FILES['avatar']['size']) ) ? $HTTP_POST_FILES['avatar']['size'] : 0;
 		$user_avatar_filetype = ( !empty($HTTP_POST_FILES['avatar']['type']) ) ? $HTTP_POST_FILES['avatar']['type'] : '';
@@ -283,24 +285,24 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			$password_confirm = '';
 
 			$icq = stripslashes($icq);
-			$fb = htmlspecialchars(stripslashes($fb));
-			$ig = htmlspecialchars(stripslashes($ig));
-			$pt = htmlspecialchars(stripslashes($pt));
-			$twr = htmlspecialchars(stripslashes($twr));
-			$skp = htmlspecialchars(stripslashes($skp));
-			$tg = htmlspecialchars(stripslashes($tg));			
-			$li = htmlspecialchars(stripslashes($li));
-			$tt = htmlspecialchars(stripslashes($tt));
-			$dc = htmlspecialchars(stripslashes($dc));
+			$dc = stripslashes($dc);
+			$fb = htmlspecialchars(stripslashes($fb), ENT_COMPAT, 'ISO-8859-1');
+			$ig = htmlspecialchars(stripslashes($ig), ENT_COMPAT, 'ISO-8859-1');
+			$pt = htmlspecialchars(stripslashes($pt), ENT_COMPAT, 'ISO-8859-1');
+			$twr = htmlspecialchars(stripslashes($twr), ENT_COMPAT, 'ISO-8859-1');
+			$skp = htmlspecialchars(stripslashes($skp), ENT_COMPAT, 'ISO-8859-1');
+			$tg = htmlspecialchars(stripslashes($tg), ENT_COMPAT, 'ISO-8859-1');			
+			$li = htmlspecialchars(stripslashes($li), ENT_COMPAT, 'ISO-8859-1');
+			$tt = htmlspecialchars(stripslashes($tt), ENT_COMPAT, 'ISO-8859-1');
 
-			$website = htmlspecialchars(stripslashes($website));
-			$location = htmlspecialchars(stripslashes($location));
-			$occupation = htmlspecialchars(stripslashes($occupation));
-			$interests = htmlspecialchars(stripslashes($interests));
-			$signature = htmlspecialchars(stripslashes($signature));
+			$website = htmlspecialchars(stripslashes($website), ENT_COMPAT, 'ISO-8859-1');
+			$location = htmlspecialchars(stripslashes($location), ENT_COMPAT, 'ISO-8859-1');
+			$occupation = htmlspecialchars(stripslashes($occupation), ENT_COMPAT, 'ISO-8859-1');
+			$interests = htmlspecialchars(stripslashes($interests), ENT_COMPAT, 'ISO-8859-1');
+			$signature = htmlspecialchars(stripslashes($signature), ENT_COMPAT, 'ISO-8859-1');
 
 			$user_lang = stripslashes($user_lang);
-			$user_dateformat = htmlspecialchars(stripslashes($user_dateformat));
+			$user_dateformat = htmlspecialchars(stripslashes($user_dateformat), ENT_COMPAT, 'ISO-8859-1');
 
 			if ( !isset($HTTP_POST_VARS['cancelavatar'])) 
 			{
@@ -362,6 +364,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		else if( $password && !$password_confirm )
 		{
 			$error = TRUE;
+			$error_msg = (isset($error_msg)) ? $error_msg : '';
 			$error_msg .= ( ( isset($error_msg) ) ? '<br />' : '' ) . $lang['Password_mismatch'];
 		}
 		else if( !$password && $password_confirm )
@@ -377,6 +380,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			{
 				$sig_length_check = preg_replace('/(\<.*?)(=.*?)( .*?=.*?)?([ \/]?\>)/is', '\\1\\3\\4', $sig_length_check);
 			}
+
+			$signature_bbcode_uid = (isset($signature_bbcode_uid)) ? $signature_bbcode_uid : '';
 
 			// Only create a new bbcode_uid when there was no uid yet.
 			if ( $signature_bbcode_uid == '' )
@@ -664,6 +669,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		//
 		if( !$error )
 		{
+			$username_sql = (isset($username_sql)) ? $username_sql : '';
+			$signature_bbcode_uid = (isset($signature_bbcode_uid)) ? $signature_bbcode_uid : '';			
 			$sql = "UPDATE " . USERS_TABLE . "
 				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) . "', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_viewemail = $viewemail, user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_dc = '" . str_replace("\'", "''", $dc) . "', user_attachsig = $attachsig, user_sig_bbcode_uid = '$signature_bbcode_uid', user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowavatar = $user_allowavatar, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_allow_pm = $user_allowpm, user_notify_pm = $notifypm, user_popup_pm = $popuppm, user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_active = $user_status, user_rank = $user_rank" . $avatar_sql . "
 				WHERE user_id = $user_id";
@@ -700,6 +707,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 					session_reset_keys($user_id, $user_ip);
 				}
 				
+				$message = (isset($message)) ? $message : '';
 				$message .= $lang['Admin_user_updated'];
 			}
 			else
@@ -723,30 +731,30 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 
 			$template->assign_var_from_handle('ERROR_BOX', 'reg_header');
 
-			$username = htmlspecialchars(stripslashes($username));
+			$username = htmlspecialchars(stripslashes($username), ENT_COMPAT, 'ISO-8859-1');
 			$email = stripslashes($email);
 			$password = '';
 			$password_confirm = '';
 
 			$icq = stripslashes($icq);
-			$fb = htmlspecialchars(stripslashes($fb));
-			$ig = htmlspecialchars(stripslashes($ig));
-			$pt = htmlspecialchars(stripslashes($pt));
-			$twr = htmlspecialchars(stripslashes($twr));
-			$skp = htmlspecialchars(stripslashes($skp));
-			$tg = htmlspecialchars(stripslashes($tg));
-			$li = htmlspecialchars(stripslashes($li));
-			$tt = htmlspecialchars(stripslashes($tt));
+			$fb = htmlspecialchars(stripslashes($fb), ENT_COMPAT, 'ISO-8859-1');
+			$ig = htmlspecialchars(stripslashes($ig), ENT_COMPAT, 'ISO-8859-1');
+			$pt = htmlspecialchars(stripslashes($pt), ENT_COMPAT, 'ISO-8859-1');
+			$twr = htmlspecialchars(stripslashes($twr), ENT_COMPAT, 'ISO-8859-1');
+			$skp = htmlspecialchars(stripslashes($skp), ENT_COMPAT, 'ISO-8859-1');
+			$tg = htmlspecialchars(stripslashes($tg), ENT_COMPAT, 'ISO-8859-1');
+			$li = htmlspecialchars(stripslashes($li), ENT_COMPAT, 'ISO-8859-1');
+			$tt = htmlspecialchars(stripslashes($tt), ENT_COMPAT, 'ISO-8859-1');
 			$dc = stripslashes($dc);
 
-			$website = htmlspecialchars(stripslashes($website));
-			$location = htmlspecialchars(stripslashes($location));
-			$occupation = htmlspecialchars(stripslashes($occupation));
-			$interests = htmlspecialchars(stripslashes($interests));
-			$signature = htmlspecialchars(stripslashes($signature));
+			$website = htmlspecialchars(stripslashes($website), ENT_COMPAT, 'ISO-8859-1');
+			$location = htmlspecialchars(stripslashes($location), ENT_COMPAT, 'ISO-8859-1');
+			$occupation = htmlspecialchars(stripslashes($occupation), ENT_COMPAT, 'ISO-8859-1');
+			$interests = htmlspecialchars(stripslashes($interests), ENT_COMPAT, 'ISO-8859-1');
+			$signature = htmlspecialchars(stripslashes($signature), ENT_COMPAT, 'ISO-8859-1');
 
 			$user_lang = stripslashes($user_lang);
-			$user_dateformat = htmlspecialchars(stripslashes($user_dateformat));
+			$user_dateformat = htmlspecialchars(stripslashes($user_dateformat), ENT_COMPAT, 'ISO-8859-1');
 		}
 	}
 	else if( !isset( $HTTP_POST_VARS['submit'] ) && $mode != 'save' && !isset( $HTTP_POST_VARS['avatargallery'] ) && !isset( $HTTP_POST_VARS['submitavatar'] ) && !isset( $HTTP_POST_VARS['cancelavatar'] ) )
@@ -779,20 +787,20 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		$password_confirm = '';
 
 		$icq = $this_userdata['user_icq'];
-		$fb = htmlspecialchars($this_userdata['user_fb']);
-		$ig = htmlspecialchars($this_userdata['user_ig']);
-		$pt = htmlspecialchars($this_userdata['user_pt']);
-		$twr = htmlspecialchars($this_userdata['user_twr']);
-		$skp = htmlspecialchars($this_userdata['user_skp']);
-		$tg = htmlspecialchars($this_userdata['user_tg']);
-		$li = htmlspecialchars($this_userdata['user_li']);
-		$tt = htmlspecialchars($this_userdata['user_tt']);
+		$fb = htmlspecialchars($this_userdata['user_fb'], ENT_COMPAT, 'ISO-8859-1');
+		$ig = htmlspecialchars($this_userdata['user_ig'], ENT_COMPAT, 'ISO-8859-1');
+		$pt = htmlspecialchars($this_userdata['user_pt'], ENT_COMPAT, 'ISO-8859-1');
+		$twr = htmlspecialchars($this_userdata['user_twr'], ENT_COMPAT, 'ISO-8859-1');
+		$skp = htmlspecialchars($this_userdata['user_skp'], ENT_COMPAT, 'ISO-8859-1');
+		$tg = htmlspecialchars($this_userdata['user_tg'], ENT_COMPAT, 'ISO-8859-1');
+		$li = htmlspecialchars($this_userdata['user_li'], ENT_COMPAT, 'ISO-8859-1');
+		$tt = htmlspecialchars($this_userdata['user_tt'], ENT_COMPAT, 'ISO-8859-1');
 		$dc = $this_userdata['user_dc'];
 
-		$website = htmlspecialchars($this_userdata['user_website']);
-		$location = htmlspecialchars($this_userdata['user_from']);
-		$occupation = htmlspecialchars($this_userdata['user_occ']);
-		$interests = htmlspecialchars($this_userdata['user_interests']);
+		$website = htmlspecialchars($this_userdata['user_website'], ENT_COMPAT, 'ISO-8859-1');
+		$location = htmlspecialchars($this_userdata['user_from'], ENT_COMPAT, 'ISO-8859-1');
+		$occupation = htmlspecialchars($this_userdata['user_occ'], ENT_COMPAT, 'ISO-8859-1');
+		$interests = htmlspecialchars($this_userdata['user_interests'], ENT_COMPAT, 'ISO-8859-1');
 
 		$signature = ($this_userdata['user_sig_bbcode_uid'] != '') ? preg_replace('#:' . $this_userdata['user_sig_bbcode_uid'] . '#si', '', $this_userdata['user_sig']) : $this_userdata['user_sig'];
 		$signature = preg_replace($html_entities_match, $html_entities_replace, $signature);
@@ -812,7 +820,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 		$user_style = $this_userdata['user_style'];
 		$user_lang = $this_userdata['user_lang'];
 		$user_timezone = $this_userdata['user_timezone'];
-		$user_dateformat = htmlspecialchars($this_userdata['user_dateformat']);
+		$user_dateformat = htmlspecialchars($this_userdata['user_dateformat'], ENT_COMPAT, 'ISO-8859-1');
 		
 		$user_status = $this_userdata['user_active'];
 		$user_allowavatar = $this_userdata['user_allowavatar'];
@@ -868,7 +876,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 
 			if( isset($HTTP_POST_VARS['avatarcategory']) )
 			{
-				$category = htmlspecialchars($HTTP_POST_VARS['avatarcategory']);
+				$category = htmlspecialchars($HTTP_POST_VARS['avatarcategory'], ENT_COMPAT, 'ISO-8859-1');
 			}
 			else
 			{
@@ -964,6 +972,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 	}
 	else
 	{
+		$coppa = (isset($coppa)) ? $coppa : '';
 		$s_hidden_fields = '<input type="hidden" name="mode" value="save" /><input type="hidden" name="agreed" value="true" /><input type="hidden" name="coppa" value="' . $coppa . '" />';
 		$s_hidden_fields .= '<input type="hidden" name="id" value="' . $this_userdata['user_id'] . '" />';
 
@@ -1136,9 +1145,9 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			'L_EMAIL_ADDRESS' => $lang['Email_address'],
 			'S_FORM_ENCTYPE' => $form_enctype,
 
-			'HTML_STATUS' => $html_status,
-			'BBCODE_STATUS' => sprintf($bbcode_status, '<a href="../' . append_sid("faq.$phpEx?mode=bbcode") . '" target="_phpbbcode">', '</a>'), 
-			'SMILIES_STATUS' => $smilies_status,
+			'HTML_STATUS' => (isset($html_status)) ? $html_status : '',
+			'BBCODE_STATUS' => sprintf((isset($bbcode_status)) ? $bbcode_status : '', '<a href="../' . append_sid("faq.$phpEx?mode=bbcode") . '" target="_phpbbcode">', '</a>'), 
+			'SMILIES_STATUS' => (isset($smilies_status)) ? $smilies_status : '',
 
 			'L_DELETE_USER' => $lang['User_delete'],
 			'L_DELETE_USER_EXPLAIN' => $lang['User_delete_explain'],
@@ -1189,7 +1198,7 @@ else
 		'U_SEARCH_USER' => append_sid("./../search.$phpEx?mode=searchuser"), 
 
 		'S_USER_ACTION' => append_sid("admin_users.$phpEx"),
-		'S_USER_SELECT' => $select_list)
+		'S_USER_SELECT' => (isset($select_list)) ? $select_list : '')
 	);
 	$template->pparse('body');
 

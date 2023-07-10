@@ -82,6 +82,8 @@ else if( isset($HTTP_POST_VARS['delete_name']) )
 		message_die(GENERAL_ERROR, "Couldn't removed disallowed user.", "",__LINE__, __FILE__, $sql);
 	}
 
+	$message = (isset($message)) ? $message : '';
+
 	$message .= $lang['Disallowed_deleted'] . "<br /><br />" . sprintf($lang['Click_return_disallowadmin'], "<a href=\"" . append_sid("admin_disallow.$phpEx") . "\">", "</a>") . "<br /><br />" . sprintf($lang['Click_return_admin_index'], "<a href=\"" . append_sid("index.$phpEx?pane=right") . "\">", "</a>");
 
 	message_die(GENERAL_MESSAGE, $message);
@@ -107,9 +109,10 @@ $disallowed = $db->sql_fetchrowset($result);
 //
 $disallow_select = '<select name="disallowed_id">';
 
-if( trim($disallowed) == "" )
+if( trim(isset($disallowed)) == "" )
 {
-	$disallow_select .= '<option value="">' . $lang['no_disallowed'] . '</option>';
+	$disallow_select = (isset($disallow_select)) ? $disallow_select : '';
+	$disallow_select .= '<option value="">' . $lang['No_disallowed'] . '</option>';
 }
 else 
 {
@@ -130,7 +133,7 @@ $template->assign_vars(array(
 	"S_DISALLOW_SELECT" => $disallow_select,
 	"S_FORM_ACTION" => append_sid("admin_disallow.$phpEx"),
 
-	"L_INFO" => $output_info,
+    "L_INFO" => (isset($output_info)) ? $output_info : '',
 	"L_DISALLOW_TITLE" => $lang['Disallow_control'],
 	"L_DISALLOW_EXPLAIN" => $lang['Disallow_explain'],
 	"L_DELETE" => $lang['Delete_disallow'],

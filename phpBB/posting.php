@@ -38,7 +38,7 @@ while( list($var, $param) = @each($params) )
 {
 	if ( !empty($HTTP_POST_VARS[$param]) || !empty($HTTP_GET_VARS[$param]) )
 	{
-		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? htmlspecialchars($HTTP_POST_VARS[$param]) : htmlspecialchars($HTTP_GET_VARS[$param]);
+		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS[$param], ENT_COMPAT, 'ISO-8859-1');
 	}
 	else
 	{
@@ -569,9 +569,16 @@ else if ( $submit || $confirm )
 
 			if ( $error_msg == '' )
 			{
+				$post_data['topic_type'] = (isset($post_data['topic_type'])) ? $post_data['topic_type'] : '';
 				$topic_type = ( $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce'] ) ? $post_data['topic_type'] : $topic_type;
 
-				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, $bbcode_on, $html_on, $smilies_on, $attach_sig, $bbcode_uid, str_replace("\'", "''", $username), str_replace("\'", "''", $subject), str_replace("\'", "''", $message), str_replace("\'", "''", $poll_title), $poll_options, $poll_length);
+				//Strict Standards: Only variables should be passed by reference
+				$mon_username = str_replace("\'", "''", $username);
+				$mon_subject = str_replace("\'", "''", $subject);
+				$mon_message = str_replace("\'", "''", $message);
+				$mon_poll_title = str_replace("\'", "''", $poll_title);
+				
+				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, $bbcode_on, $html_on, $smilies_on, $attach_sig, $bbcode_uid, $mon_username, $mon_subject, $mon_message, $mon_poll_title, $poll_options, $poll_length);
 			}
 			break;
 
@@ -624,11 +631,11 @@ else if ( $submit || $confirm )
 
 if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 {
-	$username = ( !empty($HTTP_POST_VARS['username']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['username']))) : '';
-	$subject = ( !empty($HTTP_POST_VARS['subject']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['subject']))) : '';
-	$message = ( !empty($HTTP_POST_VARS['message']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['message']))) : '';
+	$username = ( !empty($HTTP_POST_VARS['username']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['username'])), ENT_COMPAT, 'ISO-8859-1') : '';
+	$subject = ( !empty($HTTP_POST_VARS['subject']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['subject'])), ENT_COMPAT, 'ISO-8859-1') : '';
+	$message = ( !empty($HTTP_POST_VARS['message']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['message'])), ENT_COMPAT, 'ISO-8859-1') : '';
 
-	$poll_title = ( !empty($HTTP_POST_VARS['poll_title']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['poll_title']))) : '';
+	$poll_title = ( !empty($HTTP_POST_VARS['poll_title']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['poll_title'])), ENT_COMPAT, 'ISO-8859-1') : '';
 	$poll_length = ( isset($HTTP_POST_VARS['poll_length']) ) ? max(0, intval($HTTP_POST_VARS['poll_length'])) : 0;
 
 	$poll_options = array();
@@ -642,14 +649,14 @@ if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 			}
 			else if ( !empty($option_text) ) 
 			{
-				$poll_options[intval($option_id)] = htmlspecialchars(trim(stripslashes($option_text)));
+				$poll_options[intval($option_id)] = htmlspecialchars(trim(stripslashes($option_text)), ENT_COMPAT, 'ISO-8859-1');
 			}
 		}
 	}
 
 	if ( isset($poll_add) && !empty($HTTP_POST_VARS['add_poll_option_text']) )
 	{
-		$poll_options[] = htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['add_poll_option_text'])));
+		$poll_options[] = htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['add_poll_option_text'])), ENT_COMPAT, 'ISO-8859-1');
 	}
 
 	if ( $mode == 'newtopic' || $mode == 'reply')
@@ -779,6 +786,7 @@ else
 	}
 	else if ( $mode == 'quote' || $mode == 'editpost' )
 	{
+		$post_info['post_subject'] = (isset($post_info['post_subject'])) ? $post_info['post_subject'] : '';
 		$subject = ( $post_data['first_post'] ) ? $post_info['topic_title'] : $post_info['post_subject'];
 		$message = $post_info['post_text'];
 
@@ -812,7 +820,7 @@ else
 			$replacement_word = array();
 			obtain_word_list($orig_word, $replace_word);
 
-			$msg_date =  create_date($board_config['default_dateformat'], $postrow['post_time'], $board_config['board_timezone']);
+			$msg_date =  create_date($board_config['default_dateformat'], ( isset($postrow['post_time']) ) ? $postrow['post_time'] : '', $board_config['board_timezone']);
 
 			// Use trim to get rid of spaces placed there by MS-SQL 2000
 			$quote_username = ( trim($post_info['post_username']) != '' ) ? $post_info['post_username'] : $post_info['username'];
@@ -997,7 +1005,7 @@ $template->assign_block_vars('switch_not_privmsg', array());
 // Output the data to the template
 //
 $template->assign_vars(array(
-	'USERNAME' => $username,
+	'USERNAME' => ( !empty($username) ) ? $username : '',
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
 	'HTML_STATUS' => $html_status,
@@ -1092,8 +1100,8 @@ if( ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['edit_poll']) )
 		'L_POLL_LENGTH_EXPLAIN' => $lang['Poll_for_explain'], 
 		'L_POLL_DELETE' => $lang['Delete_poll'],
 		
-		'POLL_TITLE' => $poll_title,
-		'POLL_LENGTH' => $poll_length)
+		'POLL_TITLE' => ( !empty($poll_title) ) ? $poll_title : '',
+        'POLL_LENGTH' => ( !empty($poll_length) ) ? $poll_length : '')
 	);
 
 	if( $mode == 'editpost' && $post_data['edit_poll'] && $post_data['has_poll'])

@@ -66,7 +66,7 @@ if ($cancel)
 if( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -102,11 +102,27 @@ while($file = @readdir($dir))
 //
 // Select main mode
 //
+$s_hidden_fields = ( isset($s_hidden_fields) ) ? $s_hidden_fields : '';
+
 if( isset($HTTP_GET_VARS['import_pack']) || isset($HTTP_POST_VARS['import_pack']) )
 {
 	//
 	// Import a list a "Smiley Pack"
 	//
+	
+		if (!isset($HTTP_GET_VARS['smile_pak']))
+    {
+        $HTTP_GET_VARS['smile_pak']='';
+    }
+    if (!isset($HTTP_GET_VARS['clear_current']))
+    {
+        $HTTP_GET_VARS['clear_current']='';
+    }
+    if (!isset($HTTP_GET_VARS['replace']))
+    {
+        $HTTP_GET_VARS['replace']='';
+    }
+	
 	$smile_pak = ( isset($HTTP_POST_VARS['smile_pak']) ) ? $HTTP_POST_VARS['smile_pak'] : $HTTP_GET_VARS['smile_pak'];
 	$clear_current = ( isset($HTTP_POST_VARS['clear_current']) ) ? $HTTP_POST_VARS['clear_current'] : $HTTP_GET_VARS['clear_current'];
 	$replace_existing = ( isset($HTTP_POST_VARS['replace']) ) ? $HTTP_POST_VARS['replace'] : $HTTP_GET_VARS['replace'];
@@ -162,7 +178,10 @@ if( isset($HTTP_GET_VARS['import_pack']) || isset($HTTP_POST_VARS['import_pack']
 				$smile_data[$j] = str_replace("<", "&lt;", $smile_data[$j]);
 				$smile_data[$j] = str_replace(">", "&gt;", $smile_data[$j]);
 				$k = $smile_data[$j];
-
+				if (!isset($smiles["$k"]))
+                {
+                    $smiles[$k]=0;    
+                }
 				if( $smiles[$k] == 1 )
 				{
 					if( !empty($replace_existing) )
@@ -243,6 +262,9 @@ else if( isset($HTTP_POST_VARS['export_pack']) || isset($HTTP_GET_VARS['export_p
 	//
 	// Export our smiley config as a smiley pak...
 	//
+	
+	if (isset($HTTP_GET_VARS['export_pack']))
+    {	
 	if ( $HTTP_GET_VARS['export_pack'] == "send" )
 	{	
 		$sql = "SELECT * 
@@ -269,7 +291,8 @@ else if( isset($HTTP_POST_VARS['export_pack']) || isset($HTTP_GET_VARS['export_p
 
 		exit;
 	}
-
+	}
+	
 	$message = sprintf($lang['export_smiles'], "<a href=\"" . append_sid("admin_smilies.$phpEx?export_pack=send", true) . "\">", "</a>") . "<br /><br />" . sprintf($lang['Click_return_smileadmin'], "<a href=\"" . append_sid("admin_smilies.$phpEx") . "\">", "</a>") . "<br /><br />" . sprintf($lang['Click_return_admin_index'], "<a href=\"" . append_sid("index.$phpEx?pane=right") . "\">", "</a>");
 
 	message_die(GENERAL_MESSAGE, $message);
@@ -440,7 +463,7 @@ else if ( $mode != "" )
 			$smile_code = ( isset($HTTP_POST_VARS['smile_code']) ) ? trim($HTTP_POST_VARS['smile_code']) : '';
 			$smile_url = ( isset($HTTP_POST_VARS['smile_url']) ) ? trim($HTTP_POST_VARS['smile_url']) : '';
 			$smile_url = phpbb_ltrim(basename($smile_url), "'");
-			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion'])) : '';
+			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion']), ENT_COMPAT, 'ISO-8859-1') : '';
 			$smile_id = ( isset($HTTP_POST_VARS['smile_id']) ) ? intval($HTTP_POST_VARS['smile_id']) : 0;
 			$smile_code = trim($smile_code);
 			$smile_url = trim($smile_url);
@@ -485,7 +508,7 @@ else if ( $mode != "" )
 			$smile_code = ( isset($HTTP_POST_VARS['smile_code']) ) ? $HTTP_POST_VARS['smile_code'] : '';
 			$smile_url = ( isset($HTTP_POST_VARS['smile_url']) ) ? $HTTP_POST_VARS['smile_url'] : '';
 			$smile_url = phpbb_ltrim(basename($smile_url), "'");
-			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion'])) : '';
+			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion']), ENT_COMPAT, 'ISO-8859-1') : '';
 			$smile_code = trim($smile_code);
 			$smile_url = trim($smile_url);
 
@@ -566,6 +589,11 @@ else
 		//
 		$smilies[$i]['code'] = str_replace('&lt;', '<', $smilies[$i]['code']);
 		$smilies[$i]['code'] = str_replace('&gt;', '>', $smilies[$i]['code']);
+		
+        if ($smilies[$i]['code']=='')
+        {
+            continue;
+        }
 		
 		$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 		$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];

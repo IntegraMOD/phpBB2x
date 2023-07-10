@@ -39,7 +39,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$posts = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 
 	$poster_avatar = '';
-	if ( $row['user_avatar_type'] && $row['user_id'] != ANONYMOUS && $row['user_allowavatar'] )
+	if ( isset($row['user_avatar_type']) && $row['user_avatar_type'] && $row['user_id'] != ANONYMOUS && $row['user_allowavatar'] )
 	{
 		switch( $row['user_avatar_type'] )
 		{
@@ -157,7 +157,7 @@ else
 if ( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+    $mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -939,7 +939,8 @@ else if ( $group_id )
 	generate_user_info($group_moderator, $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $fb_img, $fb, $ig_img, $ig, $pt_img, $pt, $twr_img, $twr, $skp_img, $skp, $tg_img, $tg, $li_img, $li, $tt_img, $tt, $dc);
 
 	$s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
-
+	$select_sort_order = (empty($select_sort_order)) ? '' : $select_sort_order;
+	$select_sort_mode = (empty($select_sort_mode)) ? '' : $select_sort_mode;
 	$template->assign_vars(array(
 		'L_GROUP_INFORMATION' => $lang['Group_Information'],
 		'L_GROUP_NAME' => $lang['Group_name'],
@@ -1296,6 +1297,16 @@ else
 	}
 	$s_group_list = '<select name="' . POST_GROUPS_URL . '">' . $s_group_list_opt . '</select>';
 
+	if (empty($s_pending_groups_opt))
+    {
+        $s_pending_groups_opt = '';
+    }
+    
+    if (empty($s_member_groups_opt))
+    {
+        $s_member_groups_opt = '';
+    }
+	
 	if ( $s_group_list_opt != '' || $s_pending_groups_opt != '' || $s_member_groups_opt != '' )
 	{
 		//
@@ -1345,8 +1356,8 @@ else
 			'S_HIDDEN_FIELDS' => $s_hidden_fields, 
 
 			'GROUP_LIST_SELECT' => $s_group_list,
-			'GROUP_PENDING_SELECT' => $s_pending_groups,
-			'GROUP_MEMBER_SELECT' => $s_member_groups)
+			'GROUP_PENDING_SELECT' => (isset($s_pending_groups)) ? $s_pending_groups : '',
+			'GROUP_MEMBER_SELECT' => (isset($s_member_groups)) ? $s_member_groups : '')
 		);
 
 		$template->pparse('user');

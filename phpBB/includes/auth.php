@@ -194,6 +194,10 @@ function auth($type, $forum_id, $userdata, $f_access = '')
 		//
 		if ( $forum_id != AUTH_LIST_ALL )
 		{
+			if (!isset($f_access[$key]))
+            {
+                $f_access[$key]=0;
+            }			
 			$value = $f_access[$key];
 
 			switch( $value )

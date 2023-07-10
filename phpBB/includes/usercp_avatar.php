@@ -148,6 +148,7 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 		unset($avatar_data);
 		while( !@feof($fsock) )
 		{
+			$avatar_data = (isset($avatar_data)) ? $avatar_data : '';			
 			$avatar_data .= @fread($fsock, $board_config['avatar_filesize']);
 		}
 		@fclose($fsock);

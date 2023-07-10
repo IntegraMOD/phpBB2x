@@ -261,6 +261,7 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$dbsize = 0;
 					for($i = 0; $i < count($tabledata_ary); $i++)
 					{
+						$tabledata_ary[$i]['Type'] = (isset($tabledata_ary[$i]['Type'])) ? $tabledata_ary[$i]['Type'] : '';
 						if( $tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
 						{
 							if( $table_prefix != "" )
@@ -407,7 +408,6 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 				$username = $onlinerow_reg[$i]['username'];
 				
 				$onlinerow_reg[$i]['user_allow_viewonline'] = (isset($onlinerow_reg[$i]['user_allow_viewonline'])) ? $onlinerow_reg[$i]['user_allow_viewonline'] : '';
-
 				if( $onlinerow_reg[$i]['user_allow_viewonline'] || $userdata['user_level'] == ADMIN )
 				{
 					$registered_users++;

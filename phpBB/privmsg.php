@@ -62,7 +62,7 @@ $mark_list = ( !empty($HTTP_POST_VARS['mark']) ) ? $HTTP_POST_VARS['mark'] : 0;
 if ( isset($HTTP_POST_VARS['folder']) || isset($HTTP_GET_VARS['folder']) )
 {
 	$folder = ( isset($HTTP_POST_VARS['folder']) ) ? $HTTP_POST_VARS['folder'] : $HTTP_GET_VARS['folder'];
-	$folder = htmlspecialchars($folder);
+	$folder = htmlspecialchars($folder, ENT_COMPAT, 'ISO-8859-1');
 
 	if ( $folder != 'inbox' && $folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox' )
 	{
@@ -97,7 +97,7 @@ if ( $cancel )
 if ( !empty($HTTP_POST_VARS['mode']) || !empty($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( !empty($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -635,6 +635,12 @@ else if ( $mode == 'read' )
 	//
 	// Dump it to the templating engine
 	//
+	
+	$rank_image = (empty($rank_image)) ? '' : $rank_image;
+	$poster_joined = (empty($poster_joined)) ? '' : $poster_joined;
+	$poster_posts = (empty($poster_posts)) ? '' : $poster_posts;
+	$poster_from = (empty($poster_from)) ? '' : $poster_from;
+	$poster_avatar = (empty($poster_avatar)) ? '' : $poster_avatar;
 	$template->assign_vars(array(
 		'MESSAGE_TO' => $username_to,
 		'MESSAGE_FROM' => $username_from,
@@ -1229,10 +1235,16 @@ else if ( $submit || $refresh || $mode != '' )
 			$error_msg .= ( ( !empty($error_msg) ) ? '<br />' : '' ) . $lang['No_to_user'];
 		}
 
-		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject']));
+		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'ISO-8859-1'));
 		if ( empty($privmsg_subject) )
 		{
 			$error = TRUE;
+			
+			if (empty($error_msg))
+            {
+                $error_msg = '';
+            } 
+			
 			$error_msg .= ( ( !empty($error_msg) ) ? '<br />' : '' ) . $lang['Empty_subject'];
 		}
 
@@ -1414,9 +1426,9 @@ else if ( $submit || $refresh || $mode != '' )
 		// passed to the script, process it a little, do some checks
 		// where neccessary, etc.
 		//
-		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']))) : '';
+		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'ISO-8859-1')) : '';
 
-		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']))) : '';
+		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'ISO-8859-1')) : '';
 		$privmsg_message = ( isset($HTTP_POST_VARS['message']) ) ? trim($HTTP_POST_VARS['message']) : '';
 		// $privmsg_message = preg_replace('#<textarea>#si', '&lt;textarea&gt;', $privmsg_message);
 		if ( !$preview )
@@ -1790,8 +1802,11 @@ else if ( $submit || $refresh || $mode != '' )
 	//
 	generate_smilies('inline', PAGE_PRIVMSGS);
 
+	$privmsg_message = (empty($privmsg_message)) ? '' : $privmsg_message;
+	$l_box_name = (empty($l_box_name)) ? '' : $l_box_name;
+
 	$template->assign_vars(array(
-		'SUBJECT' => $privmsg_subject, 
+		'SUBJECT' => ( !empty($privmsg_subject) ) ? $privmsg_subject : '',
 		'USERNAME' => $to_username,
 		'MESSAGE' => $privmsg_message,
 		'HTML_STATUS' => $html_status, 
@@ -2201,6 +2216,7 @@ if ( $row = $db->sql_fetchrow($result) )
 		$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
 		$i++;
 
+		$u_from_user_profile = (empty($u_from_user_profile)) ? '' : $u_from_user_profile;
 		$template->assign_block_vars('listrow', array(
 			'ROW_COLOR' => '#' . $row_color,
 			'ROW_CLASS' => $row_class,

@@ -62,7 +62,7 @@ if ($cancel)
 if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_GET_VARS['mode']) ) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
-	$mode = htmlspecialchars($mode);
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else 
 {
@@ -72,12 +72,26 @@ else
 switch( $mode )
 {
 	case "addnew":
-		$install_to = ( isset($HTTP_GET_VARS['install_to']) ) ? urldecode($HTTP_GET_VARS['install_to']) : $HTTP_POST_VARS['install_to'];
-		$style_name = ( isset($HTTP_GET_VARS['style']) ) ? urldecode($HTTP_GET_VARS['style']) : $HTTP_POST_VARS['style'];
 	
+		if ( isset($HTTP_GET_VARS['install_to']) )
+		{
+			$install_to = urldecode($HTTP_GET_VARS['install_to']);
+		}
+		else if ( isset($HTTP_POST_VARS['install_to']) )
+		{
+			$install_to = $HTTP_POST_VARS['install_to'];
+		}
+			
+		if ( isset($HTTP_GET_VARS['style']) )
+		{
+			$style_name = urldecode($HTTP_GET_VARS['style']);
+		}
+		else if ( isset($HTTP_POST_VARS['style']) )
+		{
+			$style_name = $HTTP_POST_VARS['style'];
+		}	
 		if( isset($install_to) )
 		{
-
 			include($phpbb_root_path. "templates/" . basename($install_to) . "/theme_info.cfg");
 
 			$template_name = $$install_to;
@@ -280,7 +294,7 @@ switch( $mode )
 			$updated_name['span_class2_name'] = $HTTP_POST_VARS['span_class2_name'];
 			$updated['span_class3'] = $HTTP_POST_VARS['span_class3'];
 			$updated_name['span_class3_name'] = $HTTP_POST_VARS['span_class3_name'];
-			$style_id = intval($HTTP_POST_VARS['style_id']);
+			$style_id = (isset($HTTP_POST_VARS['style_id'])) ? intval($HTTP_POST_VARS['style_id']) : '';
 			//
 			// Wheeeew! Thank heavens for copy and paste and search and replace :D
 			//
@@ -556,6 +570,7 @@ switch( $mode )
 				{	
 					if( !is_file(phpbb_realpath($phpbb_root_path . 'templates/' . $file)) && !is_link(phpbb_realpath($phpbb_root_path . 'templates/' . $file)) && $file != "." && $file != ".." && $file != "CVS" )
 					{
+						$selected['template_name'] = (isset($selected['template_name'])) ? $selected['template_name'] : '';
 						if($file == $selected['template_name'])
 						{
 							$s_template_select .= '<option value="' . $file . '" selected="selected">' . $file . "</option>\n";
@@ -573,6 +588,7 @@ switch( $mode )
 				message_die(GENERAL_MESSAGE, $lang['No_template_dir']);
 			}
 
+			$s_hidden_fields = (isset($s_hidden_fields)) ? $s_hidden_fields : '';
 			$s_hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';
 
 			$template->assign_vars(array(
@@ -623,78 +639,103 @@ switch( $mode )
 				"L_SPAN_CLASS_1" => $lang['span_class1'],
 				"L_SPAN_CLASS_2" => $lang['span_class2'],
 				"L_SPAN_CLASS_3" => $lang['span_class3'],
+				"L_DIV_CLASS_1" => $lang['div_class1'],
+				"L_DIV_CLASS_2" => $lang['div_class2'],
+				"L_DIV_CLASS_3" => $lang['div_class3'],				
+				"L_ROW_CLASS_1" => $lang['row_class1'],
+				"L_ROW_CLASS_2" => $lang['row_class2'],
+				"L_ROW_CLASS_3" => $lang['row_class3'],				
+				"L_COL_CLASS_1" => $lang['col_class1'],
+				"L_COL_CLASS_2" => $lang['col_class2'],
+				"L_COL_CLASS_3" => $lang['col_class3'],				
 				"L_SAVE_SETTINGS" => $lang['Save_Settings'], 
-				"THEME_NAME" => $selected['style_name'],
-				"HEAD_STYLESHEET" => $selected['head_stylesheet'],
-				"BODY_BACKGROUND" => $selected['body_background'],
-				"BODY_BGCOLOR" => $selected['body_bgcolor'],
-				"BODY_TEXT_COLOR" => $selected['body_text'],
-				"BODY_LINK_COLOR" => $selected['body_link'],
-				"BODY_VLINK_COLOR" => $selected['body_vlink'],
-				"BODY_ALINK_COLOR" => $selected['body_alink'],
-				"BODY_HLINK_COLOR" => $selected['body_hlink'],
-				"TR_COLOR1" => $selected['tr_color1'],
-				"TR_COLOR2" => $selected['tr_color2'],
-				"TR_COLOR3" => $selected['tr_color3'],
-				"TR_CLASS1" => $selected['tr_class1'],
-				"TR_CLASS2" => $selected['tr_class2'],
-				"TR_CLASS3" => $selected['tr_class3'],
-				"TH_COLOR1" => $selected['th_color1'],
-				"TH_COLOR2" => $selected['th_color2'],
-				"TH_COLOR3" => $selected['th_color3'],
-				"TH_CLASS1" => $selected['th_class1'],
-				"TH_CLASS2" => $selected['th_class2'],
-				"TH_CLASS3" => $selected['th_class3'],
-				"TD_COLOR1" => $selected['td_color1'],
-				"TD_COLOR2" => $selected['td_color2'],
-				"TD_COLOR3" => $selected['td_color3'],
-				"TD_CLASS1" => $selected['td_class1'],
-				"TD_CLASS2" => $selected['td_class2'],
-				"TD_CLASS3" => $selected['td_class3'],
-				"FONTFACE1" => $selected['fontface1'],
-				"FONTFACE2" => $selected['fontface2'],
-				"FONTFACE3" => $selected['fontface3'],
-				"FONTSIZE1" => $selected['fontsize1'],
-				"FONTSIZE2" => $selected['fontsize2'],
-				"FONTSIZE3" => $selected['fontsize3'],
-				"FONTCOLOR1" => $selected['fontcolor1'],
-				"FONTCOLOR2" => $selected['fontcolor2'],
-				"FONTCOLOR3" => $selected['fontcolor3'],
-				"SPAN_CLASS1" => $selected['span_class1'],
-				"SPAN_CLASS2" => $selected['span_class2'],
-				"SPAN_CLASS3" => $selected['span_class3'],
-
-				"TR_COLOR1_NAME" => $selected['tr_color1_name'],
-				"TR_COLOR2_NAME" => $selected['tr_color2_name'],
-				"TR_COLOR3_NAME" => $selected['tr_color3_name'],
-				"TR_CLASS1_NAME" => $selected['tr_class1_name'],
-				"TR_CLASS2_NAME" => $selected['tr_class2_name'],
-				"TR_CLASS3_NAME" => $selected['tr_class3_name'],
-				"TH_COLOR1_NAME" => $selected['th_color1_name'],
-				"TH_COLOR2_NAME" => $selected['th_color2_name'],
-				"TH_COLOR3_NAME" => $selected['th_color3_name'],
-				"TH_CLASS1_NAME" => $selected['th_class1_name'],
-				"TH_CLASS2_NAME" => $selected['th_class2_name'],
-				"TH_CLASS3_NAME" => $selected['th_class3_name'],
-				"TD_COLOR1_NAME" => $selected['td_color1_name'],
-				"TD_COLOR2_NAME" => $selected['td_color2_name'],
-				"TD_COLOR3_NAME" => $selected['td_color3_name'],
-				"TD_CLASS1_NAME" => $selected['td_class1_name'],
-				"TD_CLASS2_NAME" => $selected['td_class2_name'],
-				"TD_CLASS3_NAME" => $selected['td_class3_name'],
-				"FONTFACE1_NAME" => $selected['fontface1_name'],
-				"FONTFACE2_NAME" => $selected['fontface2_name'],
-				"FONTFACE3_NAME" => $selected['fontface3_name'],
-				"FONTSIZE1_NAME" => $selected['fontsize1_name'],
-				"FONTSIZE2_NAME" => $selected['fontsize2_name'],
-				"FONTSIZE3_NAME" => $selected['fontsize3_name'],
-				"FONTCOLOR1_NAME" => $selected['fontcolor1_name'],
-				"FONTCOLOR2_NAME" => $selected['fontcolor2_name'],
-				"FONTCOLOR3_NAME" => $selected['fontcolor3_name'],
-				"SPAN_CLASS1_NAME" => $selected['span_class1_name'],
-				"SPAN_CLASS2_NAME" => $selected['span_class2_name'],
-				"SPAN_CLASS3_NAME" => $selected['span_class3_name'],
-				
+				"THEME_NAME" => (isset($selected['style_name'])) ? $selected['style_name'] : '',
+				"HEAD_STYLESHEET" => (isset($selected['head_stylesheet'])) ? $selected['head_stylesheet'] : '',
+				"BODY_BACKGROUND" => (isset($selected['body_background'])) ? $selected['body_background'] : '',
+				"BODY_BGCOLOR" => (isset($selected['body_bgcolor'])) ? $selected['body_bgcolor'] : '',
+				"BODY_TEXT_COLOR" => (isset($selected['body_text'])) ? $selected['body_text'] : '',
+				"BODY_LINK_COLOR" => (isset($selected['body_link'])) ? $selected['body_link'] : '',
+				"BODY_VLINK_COLOR" => (isset($selected['body_vlink'])) ? $selected['body_vlink'] : '',
+				"BODY_ALINK_COLOR" => (isset($selected['body_alink'])) ? $selected['body_alink'] : '',
+				"BODY_HLINK_COLOR" => (isset($selected['body_hlink'])) ? $selected['body_hlink'] : '',
+				"TR_COLOR1" => (isset($selected['tr_color1'])) ? $selected['tr_color1'] : '',
+				"TR_COLOR2" => (isset($selected['tr_color2'])) ? $selected['tr_color2'] : '',
+				"TR_COLOR3" => (isset($selected['tr_color3'])) ? $selected['tr_color3'] : '',
+				"TR_CLASS1" => (isset($selected['tr_class1'])) ? $selected['tr_class1'] : '',
+				"TR_CLASS2" => (isset($selected['tr_class2'])) ? $selected['tr_class2'] : '',
+				"TR_CLASS3" => (isset($selected['tr_class3'])) ? $selected['tr_class3'] : '',
+				"TH_COLOR1" => (isset($selected['th_color1'])) ? $selected['th_color1'] : '',
+				"TH_COLOR2" => (isset($selected['th_color2'])) ? $selected['th_color2'] : '',
+				"TH_COLOR3" => (isset($selected['th_color3'])) ? $selected['th_color3'] : '',
+				"TH_CLASS1" => (isset($selected['th_class1'])) ? $selected['th_class1'] : '',
+				"TH_CLASS2" => (isset($selected['th_class2'])) ? $selected['th_class2'] : '',
+				"TH_CLASS3" => (isset($selected['th_class3'])) ? $selected['th_class3'] : '',
+				"TD_COLOR1" => (isset($selected['td_color1'])) ? $selected['td_color1'] : '',
+				"TD_COLOR2" => (isset($selected['td_color2'])) ? $selected['td_color2'] : '',
+				"TD_COLOR3" => (isset($selected['td_color3'])) ? $selected['td_color3'] : '',
+				"TD_CLASS1" => (isset($selected['td_class1'])) ? $selected['td_class1'] : '',
+				"TD_CLASS2" => (isset($selected['td_class2'])) ? $selected['td_class2'] : '',
+				"TD_CLASS3" => (isset($selected['td_class3'])) ? $selected['td_class3'] : '',
+				"FONTFACE1" => (isset($selected['fontface1'])) ? $selected['fontface1'] : '',
+				"FONTFACE2" => (isset($selected['fontface2'])) ? $selected['fontface2'] : '',
+				"FONTFACE3" => (isset($selected['fontface3'])) ? $selected['fontface3'] : '',
+				"FONTSIZE1" => (isset($selected['fontsize1'])) ? $selected['fontsize1'] : '',
+				"FONTSIZE2" => (isset($selected['fontsize2'])) ? $selected['fontsize2'] : '',
+				"FONTSIZE3" => (isset($selected['fontsize3'])) ? $selected['fontsize3'] : '',
+				"FONTCOLOR1" => (isset($selected['fontcolor1'])) ? $selected['fontcolor1'] : '',
+				"FONTCOLOR2" => (isset($selected['fontcolor2'])) ? $selected['fontcolor2'] : '',
+				"FONTCOLOR3" => (isset($selected['fontcolor3'])) ? $selected['fontcolor3'] : '',
+				"SPAN_CLASS1" => (isset($selected['span_class1'])) ? $selected['span_class1'] : '',
+				"SPAN_CLASS2" => (isset($selected['span_class2'])) ? $selected['span_class2'] : '',
+				"SPAN_CLASS3" => (isset($selected['span_class3'])) ? $selected['span_class3'] : '',
+				"DIV_CLASS1" => (isset($selected['div_class1'])) ? $selected['div_class1'] : '',
+				"DIV_CLASS2" => (isset($selected['div_class2'])) ? $selected['div_class2'] : '',
+				"DIV_CLASS3" => (isset($selected['div_class3'])) ? $selected['div_class3'] : '',
+				"ROW_CLASS1" => (isset($selected['row_class1'])) ? $selected['row_class1'] : '',
+				"ROW_CLASS2" => (isset($selected['row_class2'])) ? $selected['row_class2'] : '',
+				"ROW_CLASS3" => (isset($selected['row_class3'])) ? $selected['row_class3'] : '',
+				"COL_CLASS1" => (isset($selected['col_class1'])) ? $selected['col_class1'] : '',
+				"COL_CLASS2" => (isset($selected['col_class2'])) ? $selected['col_class2'] : '',
+				"COL_CLASS3" => (isset($selected['col_class3'])) ? $selected['col_class3'] : '',				
+				"TR_COLOR1_NAME" => (isset($selected['tr_color1_name'])) ? $selected['tr_color1_name'] : '',
+				"TR_COLOR2_NAME" => (isset($selected['tr_color2_name'])) ? $selected['tr_color2_name'] : '',
+				"TR_COLOR3_NAME" => (isset($selected['tr_color3_name'])) ? $selected['tr_color3_name'] : '',
+				"TR_CLASS1_NAME" => (isset($selected['tr_class1_name'])) ? $selected['tr_class1_name'] : '',
+				"TR_CLASS2_NAME" => (isset($selected['tr_class2_name'])) ? $selected['tr_class2_name'] : '',
+				"TR_CLASS3_NAME" => (isset($selected['tr_class3_name'])) ? $selected['tr_class3_name'] : '',
+				"TH_COLOR1_NAME" => (isset($selected['th_color1_name'])) ? $selected['th_color1_name'] : '',
+				"TH_COLOR2_NAME" => (isset($selected['th_color2_name'])) ? $selected['th_color2_name'] : '',
+				"TH_COLOR3_NAME" => (isset($selected['th_color3_name'])) ? $selected['th_color3_name'] : '',
+				"TH_CLASS1_NAME" => (isset($selected['th_class1_name'])) ? $selected['th_class1_name'] : '',
+				"TH_CLASS2_NAME" => (isset($selected['th_class2_name'])) ? $selected['th_class2_name'] : '',
+				"TH_CLASS3_NAME" => (isset($selected['th_class3_name'])) ? $selected['th_class3_name'] : '',
+				"TD_COLOR1_NAME" => (isset($selected['td_color1_name'])) ? $selected['td_color1_name'] : '',
+				"TD_COLOR2_NAME" => (isset($selected['td_color2_name'])) ? $selected['td_color2_name'] : '',
+				"TD_COLOR3_NAME" => (isset($selected['td_color3_name'])) ? $selected['td_color3_name'] : '',
+				"TD_CLASS1_NAME" => (isset($selected['td_class1_name'])) ? $selected['td_class1_name'] : '',
+				"TD_CLASS2_NAME" => (isset($selected['td_class2_name'])) ? $selected['td_class2_name'] : '',
+				"TD_CLASS3_NAME" => (isset($selected['td_class3_name'])) ? $selected['td_class3_name'] : '',
+				"FONTFACE1_NAME" => (isset($selected['fontface1_name'])) ? $selected['fontface1_name'] : '',
+				"FONTFACE2_NAME" => (isset($selected['fontface2_name'])) ? $selected['fontface2_name'] : '',
+				"FONTFACE3_NAME" => (isset($selected['fontface3_name'])) ? $selected['fontface3_name'] : '',
+				"FONTSIZE1_NAME" => (isset($selected['fontsize1_name'])) ? $selected['fontsize1_name'] : '',
+				"FONTSIZE2_NAME" => (isset($selected['fontsize2_name'])) ? $selected['fontsize2_name'] : '',
+				"FONTSIZE3_NAME" => (isset($selected['fontsize3_name'])) ? $selected['fontsize3_name'] : '',
+				"FONTCOLOR1_NAME" => (isset($selected['fontcolor1_name'])) ? $selected['fontcolor1_name'] : '',
+				"FONTCOLOR2_NAME" => (isset($selected['fontcolor2_name'])) ? $selected['fontcolor2_name'] : '',
+				"FONTCOLOR3_NAME" => (isset($selected['fontcolor3_name'])) ? $selected['fontcolor3_name'] : '',
+				"SPAN_CLASS1_NAME" => (isset($selected['span_class1_name'])) ? $selected['span_class1_name'] : '',
+				"SPAN_CLASS2_NAME" => (isset($selected['span_class2_name'])) ? $selected['span_class2_name'] : '',
+				"SPAN_CLASS3_NAME" => (isset($selected['span_class3_name'])) ? $selected['span_class3_name'] : '',
+				"DIV_CLASS1_NAME" => (isset($selected['div_class1_name'])) ? $selected['div_class1_name'] : '',
+				"DIV_CLASS2_NAME" => (isset($selected['div_class2_name'])) ? $selected['div_class2_name'] : '',
+				"DIV_CLASS3_NAME" => (isset($selected['div_class3_name'])) ? $selected['div_class3_name'] : '',
+				"ROW_CLASS1_NAME" => (isset($selected['row_class1_name'])) ? $selected['row_class1_name'] : '',
+				"ROW_CLASS2_NAME" => (isset($selected['row_class2_name'])) ? $selected['row_class2_name'] : '',
+				"ROW_CLASS3_NAME" => (isset($selected['row_class3_name'])) ? $selected['row_class3_name'] : '',
+				"COL_CLASS1_NAME" => (isset($selected['col_class1_name'])) ? $selected['col_class1_name'] : '',
+				"COL_CLASS2_NAME" => (isset($selected['col_class2_name'])) ? $selected['col_class2_name'] : '',
+				"COL_CLASS3_NAME" => (isset($selected['col_class3_name'])) ? $selected['col_class3_name'] : '',
 				"S_THEME_ACTION" => append_sid("admin_styles.$phpEx"),
 				"S_TEMPLATE_SELECT" => $s_template_select,
 				"S_HIDDEN_FIELDS" => $s_hidden_fields)
@@ -704,8 +745,12 @@ switch( $mode )
 		}
 		break;
 
-	case "export";
-		if($HTTP_POST_VARS['export_template'])
+	case "export":
+		$HTTP_POST_VARS['export_template'] = (isset($HTTP_POST_VARS['export_template'])) ? $HTTP_POST_VARS['export_template'] : '';
+		$HTTP_POST_VARS['send_file'] = (isset($HTTP_POST_VARS['send_file'])) ? $HTTP_POST_VARS['send_file'] : '';
+
+		if(isset($HTTP_POST_VARS['export_template']) && $HTTP_POST_VARS['export_template'])
+
 		{
 			$template_name = $HTTP_POST_VARS['export_template'];
 
@@ -751,7 +796,7 @@ switch( $mode )
 				// Unable to open the file writeable do something here as an attempt
 				// to get around that...
 				//
-				$s_hidden_fields = '<input type="hidden" name="theme_info" value="' . htmlspecialchars($theme_data) . '" />';
+				$s_hidden_fields = '<input type="hidden" name="theme_info" value="' . htmlspecialchars($theme_data, ENT_COMPAT, 'ISO-8859-1') . '" />';
 				$s_hidden_fields .= '<input type="hidden" name="send_file" value="1" /><input type="hidden" name="mode" value="export" />';
 				
 				$download_form = '<form action="' . append_sid("admin_styles.$phpEx") . '" method="post"><input class="mainoption" type="submit" name="submit" value="' . $lang['Download'] . '" />' . $s_hidden_fields;
@@ -777,7 +822,7 @@ switch( $mode )
 			message_die(GENERAL_MESSAGE, $message);
 
 		}
-		else if($HTTP_POST_VARS['send_file'])
+		else if(isset($HTTP_POST_VARS['send_file']) && $HTTP_POST_VARS['send_file'])
 		{
 			
 			header("Content-Type: text/x-delimtext; name=\"theme_info.cfg\"");
