@@ -291,6 +291,7 @@ CREATE TABLE phpbb_sessions (
    session_page int4 DEFAULT '0' NOT NULL,
    session_logged_in int2 DEFAULT '0' NOT NULL,
    session_admin int2 DEFAULT '0' NOT NULL,
+   priv_session_id char(32) DEFAULT '0' NOT NULL;
    CONSTRAINT phpbb_session_pkey PRIMARY KEY (session_id)
 );
 CREATE INDEX session_user_id_phpbb_sessions_index ON phpbb_sessions (session_user_id);
@@ -500,9 +501,6 @@ CREATE TABLE phpbb_users (
    user_sig text,
    user_sig_bbcode_uid char(10),
    user_style int4,
-   user_aim varchar(255),
-   user_yim varchar(255),
-   user_msnm varchar(255),
    user_fb varchar(255),
    user_ig varchar(255),
    user_pt varchar(255),
@@ -511,6 +509,7 @@ CREATE TABLE phpbb_users (
    user_tg varchar(255),
    user_li varchar(255),
    user_tt varchar(255),
+   user_dc varchar(255),
    user_posts int4 DEFAULT '0' NOT NULL,
    user_new_privmsg int2 DEFAULT '0' NOT NULL,
    user_unread_privmsg int2 DEFAULT '0' NOT NULL,

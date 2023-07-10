@@ -706,8 +706,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 		$result_array = serialize($store_search_data);
 		unset($store_search_data);
 
-		mt_srand ((double) microtime() * 1000000);
-		$search_id = mt_rand();
+		$search_id = abs(crc32(dss_rand()));
 
 		$sql = "UPDATE " . SEARCH_TABLE . " 
 			SET search_id = $search_id, search_time = $current_time, search_array = '" . str_replace("\'", "''", $result_array) . "'

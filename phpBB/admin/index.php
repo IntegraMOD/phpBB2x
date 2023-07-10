@@ -395,11 +395,11 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 	$reg_userid_ary = array();
 
-	if( count($onlinerow_reg) )
+	if( is_countable($onlinerow_reg) ? count($onlinerow_reg) : 0 )
 	{
 		$registered_users = 0;
 
-		for($i = 0; $i < count($onlinerow_reg); $i++)
+		for($i = 0; $i < (is_countable($onlinerow_reg) ? count($onlinerow_reg) : 0); $i++)
 		{
 			if( !inarray($onlinerow_reg[$i]['user_id'], $reg_userid_ary) )
 			{
@@ -407,7 +407,7 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 				$username = $onlinerow_reg[$i]['username'];
 				
-				$onlinerow_reg[$i]['user_allow_viewonline'] = (isset($onlinerow_reg[$i]['user_allow_viewonline'])) ? $onlinerow_reg[$i]['user_allow_viewonline'] : '';
+				$onlinerow_reg[$i]['user_allow_viewonline'] ??= '';
 				if( $onlinerow_reg[$i]['user_allow_viewonline'] || $userdata['user_level'] == ADMIN )
 				{
 					$registered_users++;
@@ -502,12 +502,11 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	//
 	// Guest users
 	//
-    if ( isset($onlinerow_guest) && count($onlinerow_guest) )
-//	if( count($onlinerow_guest) ) 
+    if( is_countable($onlinerow_guest) ? count($onlinerow_guest) : 0 ) 
 	{
 		$guest_users = 0;
 
-		for($i = 0; $i < count($onlinerow_guest); $i++)
+		for($i = 0; $i < (is_countable($onlinerow_guest) ? count($onlinerow_guest) : 0); $i++)
 		{
 			$guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
 			$guest_users++;

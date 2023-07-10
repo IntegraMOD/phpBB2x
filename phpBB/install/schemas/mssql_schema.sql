@@ -192,7 +192,8 @@ CREATE TABLE [phpbb_sessions] (
 	[session_ip] [char] (8) NOT NULL ,
 	[session_page] [int] NULL ,
 	[session_logged_in] [smallint] NULL,
-	[session_admin] [smallint] NULL
+	[session_admin] [smallint] NULL,
+        [priv_session_id] [char] (32) NOT NULL
 ) ON [PRIMARY]
 GO
 
@@ -384,9 +385,6 @@ CREATE TABLE [phpbb_users] (
 	[user_from] [varchar] (100) NULL ,
 	[user_sig] [text] NULL ,
 	[user_sig_bbcode_uid] [char] (10) NULL ,
-	[user_aim] [varchar] (255) NULL ,
-	[user_yim] [varchar] (255) NULL ,
-	[user_msnm] [varchar] (255) NULL ,
 	[user_fb] [varchar] (255) NULL ,
 	[user_ig] [varchar] (255) NULL ,
 	[user_pt] [varchar] (255) NULL ,
@@ -395,6 +393,7 @@ CREATE TABLE [phpbb_users] (
 	[user_tg] [varchar] (255) NULL ,
 	[user_li] [varchar] (255) NULL ,
 	[user_tt] [varchar] (255) NULL ,
+        [user_dc] [varchar] (255) NULL ,
 	[user_interests] [varchar] (255) NULL ,
 	[user_actkey] [varchar] (32) NULL ,
 	[user_newpasswd] [varchar] (32) NULL ,
