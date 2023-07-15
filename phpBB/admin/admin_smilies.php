@@ -152,7 +152,7 @@ if( isset($HTTP_GET_VARS['import_pack']) || isset($HTTP_POST_VARS['import_pack']
 
 			$cur_smilies = $db->sql_fetchrowset($result);
 
-			for( $i = 0; $i < count($cur_smilies); $i++ )
+			for( $i = 0; $i < (is_countable($cur_smilies) ? count($cur_smilies) : 0); $i++ )
 			{
 				$k = $cur_smilies[$i]['code'];
 				$smiles[$k] = 1;
@@ -166,11 +166,11 @@ if( isset($HTTP_GET_VARS['import_pack']) || isset($HTTP_POST_VARS['import_pack']
 			message_die(GENERAL_ERROR, "Couldn't read smiley pak file", "", __LINE__, __FILE__, $sql);
 		}
 
-		for( $i = 0; $i < count($fcontents); $i++ )
+		for( $i = 0; $i < (is_countable($fcontents) ? count($fcontents) : 0); $i++ )
 		{
 			$smile_data = explode($delimeter, trim(addslashes($fcontents[$i])));
 
-			for( $j = 2; $j < count($smile_data); $j++)
+			for( $j = 2; $j < (is_countable($smile_data) ? count($smile_data) : 0); $j++)
 			{
 				//
 				// Replace > and < with the proper html_entities for matching.
@@ -277,7 +277,7 @@ else if( isset($HTTP_POST_VARS['export_pack']) || isset($HTTP_GET_VARS['export_p
 		$resultset = $db->sql_fetchrowset($result);
 
 		$smile_pak = "";
-		for($i = 0; $i < count($resultset); $i++ )
+		for($i = 0; $i < (is_countable($resultset) ? count($resultset) : 0); $i++ )
 		{
 			$smile_pak .= $resultset[$i]['smile_url'] . $delimeter;
 			$smile_pak .= $resultset[$i]['emoticon'] . $delimeter;
@@ -309,7 +309,7 @@ else if( isset($HTTP_POST_VARS['add']) || isset($HTTP_GET_VARS['add']) )
 	);
 
 	$filename_list = "";
-	for( $i = 0; $i < count($smiley_images); $i++ )
+	for( $i = 0; $i < (is_countable($smiley_images) ? count($smiley_images) : 0); $i++ )
 	{
 		$filename_list .= '<option value="' . $smiley_images[$i] . '">' . $smiley_images[$i] . '</option>';
 	}
@@ -406,7 +406,7 @@ else if ( $mode != "" )
 			$smile_data = $db->sql_fetchrow($result);
 
 			$filename_list = "";
-			for( $i = 0; $i < count($smiley_images); $i++ )
+			for( $i = 0; $i < (is_countable($smiley_images) ? count($smiley_images) : 0); $i++ )
 			{
 				if( $smiley_images[$i] == $smile_data['smile_url'] )
 				{
@@ -582,7 +582,7 @@ else
 	//
 	// Loop throuh the rows of smilies setting block vars for the template.
 	//
-	for($i = 0; $i < count($smilies); $i++)
+	for($i = 0; $i < (is_countable($smilies) ? count($smilies) : 0); $i++)
 	{
 		//
 		// Replace htmlentites for < and > with actual character.

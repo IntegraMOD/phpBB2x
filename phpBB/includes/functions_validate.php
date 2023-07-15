@@ -170,11 +170,11 @@ function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &
 {
 	$check_var_length = array('fb', 'ig', 'pt', 'twr', 'skp', 'tg', 'li', 'tt', 'location', 'occupation', 'interests', 'sig');
 
-	for($i = 0; $i < count($check_var_length); $i++)
+	for($i = 0; $i < (is_countable($check_var_length) ? count($check_var_length) : 0); $i++)
 	{
-		if (strlen($$check_var_length[$i]) < 2)
+		if (strlen((string) ${$check_var_length}[$i]) < 2)
 		{
-			$$check_var_length[$i] = '';
+			${$check_var_length}[$i] = '';
 		}
 	}
 	

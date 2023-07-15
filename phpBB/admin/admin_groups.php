@@ -204,7 +204,7 @@ else if ( isset($HTTP_POST_VARS['group_update']) )
 			}
 
 			$rows = $db->sql_fetchrowset($result);
-			for ($i = 0; $i < count($rows); $i++)
+			for ($i = 0; $i < (is_countable($rows) ? count($rows) : 0); $i++)
 			{
 				$sql = "SELECT g.group_id FROM " . AUTH_ACCESS_TABLE . " a, " . GROUPS_TABLE . " g, " . USER_GROUP_TABLE . " ug
 				WHERE (a.auth_mod = 1) AND (g.group_id = a.group_id) AND (a.group_id = ug.group_id) AND (g.group_id = ug.group_id) 

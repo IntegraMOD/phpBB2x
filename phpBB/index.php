@@ -41,7 +41,7 @@ $viewcat = ( !empty($HTTP_GET_VARS[POST_CAT_URL]) ) ? $HTTP_GET_VARS[POST_CAT_UR
 
 if( isset($HTTP_GET_VARS['mark']) || isset($HTTP_POST_VARS['mark']) )
 {
-	$mark_read = ( isset($HTTP_POST_VARS['mark']) ) ? $HTTP_POST_VARS['mark'] : $HTTP_GET_VARS['mark'];
+	$mark_read = $HTTP_POST_VARS['mark'] ?? $HTTP_GET_VARS['mark'];
 }
 else
 {
@@ -55,7 +55,7 @@ if( $mark_read == 'forums' )
 {
 	if( $userdata['session_logged_in'] )
 	{
-		setcookie($board_config['cookie_name'] . '_f_all', time(), 0, $board_config['cookie_path'], $board_config['cookie_domain'], $board_config['cookie_secure']);
+		setcookie($board_config['cookie_name'] . '_f_all', time(), ['expires' => 0, 'path' => $board_config['cookie_path'], 'domain' => $board_config['cookie_domain'], 'secure' => $board_config['cookie_secure']]);
 	}
 
 	$template->assign_vars(array(
@@ -128,7 +128,7 @@ while ($row = $db->sql_fetchrow($result))
 }
 $db->sql_freeresult($result);
 
-if( ( $total_categories = count($category_rows) ) )
+if( ( $total_categories = is_countable($category_rows) ? count($category_rows) : 0 ) )
 {
 	//
 	// Define appropriate SQL
@@ -180,7 +180,7 @@ if( ( $total_categories = count($category_rows) ) )
 	}
 	$db->sql_freeresult($result);
 
-	if ( !($total_forums = count($forum_data)) )
+	if ( !($total_forums = is_countable($forum_data) ? count($forum_data) : 0) )
 	{
 		message_die(GENERAL_MESSAGE, $lang['No_forums']);
 	}
@@ -192,9 +192,9 @@ if( ( $total_categories = count($category_rows) ) )
 	if ($userdata['session_logged_in'])
 	{
 		// 60 days limit
-		if ($userdata['user_lastvisit'] < (time() - 5184000))
+		if ($userdata['user_lastvisit'] < (time() - 5_184_000))
 		{
-			$userdata['user_lastvisit'] = time() - 5184000;
+			$userdata['user_lastvisit'] = time() - 5_184_000;
 		}
 
 		$sql = "SELECT t.forum_id, t.topic_id, p.post_time 
@@ -361,7 +361,7 @@ if( ( $total_categories = count($category_rows) ) )
 									{
 										$forum_last_post_time = 0;
 
-										while( list($check_topic_id, $check_post_time) = @each($new_topic_data[$forum_id]) )
+										while( [$check_topic_id, $check_post_time] = @each($new_topic_data[$forum_id]) )
 										{
 											if ( empty($tracking_topics[$check_topic_id]) )
 											{
@@ -419,9 +419,9 @@ if( ( $total_categories = count($category_rows) ) )
 							{
 								$last_post = $lang['No_Posts'];
 							}
-                            if ( isset($forum_moderators[$forum_id]) && count($forum_moderators[$forum_id]) > 0 )
+                            if ( isset($forum_moderators[$forum_id]) && (is_countable($forum_moderators[$forum_id]) ? count($forum_moderators[$forum_id]) : 0) > 0 )
 							{
-								$l_moderators = ( count($forum_moderators[$forum_id]) == 1 ) ? $lang['Moderator'] : $lang['Moderators'];
+								$l_moderators = ( (is_countable($forum_moderators[$forum_id]) ? count($forum_moderators[$forum_id]) : 0) == 1 ) ? $lang['Moderator'] : $lang['Moderators'];
 								$moderator_list = implode(', ', $forum_moderators[$forum_id]);
 							}
 							else

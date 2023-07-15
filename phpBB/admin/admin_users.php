@@ -193,7 +193,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 
 			$mark_list = (isset($mark_list)) ? $mark_list : '';
 			
-			if ( count($mark_list) )
+			if ( is_countable($mark_list) ? count($mark_list) : 0 )
 			{
 				$delete_sql_id = implode(', ', $mark_list);
 				
@@ -885,23 +885,22 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
 			@reset($avatar_images);
 
 			$s_categories = "";
-			while( list($key) = each($avatar_images) )
-			{
+			foreach (array_keys($avatar_images) as $key) {
 				$selected = ( $key == $category ) ? "selected=\"selected\"" : "";
-				if( count($avatar_images[$key]) )
+				if( is_countable($avatar_images[$key]) ? count($avatar_images[$key]) : 0 )
 				{
 					$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
 				}
 			}
 
 			$s_colspan = 0;
-			for($i = 0; $i < count($avatar_images[$category]); $i++)
+			for($i = 0; $i < (is_countable($avatar_images[$category]) ? count($avatar_images[$category]) : 0); $i++)
 			{
 				$template->assign_block_vars("avatar_row", array());
 
-				$s_colspan = max($s_colspan, count($avatar_images[$category][$i]));
+				$s_colspan = max($s_colspan, is_countable($avatar_images[$category][$i]) ? count($avatar_images[$category][$i]) : 0);
 
-				for($j = 0; $j < count($avatar_images[$category][$i]); $j++)
+				for($j = 0; $j < (is_countable($avatar_images[$category][$i]) ? count($avatar_images[$category][$i]) : 0); $j++)
 				{
 					$template->assign_block_vars("avatar_row.avatar_column", array(
 						"AVATAR_IMAGE" => "../" . $board_config['avatar_gallery_path'] . '/' . $category . '/' . $avatar_images[$category][$i][$j])

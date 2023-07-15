@@ -65,62 +65,62 @@
       </div>
 
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_ICQ_NUMBER}:</div>
+        <div class="col-4 row1 py-1"><img src="templates/BS_subSilver/images/icq_add.png">&nbsp;{L_ICQ_NUMBER}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="icq" class="post" style="width: 200px"  size="10" maxlength="255" value="{ICQ}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" /></div>
       </div>
 
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_FACEBOOK}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-facebook fa-xl"></i>&nbsp;{L_FACEBOOK}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="fb" class="post" style="width: 200px"  size="10" maxlength="255" value="{FB}" /></div>
       </div>
 
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_INSTAGRAM}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-instagram fa-xl"></i>&nbsp;{L_INSTAGRAM}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="ig" class="post" style="width: 200px"  size="10" maxlength="255" value="{IG}" /></div>
       </div>
 
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_PINTEREST}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-pinterest fa-xl"></i>&nbsp;{L_PINTEREST}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="pt" class="post" style="width: 200px"  size="10" maxlength="255" value="{PT}" /></div>
       </div>
       
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_TWITTER}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-twitter fa-xl"></i>&nbsp;{L_TWITTER}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="twr" class="post" style="width: 200px"  size="10" maxlength="255" value="{TWR}" /></div>
       </div>      
       
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_SKYPE}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-skype fa-xl"></i>&nbsp;{L_SKYPE}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="skp" class="post" style="width: 200px"  size="10" maxlength="255" value="{SKP}" /></div>
       </div>
       
        <div class="row gen">
-        <div class="col-4 row1 py-1">{L_PINTEREST}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-pinterest fa-xl"></i>&nbsp;{L_PINTEREST}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="pt" class="post" style="width: 200px"  size="10" maxlength="255" value="{PT}" /></div>
       </div>
       
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_TELEGRAM}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-telegram fa-xl"></i>&nbsp;{L_TELEGRAM}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="tg" class="post" style="width: 200px"  size="10" maxlength="255" value="{TG}" /></div>
       </div>      
  
         <div class="row gen">
-        <div class="col-4 row1 py-1">{L_LINKEDIN}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-linkedin fa-xl"></i>&nbsp;{L_LINKEDIN}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="li" class="post" style="width: 200px"  size="10" maxlength="255" value="{LI}" /></div>
       </div>
       
       <div class="row gen">
-        <div class="col-4 row1 py-1">{L_TIKTOK}&nbsp;{L_USERNAME}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-tiktok fa-xl"></i>&nbsp;{L_TIKTOK}&nbsp;{L_USERNAME}:</div>
         <div class="col-8 row2 py-1"><input type="text" name="tt" class="post" style="width: 200px"  size="10" maxlength="255" value="{TT}" /></div>
       </div>     
       
-      <div class="row gen mx-0 hr1">
-        <div class="col-4 py-1">{L_DISCORD}&nbsp;{L_USERID}:</div>
-        <div class="col-8 py-1"><input type="text" name="dc" class="post" style="width: 200px"  size="10" maxlength="255" value="{DC}" placeholder="{L_USER_ID_EXPLAIN}" /></div>
+      <div class="row gen">
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-brands fa-discord fa-xl"></i>&nbsp;{L_DISCORD}&nbsp;{L_USERID}:</div>
+        <div class="col-8 row2 py-1"><input type="text" name="dc" class="post" style="width: 200px"  size="10" maxlength="255" value="{DC}" placeholder="{L_USER_ID_EXPLAIN}" /></div>
       </div>  
 	  
      <div class="row gen">
-        <div class="col-4 row1 py-1">{L_WEBSITE}:</div>
+        <div class="col-4 row1 py-1"><i class="fa- fa fa-solid fa-globe fa-xl"></i>&nbsp;{L_WEBSITE}:</div>
         <div class="col-8 row2 py-1"><input type="text" class="post" style="width: 200px"  name="website" size="25" maxlength="255" value="{WEBSITE}" /></div>
      </div>
       
@@ -278,7 +278,7 @@
 	<!-- BEGIN switch_avatar_local_gallery -->
       <div class="row gen">
         <div class="col-8 row1 py-1">{L_AVATAR_GALLERY}:</div>
-        <div class="col-4 row2 py-1"><input type="submit" name="avatargallery" value="{L_SHOW_GALLERY}" class="liteoption" /></div>
+        <div class="col-4 row2 py-1">{S_HIDDEN_FIELDS}<input type="submit" name="avatargallery" value="{L_SHOW_GALLERY}" class="liteoption" /></div>
       </div>
 	<!-- END switch_avatar_local_gallery -->
 	<!-- END switch_avatar_block -->

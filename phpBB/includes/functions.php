@@ -220,7 +220,7 @@ function make_jumpbox($action, $match_forum_id = 0)
 		$category_rows[] = $row;
 	}
 
-	if ( $total_categories = count($category_rows) )
+	if ( $total_categories = is_countable($category_rows) ? count($category_rows) : 0 )
 	{
 		$sql = "SELECT *
 			FROM " . FORUMS_TABLE . "
@@ -238,7 +238,7 @@ function make_jumpbox($action, $match_forum_id = 0)
 			$forum_rows[] = $row;
 		}
 
-		if ( $total_forums = count($forum_rows) )
+		if ( $total_forums = is_countable($forum_rows) ? count($forum_rows) : 0 )
 		{
 			for($i = 0; $i < $total_categories; $i++)
 			{

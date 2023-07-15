@@ -161,11 +161,11 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 			}
 			$option_text = $temp_option_text;
 
-			if (count($poll_options) < 2)
+			if ((is_countable($poll_options) ? count($poll_options) : 0) < 2)
 			{
 				$error_msg .= (!empty($error_msg)) ? '<br />' . $lang['To_few_poll_options'] : $lang['To_few_poll_options'];
 			}
-			else if (count($poll_options) > $board_config['max_poll_options']) 
+			else if ((is_countable($poll_options) ? count($poll_options) : 0) > $board_config['max_poll_options']) 
 			{
 				$error_msg .= (!empty($error_msg)) ? '<br />' . $lang['To_many_poll_options'] : $lang['To_many_poll_options'];
 			}
@@ -219,7 +219,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 	if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
-		$topic_vote = (!empty($poll_title) && count($poll_options) >= 2) ? 1 : 0;
+		$topic_vote = (!empty($poll_title) && (is_countable($poll_options) ? count($poll_options) : 0) >= 2) ? 1 : 0;
 
 		$post_data['edit_vote'] = (isset($post_data['edit_vote'])) ? $post_data['edit_vote'] : '';
 
@@ -258,7 +258,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	//
 	// Add poll
 	// 
-	if (($mode == 'newtopic' || ($mode == 'editpost' && $post_data['edit_poll'])) && !empty($poll_title) && count($poll_options) >= 2)
+	if (($mode == 'newtopic' || ($mode == 'editpost' && $post_data['edit_poll'])) && !empty($poll_title) && (is_countable($poll_options) ? count($poll_options) : 0) >= 2)
 	{
 		$sql = (!$post_data['has_poll']) ? "INSERT INTO " . VOTE_DESC_TABLE . " (topic_id, vote_text, vote_start, vote_length) VALUES ($topic_id, '$poll_title', $current_time, " . ($poll_length * 86400) . ")" : "UPDATE " . VOTE_DESC_TABLE . " SET vote_text = '$poll_title', vote_length = " . ($poll_length * 86400) . " WHERE topic_id = $topic_id";
 		if (!$db->sql_query($sql))
@@ -646,7 +646,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 					{
 						$emailer->use_template('topic_notify', $user_lang);
 		
-						for ($i = 0; $i < count($bcc_list); $i++)
+						for ($i = 0; $i < (is_countable($bcc_list) ? count($bcc_list) : 0); $i++)
 						{
 							$emailer->bcc($bcc_list[$i]);
 						}

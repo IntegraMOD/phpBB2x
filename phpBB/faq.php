@@ -73,7 +73,7 @@ $counter_2 = 0;
 $faq_block = array();
 $faq_block_titles = array();
 
-for($i = 0; $i < count($faq); $i++)
+for($i = 0; $i < (is_countable($faq) ? count($faq) : 0); $i++)
 {
 	if( $faq[$i][0] != '--' )
 	{
@@ -110,9 +110,9 @@ $template->assign_vars(array(
 	'L_BACK_TO_TOP' => $lang['Back_to_top'])
 );
 
-for($i = 0; $i < count($faq_block); $i++)
+for($i = 0; $i < (is_countable($faq_block) ? count($faq_block) : 0); $i++)
 {
-	if( count($faq_block[$i]) )
+	if( is_countable($faq_block[$i]) ? count($faq_block[$i]) : 0 )
 	{
 		$template->assign_block_vars('faq_block', array(
 			'BLOCK_TITLE' => $faq_block_titles[$i])
@@ -121,7 +121,7 @@ for($i = 0; $i < count($faq_block); $i++)
 			'BLOCK_TITLE' => $faq_block_titles[$i])
 		);
 
-		for($j = 0; $j < count($faq_block[$i]); $j++)
+		for($j = 0; $j < (is_countable($faq_block[$i]) ? count($faq_block[$i]) : 0); $j++)
 		{
 			$row_color = ( !($j % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 			$row_class = ( !($j % 2) ) ? $theme['td_class1'] : $theme['td_class2'];

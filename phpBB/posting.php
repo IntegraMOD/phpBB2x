@@ -611,7 +611,7 @@ else if ( $submit || $confirm )
 			$tracking_topics = ( !empty($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
 			$tracking_forums = ( !empty($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
 
-			if ( count($tracking_topics) + count($tracking_forums) == 100 && empty($tracking_topics[$topic_id]) )
+			if ( (is_countable($tracking_topics) ? count($tracking_topics) : 0) + (is_countable($tracking_forums) ? count($tracking_forums) : 0) == 100 && empty($tracking_topics[$topic_id]) )
 			{
 				asort($tracking_topics);
 				unset($tracking_topics[key($tracking_topics)]);

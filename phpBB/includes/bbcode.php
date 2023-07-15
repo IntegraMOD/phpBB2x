@@ -742,21 +742,20 @@ function bbcode_array_push(&$stack, $value)
  */
 function bbcode_array_pop(&$stack)
 {
-   $arrSize = count($stack);
+   $arrSize = is_countable($stack) ? count($stack) : 0;
    $x = 1;
 
-   while(list($key, $val) = each($stack))
-   {
-      if($x < count($stack))
-      {
+   foreach ($stack as $key => $val) {
+				if($x < (is_countable($stack) ? count($stack) : 0))
+    {
 	 		$tmpArr[] = $val;
-      }
-      else
-      {
+    }
+    else
+    {
 	 		$return_val = $val;
-      }
-      $x++;
-   }
+    }
+				$x++;
+			}
    $stack = $tmpArr;
 
    return($return_val);
@@ -782,23 +781,23 @@ function smilies_pass($message)
 		}
 		$smilies = $db->sql_fetchrowset($result);
 
-		if (count($smilies))
+		if (is_countable($smilies) ? count($smilies) : 0)
 		{
 			usort($smilies, 'smiley_sort');
 		}
 
-		for ($i = 0; $i < count($smilies); $i++)
+		for ($i = 0; $i < (is_countable($smilies) ? count($smilies) : 0); $i++)
 		{
 			$orig[] = "/(?<=.\W|\W.|^\W)" . preg_quote($smilies[$i]['code'], "/") . "(?=.\W|\W.|\W$)/";
 			$repl[] = '<img src="'. $board_config['smilies_path'] . '/' . $smilies[$i]['smile_url'] . '" alt="' . $smilies[$i]['emoticon'] . '" border="0" />';
 		}
 	}
 
-	if (count($orig))
-	{
-		$message = preg_replace($orig, $repl, ' ' . $message . ' ');
-		$message = substr($message, 1, -1);
-	}
+		for ($i = 0; $i < (is_countable($smilies) ? count($smilies) : 0); $i++)
+		{
+			$orig[] = "/(?<=.\W|\W.|^\W)" . preg_quote($smilies[$i]['code'], "/") . "(?=.\W|\W.|\W$)/";
+			$repl[] = '<img src="'. $board_config['smilies_path'] . '/' . $smilies[$i]['smile_url'] . '" alt="' . $smilies[$i]['emoticon'] . '" border="0" />';
+		}
 	
 	return $message;
 }

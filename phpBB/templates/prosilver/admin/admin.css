@@ -34,6 +34,8 @@ a:hover{color:#BC2A4D;text-decoration:underline}
 
 a:active{color:#368AD2;text-decoration:none}
 
+.copyright{font-size:0.70em;text-align:center;padding-top:8px;}
+
 #wrap{padding:0 0 15px 0}
 
 #page-body{clear:both}

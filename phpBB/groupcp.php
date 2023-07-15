@@ -92,32 +92,32 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 		$icq = '';
 	}
 
-	$fb_img = ( $row[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
-	$fb = ( $row[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+	$fb_img = ( $row['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+	$fb = ( $row['user_fb'] ) ? '<a href="https://www.facebook.com/' . $row['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
 
-	$ig_img = ( $row[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row[$i]['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
-	$ig = ( $row[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row[$i]['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+	$ig_img = ( $row['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+	$ig = ( $row['user_ig'] ) ? '<a href="https://www.instagram.com/' . $row['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
 
-	$pt_img = ( $row[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $row[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
-	$pt = ( $row[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $row[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+	$pt_img = ( $row['user_pt'] ) ? '<a href="/www.pinterest.com/' . $row['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+	$pt = ( $row['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $row['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
 
-	$twr_img = ( $row[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $row[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
-	$twr = ( $row[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $row[$i]['user_twr'] . '" target="blank">' . $lang['TWR'] . '</a>' : '';
+	$twr_img = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+	$twr = ( $row['user_twr'] ) ? '<a href="https://twitter.com/' . $row['user_twr'] . '" target="blank">' . $lang['TWR'] . '</a>' : '';
 
-	$skp_img = ( $row[$i]['user_skp'] ) ? '<a href="skype:' . $row[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
-	$skp = ( $row[$i]['user_skp'] ) ? '<a href="skype:' . $row[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+	$skp_img = ( $row['user_skp'] ) ? '<a href="skype:' . $row['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	$skp = ( $row['user_skp'] ) ? '<a href="skype:' . $row['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
 
-	$tg_img = ( $row[$i]['user_tg'] ) ? '<a href="https://t.me/' . $row[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
-	$tg = ( $row[$i]['user_tg'] ) ? '<a href="https://t,me/' . $row[$i]['user_tg'] . '" target="blank">' . $lang['TG'] . '</a>' : '';
+	$tg_img = ( $row['user_tg'] ) ? '<a href="https://t.me/' . $row['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+	$tg = ( $row['user_tg'] ) ? '<a href="https://t,me/' . $row['user_tg'] . '" target="blank">' . $lang['TG'] . '</a>' : '';
 
-	$li_img = ( $row[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
-	$li = ( $row[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row[$i]['user_li'] . '" target="blank">' . $lang['LI'] . '</a>' : '';
+	$li_img = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+	$li = ( $row['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $row['user_li'] . '" target="blank">' . $lang['LI'] . '</a>' : '';
 
-	$tt_img = ( $row[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
-	$tt = ( $row[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row[$i]['user_tt'] . '" target="blank">' . $lang['TT'] . '</a>' : '';
+	$tt_img = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+	$tt = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '" target="blank">' . $lang['TT'] . '</a>' : '';
 
-	$dc_img = ( $row[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $row[$i]['user_dc'] . '&amp;.src=pg"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
-	$dc = ( $row[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/@' . $row[$i]['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
+	$dc_img = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $row['user_dc'] . '&amp;.src=pg"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
+	$dc = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/@' . $row['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
 
 	$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($row['username']) . "&amp;showresults=posts");
 	$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $row['username']) . '" title="' . sprintf($lang['Search_user_posts'], $row['username']) . '" border="0" /></a>';
@@ -627,7 +627,7 @@ else if ( $group_id )
 					$members = ( isset($HTTP_POST_VARS['approve']) || isset($HTTP_POST_VARS['deny']) ) ? $HTTP_POST_VARS['pending_members'] : $HTTP_POST_VARS['members'];
 
 					$sql_in = '';
-					for($i = 0; $i < count($members); $i++)
+					for($i = 0; $i < (is_countable($members) ? count($members) : 0); $i++)
 					{
 						$sql_in .= ( ( $sql_in != '' ) ? ', ' : '' ) . intval($members[$i]);
 					}
@@ -683,7 +683,7 @@ else if ( $group_id )
 
 								while( list($user_id, $group_list) = @each($group_check) )
 								{
-									if ( count($group_list) == 1 )
+									if ( (is_countable($group_list) ? count($group_list) : 0) == 1 )
 									{
 										$remove_mod_sql .= ( ( $remove_mod_sql != '' ) ? ', ' : '' ) . $user_id;
 									}
@@ -749,7 +749,7 @@ else if ( $group_id )
 						$emailer->from($board_config['board_email']);
 						$emailer->replyto($board_config['board_email']);
 
-						for ($i = 0; $i < count($bcc_list); $i++)
+						for ($i = 0; $i < (is_countable($bcc_list) ? count($bcc_list) : 0); $i++)
 						{
 							$emailer->bcc($bcc_list[$i]);
 						}
@@ -825,7 +825,6 @@ else if ( $group_id )
 	}
 
 	$group_members = $db->sql_fetchrowset($result); 
-//	$members_count = count($group_members);
     $members_count = is_countable($group_members) ? count($group_members) : 0;
  	$db->sql_freeresult($result);
 
@@ -842,7 +841,6 @@ else if ( $group_id )
 	}
 
 	$modgroup_pending_list = $db->sql_fetchrowset($result);
-//	$modgroup_pending_count = count($modgroup_pending_list);
 	$modgroup_pending_count = is_countable($modgroup_pending_list) ? count($modgroup_pending_list) : 0;
 
 	$db->sql_freeresult($result);
@@ -936,7 +934,7 @@ else if ( $group_id )
 	$username = $group_moderator['username'];
 	$user_id = $group_moderator['user_id'];
 
-	generate_user_info($group_moderator, $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $fb_img, $fb, $ig_img, $ig, $pt_img, $pt, $twr_img, $twr, $skp_img, $skp, $tg_img, $tg, $li_img, $li, $tt_img, $tt, $dc);
+	generate_user_info($group_moderator, $board_config['default_dateformat'], $is_moderator, $from, $posts, $joined, $poster_avatar, $profile_img, $profile, $search_img, $search, $pm_img, $pm, $email_img, $email, $www_img, $www, $icq_status_img, $icq_img, $icq, $fb_img, $fb, $ig_img, $ig, $pt_img, $pt, $twr_img, $twr, $skp_img, $skp, $tg_img, $tg, $li_img, $li, $tt_img, $tt, $dc_img, $dc);
 
 	$s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
 	$select_sort_order = (empty($select_sort_order)) ? '' : $select_sort_order;

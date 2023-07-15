@@ -215,11 +215,11 @@ else
 				$forward_to = ( !empty($forward_matches[3]) ) ? $forward_matches[3] : $forward_matches[1];
 				$forward_match = explode('&', $forward_to);
 
-				if(count($forward_match) > 1)
+				if((is_countable($forward_match) ? count($forward_match) : 0) > 1)
 				{
-					for($i = 1; $i < count($forward_match); $i++)
+					for($i = 1; $i < (is_countable($forward_match) ? count($forward_match) : 0); $i++)
 					{
-						if( !preg_match("/sid=/", $forward_match[$i]) )
+						if( !preg_match("/sid=/", (string) $forward_match[$i]) )
 						{
 							if( $forward_page != '' )
 							{

@@ -68,7 +68,7 @@ $mode_types_text = array($lang['Sort_Joined'], $lang['Sort_Username'], $lang['So
 $mode_types = array('joined', 'username', 'location', 'posts', 'email', 'website', 'topten');
 
 $select_sort_mode = '<select name="mode">';
-for($i = 0; $i < count($mode_types_text); $i++)
+for($i = 0; $i < (is_countable($mode_types_text) ? count($mode_types_text) : 0); $i++)
 {
 	$selected = ( $mode == $mode_types[$i] ) ? ' selected="selected"' : '';
 	$select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';

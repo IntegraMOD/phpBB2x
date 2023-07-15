@@ -161,23 +161,26 @@ window.onload = doOnLoadMenuACP;
 
 // -->
 </script>
-				<img src="../templates/prosilver/admin/images/phpbb_logo.gif" alt="phpBB" />
-                <div id="menu">
-					<ul>
-						<li class="header">{L_ADMIN}</li>
-						<li><a href="{U_ADMIN_INDEX}" target="main"><span>{L_ADMIN_INDEX}</span></a></li>
-						<li><a href="{U_FORUM_INDEX}" target="_parent"><span>{L_FORUM_INDEX}</span></a></li>
-						<li><a href="{U_FORUM_INDEX}" target="main"><span>{L_PREVIEW_FORUM}</span></a></li>
-					</ul>
-					<!-- BEGIN catrow -->
-					<ul>
-						<li class="header" onclick="onMenuCatClick('{catrow.MENU_CAT_ID}');" style="cursor:pointer;cursor:hand;">{catrow.ADMIN_CATEGORY}</li>
-		                <li id="menuCat_{catrow.MENU_CAT_ID}" style="display:block;">
-        		          <!-- BEGIN modulerow -->
-        		          <div id="menuCat_{catrow.MENU_CAT_ID}_{catrow.modulerow.ROW_COUNT}" style="display:block;"><a href="{catrow.modulerow.U_ADMIN_MODULE}" target="main" class="small">{catrow.modulerow.ADMIN_MODULE}</a></div>
-        		          <!-- END modulerow -->
-		                </li>
-					</ul>
-					<!-- END catrow -->
-				</div>
-				
+<img src="../templates/prosilver/admin/images/phpbb_logo.gif" alt="phpBB" />
+<div id="menu">
+  <ul>
+	<li class="header">{L_ADMIN}</li>
+	<li><a href="{U_ADMIN_INDEX}" target="main"><span>{L_ADMIN_INDEX}</span></a></li>
+	<li><a href="{U_FORUM_INDEX}" target="_parent"><span>{L_FORUM_INDEX}</span></a></li>
+	<li><a href="{U_FORUM_INDEX}" target="main"><span>{L_PREVIEW_FORUM}</span></a></li>
+  </ul>
+  <!-- BEGIN catrow -->
+  <ul>
+	<li class="header" onclick="onMenuCatClick('{catrow.MENU_CAT_ID}');" style="cursor:pointer;cursor:hand;">{catrow.ADMIN_CATEGORY}</li>
+    <li id="menuCat_{catrow.MENU_CAT_ID}" style="display:block;">
+      <!-- BEGIN modulerow -->
+      <div id="menuCat_{catrow.MENU_CAT_ID}_{catrow.modulerow.ROW_COUNT}" style="display:block;"><a href="{catrow.modulerow.U_ADMIN_MODULE}" target="main" class="small">{catrow.modulerow.ADMIN_MODULE}</a></div>
+      <!-- END modulerow -->
+    </li>
+  </ul>
+  <!-- END catrow -->
+  
+  
+</div>
+<div class="copyright" align="center">DHTML Menu by <b>phpMiX</b></div>
+	

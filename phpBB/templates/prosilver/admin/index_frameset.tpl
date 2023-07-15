@@ -11,7 +11,7 @@
 </frameset>
 <noframes>
 	<body style="background-color:#000">
-		<p style="color:#FFF;text-align:center"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Wiki_User_Meow_full.png/800px-Wiki_User_Meow_full.png" alt="Meow the Cheetah Goddess" /><br />Sorry, your browser doesn't seem to support frames.</p>
+		<p style="color:#FFF;text-align:center">Sorry, your browser doesn't seem to support frames.</p>
 	</body>
 </noframes>
 </html>

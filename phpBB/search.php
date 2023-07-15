@@ -271,7 +271,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			}
 			$db->sql_freeresult($result);
 
-			$total_match_count = count($search_ids);
+			$total_match_count = is_countable($search_ids) ? count($search_ids) : 0;
 
 		}
 		else if ( $search_keywords != '' )
@@ -292,7 +292,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			$word_match = array();
 			$result_list = array();
 
-			for($i = 0; $i < count($split_search); $i++)
+			for($i = 0; $i < (is_countable($split_search) ? count($split_search) : 0); $i++)
 			{
 				if ( strlen(str_replace(array('*', '%'), '', trim($split_search[$i]))) < $board_config['search_min_chars'] )
 				{
@@ -393,7 +393,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			}	
 			
 			unset($result_list);
-			$total_match_count = count($search_ids);
+			$total_match_count = is_countable($search_ids) ? count($search_ids) : 0;
 		}
 
 		//
@@ -466,9 +466,9 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 				$count = 0;
 				$chunk = 0;
 
-				if (count($search_ids) > $limiter)
+				if ((is_countable($search_ids) ? count($search_ids) : 0) > $limiter)
 				{
-					for ($i = 0; $i < count($search_ids); $i++) 
+					for ($i = 0; $i < (is_countable($search_ids) ? count($search_ids) : 0); $i++) 
 					{
 						if ($count == $limiter)
 						{
@@ -487,7 +487,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 				$search_ids = array();
 
-				for ($i = 0; $i < count($search_id_chunks); $i++)
+				for ($i = 0; $i < (is_countable($search_id_chunks) ? count($search_id_chunks) : 0); $i++)
 				{
 					$where_sql = '';
 
@@ -548,9 +548,9 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 				$count = 0;
 				$chunk = 0;
 
-				if (count($search_ids) > $limiter)
+				if ((is_countable($search_ids) ? count($search_ids) : 0) > $limiter)
 				{
-					for ($i = 0; $i < count($search_ids); $i++) 
+					for ($i = 0; $i < (is_countable($search_ids) ? count($search_ids) : 0); $i++) 
 					{
 						if ($count == $limiter)
 						{
@@ -569,7 +569,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 				$search_ids = array();
 
-				for ($i = 0; $i < count($search_id_chunks); $i++)
+				for ($i = 0; $i < (is_countable($search_id_chunks) ? count($search_id_chunks) : 0); $i++)
 				{
 					$where_sql = ( $search_author == '' && $auth_sql == '' ) ? 'post_id IN (' . implode(', ', $search_id_chunks[$i]) . ')' : 'p.post_id IN (' . implode(', ', $search_id_chunks[$i]) . ')';
 					$select_sql = ( $search_author == '' && $auth_sql == '' ) ? 'post_id' : 'p.post_id';
@@ -607,7 +607,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 					$db->sql_freeresult($result);
 				}
 
-				$total_match_count = count($search_ids);
+				$total_match_count = is_countable($search_ids) ? count($search_ids) : 0;
 			}
 		}
 		else if ( $search_id == 'unanswered' )
@@ -641,7 +641,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			}
 			$db->sql_freeresult($result);
 
-			$total_match_count = count($search_ids);
+			$total_match_count = is_countable($search_ids) ? count($search_ids) : 0;
 
 			//
 			// Basic requirements
@@ -691,11 +691,11 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 		}
 		*/
 
-		for($i = 0; $i < count($store_vars); $i++)
+		for($i = 0; $i < (is_countable($store_vars) ? count($store_vars) : 0); $i++)
         {
-            if (isset($$store_vars[$i]))
+            if (isset(${$store_vars}[$i]))
             {
-                $store_search_data[$store_vars[$i]] = $$store_vars[$i];
+                $store_search_data[$store_vars[$i]] = ${$store_vars}[$i];
             }
 			else
 			{
@@ -738,9 +738,9 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			if ( $row = $db->sql_fetchrow($result) )
 			{
 				$search_data = unserialize($row['search_array']);
-				for($i = 0; $i < count($store_vars); $i++)
+				for($i = 0; $i < (is_countable($store_vars) ? count($store_vars) : 0); $i++)
 				{
-					$$store_vars[$i] = $search_data[$store_vars[$i]];
+					${$store_vars}[$i] = $search_data[$store_vars[$i]];
 				}
 			}
 		}
@@ -1383,7 +1383,7 @@ for($i = 100; $i < 1100 ; $i += 100)
 // Sorting
 //
 $s_sort_by = "";
-for($i = 0; $i < count($sort_by_types); $i++)
+for($i = 0; $i < (is_countable($sort_by_types) ? count($sort_by_types) : 0); $i++)
 {
 	$s_sort_by .= '<option value="' . $i . '">' . $sort_by_types[$i] . '</option>';
 }
@@ -1395,7 +1395,7 @@ $previous_days = array(0, 1, 7, 14, 30, 90, 180, 364);
 $previous_days_text = array($lang['All_Posts'], $lang['1_Day'], $lang['7_Days'], $lang['2_Weeks'], $lang['1_Month'], $lang['3_Months'], $lang['6_Months'], $lang['1_Year']);
 
 $s_time = '';
-for($i = 0; $i < count($previous_days); $i++)
+for($i = 0; $i < (is_countable($previous_days) ? count($previous_days) : 0); $i++)
 {
 	$selected = ( $topic_days == $previous_days[$i] ) ? ' selected="selected"' : '';
 	$s_time .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';

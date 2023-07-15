@@ -1,5 +1,4 @@
- 
-<script>
+<script language="javascript" type="text/javascript">
 <!--
 
 var menuVersion = "Slide Menu v1.0.0";
@@ -166,16 +165,15 @@ window.onload = doOnLoadMenuACP;
 
 // -->
 </script>
-
-<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+<table width="100%" cellpadding="4" cellspacing="0" border="0" align="center">
   <tr> 
-	<td align="center" ><a href="{U_FORUM_INDEX}" target="_parent"><img src="../templates/BS_subSilver/images/logo_phpBB_med.gif" border="0" /></a></td>
+	<td align="center" ><a href="{U_FORUM_INDEX}" target="_parent"><img src="../templates/BS_subIce/images/logo_phpBB_med.gif" border="0" /></a></td>
   </tr>
   <tr> 
 	<td align="center" > 
-	  <table width="100%" cellpadding="1" cellspacing="0" border="0" class="forumline">
+	  <table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
 		<tr> 
-		  <td height="22" class="th thHead"><b>{L_ADMIN}</b></td>
+		  <th height="25" class="thHead"><b>{L_ADMIN}</b></th>
 		</tr>
 		<tr> 
 		  <td class="row1"><span class="genmed"><a href="{U_ADMIN_INDEX}" target="main" class="genmed">{L_ADMIN_INDEX}</a></span></td>
@@ -188,26 +186,29 @@ window.onload = doOnLoadMenuACP;
 		</tr>
 		<!-- BEGIN catrow -->
 		<tr> 
-		  <td height="22" class="catSides" style="cursor:pointer;cursor:hand;" onclick="onMenuCatClick('{catrow.MENU_CAT_ID}');"><div id="menuCat_{catrow.MENU_CAT_ID}_{catrow.modulerow.ROW_COUNT}" style="display:block;" class="cattitle">{catrow.ADMIN_CATEGORY}</div></td>
+		  <td height="28" class="catSides" style="cursor:pointer;cursor:hand;" onclick="onMenuCatClick('{catrow.MENU_CAT_ID}');"><span class="cattitle">{catrow.ADMIN_CATEGORY}</span></td>
 		</tr>
 		<tr> 
 		  <td class="row1">
 			<div id="menuCat_{catrow.MENU_CAT_ID}" style="display:block;">
-			  <table width="100%" cellpadding="2" cellspacing="1" border="0" class="bodyline">		
+		  	  <table width="100%" cellpadding="4" cellspacing="1" border="0" class="bodyline">
 				<!-- BEGIN modulerow -->
 				<tr> 
-				  <td class="row1"><span class="genmed"><a href="{catrow.modulerow.U_ADMIN_MODULE}"  target="main" class="genmed">{catrow.modulerow.ADMIN_MODULE}</a></span> 
+				  <td class="row1"><div id="menuCat_{catrow.MENU_CAT_ID}_{catrow.modulerow.ROW_COUNT}" style="display:block;" class="genmed"><a href="{catrow.modulerow.U_ADMIN_MODULE}"  target="main" class="genmed">{catrow.modulerow.ADMIN_MODULE}</a></div> 
 				  </td>
 				</tr>
 				<!-- END modulerow -->
 			  </table>
 			</div>
 		  </td>
-		</tr>
+		</tr>		
 		<!-- END catrow -->
 	  </table>
 	</td>
   </tr>
+  <tr>
+    <td align="center"><span class="copyright">DHTML Menu by <b>phpMiX</b></span></td>
+  </tr>  
 </table>
 
 <br />

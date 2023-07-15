@@ -5,8 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="copyright" content="2017, 2023 Integra Team">
-<link rel="stylesheet" href="{TEMPLATE}/css/stylesheet.css" type="text/css">
-<link rel="stylesheet" href="{TEMPLATE}/css/admin.css" type="text/css">
+<link href="../templates/BS_subIce/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
+<link href="../templates/BS_subIce/css/admin.css" rel="stylesheet" type="text/css">
+
 <title>{SITENAME} - {L_PHPBB_ADMIN}</title>
 <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 <script>

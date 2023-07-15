@@ -292,18 +292,19 @@ CREATE TABLE phpbb_search_wordmatch (
 #
 # Table structure for table 'phpbb_sessions'
 #
-# Note that if you're running 3.23.x you may want to make
+# Note you may want to make
 # this table a type HEAP. This type of table is stored
 # within system memory and therefore for big busy boards
 # is likely to be noticeably faster than continually
 # writing to disk ...
 #
+
 CREATE TABLE phpbb_sessions (
    session_id char(32) DEFAULT '' NOT NULL,
    session_user_id mediumint(8) DEFAULT '0' NOT NULL,
    session_start int(11) DEFAULT '0' NOT NULL,
    session_time int(11) DEFAULT '0' NOT NULL,
-   session_ip int(11) DEFAULT '0' NOT NULL,
+   session_ip char(8) DEFAULT '0' NOT NULL,
    session_page int(11) DEFAULT '0' NOT NULL,
    session_logged_in tinyint(1) DEFAULT '0' NOT NULL,
    session_admin tinyint(2) DEFAULT '0' NOT NULL,
@@ -542,7 +543,7 @@ CREATE TABLE phpbb_users (
    user_tg varchar (255),
    user_li varchar (255),
    user_tt varchar (255),
-   user_dc varchar (255),
+   user_dc varchar (255),  
    user_occ varchar(100),
    user_interests varchar(255),
    user_actkey varchar(32),

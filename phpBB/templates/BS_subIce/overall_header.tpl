@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="templates/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 <!-- fontawesome 6.4.0 CSS-->  
 <link rel="stylesheet" href="templates/assets/css/all.css" rel="stylesheet" type="text/css">
-<link href="{TEMPLATE}/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
+<link href="templates/BS_subIce/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
 
 <!-- BEGIN switch_enable_pm_popup -->
 <script>
