@@ -50,6 +50,40 @@ $template->pparse('overall_footer');
 //
 $db->sql_close();
 
+/* Un-comment the line below to restrict Admins only to view page generation info */
+
+//if( ($userdata['session_logged_in']) and ($userdata['user_level'] == ADMIN) )
+//{
+	$gzip_text = ($board_config['gzip_compress']) ? 'GZIP enabled' : 'GZIP disabled';
+
+	$debug_text = (DEBUG == 1) ? 'Debug on' : 'Debug off';
+
+	$excuted_queries = $db->num_queries;
+
+	$mtime = microtime();
+	$mtime = explode(" ",$mtime);
+	$mtime = $mtime[1] + $mtime[0];
+	$endtime = $mtime;
+
+	$gentime = round(($endtime - $starttime), 4);
+
+	$sql_time = round($db->sql_time, 4);
+
+	$sql_part = round($sql_time / $gentime * 100);
+	$php_part = 100 - $sql_part;
+
+//}*/
+if( defined('DEBUG') && DEBUG == "1")
+{
+	$debug_out = '<div class="gensmall" style="text-align: center; margin-bottom:10px;">[Page generation time: '. $gentime .'s (PHP: '. $php_part .'% | SQL: '. $sql_part .'%) | SQL queries: '. $excuted_queries .' | '. $gzip_text .' | '. $debug_text .']</div>';
+}
+else
+{
+	$debug_out = '<br />';
+}
+
+echo $debug_out;
+
 //
 // Compress buffered output if required and send to browser
 //
