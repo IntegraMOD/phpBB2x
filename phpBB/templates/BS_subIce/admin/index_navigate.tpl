@@ -1,8 +1,4 @@
-<script language="javascript" type="text/javascript">
-<!--
-
-var menuVersion = "Slide Menu v1.0.0";
-
+<script>
 /*************************************************************
  *	DHTML Slide Menu for ACP MOD
  *
@@ -14,8 +10,6 @@ var menuVersion = "Slide Menu v1.0.0";
  *
  *	Enjoy! ;-)
  *************************************************************/
-
-menuVersion += ' &copy; 2004<br />by <a href="http://www.phpmix.com/" target="_blank" class="copyright">phpMiX</a>';
 
 function getCookie(name)
 {
@@ -162,53 +156,24 @@ function doOnLoadMenuACP()
 }
 var	oldOnLoadMenuACP = window.onload;
 window.onload = doOnLoadMenuACP;
-
-// -->
 </script>
-<table width="100%" cellpadding="4" cellspacing="0" border="0" align="center">
-  <tr> 
-	<td align="center" ><a href="{U_FORUM_INDEX}" target="_parent"><img src="../templates/BS_subIce/images/logo_phpBB_med.gif" border="0" /></a></td>
-  </tr>
-  <tr> 
-	<td align="center" > 
-	  <table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
-		<tr> 
-		  <th height="25" class="thHead"><b>{L_ADMIN}</b></th>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_ADMIN_INDEX}" target="main" class="genmed">{L_ADMIN_INDEX}</a></span></td>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
-		</tr>
-		<!-- BEGIN catrow -->
-		<tr> 
-		  <td height="28" class="catSides" style="cursor:pointer;cursor:hand;" onclick="onMenuCatClick('{catrow.MENU_CAT_ID}');"><span class="cattitle">{catrow.ADMIN_CATEGORY}</span></td>
-		</tr>
-		<tr> 
-		  <td class="row1">
-			<div id="menuCat_{catrow.MENU_CAT_ID}" style="display:block;">
-		  	  <table width="100%" cellpadding="4" cellspacing="1" border="0" class="bodyline">
-				<!-- BEGIN modulerow -->
-				<tr> 
-				  <td class="row1"><div id="menuCat_{catrow.MENU_CAT_ID}_{catrow.modulerow.ROW_COUNT}" style="display:block;" class="genmed"><a href="{catrow.modulerow.U_ADMIN_MODULE}"  target="main" class="genmed">{catrow.modulerow.ADMIN_MODULE}</a></div> 
-				  </td>
-				</tr>
-				<!-- END modulerow -->
-			  </table>
-			</div>
-		  </td>
-		</tr>		
-		<!-- END catrow -->
-	  </table>
-	</td>
-  </tr>
-  <tr>
-    <td align="center"><span class="copyright">DHTML Menu by <b>phpMiX</b></span></td>
-  </tr>  
-</table>
-
-<br />
+<img src="../templates/BS_subIce/images/logo_phpBB.png" style="width: 12em" alt="phpBB" />
+<div id="menu">
+  <ul>
+    <li class="header">{L_ADMIN}</li>
+    <li><a href="{U_ADMIN_INDEX}" target="main"><span>{L_ADMIN_INDEX}</span></a></li>
+    <li><a href="{U_FORUM_INDEX}" target="_parent"><span>{L_FORUM_INDEX}</span></a></li>
+    <li><a href="{U_FORUM_INDEX}" target="main"><span>{L_PREVIEW_FORUM}</span></a></li>
+  </ul>
+  <!-- BEGIN catrow -->
+  <ul>
+    <li class="header" onclick="onMenuCatClick('{catrow.MENU_CAT_ID}');" style="cursor:pointer;cursor:hand;">{catrow.ADMIN_CATEGORY}</li>
+    <li id="menuCat_{catrow.MENU_CAT_ID}" style="display:block;">
+      <!-- BEGIN modulerow -->
+      <div id="menuCat_{catrow.MENU_CAT_ID}_{catrow.modulerow.ROW_COUNT}" style="display:block;"><a href="{catrow.modulerow.U_ADMIN_MODULE}" target="main" class="small">{catrow.modulerow.ADMIN_MODULE}</a></div>
+      <!-- END modulerow -->
+    </li>
+  </ul>
+  <!-- END catrow -->
+</div>
+				

@@ -1,0 +1,92 @@
+<?php
+/***************************************************************************
+ *                          lang_faq.php [Azerbaijani]
+ *                            -------------------
+ *   begin                : Mon Sep 9 2002
+ *   copyright            : (C) 2001 The phpBB Group
+ *   email                : support@phpbb.com
+ *
+ *   $Id: lang_faq.php,v 1.4 2001/12/15 16:42:08 psotfx Exp $
+ *
+ *
+ ***************************************************************************/
+
+/***************************************************************************
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ ***************************************************************************/
+//
+// Translation by:
+//
+// Məmmədova Zəminə (Vərqa Simurq)  :: SimurgVerga@aol.com  :: http://www.fikrini.de
+//
+//
+// For questions and comments use: SimurgVerga@aol.com 
+//
+
+$faq[] = array("--","Giriş və qeydiyyat problemləri");
+
+$faq[] = array("Niyə foruma daxil ola bilmirəm?", "Qeydiyyatdan keçmisiniz? Hesabınıza daxil olmaq üçün əvvəl qeydiyyatdan keçməlisiniz. Əks halda hesabınıza qadağa qoyulub, ya da deaktivləşdirilib (bu halda bunun qeyd edildiyi bir yazı görməlisiniz). Əgər elədirsə, idarəçilərə müraciət edib səbəbi soruşa bilərsiniz. Əgər qeydiyyatdan keçdiyiniz və qadağan qoyulmadığı halda belə hesabınıza daxil ola bilmirsinzsə, təkrar-təkrar istifadəçi adınızı və şifrənizi yoxlayın. Səbəb bu deyilsə, ismarış lövhəsinə keçin, bəlkə lövhədə yanlış dəyişikliklər edilib, məsələn: əlifba dəyişikliyi kimi. Şifrənizi və istifadəçi adınızı düzgün daxil etdiyinizi də yoxlayin. Ən son məqamda \"Şifrəmi unutmuşam\" keçidini açın və e-məktub ünvanınıza gələcək yeni şifrə ilə hesabınıza daxil olmağa çalışın. Bütün bunlar nəticə vermədiyi halda idarəçilərə müraciət edin.");
+$faq[] = array("Niyə qeydiyyatdan keçməliyəm?", "Əslində qeydiyyatdan keçməmək də olardı. İsmarış göndərmək üçün qeydiyyatdan keçməyin zərururi olub olmadığına hər bir forumun idarəçisi qərar verir. Qeydiyyatdan keçmək sizin öz xeyrinizədir. Siz yalnız qeydiyyatdan keçdikdən sonra bə`zi imkanlara sahib olursunuz: ismarışınızın yanında kiçik bir rəsm yerləşdirmək, şəxsi ismarış göndərmək, tanıdığınız istifadəçiyə e-məktub yazmaq, müəyyən qrupa üzv olmaq, ismarışınızda düzəlişlər etmək. Həm də qeydiyyat çox bəsit olduğu üçün keçməyiniz məsləhətdir.");
+$faq[] = array("Niyə səhifəni bağladıqdan sonra forumdan avtomatik çıxıram?", "Giriş zamanı gördüyünüz <i>\"Yadda saxla\"</i> funksiyasını seçmədiyiniz müddət boyunca ismarış lövhəsi sizi sadəcə müəyyən bir zaman üçün qeydiyyatlı qəbul edir. Bu sizin adınızdan digərlərinin istifadə etməsinin qarşısını almaq üçündür. Girişinizin davamlı qalması üçün, bu funksiyanı seçməyiniz yetərlidir. Amma bunu kütləvi internet mərkəzlərində (məs. kitabxana, internet kafe və klublarda) etməməyiniz məsləhətdir. Bir kömpüterdən istifadə etdiyiniz zaman isə bu funksiyanı seçməyiniz işinizi rahatlaşdıracaqdır.");
+$faq[] = array("Xətdəkilər siyahısında özümü gizləmək üçün nə edə bilərəm?", "Sizin şəxsi mə`lumatlarınız olan səhifədə <i>\"Xətdə olduğumu gizlə\"</i>  funksiyasından istifadə etməklə. Buradan \"<i>Bəli</i>\"ni seçdikdə xətdə olduğunuzu sadəcə idarəçilər və özünüz görə biləçəksiniz. Bu halda siz gizli istifadəçi sayılırsınız.");
+$faq[] = array("Şifrəmi unutduğum halda nə etməliyəm?", "Narahat olmayın! Onu öyrənmək mümkün olmasa belə, yerinə başqa bir şifrə ala bilərsiniz. Giriş səhifəsini açıb \"<u>Şifrəmi unutmuşam</u>\" keçidini açın və orda yazılanlara əməl edin. Qisa zaman fasiləsindən sonra təkrar xətdə olduğunuzu görəcəksiniz.");
+$faq[] = array("Niyə qeydiyyatdan keçdiyim halda hesabıma daxil ola bilmirəm?", "Əvvəlcə istifadəçi adınızı və şifrənizi doğru yazdığınızdan əmin olun. Doğru yazıldığı halda, iki səbəb daha ola bilər. Əgər COPPA dəstəklənirsə və qeydiyyat əsnasında \"<u>yaşım 13-dən azdır</u>\" keçidini seçmisinizsə, yazılanlara müvafiq hərəkət etməlisiniz. Səbəb bu deyilsə, qeydiyyatınız təsdiqlənməlidir. Bə`zi forumlarda qeydiyyatın təsdiqlənməsi şərtdir. Giriş üçün hesabınız ya özünüz ya da idarəçi tərəfindən təsdiq olunmalıdır. Bu haqda siz qeydiyyatdan keçdiyiniz zaman mə`lumat almalısınız. Əks halda təsdiqi e-məktubla alacaqsınız, o məktubda yazılanlara əməl etməlisiniz. Əgər belə bir məktub almadınızsa, onda e-məktub ünvanınızı düzgün verib, vermədiyinizi yoxlayın. Hesabın təsdiqinin səbəbi <i>pisniyyətli</i> istifadəçilərin qarşısını almaqdır. Verdiyiniz e-məktub ünvanının doğruluğundan əmin olduqda, idarəçi ilə əlaqə yaratmağa çalışın.");
+$faq[] = array("Qeydiyyatdan çoxdan keçmişəm, amma niyə indi köhnə hesaba daxil ola bilmirəm?", "Buna əsas səbəb istifadəçi adı və şifrənin düzgün yazılmaması ola bilər. Qeydiyyatdan sonra aldığınız e-məktub silinməyibsə, ora baxın. Ya da bu və ya digər səbəbdən idarəçi hesabınızı silmiş ola bilər. Bə`zən mə`lumat bazasının çox yer tutmaması üçün ismarış yazmayan istifadəçilərin hesabları silinir. Yenidən qeydiyyatdan keçin və foruma buyurun.");
+
+$faq[] = array("--","İstifadəçi xüsusiyyət və əlamətləri");
+$faq[] = array("İstifadəçi xüsusiyyətlərini necə dəyişə bilərəm?", "Siz qeydiyyatdan keçərkən bütün mə`lumatlarınız mə`lumat bazasında qeyd olunur. Amma dəyişiklikləri istənilən an (adətən ana səhifənin üst sağ qismində olan \"<u>Şəxsi mə`lumat</u>\" keçidini açaraq edə bilərsiniz. Nəzərə alın ki, bə`zən istifadəçi adını yalnız idarəçilər dəyişdirə və ya redaktə edə bilərlər. Belə bir arzunuz olduğu halda idarəçilərə müraciət edin.");
+$faq[] = array("Göstərilən saatlar doğru deyil, niyə?", "Əslində çox güman ki, saatlar düzgündür. Sadəcə forum sizin yaşadığınız yerin saatını göstərməyə bilər. Bunu siz özünüz \"<u>Şəxsi mə`lumat</u>\" keçidindən düzəldə bilərsiniz. Yaşadığınız ölkənin hansı zaman zolağında yerləşdiyini müəyyən edin və müvafiq olaraq dəyişiklikləri aparın. Əgər siz forumun Bakı vaxtı ilə işləməsini istəyirsinizsə, vaxt zonası lövhəsinə GMT+6 saat göstəricisini daxil etməlisiniz, 24 saatlıq rejim üçün isə saat formatı lövhəsinə <b>D M d, Y H:i</b> yazmağınız vacibdir.");
+$faq[] = array("Zaman zolağını dəyişməyimə baxmayaraq, saatlar düz deyil, niyə?", "Düzgün zaman zolağını seçdiyinizdən əminsiniz, amma yenə də saatlar səhvdirsə, bunun səbəbi saytın saatların mövsümlə əlaqədar geri və irəli çəkilməsini nəzərə almamasıdır. Bu halda saatı özünüz düzəldin.");
+$faq[] = array("Danışdığım dil siyahıda niyə yoxdur?", "Bu halda idarəçilərə müraciət edin. Bə`zi forumlar forumun müxtəlif dil versiyalarına malik olurlar. Sizin dilinizin phpb2 qrupunun saytında olduğundan əminsinizsə, onu daxil etməyi idarəçilərdən xahiş edə bilərsiniz.");
+$faq[] = array("İstifadəçi adımın altında şəkil yerləşdirmək üçün nə etməliyəm?", "İsmarışlar lövhəsində adınızın altında iki cür rəsm ola bilər. Bunlardan birincisi sizin istifadəçi kimi fəaliyyət dərəcənizi və ya rütbənizi əks etdirə bilər. Adətən bu ulduz şəklində olur. Ulduzların sayı sizin fəallıq dərəcənizlə düz mütənasib asılı olur. Amma bu rəsmin forumda olub-olmamasına qərar idarəçi tərəfindən verilir. İkinci şəkil növünü isə hal-hazırda bir çox istifadəçilərin adları altında və ismarışları qarşısında görə bilərsiniz. Bu şəkli daxil etmək yalnız sizin arzunuza bağlıdır. Şəkli təqdim olunan sərgidən, istənilən internet səhifəsindən və ya şəxsi kompüterinizdən yükləyə bilərsiniz. Şəkli istənilən an silə və ya başqası ilə əvəz edə bilərsiniz. Daxil etmək üçün isə <u>\"Şəxsi mə`lumat\"</u> keçidini açmalı və orda yazılan şərtlərə əməl etməlisiniz. Çətinliyiniz olduğu halda idarəçilərə müraciət edin.");
+$faq[] = array("Aktivlik göstəricimi necə artıra bilərəm?", "Əslində bunu dəyişdirmək imkanınız yoxdur. Çünki bu məhz sizin forumda fəaliyyətinizdən asılı olaraq dəyişən bir göstəricidir. Amma onu mə`nasız ismarışlarla artırmaq arzunuz olsa, idarəçilərin \"qayçılarını\" da unutmayın. Çünki bu halda ismarışlarınız silinərsə, fəalliyyət göstəriciniz də müvafiq olaraq enəcəkdir. Həm də \"forumda fəal olan üzv üçün xüsusi hədiyyə ayırmışıq\",-deyə bir e`lan verməmişik.");
+$faq[] = array("Mən istifadəçiyə e-məktub göndərmək istədiyim halda, hesabıma daxil olmağım tələb olunur. Niyə?", "Bu təbiidir, istifadəçilərimizin müxtəlif adamlar tərəfindən narahat edilməməsi üçün yalnız qeydiyatlı bir üzvün digərinə e-məktub göndərmək səlahiyyəti var. Amma bu funksiyanı qeydiyyatlı üzvlər üçün belə bə`zən idarəçi bağlaya bilər." );
+
+$faq[] = array("--","İsmarış göndərmə");
+$faq[] = array("Forumda yeni mövzu necə açılır?", "Çox sadə: müvafiq forumu seçdikdən sonra onun olduğu səhifədə <i>\"Yeni mövzu\"</i> düyməsini (təqini) açın. Bə`zi forumlarda mövzu açmaq üçün, qeydiyyatdan keçməniz tələb oluna bilər. Amma bu nadir hallarda olur. Yaxşı olar ki, forumu seçdiyiniz zaman onun yerləşdiyi səhifənin alt sağ küncünə diqqət edəsiniz. Çünki orda sizin sahib olduğunuz bütün imkanlar yazılır (məs.: <i>\"Bu forumda yeni mövzu aça bilərsiniz\"</i> və s. kimi).");
+$faq[] = array("İsmarışlar necə redaktə olunur və silinir?", "İdarəçi və ya nəzarətçi olmadığınız halda, yalnız öz ismarışlarınızı silə bilər və ya onda düzəlişlər edə bilərsiniz. Göndərdiyiniz bir ismarışı \"<i>Düzəlt</i>\" düyməsini açaraq redaktə edə bilərsiniz (nəzərə alın ki, müəyyən müddətdən sonra bunu etmək imkanınız olmaya da bilər). Göndərdiyiniz ismarış cavablandırıldığı halda onu neçə dəfə redaktə etdiyiniz yazının altında qeyd olunacaqdır, əks halda isə bu nəzərə çarpmır. İdarəçi və nəzarətçilərin etdiyi düzəlişlər barədə qeyd olmur, ona görə də etdikləri düzəlişlərin yerini və səbəblərini onların özlərinin qeyd etməsi məqsədəuyğundur. Bir də nəzərə alın ki, istifadəçilər cavablandırılmış ismarışlarını silə bilməzlər.");
+$faq[] = array("İmzamı necə qeyd edə bilərəm?", "Hər hansı ismarışa imza qoymaq üçün \"<i>Şəxsi mə`lumat</i>\" səhifəsinə daxil olaraq müvafiq yerdə imzanızı yazmağınız lazımdır. Daha sonra ismarış lövhəsindəki \"<i>İmzamı daxil et</i>\" funksiyasını seçin. Əgər imzanızın bütün ismarışlarınızda görünməsini istəyirsinizsə, \"<i>Şəxsi mə`lumat</i>\" səhifənizdəki \"<i>Həmişə imzam görünsün</i>\" funksiyasını seçin. Buna baxmayaraq istəmədiyiniz halda ismarış lövhəsində müvafiq funksiyanı ləğv etməklə imzanızın görünməsinin qarşısını ala bilərsiniz.");
+$faq[] = array("Sorğu necə hazırlanır?", "Çox sadə: yeni bir mövzu açarkən və ya ilk mövzunu (səlahiyyətiniz buna imkan verdiyi halda) redaktə edərkən, ismarış lövhəsinin altında \"<i>Sorğu apar</i>\" funksiyasını görəcəksiniz (bu olmadığı halda, demək ki, həmin forumda sorğu aparmaq olmaz). Sorğunun sualını və ən azı iki cavab variantını daxil etməyiniz lazımdır. Cavab daxil etmək üçün \"<i>Bu cavabı daxil et</i>\" düyməsini açın. Sorğunun aparılma müddətini özünüz tə`yin edə bilərsiniz. \"0\" (sıfır) yazdığınız halda zaman sərhədi qoymursunuz. Sorğuda daxil edilən cavabların sayını idarəçilər müəyyən edirlər.");
+$faq[] = array("Sorğu necə dəyişdirilir və ya silinir?", "Sorğular da sadəcə idarəçilər, nəzarətçilər və sorğunun müəllifi tərəfindən silinə və redaktə edilə bilər. Sorğunu dəyişmək üçün mövzunun ilk ismarışını açmaq lazımdır. Sorğuya cavab verilmədikcə müəllif onu redaktə edə və ya silə bilər. Əks halda bunu yalnız idarəçilər və nəzarətçilər edə bilər.");
+$faq[] = array("Niyə sorğuda iştirak edə bilmirəm?", "Sorğuda yalnız qeydiyyatlı istifadəçilər iştirak edə bilərlər. Bu sorğunun obyektivliyi üçündür. Sorğuda bir dəfə iştirak edə bilərsiniz. Qeydiyyatlı olduğunuz halda belə səsiniz qəbul edilmirsə, demək bu imkandan məhrumsunuz.");
+$faq[] = array("Niyə bə`zi forumlara daxil ola bilmirəm?", "Bə`zi forumlar müəyyən üzvlərə və ya üzv qruplarına açıqdır. Onlar qapalı forumlardır və giriş səlahiyyətlərini yalnız idarəçilər müəyyən edirlər.");
+
+$faq[] = array("--","Üslub və mövzu xüsusiyyətləri");
+$faq[] = array("BBCode nədir?", "BBCode HTML-ın xüsusi bir təzahürüdür. Foruma yazdığınız ismarışlarda BBCode istifadə etmə imkanınınız var. Həm də ismarış göndərmə səhifəsindəki xüsusiyyətlər sayəsində istədiyiniz zaman BBCode-nu ləğv edə bilərsiniz. BBCode HTML-ə bənzər tərzdədir, sadəcə təqlər &lt; və &gt; yerinə [ və ] içinə alınır və nəyin necə göründüyü daha yaxşı kontrol edilir. Daha ətraflı mə`lumat üçün ismarış lövhəsinin sol tərəfindəki müvafiq keçidi açın.");
+$faq[] = array("HTML istifadə edə bilərəmmi?", "İdarəçi icazə verdiyi halda, bəli. Bu halda HTML-dan istifadə edib-etməyəcəyinizi siz özünüz seçə bilərsiniz, bunun üçün sadəcə ismarış lövhəsindəki müvafiq funksiyanı seçməlisiniz və unutmayın ki, \"Şəxsi mə`lumat\" səhifəsində də HTML-ı istifadənizə açmalısınız.");
+$faq[] = array("Mimika nədir?", "Mimikalar və ya simalar sizin ifadə etmək istədiyiniz emossional halınızı göstərəcək işarəciklərdir. Mətndə kiçik rəsmlər şəklində görünür, məs.: :) sevincli, :( isə qəmgin halın ifadəsidir. Mimikaların siyahısı ismarış lövhəsinin sol kənarında verilmişdir. Amma onların istifadəsində ifrata varmamağınız məsləhətdir. Əks halda idarəçi ismarışınızı tamamilə silə bilər.");
+$faq[] = array("Şəkil daxil edə bilərəmmi?", "İsmarışlarınızda şəkil nümayiş etdirə bilərsiniz. Amma rəsm mütləq internetdə olmalıdır. Öz kompüterinizdəki rəsmi ismarışınıza daxil edə bilməzsiniz. Bu barədə daha geniş mə`lumatı ismarış lövhəsinin sol tərəfindəki BBCode keçidini açmaqla ala bilərsiniz.");
+$faq[] = array("Bildiriş nədir?", "Bildirişlər adətən vacib bir xəbəri bildirmək üçün yazılır. Onları qısa bir zamanda oxumağınız məsləhətdir, elə buna görədir ki, onlar müvafiq forumun mövzuları siyahısında yuxarıda yer alır. Bildiriş göndərmək üçün səlahiyyəti istifadəçiyə idarəçilər verirlər.");
+$faq[] = array("Sabit mövzular nədir?", "Sabit mövzular forumun mövzu siyahısında bildirişlərdən sonra gəlir. Adətən onlarda mühüm mə`lumatlar olur. Onların da tez bir zamanda oxunması məsləhətdir. Sabit mövzular üçün də səlahiyyəti idarəçilər tə`yin edirlər. Bu hər hansı bir tarixi fakt ola bilər və ya diskussiyaya açıq olmayan bir mövzu kimi forumda yer ala bilər. Sizin belə bir mövzu açmaq arzunuz olduqda (məhz, şərhsiz sabit mövzu) idarəçilərə müraciət edin.");
+$faq[] = array("Bağlı mövzular nədir?", "Bu mövzuları idarəçi və nəzarətçilər bağlayırlar. Bağlı mövzulara cavab vermək mümkün deyil, sorğular isə avtomatik olaraq dayanır. Mövzular bir çox səbəbdən bağlana bilər. Səbəbləri yəqin ki, mövzunu bağlayan idarə hey`əti üzvü qeyd edəcəkdir, əks halda səbəbi bilmək üçün onlara bu sualla müraciət edə bilərsiniz.");
+
+$faq[] = array("--","İstifadəçi dərəcələri və qrupları");
+$faq[] = array("İdarəçilər kimlərdir?", "İdarəçilər forumda ən geniş səlahiyyətlərə malik şəxslərdir. Onlar forumun bütün işlərinə nəzarət edərək onu idarə edirlər. Səlahiyyətlərin tə`yin olunması, istifadəçi qadağanları, istifadəçi qrupları yaratmaq, forum tərtibi, nəzarətçilərin tə`yini və s. s. Eləcə də bütün forumlarda nəzarətçilik hüququna malikdirlər.");
+$faq[] = array("Nəzarətçilər kimlərdir?", "Nəzarətçilər müvafiq forumlarda idarəçilik edən şəxslər və ya qruplardır. Mövzuları dəyişdirmək, silmək, bağlamaq, ismarışları redaktə etmək, müəyyən mövzuları ayırmaq, bir yerdən başqa yerə köçürmək səlahiyyətləri vardır.");
+$faq[] = array("İstifadəçi qrupları nədir?", "İstifadəçi qrupları idarəçilər tərəfindən yaradılır, bu idarəçinin müvafiq qrup üzvlərinə nəzarət etməsini və ya səlahiyyətləndirməsini asanlaşdırır. Bir istifadəçi bir neçə qrupa üzv ola bilər.");
+$faq[] = array("İstifadəçi qrupuna necə üzv ola bilərəm?", "Bir qrupa üzv olmaq üçün istifadəçi qrupunu seçin. Qrup açıq, qapalı və gizli ola bilər. Açıq qrupa üzv olmaq üçün sadəcə müvafiq göstərişlərə əməl edin. Amma bə`zən qrup nəzarətçisinin üzvlülüyünüzü qəbul etməsi lazım olacaqdır. O, sizə sual verə və ya müəyyən şərtlər qoya bilər. Onun sizin üzvlülüyünüzü rədd etmək hüququ var, belə olduğu halda onu narahat etməyin, çünki buna onun səbəbləri ola bilər.");
+$faq[] = array("İstifadəçi qrupunun nəzarətçisi olmaq üçün nə etmək lazımdır?", "İstifadəçi qrupu idarəçi tərəfindən açıldığı kimi, nəzarətçini də o, tə`yin edir. Qrup yaratmaq arzunuz olduqda, bunu idarəçiyə şəxsi ismarışla bildirin.");
+
+$faq[] = array("--","Şəxsi ismarışlar");
+$faq[] = array("Niyə şəxsi ismarış göndərə bilmirəm?", "Bunun üç səbəbi ola bilər: 1.Qeydiyyatlı deyilsiniz və ya hesabınıza daxil olmamısınız; 2. İdarəçi qarşılıqlı yazışmanı bütün səhifədə ləğv edib; 3. Sizin şəxsi ismarış göndərmək səlahiyyətiniz aradan qaldırılıb, bu halda idarəçilərə müraciət edin.");
+$faq[] = array("Niyə arzu etmədiyim şəxslərdən ismarış alıram?", "Bunun qarşısını almaq üçün idarəçilərə müraciət edin, onlar bu və ya digər istifadəçiyə şəxsi ismarış göndərməyi qadağan edə bilərlər.");
+$faq[] = array("Qeydiyyatlı bir üzvdən arzulamadığım halda e-məktub aldığım zaman nə etməliyəm?", "Bunun qarşısını almaq üçün bir çox tədbirlər görülsə də, bə`zən kənaraçıxmalar olur. Bu halda aldığınız e-məktubu bütün göstəriciləri ilə (əsas da kimdən və kimə qismini) idarəçilərə göndərin.");
+
+//
+// These entries should remain in all languages and for all modifications
+//
+$faq[] = array("--","phpBB 2 ilə əlaqəli mövzular");
+$faq[] = array("Bu forumu kim yazıb?", "Bu forum <a href=\"http://www.phpbb.com/\" target=\"_blank\">phpBB Group</a> tərəfindən yaradılmışdır. Bütün müəlliflik haqqları phpBB Group-una aiddir. Bu əsər GNU General Public Licence müqaviləsinə əsasən istifadəyə verilmişdir. Bu müqaviləyə əsasən müəlliflik hüquqları pozulmadan istifadə edilməlidir.");
+$faq[] = array("Axtardığım hər hansı bir xüsusiyyət niyə bu forumda yoxdur?", "Bu forum, qeyd olunduğu kimi, phpBB Group tərəfindən yaradılmışdır. Hər hansı çatışmamazlıqlar üçün phpbb.com-u ziyaret edib phpBB qrupunun mövcud planlarına baxın. Bəlkə həmin xüsusiyyət növbəti təkmilləşdirilmiş versiyada yer alacaqdır.");
+$faq[] = array("Bu forumda hüquqi suallar yarandığı zaman və ya sui-istifadə hallarında kimə müraciət etmək olar?", "İdarəçilərə müraciət edin. Onları tanımadığınız halda isə, nəzarətçilərə. Nəzərə alın ki, phpBB Group-una hər hansı hüquqi sualla müraciət etmək əhəmiyyətsizdir, çünki onlar sadəcə proqram qurucularıdır. Onları bu tip suallarla narahat etməməniz xahiş olunur.");
+
+//
+// This ends the FAQ entries
+//
+
+?>

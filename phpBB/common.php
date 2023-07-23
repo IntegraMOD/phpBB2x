@@ -25,9 +25,9 @@ if ( !defined('IN_PHPBB') )
 }
 
 // Uncomment these and comment out "error_reporting" to debug errors
-// ini_set('display_startup_errors',1); 
-// ini_set('display_errors',1);
-// error_reporting(-1);
+//ini_set('display_startup_errors',1); 
+//ini_set('display_errors',1);
+//error_reporting(-1);
 
 error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
 

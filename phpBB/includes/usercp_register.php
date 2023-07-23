@@ -104,7 +104,7 @@ if (
 	if ( $mode == 'editprofile' )
 	{
 		$user_id = intval($HTTP_POST_VARS['user_id']);
-        $current_email = trim(htmlspecialchars($HTTP_POST_VARS['current_email'], ENT_COMPAT, 'ISO-8859-1'));
+        $current_email = trim(htmlspecialchars($HTTP_POST_VARS['current_email'], ENT_COMPAT, 'utf-8'));
 	}
 
 	$strip_var_list = array('email' => 'email', 'icq' => 'icq', 'fb' => 'fb', 'ig' => 'ig', 'pt' => 'pt', 'twr' => 'twr', 'skp' => 'skp', 'tg' => 'tg', 'li' => 'li', 'tt' => 'tt', 'dc' => 'dc', 'website' => 'website', 'location' => 'location', 'occupation' => 'occupation', 'interests' => 'interests', 'confirm_code' => 'confirm_code');
@@ -116,7 +116,7 @@ if (
 	{
 		if ( !empty($HTTP_POST_VARS[$param]) )
 		{
-			${$var} = trim(htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'ISO-8859-1'));
+			${$var} = trim(htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'utf-8'));
 		}
 	}
 
@@ -169,7 +169,7 @@ if (
 	{
 		if ( preg_match('/^[a-z_]+$/i', (string) $HTTP_POST_VARS['language']) )
 		{
-			$user_lang = htmlspecialchars($HTTP_POST_VARS['language'], ENT_COMPAT, 'ISO-8859-1');
+			$user_lang = htmlspecialchars($HTTP_POST_VARS['language'], ENT_COMPAT, 'utf-8');
 		}
 		else
 		{
@@ -193,15 +193,15 @@ if (
 	}
 	$row = $db->sql_fetchrow($result);
 	$board_config['default_dateformat'] = $row['config_value'];
-	$user_dateformat = ( !empty($HTTP_POST_VARS['dateformat']) ) ? trim(htmlspecialchars($HTTP_POST_VARS['dateformat'], ENT_COMPAT, 'ISO-8859-1')) : $board_config['default_dateformat'];
+	$user_dateformat = ( !empty($HTTP_POST_VARS['dateformat']) ) ? trim(htmlspecialchars($HTTP_POST_VARS['dateformat'], ENT_COMPAT, 'utf-8')) : $board_config['default_dateformat'];
 
-	$user_avatar_local = ( isset($HTTP_POST_VARS['avatarselect']) && !empty($HTTP_POST_VARS['submitavatar']) && $board_config['allow_avatar_local'] ) ? htmlspecialchars($HTTP_POST_VARS['avatarselect'], ENT_COMPAT, 'ISO-8859-1') : ( ( isset($HTTP_POST_VARS['avatarlocal'])  ) ? htmlspecialchars($HTTP_POST_VARS['avatarlocal'], ENT_COMPAT, 'ISO-8859-1') : '' );
-	$user_avatar_category = ( isset($HTTP_POST_VARS['avatarcatname']) && $board_config['allow_avatar_local'] ) ? htmlspecialchars($HTTP_POST_VARS['avatarcatname'], ENT_COMPAT, 'ISO-8859-1') : '' ;
+	$user_avatar_local = ( isset($HTTP_POST_VARS['avatarselect']) && !empty($HTTP_POST_VARS['submitavatar']) && $board_config['allow_avatar_local'] ) ? htmlspecialchars($HTTP_POST_VARS['avatarselect'], ENT_COMPAT, 'utf-8') : ( ( isset($HTTP_POST_VARS['avatarlocal'])  ) ? htmlspecialchars($HTTP_POST_VARS['avatarlocal'], ENT_COMPAT, 'utf-8') : '' );
+	$user_avatar_category = ( isset($HTTP_POST_VARS['avatarcatname']) && $board_config['allow_avatar_local'] ) ? htmlspecialchars($HTTP_POST_VARS['avatarcatname'], ENT_COMPAT, 'utf-8') : '' ;
 
 	$HTTP_POST_VARS['avatarremoteurl'] = (isset($HTTP_POST_VARS['avatarremoteurl'])) ? $HTTP_POST_VARS['avatarremoteurl'] : '';
 	$HTTP_POST_FILES['avatar']['tmp_name'] = (isset($HTTP_POST_FILES['avatar']['tmp_name'])) ? $HTTP_POST_FILES['avatar']['tmp_name'] : '';
 	
-	$user_avatar_remoteurl = ( !empty($HTTP_POST_VARS['avatarremoteurl']) ) ? trim(htmlspecialchars($HTTP_POST_VARS['avatarremoteurl'], ENT_COMPAT, 'ISO-8859-1')) : '';
+	$user_avatar_remoteurl = ( !empty($HTTP_POST_VARS['avatarremoteurl']) ) ? trim(htmlspecialchars($HTTP_POST_VARS['avatarremoteurl'], ENT_COMPAT, 'utf-8')) : '';
 	$user_avatar_upload = ( !empty($HTTP_POST_VARS['avatarurl']) ) ? trim($HTTP_POST_VARS['avatarurl']) : ( ( $HTTP_POST_FILES['avatar']['tmp_name'] != "none") ? $HTTP_POST_FILES['avatar']['tmp_name'] : '' );
 	$user_avatar_name = ( !empty($HTTP_POST_FILES['avatar']['name']) ) ? $HTTP_POST_FILES['avatar']['name'] : '';
 	$user_avatar_size = ( !empty($HTTP_POST_FILES['avatar']['size']) ) ? $HTTP_POST_FILES['avatar']['size'] : 0;
@@ -214,9 +214,9 @@ if (
 	{
 		$username = stripslashes($username);
 		$email = stripslashes($email);
-		$cur_password = htmlspecialchars(stripslashes($cur_password), ENT_COMPAT, 'ISO-8859-1');
-		$new_password = htmlspecialchars(stripslashes($new_password), ENT_COMPAT, 'ISO-8859-1');
-		$password_confirm = htmlspecialchars(stripslashes($password_confirm), ENT_COMPAT, 'ISO-8859-1');
+		$cur_password = htmlspecialchars(stripslashes($cur_password), ENT_COMPAT, 'utf-8');
+		$new_password = htmlspecialchars(stripslashes($new_password), ENT_COMPAT, 'utf-8');
+		$password_confirm = htmlspecialchars(stripslashes($password_confirm), ENT_COMPAT, 'utf-8');
 
 		$icq = stripslashes($icq);
 		$fb = stripslashes($fb);
@@ -233,7 +233,7 @@ if (
 		$location = stripslashes($location);
 		$occupation = stripslashes($occupation);
 		$interests = stripslashes($interests);
-		$signature = htmlspecialchars(stripslashes($signature), ENT_COMPAT, 'ISO-8859-1');
+		$signature = htmlspecialchars(stripslashes($signature), ENT_COMPAT, 'utf-8');
 		$user_lang = stripslashes($user_lang);
 		$user_dateformat = stripslashes($user_dateformat);
 
@@ -888,7 +888,7 @@ if( isset($HTTP_POST_VARS['avatargallery']) && !$error )
 {
 	include($phpbb_root_path . 'includes/usercp_avatar.'.$phpEx);
 
-	$avatar_category = ( !empty($HTTP_POST_VARS['avatarcategory']) ) ? htmlspecialchars($HTTP_POST_VARS['avatarcategory'], ENT_COMPAT, 'ISO-8859-1') : '';
+	$avatar_category = ( !empty($HTTP_POST_VARS['avatarcategory']) ) ? htmlspecialchars($HTTP_POST_VARS['avatarcategory'], ENT_COMPAT, 'utf-8') : '';
 
 	$template->set_filenames(array(
 		'body' => 'profile_avatar_gallery.tpl')

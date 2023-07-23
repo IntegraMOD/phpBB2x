@@ -1,56 +1,38 @@
-
-<h1>{L_GROUP_TITLE}</h1>
-
-<form action="{S_GROUP_ACTION}" method="post" name="post"><table border="0" cellpadding="3" cellspacing="1" class="forumline" align="center">
-	<tr> 
-	  <th class="thHead" colspan="2">{L_GROUP_EDIT_DELETE}</th>
-	</tr>
-	<tr>
-	  <td class="row1" colspan="2"><span class="gensmall">{L_ITEMS_REQUIRED}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_GROUP_NAME}:</span></td>
-	  <td class="row2" width="62%"> 
-		<input class="post" type="text" name="group_name" size="35" maxlength="40" value="{GROUP_NAME}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_GROUP_DESCRIPTION}:</span></td>
-	  <td class="row2" width="62%"> 
-		<textarea class="post" name="group_description" rows="5" cols="51">{GROUP_DESCRIPTION}</textarea>
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_GROUP_MODERATOR}:</span></td>
-	  <td class="row2" width="62%"><input class="post" type="text" class="post" name="username" maxlength="50" size="20" value="{GROUP_MODERATOR}" /> &nbsp; <input type="submit" name="usersubmit" value="{L_FIND_USERNAME}" class="liteoption" onClick="window.open('{U_SEARCH_USER}', '_phpbbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" /></td>
-	</tr>
-
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_GROUP_STATUS}:</span></td>
-	  <td class="row2" width="62%"> 
-		<input type="radio" name="group_type" value="{S_GROUP_OPEN_TYPE}" {S_GROUP_OPEN_CHECKED} /> {L_GROUP_OPEN} &nbsp;&nbsp;<input type="radio" name="group_type" value="{S_GROUP_CLOSED_TYPE}" {S_GROUP_CLOSED_CHECKED} />	{L_GROUP_CLOSED} &nbsp;&nbsp;<input type="radio" name="group_type" value="{S_GROUP_HIDDEN_TYPE}" {S_GROUP_HIDDEN_CHECKED} />	{L_GROUP_HIDDEN}</td> 
-	</tr>
-	<!-- BEGIN group_edit -->
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_DELETE_MODERATOR}</span>
-	  <br />
-	  <span class="gensmall">{L_DELETE_MODERATOR_EXPLAIN}</span></td>
-	  <td class="row2" width="62%"> 
-		<input type="checkbox" name="delete_old_moderator" value="1">
-		{L_YES}</td>
-	</tr>
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_GROUP_DELETE}:</span></td>
-	  <td class="row2" width="62%"> 
-		<input type="checkbox" name="group_delete" value="1">
-		{L_GROUP_DELETE_CHECK}</td>
-	</tr>
-	<!-- END group_edit -->
-	<tr> 
-	  <td class="catBottom" colspan="2" align="center"><span class="cattitle"> 
-		<input type="submit" name="group_update" value="{L_SUBMIT}" class="mainoption" />
-		&nbsp;&nbsp; 
-		<input type="reset" value="{L_RESET}" name="reset" class="liteoption" />
-		</span></td>
-	</tr>
-</table>{S_HIDDEN_FIELDS}</form>
+				<h1>{L_GROUP_TITLE}</h1>
+				<form action="{S_GROUP_ACTION}" method="post" name="post">
+				<fieldset>
+					<legend>{L_GROUP_EDIT_DELETE}</legend>
+					<p>{L_ITEMS_REQUIRED}</p>
+					<dl>
+						<dt><label>{L_GROUP_NAME}:</label></dt>
+						<dd><input type="text" name="group_name" size="35" maxlength="40" value="{GROUP_NAME}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_GROUP_DESCRIPTION}:</label></dt>
+						<dd><textarea name="group_description" rows="5" cols="51">{GROUP_DESCRIPTION}</textarea></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_GROUP_MODERATOR}:</label></dt>
+						<dd><input type="text" name="username" maxlength="50" size="20" value="{GROUP_MODERATOR}" /> <input type="submit" name="usersubmit" value="{L_FIND_USERNAME}" class="button2" onclick="window.open('{U_SEARCH_USER}', '_phpbbsearch', 'height=250,resizable=yes,width=400');return false;" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_GROUP_STATUS}:</label></dt>
+						<dd><input type="radio" class="radio" name="group_type" value="{S_GROUP_OPEN_TYPE}" {S_GROUP_OPEN_CHECKED} /> {L_GROUP_OPEN}&nbsp; <input type="radio" class="radio" name="group_type" value="{S_GROUP_CLOSED_TYPE}" {S_GROUP_CLOSED_CHECKED} /> {L_GROUP_CLOSED}&nbsp; <input type="radio" class="radio" name="group_type" value="{S_GROUP_HIDDEN_TYPE}" {S_GROUP_HIDDEN_CHECKED} /> {L_GROUP_HIDDEN}</dd>
+					</dl>
+					<!-- BEGIN group_edit -->
+					<dl>
+						<dt><label>{L_DELETE_MODERATOR}</label><br /><span>{L_DELETE_MODERATOR_EXPLAIN}</span></dt>
+						<dd><input type="checkbox" name="delete_old_moderator" value="1"> {L_YES}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_GROUP_DELETE}:</label></dt>
+						<dd><input type="checkbox" name="group_delete" value="1"> {L_GROUP_DELETE_CHECK}</dd>
+					</dl>
+					<!-- END group_edit -->
+					<p class="submit-buttons">
+						{S_HIDDEN_FIELDS}
+						<input type="submit" name="group_update" value="{L_SUBMIT}" class="button1" />&nbsp; 
+						<input type="reset" value="{L_RESET}" name="reset" class="button2" />
+					</p>
+				</fieldset>
+				</form>

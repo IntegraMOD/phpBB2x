@@ -54,7 +54,7 @@ if(!defined("SQL_LAYER"))
 			
 			if( $this->db_connect_id && $database != '')
 			{
-				@mysqli_query($this->db_connect_id, "SET NAMES 'ISO-8859-1'");
+				@mysqli_query($this->db_connect_id, "SET NAMES 'utf-8'");
 				
 				$this->dbname = $database;
 				$dbselect = @mysqli_select_db($this->db_connect_id, $this->dbname);

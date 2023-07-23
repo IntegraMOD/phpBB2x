@@ -74,3 +74,4 @@ if( !CFAQ.IsDisplaySupported() )
 	u_faq += ( u_faq.indexOf('?') > 0 ? '&' : '?' ) + 'dhtml=no';
 	window.location.replace(u_faq);
 }
+

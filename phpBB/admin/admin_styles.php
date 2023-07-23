@@ -62,7 +62,7 @@ if ($cancel)
 if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_GET_VARS['mode']) ) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 }
 else 
 {
@@ -788,7 +788,7 @@ switch( $mode )
 				// Unable to open the file writeable do something here as an attempt
 				// to get around that...
 				//
-				$s_hidden_fields = '<input type="hidden" name="theme_info" value="' . htmlspecialchars($theme_data, ENT_COMPAT, 'ISO-8859-1') . '" />';
+				$s_hidden_fields = '<input type="hidden" name="theme_info" value="' . htmlspecialchars($theme_data, ENT_COMPAT, 'utf-8') . '" />';
 				$s_hidden_fields .= '<input type="hidden" name="send_file" value="1" /><input type="hidden" name="mode" value="export" />';
 				
 				$download_form = '<form action="' . append_sid("admin_styles.$phpEx") . '" method="post"><input class="mainoption" type="submit" name="submit" value="' . $lang['Download'] . '" />' . $s_hidden_fields;

@@ -66,7 +66,7 @@ if ($cancel)
 if( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 }
 else
 {
@@ -463,7 +463,7 @@ else if ( $mode != "" )
 			$smile_code = ( isset($HTTP_POST_VARS['smile_code']) ) ? trim($HTTP_POST_VARS['smile_code']) : '';
 			$smile_url = ( isset($HTTP_POST_VARS['smile_url']) ) ? trim($HTTP_POST_VARS['smile_url']) : '';
 			$smile_url = phpbb_ltrim(basename($smile_url), "'");
-			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion']), ENT_COMPAT, 'ISO-8859-1') : '';
+			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion']), ENT_COMPAT, 'utf-8') : '';
 			$smile_id = ( isset($HTTP_POST_VARS['smile_id']) ) ? intval($HTTP_POST_VARS['smile_id']) : 0;
 			$smile_code = trim($smile_code);
 			$smile_url = trim($smile_url);
@@ -508,7 +508,7 @@ else if ( $mode != "" )
 			$smile_code = ( isset($HTTP_POST_VARS['smile_code']) ) ? $HTTP_POST_VARS['smile_code'] : '';
 			$smile_url = ( isset($HTTP_POST_VARS['smile_url']) ) ? $HTTP_POST_VARS['smile_url'] : '';
 			$smile_url = phpbb_ltrim(basename($smile_url), "'");
-			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion']), ENT_COMPAT, 'ISO-8859-1') : '';
+			$smile_emotion = ( isset($HTTP_POST_VARS['smile_emotion']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['smile_emotion']), ENT_COMPAT, 'utf-8') : '';
 			$smile_code = trim($smile_code);
 			$smile_url = trim($smile_url);
 

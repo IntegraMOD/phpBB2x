@@ -1,346 +1,247 @@
-
-<h1>{L_USER_TITLE}</h1>
-
-<p>{L_USER_EXPLAIN}</p>
-
-{ERROR_BOX}
-
-<form action="{S_PROFILE_ACTION}" {S_FORM_ENCTYPE} method="post"><table width="98%" cellspacing="1" cellpadding="4" border="0" align="center" class="forumline">
-	<tr> 
-	  <th class="thHead" colspan="2">{L_REGISTRATION_INFO}</th>
-	</tr>
-	<tr> 
-	  <td class="row2" colspan="2"><span class="gensmall">{L_ITEMS_REQUIRED}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1" width="38%"><span class="gen">{L_USERNAME}: *</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="username" size="35" maxlength="40" value="{USERNAME}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_EMAIL_ADDRESS}: *</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="email" size="35" maxlength="255" value="{EMAIL}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_NEW_PASSWORD}: *</span><br />
-		<span class="gensmall">{L_PASSWORD_IF_CHANGED}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="password" name="password" size="35" maxlength="32" value="" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_CONFIRM_PASSWORD}: * </span><br />
-		<span class="gensmall">{L_PASSWORD_CONFIRM_IF_CHANGED}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="password" name="password_confirm" size="35" maxlength="32" value="" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="catsides" colspan="2">&nbsp;</td>
-	</tr>
-	<tr> 
-	  <th class="thSides" colspan="2">{L_PROFILE_INFO}</th>
-	</tr>
-	<tr> 
-	  <td class="row2" colspan="2"><span class="gensmall">{L_PROFILE_INFO_NOTICE}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ICQ_NUMBER}:</span></td>
-	  <td class="row2"> 
-		<input type="text" name="icq" class="post" style="width: 100px"  size="10" maxlength="15" value="{ICQ}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_FACEBOOK}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="fb" size="20" maxlength="255" value="{FB}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_INSTAGRAM}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="ig" size="20" maxlength="255" value="{IG}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_PINTEREST}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="pt" size="20" maxlength="255" value="{PT}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_TWITTER}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="twr" size="20" maxlength="255" value="{TWR}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_SKYPE}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="skp" size="20" maxlength="255" value="{SKP}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_TELEGRAM}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="tg" size="20" maxlength="255" value="{TG}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_LINKEDIN}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="li" size="20" maxlength="255" value="{LI}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_TIKTOK}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{TT}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_DISCORD}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{DC}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_WEBSITE}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="website" size="35" maxlength="255" value="{WEBSITE}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_LOCATION}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="location" size="35" maxlength="100" value="{LOCATION}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_OCCUPATION}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="occupation" size="35" maxlength="100" value="{OCCUPATION}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_INTERESTS}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="interests" size="35" maxlength="150" value="{INTERESTS}" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_SIGNATURE}</span><br />
-		<span class="gensmall">{L_SIGNATURE_EXPLAIN}<br />
-		<br />
-		{HTML_STATUS}<br />
-		{BBCODE_STATUS}<br />
-		{SMILIES_STATUS}</span></td>
-	  <td class="row2"> 
-		<textarea class="post" name="signature" rows="6" cols="45">{SIGNATURE}</textarea>
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="catsides" colspan="2"><span class="cattitle">&nbsp;</span></td>
-	</tr>
-	<tr> 
-	  <th class="thSides" colspan="2">{L_PREFERENCES}</th>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_PUBLIC_VIEW_EMAIL}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="viewemail" value="1" {VIEW_EMAIL_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="viewemail" value="0" {VIEW_EMAIL_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_HIDE_USER}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="hideonline" value="1" {HIDE_USER_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="hideonline" value="0" {HIDE_USER_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_NOTIFY_ON_REPLY}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="notifyreply" value="1" {NOTIFY_REPLY_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="notifyreply" value="0" {NOTIFY_REPLY_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_NOTIFY_ON_PRIVMSG}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="notifypm" value="1" {NOTIFY_PM_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="notifypm" value="0" {NOTIFY_PM_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_POPUP_ON_PRIVMSG}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="popup_pm" value="1" {POPUP_PM_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="popup_pm" value="0" {POPUP_PM_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ALWAYS_ADD_SIGNATURE}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="attachsig" value="1" {ALWAYS_ADD_SIGNATURE_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="attachsig" value="0" {ALWAYS_ADD_SIGNATURE_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ALWAYS_ALLOW_BBCODE}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="allowbbcode" value="1" {ALWAYS_ALLOW_BBCODE_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="allowbbcode" value="0" {ALWAYS_ALLOW_BBCODE_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ALWAYS_ALLOW_HTML}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="allowhtml" value="1" {ALWAYS_ALLOW_HTML_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="allowhtml" value="0" {ALWAYS_ALLOW_HTML_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ALWAYS_ALLOW_SMILIES}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="allowsmilies" value="1" {ALWAYS_ALLOW_SMILIES_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="allowsmilies" value="0" {ALWAYS_ALLOW_SMILIES_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_BOARD_LANGUAGE}</span></td>
-	  <td class="row2">{LANGUAGE_SELECT}</td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_BOARD_STYLE}</span></td>
-	  <td class="row2">{STYLE_SELECT}</td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_TIMEZONE}</span></td>
-	  <td class="row2">{TIMEZONE_SELECT}</td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_DATE_FORMAT}</span><br />
-		<span class="gensmall">{L_DATE_FORMAT_EXPLAIN}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="16" />
-	  </td>
-	</tr>
-	<tr> 
-	  <td class="catSides" colspan="2"><span class="cattitle">&nbsp;</span></td>
-	</tr>
-	<tr> 
-	  <th class="thSides" colspan="2" height="12" valign="middle">{L_AVATAR_PANEL}</th>
-	</tr>
-	<tr align="center"> 
-	  <td class="row1" colspan="2"> 
-		<table width="70%" cellspacing="2" cellpadding="0" border="0">
-		  <tr> 
-			<td width="65%"><span class="gensmall">{L_AVATAR_EXPLAIN}</span></td>
-			<td align="center"><span class="gensmall">{L_CURRENT_IMAGE}</span><br />
-			  {AVATAR}<br />
-			  <input type="checkbox" name="avatardel" />
-			  &nbsp;<span class="gensmall">{L_DELETE_AVATAR}</span></td>
-		  </tr>
-		</table>
-	  </td>
-	</tr>
-
-	<!-- BEGIN avatar_local_upload -->
-	<tr> 
-	  <td class="row1"><span class="gen">{L_UPLOAD_AVATAR_FILE}</span></td>
-	  <td class="row2"> 
-		<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" />
-		<input type="file" name="avatar" class="post" style="width: 200px"  />
-	  </td>
-	</tr>
-	<!-- END avatar_local_upload -->
-	<!-- BEGIN avatar_remote_upload -->
-	<tr> 
-	  <td class="row1"><span class="gen">{L_UPLOAD_AVATAR_URL}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="avatarurl" size="40" style="width: 200px"  />
-	  </td>
-	</tr>
-	<!-- END avatar_remote_upload -->
-	<!-- BEGIN avatar_remote_link -->
-	<tr> 
-	  <td class="row1"><span class="gen">{L_LINK_REMOTE_AVATAR}</span></td>
-	  <td class="row2"> 
-		<input class="post" type="text" name="avatarremoteurl" size="40" style="width: 200px"  />
-	  </td>
-	</tr>
-	<!-- END avatar_remote_link -->
-	<!-- BEGIN avatar_local_gallery -->
-	<tr> 
-	  <td class="row1"><span class="gen">{L_AVATAR_GALLERY}</span></td>
-	  <td class="row2"> 
-		<input type="submit" name="avatargallery" value="{L_SHOW_GALLERY}" class="liteoption" />
-	  </td>
-	</tr>
-	<!-- END avatar_local_gallery -->
-
-	<tr> 
-	  <td class="catSides" colspan="2">&nbsp;</td>
-	</tr>
-	<tr>
-	  <th class="thSides" colspan="2">{L_SPECIAL}</th>
-	</tr>
-	<tr>
-	  <td class="row1" colspan="2"><span class="gensmall">{L_SPECIAL_EXPLAIN}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_USER_ACTIVE}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="user_status" value="1" {USER_ACTIVE_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="user_status" value="0" {USER_ACTIVE_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ALLOW_PM}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="user_allowpm" value="1" {ALLOW_PM_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="user_allowpm" value="0" {ALLOW_PM_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_ALLOW_AVATAR}</span></td>
-	  <td class="row2"> 
-		<input type="radio" name="user_allowavatar" value="1" {ALLOW_AVATAR_YES} />
-		<span class="gen">{L_YES}</span>&nbsp;&nbsp; 
-		<input type="radio" name="user_allowavatar" value="0" {ALLOW_AVATAR_NO} />
-		<span class="gen">{L_NO}</span></td>
-	</tr>
-	<tr>
-		<td class="row1"><span class="gen">{L_SELECT_RANK}</span></td>
-		<td class="row2"><select name="user_rank">{RANK_SELECT_BOX}</select></td>
-	</tr>
-	<tr> 
-	  <td class="row1"><span class="gen">{L_DELETE_USER}?</span></td>
-	  <td class="row2"> 
-		<input type="checkbox" name="deleteuser">
-		{L_DELETE_USER_EXPLAIN}</td>
-	</tr>
-	<tr> 
-	  <td class="catBottom" colspan="2" align="center">{S_HIDDEN_FIELDS} 
-		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
-		&nbsp;&nbsp; 
-		<input type="reset" value="{L_RESET}" class="liteoption" />
-	  </td>
-	</tr>
-</table></form>
+				<h1>{L_USER_TITLE}</h1>
+				<p>{L_USER_EXPLAIN}</p>
+				{ERROR_BOX}
+				<form action="{S_PROFILE_ACTION}" {S_FORM_ENCTYPE} method="post">
+				<fieldset>
+					<legend>{L_REGISTRATION_INFO}</legend>
+					<p>{L_ITEMS_REQUIRED}</p>
+					<dl>
+						<dt><label>{L_USERNAME}: *</label></dt>
+						<dd><input type="text" name="username" maxlength="40" value="{USERNAME}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_EMAIL_ADDRESS}: *</label></dt>
+						<dd><input id="user_email" type="text" name="email" maxlength="100" value="{EMAIL}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_NEW_PASSWORD}: *</label><br /><span>{L_PASSWORD_IF_CHANGED}</span></dt>
+						<dd><input type="password" name="password"maxlength="255" value="" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_CONFIRM_PASSWORD}: *</label><br /><span>{L_PASSWORD_CONFIRM_IF_CHANGED}</span></dt>
+						<dd><input type="password" name="password_confirm" maxlength="255" value="" /></dd>
+					</dl>
+				</fieldset>
+				<fieldset>
+				    <legend>{L_PROFILE_INFO}</legend>
+				    <p>{L_PROFILE_INFO_NOTICE}</p>
+					<dl>
+						<dt><label>{L_ICQ_NUMBER}:</label></dt>
+						<dd><input type="text" name="icq" maxlength="15" value="{ICQ}" class="inputbox" placeholder="{L_USER_ID_EXPLAIN}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_DISCORD}:</label></dt>
+						<dd><input type="text" name="dc" maxlength="255" value="{DC}" class="inputbox" placeholder="{L_USER_ID_EXPLAIN}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_FACEBOOK}:</label></dt>
+						<dd><input type="text" name="fb" maxlength="255" value="{FB}" class="inputbox" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_INSTAGRAM}:</label></dt>
+						<dd><input type="text" name="ig" maxlength="255" value="{IG}" class="inputbox" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_LINKEDIN}:</label></dt>
+						<dd><input type="text" name="li" maxlength="255" value="{LI}" class="inputbox" /></dd>
+					</dl>						
+					<dl>
+						<dt><label>{L_PINTEREST}:</label></dt>
+						<dd><input type="text" name="pt" maxlength="255" value="{PT}" class="inputbox" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_SKYPE}:</label></dt>
+						<dd><input type="text" name="skp" maxlength="255" value="{SKP}" class="inputbox" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_TELEGRAM}:</label></dt>
+						<dd><input type="text" name="tg" maxlength="255" value="{TG}" class="inputbox" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_TIKTOK}:</label></dt>
+						<dd><input type="text" name="tt" maxlength="255" value="{TT}" class="inputbox" /></dd>
+					</dl>						
+					<dl>
+						<dt><label>{L_TWITTER}:</label></dt>
+						<dd><input type="text" name="twr" maxlength="255" value="{TWR}" class="inputbox" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_WEBSITE}:</label></dt>
+						<dd><input type="text" name="website" maxlength="255" value="{WEBSITE}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_LOCATION}:</label></dt>
+						<dd><input type="text" name="location" maxlength="255" value="{LOCATION}" /></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_OCCUPATION}:</label></dt>
+						<dd><textarea name="occupation" rows="3" cols="30">{OCCUPATION}</textarea></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_INTERESTS}:</label></dt>
+						<dd><textarea name="interests" rows="3" cols="30">{INTERESTS}</textarea></dd>
+					</dl>
+				</fieldset>
+				<fieldset>
+					<legend>{L_SIGNATURE}</legend>
+					<p>{L_SIGNATURE_EXPLAIN}<p/>
+					<dl>
+						<dt>{BBCODE_STATUS}<br />
+						{SMILIES_STATUS}</dt>
+						<dd><textarea name="signature" rows="6" cols="76">{SIGNATURE}</textarea></dd>
+					</dl>
+				</fieldset>
+				<fieldset>
+					<legend>{L_PREFERENCES}</legend>
+					<dl>
+						<dt><label>{L_PUBLIC_VIEW_EMAIL}:</label></dt>
+						<dd><input type="radio" class="radio" name="viewemail" value="1" {VIEW_EMAIL_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="viewemail" value="0" {VIEW_EMAIL_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_HIDE_USER}:</label></dt>
+						<dd><input type="radio" class="radio" name="hideonline" value="1" {HIDE_USER_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="hideonline" value="0" {HIDE_USER_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_NOTIFY_ON_REPLY}:</label></dt>
+						<dd><input type="radio" class="radio" name="notifyreply" value="1" {NOTIFY_REPLY_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="notifyreply" value="0" {NOTIFY_REPLY_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_NOTIFY_ON_PRIVMSG}:</label></dt>
+						<dd><input type="radio" class="radio" name="notifypm" value="1" {NOTIFY_PM_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="notifypm" value="0" {NOTIFY_PM_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_POPUP_ON_PRIVMSG}:</label></dt>
+						<dd><input type="radio" class="radio" name="popup_pm" value="1" {POPUP_PM_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="popup_pm" value="0" {POPUP_PM_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_ALWAYS_ADD_SIGNATURE}:</label></dt>
+						<dd><input type="radio" class="radio" name="attachsig" value="1" {ALWAYS_ADD_SIGNATURE_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="attachsig" value="0" {ALWAYS_ADD_SIGNATURE_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_ALWAYS_ALLOW_BBCODE}:</label></dt>
+						<dd><input type="radio" class="radio" name="allowbbcode" value="1" {ALWAYS_ALLOW_BBCODE_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="allowbbcode" value="0" {ALWAYS_ALLOW_BBCODE_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl style="display:none">
+						<dt><label>{L_ALWAYS_ALLOW_HTML}:</label></dt>
+						<dd><input type="radio" class="radio" name="allowhtml" value="1" /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="allowhtml" value="0" checked="checked" /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_ALWAYS_ALLOW_SMILIES}:</label></dt>
+						<dd><input type="radio" class="radio" name="allowsmilies" value="1" {ALWAYS_ALLOW_SMILIES_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="allowsmilies" value="0" {ALWAYS_ALLOW_SMILIES_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_BOARD_LANGUAGE}:</label></dt>
+						<dd>{LANGUAGE_SELECT}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_BOARD_STYLE}:</label></dt>
+						<dd>{STYLE_SELECT}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_TIMEZONE}:</label></dt>
+						<dd>{TIMEZONE_SELECT}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_DATE_FORMAT}:</label><br />
+						<span>{L_DATE_FORMAT_EXPLAIN}</span></dt>
+						<dd><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="16" /></dd>
+					</dl>
+				</fieldset>
+				<fieldset>
+					<legend>{L_AVATAR_PANEL}</legend>
+					<dl>
+						<dt><label>{L_CURRENT_IMAGE}:</label><br /><span>{L_AVATAR_EXPLAIN}</span></dt>
+						<dd>{AVATAR}</dd>
+						<dd><label><input type="checkbox" name="avatardel" /> {L_DELETE_AVATAR}</label></dd>
+					</dl>
+					<!-- BEGIN avatar_local_upload -->
+						<dl>
+							<dt><label>{L_UPLOAD_AVATAR_FILE}:</label></dt>
+							<dd><input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" /><input type="file" name="avatar" /></dd>
+						</dl>
+					<!-- END avatar_local_upload -->
+					<!-- BEGIN avatar_remote_upload -->
+						<dl>
+							<dt><label>{L_UPLOAD_AVATAR_URL}:</label><br /><span>{L_UPLOAD_AVATAR_URL_EXPLAIN}</span></dt>
+							<dd><input type="text" name="avatarurl" value="{AVATAR_URL}" /></dd>
+						</dl>
+					<!-- END avatar_remote_upload -->
+					<!-- BEGIN avatar_remote_link -->
+						<dl>
+							<dt><label>{L_LINK_REMOTE_AVATAR}:</label><br /><span>{L_LINK_REMOTE_AVATAR_EXPLAIN}</span></dt>
+							<dd><input type="text" name="avatarremoteurl" value="{AVATAR_REMOTE}" /></dd>
+						</dl>
+					<!-- END avatar_remote_link -->
+					<!-- BEGIN avatar_local_gallery -->
+						<dl>
+							<dt><label>{L_AVATAR_GALLERY}:</label><br /><span>{L_UPLOAD_AVATAR_URL_EXPLAIN}</span></dt>
+							<dd><input type="submit" name="avatargallery" value="{L_SHOW_GALLERY}" class="button2" /></dd>
+						</dl>
+					<!-- END avatar_local_gallery -->
+					</fieldset>
+				<fieldset>
+					<legend>{L_SPECIAL}</legend>
+					<p>{L_SPECIAL_EXPLAIN}</p>
+					<dl>
+						<dt><label>{L_USER_ACTIVE}:</label></dt>
+						<dd><input type="radio" class="radio" name="user_status" value="1" {USER_ACTIVE_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="user_status" value="0" {USER_ACTIVE_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_ALLOW_PM}:</label></dt>
+						<dd><input type="radio" class="radio" name="user_allowpm" value="1" {ALLOW_PM_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="user_allowpm" value="0" {ALLOW_PM_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_ALLOW_AVATAR}:</label></dt>
+						<dd><input type="radio" class="radio" name="user_allowavatar" value="1" {ALLOW_AVATAR_YES} /> 
+						{L_YES}&nbsp; 
+						<input type="radio" class="radio" name="user_allowavatar" value="0" {ALLOW_AVATAR_NO} /> 
+						{L_NO}</dd>
+					</dl>
+					<dl>
+						<dt><label>{L_SELECT_RANK}:</label></dt>
+						<dd><select name="user_rank">{RANK_SELECT_BOX}</select></dd>
+					</dl>
+					<dl>
+						<dt><label>{L_DELETE_USER}?</label></dt>
+						<dd><input type="checkbox" name="deleteuser">
+						{L_DELETE_USER_EXPLAIN}</dd>
+					</dl>
+				</fieldset>
+				<p class="submit-buttons">
+					{S_HIDDEN_FIELDS}
+					<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" /> <input type="reset" value="{L_RESET}" class="button2" />
+				</p>
+				</form>

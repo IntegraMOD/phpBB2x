@@ -1,3 +1,13 @@
+<script>
+function phpbb_credits() {
+  var x = document.getElementById("credits");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
 				<a name="maincontent"></a>
 				<h1>{L_WELCOME}</h1>
 				<p>{L_ADMIN_INTRO}</p>
@@ -48,6 +58,29 @@
 					<td><strong>{PHP_VERSION}</strong></td>
 					<td>{L_MYSQL_VERSION}:</td>
 					<td><strong>{MYSQL_VERSION}</strong></td>
+				</tr>
+				<tr>
+				  <td valign="top"><a href="#" onclick="phpbb_credits()">credits</a></td>
+				  <td id="credits" style="display: none" colspan="3">
+				    <div> 
+					  <ul class="credits">
+						<li class="med">phpBB 2.0.23</li>
+						<li class="author">Author: The phpBB Group</li>
+						<li class="med">phpBB 2.0.23 misc fixes</li>
+						<li class="author">MOD Author: achaab & BoBmArLeY</li>
+						<li class="med">phpBB 2.0.23 to 2.0.24</li>
+						<li class="author">MOD Author: Dog Cow</li>
+						<li class="med">phpBB 2.0.24 to 2.0.25</li>
+						<li class="author">MOD Author: Helter https://integramod.com</li>
+						<li class="med">DHTML Collapsible FAQ</li>
+						<li class="author">MOD Author: Markus_Petrux http://www.phpmix.com</li>
+						<li class="med">DHTML Collapsible ACP MENU</li>
+						<li class="author">MOD Author: Markus_Petrux http://www.phpmix.com</li>
+					  </ul> 
+				    </div>
+				  </td>
+				  <td></td>
+				  <td></td>				  
 				</tr>
 				</tbody>
 				</table>

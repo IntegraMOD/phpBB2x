@@ -60,7 +60,7 @@ while( list($var, $param) = @each($params) )
 $user_id = intval($user_id);
 $group_id = intval($group_id);
 $adv = intval($adv);
-$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 
 //
 // Start program - define vars

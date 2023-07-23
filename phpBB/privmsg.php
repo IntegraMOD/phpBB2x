@@ -62,7 +62,7 @@ $mark_list = ( !empty($HTTP_POST_VARS['mark']) ) ? $HTTP_POST_VARS['mark'] : 0;
 if ( isset($HTTP_POST_VARS['folder']) || isset($HTTP_GET_VARS['folder']) )
 {
 	$folder = ( isset($HTTP_POST_VARS['folder']) ) ? $HTTP_POST_VARS['folder'] : $HTTP_GET_VARS['folder'];
-	$folder = htmlspecialchars($folder, ENT_COMPAT, 'ISO-8859-1');
+	$folder = htmlspecialchars($folder, ENT_COMPAT, 'utf-8');
 
 	if ( $folder != 'inbox' && $folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox' )
 	{
@@ -97,7 +97,7 @@ if ( $cancel )
 if ( !empty($HTTP_POST_VARS['mode']) || !empty($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( !empty($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 }
 else
 {
@@ -1235,7 +1235,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$error_msg .= ( ( !empty($error_msg) ) ? '<br />' : '' ) . $lang['No_to_user'];
 		}
 
-		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'ISO-8859-1'));
+		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'utf-8'));
 		if ( empty($privmsg_subject) )
 		{
 			$error = TRUE;
@@ -1426,9 +1426,9 @@ else if ( $submit || $refresh || $mode != '' )
 		// passed to the script, process it a little, do some checks
 		// where neccessary, etc.
 		//
-		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'ISO-8859-1')) : '';
+		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'utf-8')) : '';
 
-		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'ISO-8859-1')) : '';
+		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'utf-8')) : '';
 		$privmsg_message = ( isset($HTTP_POST_VARS['message']) ) ? trim($HTTP_POST_VARS['message']) : '';
 		// $privmsg_message = preg_replace('#<textarea>#si', '&lt;textarea&gt;', $privmsg_message);
 		if ( !$preview )
