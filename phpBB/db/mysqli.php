@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *                                 mysql4.php
+ *                                 mysqli.php
  *                            -------------------
  *   begin                : Saturday, Jul 23, 2023
  *   copyright            : (C) 2001 The phpBB Group
@@ -33,8 +33,6 @@ if(!defined("SQL_LAYER"))
 		var $rowset = array();		
 		public $queries;
 		public $sql_time;
-		public $cache, $cached, $caching;
-
 
 		//
 		// Constructor
@@ -242,7 +240,6 @@ if(!defined("SQL_LAYER"))
 				$this->row[(bool)$query_id] = @mysqli_fetch_array($query_id, MYSQLI_ASSOC);
 				$qend = microtime(true);
 				$this->sql_time += $qend - $qstart;
-				$this->cache[] = $this->row[$query_id];
 				return $this->row[(bool)$query_id];
 			}
 			else
