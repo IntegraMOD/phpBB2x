@@ -6,7 +6,7 @@
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
  *
- *   $Id$
+ *   $Id: page_tail.php  2023/10/31 03:18:41 Helter $
  *
  *
  ***************************************************************************/
@@ -52,8 +52,8 @@ $db->sql_close();
 
 /* Un-comment the line below to restrict Admins only to view page generation info */
 
-//if( ($userdata['session_logged_in']) and ($userdata['user_level'] == ADMIN) )
-//{
+if( ($userdata['session_logged_in']) and ($userdata['user_level'] == ADMIN) )
+{
 	$gzip_text = ($board_config['gzip_compress']) ? 'GZIP enabled' : 'GZIP disabled';
 
 	$debug_text = (DEBUG == 1) ? 'Debug on' : 'Debug off';
@@ -64,18 +64,20 @@ $db->sql_close();
 	$mtime = explode(" ",$mtime);
 	$mtime = $mtime[1] + $mtime[0];
 	$endtime = $mtime;
-
+    $start = microtime(true);
+    usleep(1000000);
+    $end = microtime(true) - $start;
 	$gentime = round(($endtime - $starttime), 4);
-
 	$sql_time = round($db->sql_time, 4);
-
 	$sql_part = round($sql_time / $gentime * 100);
 	$php_part = 100 - $sql_part;
+	$ptime = round($end, 2);
+    $peak_memory = round(memory_get_peak_usage()/1048576, 2);
+}
 
-//}*/
-if( defined('DEBUG') && DEBUG == "1")
+if( defined('DEBUG') )
 {
-	$debug_out = '<div class="gensmall" style="text-align: center; margin-bottom:10px;">[Page generation time: '. $gentime .'s (PHP: '. $php_part .'% | SQL: '. $sql_part .'%) | SQL queries: '. $excuted_queries .' | '. $gzip_text .' | '. $debug_text .']</div>';
+	$debug_out = '<div class="gensmall" style="text-align:center; padding:10px;">[Page generation time: '. $ptime .'s | (PHP: '. $php_part .'% | SQL: '. $sql_part .'%) | SQL queries: '. $excuted_queries .' | '. $gzip_text .' | '. $debug_text .' | Peak memory usage: '. $peak_memory .' MB]</div>';
 }
 else
 {
@@ -84,29 +86,34 @@ else
 
 echo $debug_out;
 
+if (defined('DEV_MODE') && DEV_MODE && $db && $db->queries)
+{
+	foreach ($db->queries as $query)
+	{
+		list($sql, $bt, $time) = $query;
+		echo "Query: $time <pre style='max-width: 300px;'>$sql" . str_replace($sql, '*QUERY*', strip_tags($bt)) . "</pre>";
+	    implode("\n", array_slice(explode("\n", $bt), 0, 10));
+	}
+}
+
 //
 // Compress buffered output if required and send to browser
 //
-if ( $do_gzip_compress )
+if( $do_gzip_compress && headers_sent() != TRUE )
 {
-	//
-	// Borrowed from php.net!
-	//
 	$gzip_contents = ob_get_contents();
 	ob_end_clean();
-
 	$gzip_size = strlen($gzip_contents);
 	$gzip_crc = crc32($gzip_contents);
-
 	$gzip_contents = gzcompress($gzip_contents, 9);
 	$gzip_contents = substr($gzip_contents, 0, strlen($gzip_contents) - 4);
-
+	$gzip_contents .= pack("V",$gzip_crc) . pack("V", $gzip_size);
+	header("Content-Encoding: gzip");
+	header("Vary: Accept-Encoding");
+	header("Content-Length: ".strlen($gzip_contents));
+	header('X-Content-Encoded-By: Integramod '.$board_config['integramod_version']);
 	echo "\x1f\x8b\x08\x00\x00\x00\x00\x00";
 	echo $gzip_contents;
-	echo pack('V', $gzip_crc);
-	echo pack('V', $gzip_size);
-}
-
-exit;
+}else echo ob_get_clean();
 
 ?>

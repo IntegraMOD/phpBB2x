@@ -1,12 +1,12 @@
 <?php
 /***************************************************************************
- *                                 mysqli.php
+ *                                 mysql4.php
  *                            -------------------
- *   begin                : 1 janvier 2013
- *   copyright            : achaab & BoBmArLeY
- *   sebsite              : http://premod-shdow.servhome.org
+ *   begin                : Saturday, Jul 23, 2023
+ *   copyright            : (C) 2001 The phpBB Group
+ *   email                : support@phpbb.com
  *
- *   $Id: mysqli.php,v 1.0 2013/01/01 21:13:47 achaab Exp $
+ *   $Id: mysqli.php,v 2 2023/10/31 03:18:41 Helter $
  *
  ***************************************************************************/
 
@@ -17,9 +17,6 @@
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
  *
- *   Please, if you do any change to improve the code, send me an email
- *   at achaab@hotmail.fr so i can do the changes myself and diffuse them
- *
  ***************************************************************************/
  
 if(!defined("SQL_LAYER"))
@@ -28,13 +25,16 @@ if(!defined("SQL_LAYER"))
 
 	class sql_db
 	{
-
 		var $db_connect_id;
 		var $query_result;
-		var $row = array();
-		var $rowset = array();
 		var $num_queries = 0;
 		var $in_transaction = 0;
+		var $row = array();
+		var $rowset = array();		
+		public $queries;
+		public $sql_time;
+		public $cache, $cached, $caching;
+
 
 		//
 		// Constructor
@@ -120,7 +120,19 @@ if(!defined("SQL_LAYER"))
 					}
 					$this->in_transaction = TRUE;
 				}
+			
+				$qstart = microtime(true);
+				$this->query_result = @mysqli_query($this->db_connect_id, $query);
+				$qend = microtime(true);
+				$this->sql_time += $qend - $qstart;
 
+				if (defined('DEV_MODE') && DEV_MODE)
+				{
+					ob_start();
+					debug_print_backtrace();
+					$backtrace = ob_get_clean();
+					$this->queries[] = array($query, $backtrace, $qend - $qstart);
+				}
 				$this->query_result = @mysqli_query($this->db_connect_id, $query);
 			}
 			else
@@ -171,8 +183,11 @@ if(!defined("SQL_LAYER"))
 				$query_id = $this->query_result;
 			}
 			
-
-			return ( $query_id ) ? @mysqli_num_rows($query_id) : false;
+			$qstart = microtime(true);
+			$result = ( $query_id ) ? mysqli_num_rows($query_id) : false;
+			$qend = microtime(true);
+			$this->sql_time += $qend - $qstart;
+			return $result;
 		}
 
 		function sql_affectedrows()
@@ -223,7 +238,11 @@ if(!defined("SQL_LAYER"))
 
 			if( $query_id )
 			{
+				$qstart = microtime(true);
 				$this->row[(bool)$query_id] = @mysqli_fetch_array($query_id, MYSQLI_ASSOC);
+				$qend = microtime(true);
+				$this->sql_time += $qend - $qstart;
+				$this->cache[] = $this->row[$query_id];
 				return $this->row[(bool)$query_id];
 			}
 			else
@@ -248,7 +267,8 @@ if(!defined("SQL_LAYER"))
 				{
 					$result[] = $this->rowset[(bool)$query_id];
 				}
-
+				$qend = microtime(true);
+				$this->sql_time += $qend - $qstart;
 				if (isset($result))
 				{
 					return $result;
