@@ -109,7 +109,8 @@ $disallowed = $db->sql_fetchrowset($result);
 //
 $disallow_select = '<select name="disallowed_id">';
 
-if( trim(isset($disallowed)) == "" )
+//if( trim(isset($disallowed)) == "" )
+if (!isset($disallowed) || $disallowed == "")	
 {
 	$disallow_select = (isset($disallow_select)) ? $disallow_select : '';
 	$disallow_select .= '<option value="">' . $lang['No_disallowed'] . '</option>';
