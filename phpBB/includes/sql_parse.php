@@ -73,7 +73,7 @@ function remove_remarks($sql)
 	// try to keep mem. use down
 	$sql = "";
 	
-	$linecount = is_countable($lines) ? count($lines) : 0;
+	$linecount = count($lines);
 	$output = "";
 
 	for ($i = 0; $i < $linecount; $i++)
@@ -114,7 +114,7 @@ function split_sql_file($sql, $delimiter)
 	$matches = array();
 	
 	// this is faster than calling count($oktens) every time thru the loop.
-	$token_count = is_countable($tokens) ? count($tokens) : 0;
+	$token_count = count($tokens);
 	for ($i = 0; $i < $token_count; $i++)
 	{
 		// Don't wanna add an empty string as the last thing in the array.

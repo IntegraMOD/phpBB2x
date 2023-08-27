@@ -118,7 +118,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 	// Check subject
 	if (!empty($subject))
 	{
-		$subject = htmlspecialchars(trim($subject), ENT_COMPAT, 'utf-8');
+		$subject = htmlspecialchars(trim($subject), ENT_COMPAT, 'ISO-8859-1');
 	}
 	else if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
@@ -145,7 +145,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 
 		if (!empty($poll_title))
 		{
-			$poll_title = htmlspecialchars(trim($poll_title), ENT_COMPAT, 'utf-8');
+			$poll_title = htmlspecialchars(trim($poll_title), ENT_COMPAT, 'ISO-8859-1');
 		}
 
 		if(!empty($poll_options))
@@ -156,16 +156,16 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 				$option_text = trim($option_text);
 				if (!empty($option_text))
 				{
-					$temp_option_text[intval($option_id)] = htmlspecialchars($option_text, ENT_COMPAT, 'utf-8');
+					$temp_option_text[intval($option_id)] = htmlspecialchars($option_text, ENT_COMPAT, 'ISO-8859-1');
 				}
 			}
 			$option_text = $temp_option_text;
 
-			if ((is_countable($poll_options) ? count($poll_options) : 0) < 2)
+			if (count($poll_options) < 2)
 			{
 				$error_msg .= (!empty($error_msg)) ? '<br />' . $lang['To_few_poll_options'] : $lang['To_few_poll_options'];
 			}
-			else if ((is_countable($poll_options) ? count($poll_options) : 0) > $board_config['max_poll_options']) 
+			else if (count($poll_options) > $board_config['max_poll_options']) 
 			{
 				$error_msg .= (!empty($error_msg)) ? '<br />' . $lang['To_many_poll_options'] : $lang['To_many_poll_options'];
 			}
@@ -219,7 +219,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 	if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
-		$topic_vote = (!empty($poll_title) && (is_countable($poll_options) ? count($poll_options) : 0) >= 2) ? 1 : 0;
+		$topic_vote = (!empty($poll_title) && count($poll_options) >= 2) ? 1 : 0;
 
 		$post_data['edit_vote'] = (isset($post_data['edit_vote'])) ? $post_data['edit_vote'] : '';
 
@@ -258,7 +258,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	//
 	// Add poll
 	// 
-	if (($mode == 'newtopic' || ($mode == 'editpost' && $post_data['edit_poll'])) && !empty($poll_title) && (is_countable($poll_options) ? count($poll_options) : 0) >= 2)
+	if (($mode == 'newtopic' || ($mode == 'editpost' && $post_data['edit_poll'])) && !empty($poll_title) && count($poll_options) >= 2)
 	{
 		$sql = (!$post_data['has_poll']) ? "INSERT INTO " . VOTE_DESC_TABLE . " (topic_id, vote_text, vote_start, vote_length) VALUES ($topic_id, '$poll_title', $current_time, " . ($poll_length * 86400) . ")" : "UPDATE " . VOTE_DESC_TABLE . " SET vote_text = '$poll_title', vote_length = " . ($poll_length * 86400) . " WHERE topic_id = $topic_id";
 		if (!$db->sql_query($sql))
@@ -301,7 +301,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		{
 			if (!empty($option_text))
 			{
-				$option_text = str_replace("\'", "''", htmlspecialchars($option_text, ENT_COMPAT, 'utf-8'));
+				$option_text = str_replace("\'", "''", htmlspecialchars($option_text, ENT_COMPAT, 'ISO-8859-1'));
 				$poll_result = ($mode == "editpost" && isset($old_poll_result[$option_id])) ? $old_poll_result[$option_id] : 0;
 
 				$sql = ($mode != "editpost" || !isset($old_poll_result[$option_id])) ? "INSERT INTO " . VOTE_RESULTS_TABLE . " (vote_id, vote_option_id, vote_option_text, vote_result) VALUES ($poll_id, $poll_option_id, '$option_text', $poll_result)" : "UPDATE " . VOTE_RESULTS_TABLE . " SET vote_option_text = '$option_text', vote_result = $poll_result WHERE vote_option_id = $option_id AND vote_id = $poll_id";
@@ -646,7 +646,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 					{
 						$emailer->use_template('topic_notify', $user_lang);
 		
-						for ($i = 0; $i < (is_countable($bcc_list) ? count($bcc_list) : 0); $i++)
+						for ($i = 0; $i < count($bcc_list); $i++)
 						{
 							$emailer->bcc($bcc_list[$i]);
 						}
@@ -857,7 +857,7 @@ function clean_html($tag)
 		}
 		else
 		{
-			return  htmlspecialchars('</' . $matches[1] . '>', ENT_COMPAT, 'utf-8');
+			return  htmlspecialchars('</' . $matches[1] . '>', ENT_COMPAT, 'ISO-8859-1');
 		}
 	}
 
@@ -874,7 +874,7 @@ function clean_html($tag)
 				{
 					continue;
 				}
-				$attributes .= ' ' . $test[1][$i] . '=' . $test[2][$i] . str_replace(array('[', ']'), array('&#91;', '&#93;'), htmlspecialchars($test[3][$i], ENT_COMPAT, 'utf-8')) . $test[2][$i];
+				$attributes .= ' ' . $test[1][$i] . '=' . $test[2][$i] . str_replace(array('[', ']'), array('&#91;', '&#93;'), htmlspecialchars($test[3][$i], ENT_COMPAT, 'ISO-8859-1')) . $test[2][$i];
 			}
 		}
 		if (in_array(strtolower($tag[1]), $allowed_html_tags))
@@ -883,13 +883,13 @@ function clean_html($tag)
 		}
 		else
 		{
-			return htmlspecialchars('<' . $tag[1] . $attributes . '>', ENT_COMPAT, 'utf-8');
+			return htmlspecialchars('<' . $tag[1] . $attributes . '>', ENT_COMPAT, 'ISO-8859-1');
 		}
 	}
 	// Finally, this is not an allowed tag so strip all the attibutes and escape it
 	else
 	{
-		return htmlspecialchars('<' .   $tag[1] . '>', ENT_COMPAT, 'utf-8');
+		return htmlspecialchars('<' .   $tag[1] . '>', ENT_COMPAT, 'ISO-8859-1');
 	}
 }
 ?>

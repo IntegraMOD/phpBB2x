@@ -91,7 +91,7 @@ $unlock = ( isset($HTTP_POST_VARS['unlock']) ) ? TRUE : FALSE;
 if ( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -261,7 +261,7 @@ switch( $mode )
 			$topics = ( isset($HTTP_POST_VARS['topic_id_list']) ) ? $HTTP_POST_VARS['topic_id_list'] : array($topic_id);
 
 			$topic_id_sql = '';
-			for($i = 0; $i < (is_countable($topics) ? count($topics) : 0); $i++)
+			for($i = 0; $i < count($topics); $i++)
 			{
 				$topic_id_sql .= ( ( $topic_id_sql != '' ) ? ', ' : '' ) . intval($topics[$i]);
 			}
@@ -446,7 +446,7 @@ switch( $mode )
 			if ( isset($HTTP_POST_VARS['topic_id_list']) )
 			{
 				$topics = $HTTP_POST_VARS['topic_id_list'];
-				for($i = 0; $i < (is_countable($topics) ? count($topics) : 0); $i++)
+				for($i = 0; $i < count($topics); $i++)
 				{
 					$hidden_fields .= '<input type="hidden" name="topic_id_list[]" value="' . intval($topics[$i]) . '" />';
 				}
@@ -513,7 +513,7 @@ switch( $mode )
 				$topics = ( isset($HTTP_POST_VARS['topic_id_list']) ) ?  $HTTP_POST_VARS['topic_id_list'] : array($topic_id);
 
 				$topic_list = '';
-				for($i = 0; $i < (is_countable($topics) ? count($topics) : 0); $i++)
+				for($i = 0; $i < count($topics); $i++)
 				{
 					$topic_list .= ( ( $topic_list != '' ) ? ', ' : '' ) . intval($topics[$i]);
 				}
@@ -531,7 +531,7 @@ switch( $mode )
 				$row = $db->sql_fetchrowset($result);
 				$db->sql_freeresult($result);
 
-				for($i = 0; $i < (is_countable($row) ? count($row) : 0); $i++)
+				for($i = 0; $i < count($row); $i++)
 				{
 					$topic_id = $row[$i]['topic_id'];
 					
@@ -607,7 +607,7 @@ switch( $mode )
 			{
 				$topics = $HTTP_POST_VARS['topic_id_list'];
 
-				for($i = 0; $i < (is_countable($topics) ? count($topics) : 0); $i++)
+				for($i = 0; $i < count($topics); $i++)
 				{
 					$hidden_fields .= '<input type="hidden" name="topic_id_list[]" value="' . intval($topics[$i]) . '" />';
 				}
@@ -653,7 +653,7 @@ switch( $mode )
 		$topics = ( isset($HTTP_POST_VARS['topic_id_list']) ) ?  $HTTP_POST_VARS['topic_id_list'] : array($topic_id);
 
 		$topic_id_sql = '';
-		for($i = 0; $i < (is_countable($topics) ? count($topics) : 0); $i++)
+		for($i = 0; $i < count($topics); $i++)
 		{
 			$topic_id_sql .= ( ( $topic_id_sql != '' ) ? ', ' : '' ) . intval($topics[$i]);
 		}
@@ -698,7 +698,7 @@ switch( $mode )
 		$topics = ( isset($HTTP_POST_VARS['topic_id_list']) ) ?  $HTTP_POST_VARS['topic_id_list'] : array($topic_id);
 
 		$topic_id_sql = '';
-		for($i = 0; $i < (is_countable($topics) ? count($topics) : 0); $i++)
+		for($i = 0; $i < count($topics); $i++)
 		{
 			$topic_id_sql .= ( ( $topic_id_sql != "") ? ', ' : '' ) . intval($topics[$i]);
 		}
@@ -744,7 +744,7 @@ switch( $mode )
 		{
 			$posts = $HTTP_POST_VARS['post_id_list'];
 
-			for ($i = 0; $i < (is_countable($posts) ? count($posts) : 0); $i++)
+			for ($i = 0; $i < count($posts); $i++)
 			{
 				$post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($posts[$i]);
 			}
@@ -797,7 +797,7 @@ switch( $mode )
 				}
 				while ($row = $db->sql_fetchrow($result));
 
-				$post_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'utf-8'));
+				$post_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'ISO-8859-1'));
 				if (empty($post_subject))
 				{
 					message_die(GENERAL_MESSAGE, $lang['Empty_subject']);
@@ -960,7 +960,7 @@ switch( $mode )
 						$message = ( $board_config['allow_bbcode'] ) ? bbencode_second_pass($message, $bbcode_uid) : preg_replace('/\:[0-9a-z\:]+\]/si', ']', $message);
 					}
 
-					if ( is_countable($orig_word) ? count($orig_word) : 0 )
+					if ( count($orig_word) )
 					{
 						$post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
 						$message = preg_replace($orig_word, $replacement_word, $message);
@@ -1032,7 +1032,7 @@ switch( $mode )
 		}
 
 		$ip_this_post = decode_ip($post_row['poster_ip']);
-		$ip_this_post = ( $rdns_ip_num == $ip_this_post ) ? htmlspecialchars(gethostbyaddr($ip_this_post), ENT_COMPAT, 'utf-8') : $ip_this_post;
+		$ip_this_post = ( $rdns_ip_num == $ip_this_post ) ? htmlspecialchars(gethostbyaddr($ip_this_post), ENT_COMPAT, 'ISO-8859-1') : $ip_this_post;
 
 		$poster_id = $post_row['poster_id'];
 
@@ -1078,7 +1078,7 @@ switch( $mode )
 				}
 
 				$ip = decode_ip($row['poster_ip']);
-				$ip = ( $rdns_ip_num == $row['poster_ip'] || $rdns_ip_num == 'all') ? htmlspecialchars(gethostbyaddr($ip), ENT_COMPAT, 'utf-8') : $ip;
+				$ip = ( $rdns_ip_num == $row['poster_ip'] || $rdns_ip_num == 'all') ? htmlspecialchars(gethostbyaddr($ip), ENT_COMPAT, 'ISO-8859-1') : $ip;
 
 				$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
@@ -1245,7 +1245,7 @@ switch( $mode )
 			}
 	
 			$topic_title = $row['topic_title'];
-			if ( is_countable($orig_word) ? count($orig_word) : 0 )
+			if ( count($orig_word) )
 			{
 				$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 			}

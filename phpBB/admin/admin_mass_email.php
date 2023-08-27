@@ -122,7 +122,7 @@ if ( isset($HTTP_POST_VARS['submit']) )
 		$emailer->from($board_config['board_email']);
 		$emailer->replyto($board_config['board_email']);
 
-		for ($i = 0; $i < (is_countable($bcc_list) ? count($bcc_list) : 0); $i++)
+		for ($i = 0; $i < count($bcc_list); $i++)
 		{
 			$emailer->bcc($bcc_list[$i]);
 		}

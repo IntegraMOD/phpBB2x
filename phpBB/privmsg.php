@@ -62,7 +62,7 @@ $mark_list = ( !empty($HTTP_POST_VARS['mark']) ) ? $HTTP_POST_VARS['mark'] : 0;
 if ( isset($HTTP_POST_VARS['folder']) || isset($HTTP_GET_VARS['folder']) )
 {
 	$folder = ( isset($HTTP_POST_VARS['folder']) ) ? $HTTP_POST_VARS['folder'] : $HTTP_GET_VARS['folder'];
-	$folder = htmlspecialchars($folder, ENT_COMPAT, 'utf-8');
+	$folder = htmlspecialchars($folder, ENT_COMPAT, 'ISO-8859-1');
 
 	if ( $folder != 'inbox' && $folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox' )
 	{
@@ -97,7 +97,7 @@ if ( $cancel )
 if ( !empty($HTTP_POST_VARS['mode']) || !empty($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( !empty($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -531,32 +531,32 @@ else if ( $mode == 'read' )
 		$icq = '';
 	}
 
-	$fb_img = ( $privmsg['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
-	$fb = ( $privmsg['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
+	$fb_img = ( $privmsg[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg[$i]['user_fb'] . '" target="blank" title="' . $lang['FB'] . '"><img src="' . $images['icon_fb'] . '" alt="' . $lang['FB'] . '" /></a>' : ''; 
+	$fb = ( $privmsg[$i]['user_fb'] ) ? '<a href="https://www.facebook.com/' . $privmsg[$i]['user_fb'] . '" target="blank">' . $lang['FB'] . '</a>' : ''; 
 
-	$ig_img = ( $privmsg['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
-	$ig = ( $privmsg['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
+	$ig_img = ( $privmsg[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg[$i]['user_ig'] . '" target="blank" title="' . $lang['IG'] . '"><img src="' . $images['icon_ig'] . '" alt="' . $lang['IG'] . '" /></a>' : ''; 
+	$ig = ( $privmsg[$i]['user_ig'] ) ? '<a href="https://www.instagram.com/' . $privmsg[$i]['user_ig'] . '" target="blank">' . $lang['IG'] . '</a>' : ''; 
 
-	$pt_img = ( $privmsg['user_pt'] ) ? '<a href="/www.pinterest.com/' . $privmsg['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
-	$pt = ( $privmsg['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $privmsg['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
+	$pt_img = ( $privmsg[$i]['user_pt'] ) ? '<a href="/www.pinterest.com/' . $privmsg[$i]['user_pt'] . '" target="blank" title="' . $lang['PT'] . '"><img src="' . $images['icon_pt'] . '" alt="' . $lang['PT'] . '" /></a>' : ''; 
+	$pt = ( $privmsg[$i]['user_pt'] ) ? '<a href="https://www.pinterest.com/' . $privmsg[$i]['user_pt'] . '" target="blank">' . $lang['PT'] . '</a>' : ''; 
 
-	$twr_img = ( $privmsg['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
-	$twr = ( $privmsg['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
+	$twr_img = ( $privmsg[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg[$i]['user_twr'] . '&amp;.src=pg"><img src="' . $images['icon_twr'] . '" alt="' . $lang['TWR'] . '" title="' . $lang['TWR'] . '" border="0" /></a>' : '';
+	$twr = ( $privmsg[$i]['user_twr'] ) ? '<a href="https://twitter.com/' . $privmsg[$i]['user_twr'] . '&amp;.src=pg">' . $lang['TWR'] . '</a>' : '';
 
-	$skp_img = ( $privmsg['user_skp'] ) ? '<a href="skype:' . $privmsg['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
-	$skp = ( $privmsg['user_skp'] ) ? '<a href="skype:' . $privmsg['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
+	$skp_img = ( $privmsg[$i]['user_skp'] ) ? '<a href="skype:' . $privmsg[$i]['user_skp'] . '?call" title="' . $lang['SKP'] . '"><img src="' . $images['icon_skp'] . '" alt="' . $lang['SKP'] . '" /></a>' : ''; 
+	$skp = ( $privmsg[$i]['user_skp'] ) ? '<a href="skype:' . $privmsg[$i]['user_skp'] . '?call">' . $lang['SKP'] . '</a>' : ''; 
 
-	$tg_img = ( $privmsg['user_tg'] ) ? '<a href="https://t.me/' . $privmsg['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
-	$tg = ( $privmsg['user_tg'] ) ? '<a href="https://t,me/' . $privmsg['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
+	$tg_img = ( $privmsg[$i]['user_tg'] ) ? '<a href="https://t.me/' . $privmsg[$i]['user_tg'] . '&amp;.src=pg"><img src="' . $images['icon_tg'] . '" alt="' . $lang['TG'] . '" title="' . $lang['TG'] . '" border="0" /></a>' : '';
+	$tg = ( $privmsg[$i]['user_tg'] ) ? '<a href="https://t,me/' . $privmsg[$i]['user_tg'] . '&amp;.src=pg">' . $lang['TG'] . '</a>' : '';
 
-	$li_img = ( $privmsg['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
-	$li = ( $privmsg['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
+	$li_img = ( $privmsg[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg[$i]['user_li'] . '&amp;.src=pg"><img src="' . $images['icon_li'] . '" alt="' . $lang['LI'] . '" title="' . $lang['LI'] . '" border="0" /></a>' : '';
+	$li = ( $privmsg[$i]['user_li'] ) ? '<a href="https://www.linkedin.com/in/' . $privmsg[$i]['user_li'] . '&amp;.src=pg">' . $lang['LI'] . '</a>' : '';
 
-	$tt_img = ( $privmsg['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
-	$tt = ( $privmsg['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
+	$tt_img = ( $privmsg[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg[$i]['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
+	$tt = ( $privmsg[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $privmsg[$i]['user_tt'] . '&amp;.src=pg">' . $lang['TT'] . '</a>' : '';
 
-	$dc_img = ( $privmsg['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $privmsg['user_dc'] . '&amp;.src=pg"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
-	$dc = ( $privmsg['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $privmsg['user_dc'] . '&amp;.src=pg">' . $lang['DC'] . '</a>' : '';
+	$dc_img = ( $privmsg[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $privmsg[$i]['user_dc'] . '&amp;.src=pg"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
+	$dc = ( $privmsg[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $privmsg[$i]['user_dc'] . '&amp;.src=pg">' . $lang['DC'] . '</a>' : '';
 
 	$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($username_from) . "&amp;showresults=posts");
 	$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $username_from) . '" title="' . sprintf($lang['Search_user_posts'], $username_from) . '" border="0" /></a>';
@@ -619,7 +619,7 @@ else if ( $mode == 'read' )
 	$replacement_word = array();
 	obtain_word_list($orig_word, $replacement_word);
 
-	if ( is_countable($orig_word) ? count($orig_word) : 0 )
+	if ( count($orig_word) )
 	{
 		$post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
 		$private_message = preg_replace($orig_word, $replacement_word, $private_message);
@@ -708,7 +708,7 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 		$s_hidden_fields .= ( isset($HTTP_POST_VARS['delete']) ) ? '<input type="hidden" name="delete" value="true" />' : '<input type="hidden" name="deleteall" value="true" />';
 		$s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
 
-		for($i = 0; $i < (is_countable($mark_list) ? count($mark_list) : 0); $i++)
+		for($i = 0; $i < count($mark_list); $i++)
 		{
 			$s_hidden_fields .= '<input type="hidden" name="mark[]" value="' . intval($mark_list[$i]) . '" />';
 		}
@@ -743,7 +743,7 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 
 		if (!$delete_all)
 		{
-			for ($i = 0; $i < (is_countable($mark_list) ? count($mark_list) : 0); $i++)
+			for ($i = 0; $i < count($mark_list); $i++)
 			{
 				$delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . intval($mark_list[$i]);
 			}
@@ -790,7 +790,7 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 
 		unset($delete_type);
 
-		if ( is_countable($mark_list) ? count($mark_list) : 0 )
+		if ( count($mark_list) )
 		{
 			$delete_sql_id = '';
 			for ($i = 0; $i < sizeof($mark_list); $i++)
@@ -1235,7 +1235,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$error_msg .= ( ( !empty($error_msg) ) ? '<br />' : '' ) . $lang['No_to_user'];
 		}
 
-		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'utf-8'));
+		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'ISO-8859-1'));
 		if ( empty($privmsg_subject) )
 		{
 			$error = TRUE;
@@ -1426,9 +1426,9 @@ else if ( $submit || $refresh || $mode != '' )
 		// passed to the script, process it a little, do some checks
 		// where neccessary, etc.
 		//
-		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'utf-8')) : '';
+		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'ISO-8859-1')) : '';
 
-		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'utf-8')) : '';
+		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'ISO-8859-1')) : '';
 		$privmsg_message = ( isset($HTTP_POST_VARS['message']) ) ? trim($HTTP_POST_VARS['message']) : '';
 		// $privmsg_message = preg_replace('#<textarea>#si', '&lt;textarea&gt;', $privmsg_message);
 		if ( !$preview )
@@ -1648,7 +1648,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$preview_message = $preview_message . '<br /><br />_________________<br />' . $user_sig;
 		}
 		
-		if ( is_countable($orig_word) ? count($orig_word) : 0 )
+		if ( count($orig_word) )
 		{
 			$preview_subject = preg_replace($orig_word, $replacement_word, $privmsg_subject);
 			$preview_message = preg_replace($orig_word, $replacement_word, $preview_message);
@@ -2063,7 +2063,7 @@ $previous_days = array(0, 1, 7, 14, 30, 90, 180, 364);
 $previous_days_text = array($lang['All_Posts'], $lang['1_Day'], $lang['7_Days'], $lang['2_Weeks'], $lang['1_Month'], $lang['3_Months'], $lang['6_Months'], $lang['1_Year']);
 
 $select_msg_days = '';
-for($i = 0; $i < (is_countable($previous_days) ? count($previous_days) : 0); $i++)
+for($i = 0; $i < count($previous_days); $i++)
 {
 	$selected = ( $msg_days == $previous_days[$i] ) ? ' selected="selected"' : '';
 	$select_msg_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
@@ -2196,7 +2196,7 @@ if ( $row = $db->sql_fetchrow($result) )
 
 		$msg_subject = $row['privmsgs_subject'];
 
-		if ( is_countable($orig_word) ? count($orig_word) : 0 )
+		if ( count($orig_word) )
 		{
 			$msg_subject = preg_replace($orig_word, $replacement_word, $msg_subject);
 		}

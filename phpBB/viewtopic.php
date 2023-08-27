@@ -355,7 +355,7 @@ else
 }
 
 $select_post_days = '<select name="postdays">';
-for($i = 0; $i < (is_countable($previous_days) ? count($previous_days) : 0); $i++)
+for($i = 0; $i < count($previous_days); $i++)
 {
 	$selected = ($post_days == $previous_days[$i]) ? ' selected="selected"' : '';
 	$select_post_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
@@ -367,7 +367,7 @@ $select_post_days .= '</select>';
 //
 if ( !empty($HTTP_POST_VARS['postorder']) || !empty($HTTP_GET_VARS['postorder']) )
 {
-	$post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder'], ENT_COMPAT, 'utf-8') : htmlspecialchars($HTTP_GET_VARS['postorder'], ENT_COMPAT, 'utf-8');
+	$post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder'], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS['postorder'], ENT_COMPAT, 'ISO-8859-1');
 	$post_time_order = ($post_order == "asc") ? "ASC" : "DESC";
 }
 else
@@ -413,7 +413,7 @@ if ($row = $db->sql_fetchrow($result))
 	while ($row = $db->sql_fetchrow($result));
 	$db->sql_freeresult($result);
 
-	$total_posts = is_countable($postrow) ? count($postrow) : 0;
+	$total_posts = count($postrow);
 }
 else 
 { 
@@ -424,22 +424,22 @@ else
 } 
 
 $resync = FALSE; 
-if ($forum_topic_data['topic_replies'] + 1 < $start + (is_countable($postrow) ? count($postrow) : 0)) 
+if ($forum_topic_data['topic_replies'] + 1 < $start + count($postrow)) 
 { 
    $resync = TRUE; 
-}
+} 
 elseif ($start + $board_config['posts_per_page'] > $forum_topic_data['topic_replies']) 
 { 
    $row_id = intval($forum_topic_data['topic_replies']) % intval($board_config['posts_per_page']); 
-   if ($postrow[$row_id]['post_id'] != $forum_topic_data['topic_last_post_id'] || $start + (is_countable($postrow) ? count($postrow) : 0) < $forum_topic_data['topic_replies']) 
+   if ($postrow[$row_id]['post_id'] != $forum_topic_data['topic_last_post_id'] || $start + count($postrow) < $forum_topic_data['topic_replies']) 
    { 
       $resync = TRUE; 
    } 
 } 
-elseif ((is_countable($postrow) ? count($postrow) : 0) < $board_config['posts_per_page']) 
+elseif (count($postrow) < $board_config['posts_per_page']) 
 { 
    $resync = TRUE; 
-}
+} 
 
 if ($resync) 
 { 
@@ -476,7 +476,7 @@ obtain_word_list($orig_word, $replacement_word);
 //
 // Censor topic title
 //
-if ( is_countable($orig_word) ? count($orig_word) : 0 )
+if ( count($orig_word) )
 {
 	$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 }
@@ -488,7 +488,7 @@ $highlight_match = $highlight = '';
 if (isset($HTTP_GET_VARS['highlight']))
 {
 	// Split words and phrases
-	$words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'], ENT_COMPAT, 'utf-8')));
+	$words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'], ENT_COMPAT, 'ISO-8859-1')));
 
 	for($i = 0; $i < sizeof($words); $i++)
 	{
@@ -555,7 +555,7 @@ if ( $userdata['session_logged_in'] )
 		$topic_last_read = $userdata['user_lastvisit'];
 	}
 
-	if ( (is_countable($tracking_topics) ? count($tracking_topics) : 0) >= 150 && empty($tracking_topics[$topic_id]) )
+	if ( count($tracking_topics) >= 150 && empty($tracking_topics[$topic_id]) )
 	{
 		asort($tracking_topics);
 		unset($tracking_topics[key($tracking_topics)]);
@@ -701,7 +701,7 @@ if ( !empty($forum_topic_data['topic_vote']) )
 	if ( $vote_info = $db->sql_fetchrowset($result) )
 	{
 		$db->sql_freeresult($result);
-		$vote_options = is_countable($vote_info) ? count($vote_info) : 0;
+		$vote_options = count($vote_info);
 
 		$vote_id = $vote_info[0]['vote_id'];
 		$vote_title = $vote_info[0]['vote_text'];
@@ -743,7 +743,7 @@ if ( !empty($forum_topic_data['topic_vote']) )
 			}
 
 			$vote_graphic = 0;
-			$vote_graphic_max = is_countable($images['voting_graphic']) ? count($images['voting_graphic']) : 0;
+			$vote_graphic_max = count($images['voting_graphic']);
 
 			for($i = 0; $i < $vote_options; $i++)
 			{
@@ -753,7 +753,7 @@ if ( !empty($forum_topic_data['topic_vote']) )
 				$vote_graphic_img = $images['voting_graphic'][$vote_graphic];
 				$vote_graphic = ($vote_graphic < $vote_graphic_max - 1) ? $vote_graphic + 1 : 0;
 
-				if ( is_countable($orig_word) ? count($orig_word) : 0 )
+				if ( count($orig_word) )
 				{
 					$vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
 				}
@@ -782,7 +782,7 @@ if ( !empty($forum_topic_data['topic_vote']) )
 
 			for($i = 0; $i < $vote_options; $i++)
 			{
-				if ( is_countable($orig_word) ? count($orig_word) : 0 )
+				if ( count($orig_word) )
 				{
 					$vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
 				}
@@ -803,7 +803,7 @@ if ( !empty($forum_topic_data['topic_vote']) )
 			$s_hidden_fields = '<input type="hidden" name="topic_id" value="' . $topic_id . '" /><input type="hidden" name="mode" value="vote" />';
 		}
 
-		if ( is_countable($orig_word) ? count($orig_word) : 0 )
+		if ( count($orig_word) )
 		{
 			$vote_title = preg_replace($orig_word, $replacement_word, $vote_title);
 		}
@@ -892,7 +892,7 @@ for($i = 0; $i < $total_posts; $i++)
 	}
 	else if ( $postrow[$i]['user_rank'] )
 	{
-		for($j = 0; $j < (is_countable($ranksrow) ? count($ranksrow) : 0); $j++)
+		for($j = 0; $j < count($ranksrow); $j++)
 		{
 			if ( $postrow[$i]['user_rank'] == $ranksrow[$j]['rank_id'] && $ranksrow[$j]['rank_special'] )
 			{
@@ -903,7 +903,7 @@ for($i = 0; $i < $total_posts; $i++)
 	}
 	else
 	{
-		for($j = 0; $j < (is_countable($ranksrow) ? count($ranksrow) : 0); $j++)
+		for($j = 0; $j < count($ranksrow); $j++)
 		{
 			if ( $postrow[$i]['user_posts'] >= $ranksrow[$j]['rank_min'] && !$ranksrow[$j]['rank_special'] )
 			{
@@ -1148,7 +1148,7 @@ for($i = 0; $i < $total_posts; $i++)
 	//
 	// Replace naughty words
 	//
-	if (is_countable($orig_word) ? count($orig_word) : 0)
+	if (count($orig_word))
 	{
 		$post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
 

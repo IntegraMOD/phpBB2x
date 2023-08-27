@@ -109,8 +109,7 @@ $disallowed = $db->sql_fetchrowset($result);
 //
 $disallow_select = '<select name="disallowed_id">';
 
-//if( trim(isset($disallowed)) == "" )
-if (!isset($disallowed) || $disallowed == "")	
+if( trim(isset($disallowed)) == "" )
 {
 	$disallow_select = (isset($disallow_select)) ? $disallow_select : '';
 	$disallow_select .= '<option value="">' . $lang['No_disallowed'] . '</option>';
@@ -118,7 +117,7 @@ if (!isset($disallowed) || $disallowed == "")
 else 
 {
 	$user = array();
-	for( $i = 0; $i < (is_countable($disallowed) ? count($disallowed) : 0); $i++ )
+	for( $i = 0; $i < count($disallowed); $i++ )
 	{
 		$disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . $disallowed[$i]['disallow_username'] . '</option>';
 	}

@@ -102,7 +102,7 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 
 					if( $session_id )
 					{
-						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'utf-8')) : "index.$phpEx";
+						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'ISO-8859-1')) : "index.$phpEx";
 						redirect(append_sid($url, true));
 					}
 					else
@@ -123,7 +123,7 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 					}
 				}
 
-				$redirect = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'utf-8')) : '';
+				$redirect = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'ISO-8859-1')) : '';
 				$redirect = str_replace('?', '&', $redirect);
 
 				if (strstr(urldecode($redirect), "\n") || strstr(urldecode($redirect), "\r") || strstr(urldecode($redirect), ';url'))
@@ -142,7 +142,7 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 		}
 		else
 		{
-			$redirect = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'utf-8')) : "";
+			$redirect = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'ISO-8859-1')) : "";
 			$redirect = str_replace("?", "&", $redirect);
 
 			if (strstr(urldecode($redirect), "\n") || strstr(urldecode($redirect), "\r") || strstr(urldecode($redirect), ';url'))
@@ -174,7 +174,7 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 
 		if (!empty($HTTP_POST_VARS['redirect']) || !empty($HTTP_GET_VARS['redirect']))
 		{
-			$url = (!empty($HTTP_POST_VARS['redirect'])) ? htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'utf-8') : htmlspecialchars($HTTP_GET_VARS['redirect'], ENT_COMPAT, 'utf-8');
+			$url = (!empty($HTTP_POST_VARS['redirect'])) ? htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS['redirect'], ENT_COMPAT, 'ISO-8859-1');
 			$url = str_replace('&amp;', '&', $url);
 			redirect(append_sid($url, true));
 		}
@@ -185,7 +185,7 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 	}
 	else
 	{
-		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'utf-8')) : "index.$phpEx";
+		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'ISO-8859-1')) : "index.$phpEx";
 		redirect(append_sid($url, true));
 	}
 }
@@ -215,11 +215,11 @@ else
 				$forward_to = ( !empty($forward_matches[3]) ) ? $forward_matches[3] : $forward_matches[1];
 				$forward_match = explode('&', $forward_to);
 
-				if((is_countable($forward_match) ? count($forward_match) : 0) > 1)
+				if(count($forward_match) > 1)
 				{
-					for($i = 1; $i < (is_countable($forward_match) ? count($forward_match) : 0); $i++)
+					for($i = 1; $i < count($forward_match); $i++)
 					{
-						if( !preg_match("/sid=/", (string) $forward_match[$i]) )
+						if( !preg_match("/sid=/", $forward_match[$i]) )
 						{
 							if( $forward_page != '' )
 							{

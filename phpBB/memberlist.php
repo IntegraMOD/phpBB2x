@@ -41,7 +41,7 @@ $start = ($start < 0) ? 0 : $start;
 
 if ( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
-	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? htmlspecialchars($HTTP_POST_VARS['mode'], ENT_COMPAT, 'utf-8') : htmlspecialchars($HTTP_GET_VARS['mode'], ENT_COMPAT, 'utf-8');
+	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? htmlspecialchars($HTTP_POST_VARS['mode'], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS['mode'], ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -68,7 +68,7 @@ $mode_types_text = array($lang['Sort_Joined'], $lang['Sort_Username'], $lang['So
 $mode_types = array('joined', 'username', 'location', 'posts', 'email', 'website', 'topten');
 
 $select_sort_mode = '<select name="mode">';
-for($i = 0; $i < (is_countable($mode_types_text) ? count($mode_types_text) : 0); $i++)
+for($i = 0; $i < count($mode_types_text); $i++)
 {
 	$selected = ( $mode == $mode_types[$i] ) ? ' selected="selected"' : '';
 	$select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';

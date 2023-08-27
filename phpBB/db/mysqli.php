@@ -33,6 +33,7 @@ if(!defined("SQL_LAYER"))
 		var $rowset = array();		
 		public $queries;
 		public $sql_time;
+		public $cache, $cached, $caching;
 
 		//
 		// Constructor

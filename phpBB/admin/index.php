@@ -101,7 +101,7 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 		$template->assign_block_vars("catrow", array(
 			"ADMIN_CATEGORY" => $cat,
 			"MENU_CAT_ID" => $menu_cat_id,
-			"MENU_CAT_ROWS" => is_countable($action_array) ? count($action_array) : 0)
+			"MENU_CAT_ROWS" => count($action_array))
 		);
 
 		ksort($action_array);
@@ -259,14 +259,14 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$tabledata_ary = $db->sql_fetchrowset($result);
 
 					$dbsize = 0;
-					for($i = 0; $i < (is_countable($tabledata_ary) ? count($tabledata_ary) : 0); $i++)
+					for($i = 0; $i < count($tabledata_ary); $i++)
 					{
-						$tabledata_ary[$i]['Type'] ??= '';
+						$tabledata_ary[$i]['Type'] = (isset($tabledata_ary[$i]['Type'])) ? $tabledata_ary[$i]['Type'] : '';
 						if( $tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
 						{
 							if( $table_prefix != "" )
 							{
-								if( strstr($tabledata_ary[$i]['Name'], (string) $table_prefix) )
+								if( strstr($tabledata_ary[$i]['Name'], $table_prefix) )
 								{
 									$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
 								}

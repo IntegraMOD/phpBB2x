@@ -49,8 +49,7 @@ $template->pparse('overall_footer');
 // Close our DB connection.
 //
 $db->sql_close();
-
-/* Un-comment the line below to restrict Admins only to view page generation info */
+	global $gentime, $sql_time, $sql_part, $php_part, $ptime, $peak_memory;
 
 if( ($userdata['session_logged_in']) and ($userdata['user_level'] == ADMIN) )
 {
@@ -74,7 +73,6 @@ if( ($userdata['session_logged_in']) and ($userdata['user_level'] == ADMIN) )
 	$ptime = round($end, 2);
     $peak_memory = round(memory_get_peak_usage()/1048576, 2);
 }
-
 if( defined('DEBUG') )
 {
 	$debug_out = '<div class="gensmall" style="text-align:center; padding:10px;">[Page generation time: '. $ptime .'s | (PHP: '. $php_part .'% | SQL: '. $sql_part .'%) | SQL queries: '. $excuted_queries .' | '. $gzip_text .' | '. $debug_text .' | Peak memory usage: '. $peak_memory .' MB]</div>';

@@ -62,7 +62,7 @@ if ($cancel)
 if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_GET_VARS['mode']) ) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else 
 {
@@ -97,11 +97,12 @@ switch( $mode )
 			$template_name = $$install_to;
 			$found = FALSE; 
 			
-			for($i = 0; $i < (is_countable($template_name) ? count($template_name) : 0) && !$found; $i++)
+			for($i = 0; $i < count($template_name) && !$found; $i++)
 			{
 				if( $template_name[$i]['style_name'] == $style_name )
 				{
-					foreach ($template_name[$i] as $key => $val) {
+					while(list($key, $val) = each($template_name[$i]))
+					{
 						$db_fields[] = $key;
 						$db_values[] = str_replace("\'", "''" , $val);
 					}
@@ -110,10 +111,10 @@ switch( $mode )
 					
 			$sql = "INSERT INTO " . THEMES_TABLE . " (";
 
-			for($i = 0; $i < (is_countable($db_fields) ? count($db_fields) : 0); $i++)
+			for($i = 0; $i < count($db_fields); $i++)
 			{
 				$sql .= $db_fields[$i];
-				if($i != ((is_countable($db_fields) ? count($db_fields) : 0) - 1))
+				if($i != (count($db_fields) - 1))
 				{
 					$sql .= ", ";
 				}
@@ -122,10 +123,10 @@ switch( $mode )
 
 			$sql .= ") VALUES (";
 
-			for($i = 0; $i < (is_countable($db_values) ? count($db_values) : 0); $i++)
+			for($i = 0; $i < count($db_values); $i++)
 			{
 				$sql .= "'" . $db_values[$i] . "'";
-				if($i != ((is_countable($db_values) ? count($db_values) : 0) - 1))
+				if($i != (count($db_values) - 1))
 				{
 					$sql .= ", ";
 				}
@@ -156,9 +157,9 @@ switch( $mode )
 						{
 							include($phpbb_root_path. "templates/" . $sub_dir . "/theme_info.cfg");
 							
-							for($i = 0; $i < (is_countable(${$sub_dir}) ? count($$sub_dir) : 0); $i++)
+							for($i = 0; $i < count($$sub_dir); $i++)
 							{
-								$working_data = ${$sub_dir};
+								$working_data = $$sub_dir;
 								
 								$style_name = $working_data[$i]['style_name'];
 														
@@ -303,18 +304,21 @@ switch( $mode )
 				$sql = "UPDATE " . THEMES_TABLE . " SET ";
 				$count = 0;
 
-				foreach ($updated as $key => $val) {
-	if($count != 0)
+				while(list($key, $val) = each($updated))
+				{
+					if($count != 0)
 					{
 						$sql .= ", ";
 					}
-	//
-	// I don't like this but it'll keep MSSQL from throwing
-	// an error and save me alot of typing
-	//
-	$sql .= ( stristr($key, "fontsize") ) ? "$key = $val" : "$key = '" . str_replace("\'", "''", $val) . "'";
-	$count++;
-}
+
+					//
+					// I don't like this but it'll keep MSSQL from throwing
+					// an error and save me alot of typing
+					//
+					$sql .= ( stristr($key, "fontsize") ) ? "$key = $val" : "$key = '" . str_replace("\'", "''", $val) . "'";
+
+					$count++;
+				}
 				
 				$sql .= " WHERE themes_id = $style_id";
 				
@@ -339,12 +343,15 @@ switch( $mode )
 					$sql = "UPDATE " . THEMES_NAME_TABLE . " 
 						SET ";
 					$count = 0;
-					foreach ($updated_name as $key => $val) {
+					while(list($key, $val) = each($updated_name))
+					{
 						if($count != 0)
 						{
 							$sql .= ", ";
 						}
+			
 						$sql .= "$key = '$val'";
+			
 						$count++;
 					}
 					
@@ -362,7 +369,7 @@ switch( $mode )
 						$vals[] = str_replace("\'", "''", $val);
 					}
 
-					for($i = 0; $i < (is_countable($fields) ? count($fields) : 0); $i++)
+					for($i = 0; $i < count($fields); $i++)
 					{
 						if($i > 0)
 						{
@@ -372,7 +379,7 @@ switch( $mode )
 					}
 					
 					$sql .= ") VALUES ($style_id, ";
-					for($i = 0; $i < (is_countable($vals) ? count($vals) : 0); $i++)
+					for($i = 0; $i < count($vals); $i++)
 					{
 						if($i > 0)
 						{
@@ -427,7 +434,7 @@ switch( $mode )
 				
 				$sql = "INSERT 
 					INTO " . THEMES_TABLE . " (";
-				for($i = 0; $i < (is_countable($field_names) ? count($field_names) : 0); $i++)
+				for($i = 0; $i < count($field_names); $i++)
 				{
 					if($i != 0)
 					{
@@ -437,7 +444,7 @@ switch( $mode )
 				}
 				
 				$sql .= ") VALUES (";
-				for($i = 0; $i < (is_countable($values) ? count($values) : 0); $i++)
+				for($i = 0; $i < count($values); $i++)
 				{
 					if($i != 0)
 					{
@@ -464,7 +471,7 @@ switch( $mode )
 					$vals[] = $val;
 				}
 
-				for($i = 0; $i < (is_countable($fields) ? count($fields) : 0); $i++)
+				for($i = 0; $i < count($fields); $i++)
 				{
 					if($i > 0)
 					{
@@ -474,7 +481,7 @@ switch( $mode )
 				}
 				
 				$sql .= ") VALUES ($style_id, ";
-				for($i = 0; $i < (is_countable($vals) ? count($vals) : 0); $i++)
+				for($i = 0; $i < count($vals); $i++)
 				{
 					if($i > 0)
 					{
@@ -757,7 +764,7 @@ switch( $mode )
 			
 			$theme_rowset = $db->sql_fetchrowset($result);
 			
-			if( (is_countable($theme_rowset) ? count($theme_rowset) : 0) == 0 )
+			if( count($theme_rowset) == 0 )
 			{
 				message_die(GENERAL_MESSAGE, $lang['No_themes']);
 			}
@@ -765,9 +772,10 @@ switch( $mode )
 			$theme_data = '<?php'."\n\n";
 			$theme_data .= "//\n// phpBB 2.x auto-generated theme config file for $template_name\n// Do not change anything in this file!\n//\n\n";
 
-			for($i = 0; $i < (is_countable($theme_rowset) ? count($theme_rowset) : 0); $i++)
+			for($i = 0; $i < count($theme_rowset); $i++)
 			{
-				foreach ($theme_rowset[$i] as $key => $val) {
+				while(list($key, $val) = each($theme_rowset[$i]))
+				{
 					if(!intval($key) && $key != "0" && $key != "themes_id")
 					{
 						$theme_data .= '$' . $template_name . "[$i]['$key'] = \"" . addslashes($val) . "\";\n";
@@ -788,7 +796,7 @@ switch( $mode )
 				// Unable to open the file writeable do something here as an attempt
 				// to get around that...
 				//
-				$s_hidden_fields = '<input type="hidden" name="theme_info" value="' . htmlspecialchars($theme_data, ENT_COMPAT, 'utf-8') . '" />';
+				$s_hidden_fields = '<input type="hidden" name="theme_info" value="' . htmlspecialchars($theme_data, ENT_COMPAT, 'ISO-8859-1') . '" />';
 				$s_hidden_fields .= '<input type="hidden" name="send_file" value="1" /><input type="hidden" name="mode" value="export" />';
 				
 				$download_form = '<form action="' . append_sid("admin_styles.$phpEx") . '" method="post"><input class="mainoption" type="submit" name="submit" value="' . $lang['Download'] . '" />' . $s_hidden_fields;
@@ -953,7 +961,7 @@ switch( $mode )
 			"L_DELETE" => $lang['Delete'])
 		);
 					
-		for($i = 0; $i < (is_countable($style_rowset) ? count($style_rowset) : 0); $i++)
+		for($i = 0; $i < count($style_rowset); $i++)
 		{
 			$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 			$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];

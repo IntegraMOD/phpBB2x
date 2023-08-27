@@ -33,7 +33,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'utf-8';
+$lang['ENCODING'] = 'iso-8859-1';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -1041,7 +1041,6 @@ $lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
 $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
- 
 //
 // That's all, Folks!
 // -------------------------------------------------

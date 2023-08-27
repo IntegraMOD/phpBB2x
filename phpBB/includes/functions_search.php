@@ -48,7 +48,7 @@ function clean_words($mode, &$entry, &$stopword_list, &$synonym_list)
 	//
 	// Filter out strange characters like ^, $, &, change "it's" to "its"
 	//
-	for($i = 0; $i < (is_countable($drop_char_match) ? count($drop_char_match) : 0); $i++)
+	for($i = 0; $i < count($drop_char_match); $i++)
 	{
 		$entry =  str_replace($drop_char_match[$i], $drop_char_replace[$i], $entry);
 	}
@@ -76,9 +76,9 @@ function clean_words($mode, &$entry, &$stopword_list, &$synonym_list)
 
 	if ( !empty($synonym_list) )
 	{
-		for ($j = 0; $j < (is_countable($synonym_list) ? count($synonym_list) : 0); $j++)
+		for ($j = 0; $j < count($synonym_list); $j++)
 		{
-            [$replace_synonym, $match_synonym] = explode(' ', trim(strtolower($synonym_list[$j])));
+            list($replace_synonym, $match_synonym) = explode(' ', trim(strtolower($synonym_list[$j])));
 			if ( $mode == 'post' || ( $match_synonym != 'not' && $match_synonym != 'and' && $match_synonym != 'or' ) )
 			{
 				$entry =  str_replace(' ' . trim($match_synonym) . ' ', ' ' . trim($replace_synonym) . ' ', $entry);
@@ -122,7 +122,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 		$word_insert_sql[$word_in] = '';
 		if ( !empty($search_matches) )
 		{
-			for ($i = 0; $i < (is_countable($search_matches) ? count($search_matches) : 0); $i++)
+			for ($i = 0; $i < count($search_matches); $i++)
 			{ 
 				$search_matches[$i] = trim($search_matches[$i]);
 
@@ -138,14 +138,14 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 		}
 	}
 
-	if ( is_countable($word) ? count($word) : 0 )
+	if ( count($word) )
 	{
 		sort($word);
 
 		$prev_word = '';
 		$word_text_sql = '';
 		$temp_word = array();
-		for($i = 0; $i < (is_countable($word) ? count($word) : 0); $i++)
+		for($i = 0; $i < count($word); $i++)
 		{
 			if ( $word[$i] != $prev_word )
 			{
@@ -181,8 +181,8 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 
 		$value_sql = '';
 		$match_word = array();
-		for ($i = 0; $i < (is_countable($word) ? count($word) : 0); $i++)
-		{
+		for ($i = 0; $i < count($word); $i++)
+		{ 
 			$new_match = true;
 			if ( isset($check_words[$word[$i]]) )
 			{
@@ -284,10 +284,10 @@ function remove_common($mode, $fraction, $word_id_list = array())
 	{
 		$common_threshold = floor($row['total_posts'] * $fraction);
 
-		if ( $mode == 'single' && (is_countable($word_id_list) ? count($word_id_list) : 0) )
+		if ( $mode == 'single' && count($word_id_list) )
 		{
 			$word_id_sql = '';
-			for($i = 0; $i < (is_countable($word_id_list) ? count($word_id_list) : 0); $i++)
+			for($i = 0; $i < count($word_id_list); $i++)
 			{
 				$word_id_sql .= ( ( $word_id_sql != '' ) ? ', ' : '' ) . "'" . $word_id_list[$i] . "'";
 			}

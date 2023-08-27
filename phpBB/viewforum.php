@@ -140,7 +140,7 @@ if ( $mark_read == 'topics' )
 			$tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
 			$tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
 
-			if ( ( (is_countable($tracking_forums) ? count($tracking_forums) : 0) + (is_countable($tracking_topics) ? count($tracking_topics) : 0) ) >= 150 && empty($tracking_forums[$forum_id]) )
+			if ( ( count($tracking_forums) + count($tracking_topics) ) >= 150 && empty($tracking_forums[$forum_id]) )
 			{
 				asort($tracking_forums);
 				unset($tracking_forums[key($tracking_forums)]);
@@ -230,7 +230,7 @@ while( $row = $db->sql_fetchrow($result) )
 	$moderators[] = '<a href="' . append_sid("groupcp.$phpEx?" . POST_GROUPS_URL . "=" . $row['group_id']) . '">' . $row['group_name'] . '</a>';
 }
 	
-$l_moderators = ( (is_countable($moderators) ? count($moderators) : 0) == 1 ) ? $lang['Moderator'] : $lang['Moderators'];
+$l_moderators = ( count($moderators) == 1 ) ? $lang['Moderator'] : $lang['Moderators'];
 $forum_moderators = ( count($moderators) ) ? implode(', ', $moderators) : $lang['None'];
 unset($moderators);
 
@@ -276,7 +276,7 @@ else
 }
 
 $select_topic_days = '<select name="topicdays">';
-for($i = 0; $i < (is_countable($previous_days) ? count($previous_days) : 0); $i++)
+for($i = 0; $i < count($previous_days); $i++)
 {
 	$selected = ($topic_days == $previous_days[$i]) ? ' selected="selected"' : '';
 	$select_topic_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';

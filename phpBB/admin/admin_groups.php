@@ -52,7 +52,7 @@ else
 if ( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
 }
 else
 {
@@ -204,7 +204,7 @@ else if ( isset($HTTP_POST_VARS['group_update']) )
 			}
 
 			$rows = $db->sql_fetchrowset($result);
-			for ($i = 0; $i < (is_countable($rows) ? count($rows) : 0); $i++)
+			for ($i = 0; $i < count($rows); $i++)
 			{
 				$sql = "SELECT g.group_id FROM " . AUTH_ACCESS_TABLE . " a, " . GROUPS_TABLE . " g, " . USER_GROUP_TABLE . " ug
 				WHERE (a.auth_mod = 1) AND (g.group_id = a.group_id) AND (a.group_id = ug.group_id) AND (g.group_id = ug.group_id) 

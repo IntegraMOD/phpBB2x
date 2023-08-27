@@ -96,7 +96,7 @@ if( isset($HTTP_POST_VARS['doprune']) )
 		'body' => 'admin/forum_prune_result_body.tpl')
 	);
 
-	for($i = 0; $i < (is_countable($forum_rows) ? count($forum_rows) : 0); $i++)
+	for($i = 0; $i < count($forum_rows); $i++)
 	{
 		$p_result = prune($forum_rows[$i]['forum_id'], $prunedate);
 		sync('forum', $forum_rows[$i]['forum_id']);
@@ -139,7 +139,7 @@ else
 		$select_list = '<select name="' . POST_FORUM_URL . '">';
 		$select_list .= '<option value="-1">' . $lang['All_Forums'] . '</option>';
 
-		for($i = 0; $i < (is_countable($forum_rows) ? count($forum_rows) : 0); $i++)
+		for($i = 0; $i < count($forum_rows); $i++)
 		{
 			$select_list .= '<option value="' . $forum_rows[$i]['forum_id'] . '">' . $forum_rows[$i]['forum_name'] . '</option>';
 		}

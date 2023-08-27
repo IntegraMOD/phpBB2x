@@ -107,7 +107,7 @@ if( isset($HTTP_POST_VARS['submit']) )
 		{
 			$simple_ary = $simple_auth_ary[intval($HTTP_POST_VARS['simpleauth'])];
 
-			for($i = 0; $i < (is_countable($simple_ary) ? count($simple_ary) : 0); $i++)
+			for($i = 0; $i < count($simple_ary); $i++)
 			{
 				$sql .= ( ( $sql != '' ) ? ', ' : '' ) . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
 			}
@@ -119,7 +119,7 @@ if( isset($HTTP_POST_VARS['submit']) )
 		}
 		else
 		{
-			for($i = 0; $i < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $i++)
+			for($i = 0; $i < count($forum_auth_fields); $i++)
 			{
 				$value = intval($HTTP_POST_VARS[$forum_auth_fields[$i]]);
 
@@ -186,7 +186,7 @@ if( empty($forum_id) )
 	);
 
 	$select_list = '<select name="' . POST_FORUM_URL . '">';
-	for($i = 0; $i < (is_countable($forum_rows) ? count($forum_rows) : 0); $i++)
+	for($i = 0; $i < count($forum_rows); $i++)
 	{
 		$select_list .= '<option value="' . $forum_rows[$i]['forum_id'] . '">' . $forum_rows[$i]['forum_name'] . '</option>';
 	}
@@ -219,7 +219,7 @@ else
 	while( list($key, $auth_levels) = each($simple_auth_ary))
 	{
 		$matched = 1;
-		for($k = 0; $k < (is_countable($auth_levels) ? count($auth_levels) : 0); $k++)
+		for($k = 0; $k < count($auth_levels); $k++)
 		{
 			$matched_type = $key;
 
@@ -252,7 +252,7 @@ else
 	{
 		$simple_auth = '<select name="simpleauth">';
 
-		for($j = 0; $j < (is_countable($simple_auth_types) ? count($simple_auth_types) : 0); $j++)
+		for($j = 0; $j < count($simple_auth_types); $j++)
 		{
 			$selected = ( $matched_type == $j ) ? ' selected="selected"' : '';
 			$simple_auth .= '<option value="' . $j . '"' . $selected . '>' . $simple_auth_types[$j] . '</option>';
@@ -279,7 +279,7 @@ else
 		{
 			$custom_auth[$j] = '&nbsp;<select name="' . $forum_auth_fields[$j] . '">';
 
-			for($k = 0; $k < (is_countable($forum_auth_levels) ? count($forum_auth_levels) : 0); $k++)
+			for($k = 0; $k < count($forum_auth_levels); $k++)
 			{
 				$selected = ( $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k] ) ? ' selected="selected"' : '';
 				$custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['Forum_' . $forum_auth_levels[$k]] . '</option>';

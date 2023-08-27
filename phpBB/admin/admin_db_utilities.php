@@ -712,7 +712,7 @@ if( isset($HTTP_GET_VARS['perform']) || isset($HTTP_POST_VARS['perform']) )
 				{
 					$additional_tables = explode(",", $additional_tables);
 
-					for($i = 0; $i < (is_countable($additional_tables) ? count($additional_tables) : 0); $i++)
+					for($i = 0; $i < count($additional_tables); $i++)
 					{
 						$tables[] = trim($additional_tables[$i]);
 					}
@@ -818,7 +818,7 @@ if( isset($HTTP_GET_VARS['perform']) || isset($HTTP_POST_VARS['perform']) )
 			{
 				 echo "\n" . pg_get_sequences("\n", $backup_type);
 			}
-			for($i = 0; $i < (is_countable($tables) ? count($tables) : 0); $i++)
+			for($i = 0; $i < count($tables); $i++)
 			{
 				$table_name = $tables[$i];
 
@@ -964,7 +964,7 @@ if( isset($HTTP_GET_VARS['perform']) || isset($HTTP_POST_VARS['perform']) )
 					$sql_query = remove_remarks($sql_query);
 					$pieces = split_sql_file($sql_query, ";");
 
-					$sql_count = is_countable($pieces) ? count($pieces) : 0;
+					$sql_count = count($pieces);
 					for($i = 0; $i < $sql_count; $i++)
 					{
 						$sql = trim($pieces[$i]);

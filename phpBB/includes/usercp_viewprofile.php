@@ -101,7 +101,7 @@ $poster_rank = '';
 $rank_image = '';
 if ( $profiledata['user_rank'] )
 {
-	for($i = 0; $i < (is_countable($ranksrow) ? count($ranksrow) : 0); $i++)
+	for($i = 0; $i < count($ranksrow); $i++)
 	{
 		if ( $profiledata['user_rank'] == $ranksrow[$i]['rank_id'] && $ranksrow[$i]['rank_special'] )
 		{
@@ -112,7 +112,7 @@ if ( $profiledata['user_rank'] )
 }
 else
 {
-	for($i = 0; $i < (is_countable($ranksrow) ? count($ranksrow) : 0); $i++)
+	for($i = 0; $i < count($ranksrow); $i++)
 	{
 		if ( $profiledata['user_posts'] >= $ranksrow[$i]['rank_min'] && !$ranksrow[$i]['rank_special'] )
 		{

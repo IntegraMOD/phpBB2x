@@ -77,7 +77,7 @@ function get_db_stat($mode)
 // added at phpBB 2.0.11 to properly format the username
 function phpbb_clean_username($username)
 {
-	$username = substr(htmlspecialchars(str_replace("\'", "'", trim($username)), ENT_COMPAT, 'utf-8'), 0, 25);
+	$username = substr(htmlspecialchars(str_replace("\'", "'", trim($username)), ENT_COMPAT, 'ISO-8859-1'), 0, 25);
 	$username = phpbb_rtrim($username, "\\");
 	$username = str_replace("'", "\'", $username);
 
@@ -220,7 +220,7 @@ function make_jumpbox($action, $match_forum_id = 0)
 		$category_rows[] = $row;
 	}
 
-	if ( $total_categories = is_countable($category_rows) ? count($category_rows) : 0 )
+	if ( $total_categories = count($category_rows) )
 	{
 		$sql = "SELECT *
 			FROM " . FORUMS_TABLE . "
@@ -238,7 +238,7 @@ function make_jumpbox($action, $match_forum_id = 0)
 			$forum_rows[] = $row;
 		}
 
-		if ( $total_forums = is_countable($forum_rows) ? count($forum_rows) : 0 )
+		if ( $total_forums = count($forum_rows) )
 		{
 			for($i = 0; $i < $total_categories; $i++)
 			{
@@ -1046,7 +1046,7 @@ function redirect($url)
 	if (@preg_match('/Microsoft|WebSTAR|Xitami/', getenv('SERVER_SOFTWARE')))
 	{
 		header('Refresh: 0; URL=' . $server_protocol . $server_name . $server_port . $script_name . $url);
-		echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="refresh" content="0; url=' . $server_protocol . $server_name . $server_port . $script_name . $url . '"><title>Redirect</title></head><body><div align="center">If your browser does not support meta redirection please click <a href="' . $server_protocol . $server_name . $server_port . $script_name . $url . '">HERE</a> to be redirected</div></body></html>';
+		echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><meta http-equiv="refresh" content="0; url=' . $server_protocol . $server_name . $server_port . $script_name . $url . '"><title>Redirect</title></head><body><div align="center">If your browser does not support meta redirection please click <a href="' . $server_protocol . $server_name . $server_port . $script_name . $url . '">HERE</a> to be redirected</div></body></html>';
 		exit;
 	}
 

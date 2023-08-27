@@ -38,7 +38,7 @@ while( list($var, $param) = @each($params) )
 {
 	if ( !empty($HTTP_POST_VARS[$param]) || !empty($HTTP_GET_VARS[$param]) )
 	{
-		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'utf-8') : htmlspecialchars($HTTP_GET_VARS[$param], ENT_COMPAT, 'utf-8');
+		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS[$param], ENT_COMPAT, 'ISO-8859-1');
 	}
 	else
 	{
@@ -611,7 +611,7 @@ else if ( $submit || $confirm )
 			$tracking_topics = ( !empty($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
 			$tracking_forums = ( !empty($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
 
-			if ( (is_countable($tracking_topics) ? count($tracking_topics) : 0) + (is_countable($tracking_forums) ? count($tracking_forums) : 0) == 100 && empty($tracking_topics[$topic_id]) )
+			if ( count($tracking_topics) + count($tracking_forums) == 100 && empty($tracking_topics[$topic_id]) )
 			{
 				asort($tracking_topics);
 				unset($tracking_topics[key($tracking_topics)]);
@@ -631,11 +631,11 @@ else if ( $submit || $confirm )
 
 if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 {
-	$username = ( !empty($HTTP_POST_VARS['username']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['username'])), ENT_COMPAT, 'utf-8') : '';
-	$subject = ( !empty($HTTP_POST_VARS['subject']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['subject'])), ENT_COMPAT, 'utf-8') : '';
-	$message = ( !empty($HTTP_POST_VARS['message']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['message'])), ENT_COMPAT, 'utf-8') : '';
+	$username = ( !empty($HTTP_POST_VARS['username']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['username'])), ENT_COMPAT, 'ISO-8859-1') : '';
+	$subject = ( !empty($HTTP_POST_VARS['subject']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['subject'])), ENT_COMPAT, 'ISO-8859-1') : '';
+	$message = ( !empty($HTTP_POST_VARS['message']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['message'])), ENT_COMPAT, 'ISO-8859-1') : '';
 
-	$poll_title = ( !empty($HTTP_POST_VARS['poll_title']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['poll_title'])), ENT_COMPAT, 'utf-8') : '';
+	$poll_title = ( !empty($HTTP_POST_VARS['poll_title']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['poll_title'])), ENT_COMPAT, 'ISO-8859-1') : '';
 	$poll_length = ( isset($HTTP_POST_VARS['poll_length']) ) ? max(0, intval($HTTP_POST_VARS['poll_length'])) : 0;
 
 	$poll_options = array();
@@ -649,14 +649,14 @@ if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 			}
 			else if ( !empty($option_text) ) 
 			{
-				$poll_options[intval($option_id)] = htmlspecialchars(trim(stripslashes($option_text)), ENT_COMPAT, 'utf-8');
+				$poll_options[intval($option_id)] = htmlspecialchars(trim(stripslashes($option_text)), ENT_COMPAT, 'ISO-8859-1');
 			}
 		}
 	}
 
 	if ( isset($poll_add) && !empty($HTTP_POST_VARS['add_poll_option_text']) )
 	{
-		$poll_options[] = htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['add_poll_option_text'])), ENT_COMPAT, 'utf-8');
+		$poll_options[] = htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['add_poll_option_text'])), ENT_COMPAT, 'ISO-8859-1');
 	}
 
 	if ( $mode == 'newtopic' || $mode == 'reply')
