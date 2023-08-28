@@ -106,7 +106,6 @@ if(!defined("SQL_LAYER"))
 			// Remove any pre-existing queries
 			//
 			unset($this->query_result);
-
 			if( $query != "" )
 			{
 				$this->num_queries++;
@@ -132,7 +131,6 @@ if(!defined("SQL_LAYER"))
 					$backtrace = ob_get_clean();
 					$this->queries[] = array($query, $backtrace, $qend - $qstart);
 				}
-				$this->query_result = @mysqli_query($this->db_connect_id, $query);
 			}
 			else
 			{
@@ -258,23 +256,16 @@ if(!defined("SQL_LAYER"))
 
 			if( $query_id )
 			{
-				unset($this->rowset[(bool)$query_id]);
-				unset($this->row[(bool)$query_id]);
-
-				while($this->rowset[(bool)$query_id] = @mysqli_fetch_array($query_id, MYSQLI_ASSOC))
+				$qstart = microtime(true);
+				$result = [];
+				while($row = @mysqli_fetch_array($query_id))
 				{
-					$result[] = $this->rowset[(bool)$query_id];
+				$result[] = $row;
 				}
 				$qend = microtime(true);
 				$this->sql_time += $qend - $qstart;
-				if (isset($result))
-				{
-					return $result;
-				}
-				else
-				{
-					return false;
-				} 
+
+        		return $result;
 			}
 			else
 			{
