@@ -122,7 +122,9 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	// * User does not exist
 	// * User is inactive
 	//
-	if (!sizeof($userdata) || !is_array($userdata) || !$userdata)
+
+//	if (!sizeof($userdata) || !is_array($userdata) || !$userdata)
+    if (!empty($userdata) &&(sizeof($userdata) || !is_array($userdata) || !$userdata))
 	{
 		$sessiondata['autologinid'] = '';
 		$sessiondata['userid'] = $user_id = ANONYMOUS;
@@ -579,5 +581,3 @@ function append_sid($url, $non_html_amp = false)
 	}
 	return $url;
 }
-
-?>
