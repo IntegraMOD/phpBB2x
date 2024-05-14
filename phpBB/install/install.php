@@ -195,6 +195,7 @@ function guess_lang()
 		'chinese_simplified'		=> 'zh', 
 	);
 
+    global $lang;
 	if (isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']))
 	{
 		$accept_lang_ary = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
@@ -327,20 +328,6 @@ include($phpbb_root_path.'includes/sessions.'.$phpEx);
 
 // Define schema info
 $available_dbms = array(
-	'mysql'=> array(
-		'LABEL'			=> 'MySQL 3.x',
-		'SCHEMA'		=> 'mysql', 
-		'DELIM'			=> ';',
-		'DELIM_BASIC'	=> ';',
-		'COMMENTS'		=> 'remove_remarks'
-	), 
-	'mysql4' => array(
-		'LABEL'			=> 'MySQL 4.x/5.x',
-		'SCHEMA'		=> 'mysql', 
-		'DELIM'			=> ';', 
-		'DELIM_BASIC'	=> ';',
-		'COMMENTS'		=> 'remove_remarks'
-	), 
 	'mysqli' => array(
 		'LABEL'			=> 'MySQLi',
 		'SCHEMA'		=> 'mysql',
@@ -793,8 +780,6 @@ else
 				$check_other = 'sybase';
 				break;
 
-			case 'mysql':
-			case 'mysql4':
 			case 'mysqli':
 				$check_exts = 'mysqli';
 				$check_other = 'mysqli';
