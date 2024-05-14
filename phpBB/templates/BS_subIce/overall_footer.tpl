@@ -24,6 +24,7 @@
     </div>
   </div>
 </div>
+<!-- fontawesome 6.5.2 CSS-->  
 <script src="templates/assets/js/all.min.js"></script>
 <script src="templates/assets/js/jquery-3.7.0.min.js"></script>
 <script src="templates/assets/js/bootstrap.bundle.js"></script>

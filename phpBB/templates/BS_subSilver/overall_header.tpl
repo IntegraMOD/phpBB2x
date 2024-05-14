@@ -9,8 +9,6 @@
 
 <!-- Bootstrap 5.2.3 CSS -->
 <link rel="stylesheet" href="templates/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-<!-- fontawesome 6.4.0 CSS-->  
-<link rel="stylesheet" href="templates/assets/css/all.css" rel="stylesheet" type="text/css">
 <link href="templates/BS_subSilver/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <title>{SITENAME} :: {PAGE_TITLE}</title>
