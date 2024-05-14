@@ -423,9 +423,26 @@ button:hover {
         z-index: 1500;
       }
       
-    @media (min-width: 576px) {
-  .px-xs-0 {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
+.topp {
+  padding-top: 8px;
+}
+
+.topp2 {
+  padding-top: 12px;
+}
+	  
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    html { 
+        -webkit-text-size-adjust: 100%;
+    }
+	.px-xs-0 {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+	.topics, .posts {
+	  display: none;
+	}
+	.lastpost {
+	  display: inline-block;
+	}	
 }

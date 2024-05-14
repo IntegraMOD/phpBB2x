@@ -334,4 +334,24 @@ button:hover {
 
 .btn:hover {
   color: #DD6900;
-}  
+} 
+
+.topp {
+  padding-top: 8px;
+}
+
+.topp2 {
+  padding-top: 12px;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    html { 
+        -webkit-text-size-adjust: 100%;
+    }
+	.topics, .posts {
+	  display: none;
+	}
+	.lastpost {
+	  display: inline-block;
+	}	
+} 
