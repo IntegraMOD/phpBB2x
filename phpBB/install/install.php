@@ -6,7 +6,7 @@
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
  *
- *   $Id: install.php 5392 2005-12-29 11:51:13Z acydburn $
+ *   $Id$
  *
  ***************************************************************************/
 
@@ -19,12 +19,6 @@
  *
  ***************************************************************************/
 
-//@TODO: Agregar que no se pueda ejecutar el script, si el foro esta instalado
-
-if(!isset($table_prefix))
-{
-    $table_prefix = "";
-}
 // ---------
 // FUNCTIONS
 //
@@ -145,9 +139,8 @@ function page_error($error_title, $error)
 // match on a second pass instead of a straight "fuzzy" match.
 function guess_lang()
 {
+	global $phpbb_root_path, $_SERVER;
 
-	global $phpbb_root_path, $_SERVER, $lang;
-	
 	// The order here _is_ important, at least for major_minor
 	// matches. Don't go moving these around without checking with
 	// me first - psoTFX
@@ -230,11 +223,11 @@ function guess_lang()
 // ---------
 
 // Begin
-//error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
-error_reporting(E_ALL);
+error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
+
 
 // Slash data if it isn't slashed
-/*if (!get_magic_quotes_gpc())
+if (true)
 {
 	if (is_array($_GET))
 	{
@@ -263,7 +256,8 @@ error_reporting(E_ALL);
 		foreach((Array) $_POST as list ($k => $v)) {
 			if (is_array($_POST[$k]))
 			{
-				while (list($k2, $v2) = each($_POST[$k])){
+//				while (list($k2, $v2) = each($_POST[$k])) {
+		        foreach((Array) $_POST[$k] as list ($k2 => $v2)) {
 					$_POST[$k][$k2] = addslashes($v2);
 				}
 				@reset($_POST[$k]);
@@ -278,12 +272,13 @@ error_reporting(E_ALL);
 
 	if (is_array($_COOKIE))
 	{
-		while (list($k, $v) = each($_COOKIE))
-		{
+//		while (list($k, $v) = each($_COOKIE)) {
+		foreach((Array) $_COOKIE as list ($k => $v)) {
+			
 			if (is_array($_COOKIE[$k]))
 			{
-				while (list($k2, $v2) = each($_COOKIE[$k]))
-				{
+//				while (list($k2, $v2) = each($_COOKIE[$k])) {
+		        foreach((Array) $_COOKIE[$k] as list ($k2 => $v2)) {
 					$_COOKIE[$k][$k2] = addslashes($v2);
 				}
 				@reset($_COOKIE[$k]);
@@ -295,10 +290,13 @@ error_reporting(E_ALL);
 		}
 		@reset($_COOKIE);
 	}
-}*/
+}
 
 // Begin main prog
-define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
+{
+    define( 'IN_PHPBB', true);
+}
 // Uncomment the following line to completely disable the ftp option...
 // define('NO_FTP', true);
 $phpbb_root_path = './../';
@@ -322,7 +320,7 @@ $available_dbms = array(
 		'DELIM'			=> ';',
 		'DELIM_BASIC'	=> ';',
 		'COMMENTS'		=> 'remove_remarks'
-	),
+	), 
 	'postgres' => array(
 		'LABEL'			=> 'PostgreSQL 7.x',
 		'SCHEMA'		=> 'postgres', 
@@ -405,13 +403,13 @@ if (!empty($_POST['server_name']))
 else
 {
 	// Guess at some basic info used for install..
-	if (!empty($_SERVER['SERVER_NAME']) || !empty($_ENV['SERVER_NAME']))
+	if (!empty($_SERVER['SERVER_NAME']) || !empty($HTTP_ENV_VARS['SERVER_NAME']))
 	{
-		$server_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $_ENV['SERVER_NAME'];
+		$server_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $HTTP_ENV_VARS['SERVER_NAME'];
 	}
-	else if (!empty($_SERVER['HTTP_HOST']) || !empty($_ENV['HTTP_HOST']))
+	else if (!empty($_SERVER['HTTP_HOST']) || !empty($HTTP_ENV_VARS['HTTP_HOST']))
 	{
-		$server_name = (!empty($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : $_ENV['HTTP_HOST'];
+		$server_name = (!empty($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : $HTTP_ENV_VARS['HTTP_HOST'];
 	}
 	else
 	{
@@ -425,9 +423,9 @@ if (!empty($_POST['server_port']))
 }
 else
 {
-	if (!empty($_SERVER['SERVER_PORT']) || !empty($_ENV['SERVER_PORT']))
+	if (!empty($_SERVER['SERVER_PORT']) || !empty($HTTP_ENV_VARS['SERVER_PORT']))
 	{
-		$server_port = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : $_ENV['SERVER_PORT'];
+		$server_port = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : $HTTP_ENV_VARS['SERVER_PORT'];
 	}
 	else
 	{
@@ -642,7 +640,7 @@ else if ((empty($install_step) || $admin_pass1 != $admin_pass2 || empty($admin_p
 	$lang_select .= '</select>';
 
 	$dbms_select = '<select name="dbms" onchange="if(this.form.upgrade.options[this.form.upgrade.selectedIndex].value == 1){ this.selectedIndex = 0;}">';
-	while (list($dbms_name, $details) = @each($available_dbms))
+	while (list($dbms_name, $details) = @each($available_dbms))	
 	{
 		$selected = ($dbms_name == $dbms) ? 'selected="selected"' : '';
 		$dbms_select .= '<option value="' . $dbms_name . '">' . $details['LABEL'] . '</option>';
@@ -885,10 +883,8 @@ else
 				'server_name'	=> $server_name,
 			);
 
-            $config_name = null;
-            $config_value = null;
-//			while (list($config_name, $config_value) = each($update_config)){
-	        foreach((Array) $update_config as list ($config_name => $config_value)) {
+			while (list($config_name, $config_value) = each($update_config)){
+//	        foreach((Array) $update_config as list ($config_name => $config_value)) {
 				$sql = "UPDATE " . $table_prefix . "config 
 					SET config_value = '$config_value' 
 					WHERE config_name = '$config_name'";
@@ -935,8 +931,10 @@ else
 			$config_data .= '$dbuser = \'' . $dbuser . '\';' . "\n";
 			$config_data .= '$dbpasswd = \'' . $dbpasswd . '\';' . "\n\n";
 			$config_data .= '$table_prefix = \'' . $table_prefix . '\';' . "\n\n";
-			$config_data .= 'define(\'PHPBB_INSTALLED\', true);'."\n\n";	
-			$config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
+			$config_data .= 'define(\'PHPBB_INSTALLED\', true);'."\n\n";
+			$config_data .= "\n//  To enable developer mode change line below from false to true\n";
+			$config_data .= "define('DEV_MODE', false);\n\n";
+//			$config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
 
 			@umask(0111);
 			$no_open = FALSE;
@@ -1031,3 +1029,4 @@ else
 	}
 }
 
+?>

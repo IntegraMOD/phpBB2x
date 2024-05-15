@@ -830,7 +830,7 @@ function message_die($msg_code, $msg_text = '', $msg_title = '', $err_line = '',
 
 	if(defined('HAS_DIED'))
 	{
-		die("message_die() was called multiple times. This isn't supposed to happen. Was message_die() used in page_tail.php?");
+		die("message_die() was called multiple times. This isn't supposed to happen. Was message_die() used in page_tail.php? <br /><br />If you see this message after installation, delete the <b>install</b> and <b>contrib</b> folders");
 	}
 	
 	define('HAS_DIED', 1);
