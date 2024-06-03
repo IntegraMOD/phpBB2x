@@ -439,10 +439,7 @@ button:hover {
       padding-left: 0px !important;
       padding-right: 0px !important;
     }
-	.topics, .posts {
+	.topics, .posts, .views, .replies {
 	  display: none;
 	}
-	.lastpost {
-	  display: inline-block;
-	}	
 }

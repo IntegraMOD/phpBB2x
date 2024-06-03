@@ -26,9 +26,9 @@
 	  <div class="row nav mx-0 pl-2 pb-1 d-flex flex-row align-items-center">
 	    <div class="fixed" style="width:50px"></div>
 		<div class="col-5 text-start">{L_FORUM}</div>
-		<div class="col-1 px-0 text-center">{L_TOPICS}</div>
-		<div class="col-1 px-0 text-center">{L_POSTS}</div>
-		<div class="col-4 px-0 text-start">{L_LASTPOST}</div>
+		<div class="col-1 px-0 text-center topics">{L_TOPICS}</div>
+		<div class="col-1 px-0 text-center posts">{L_POSTS}</div>
+		<div class="col-4 px-0 text-start lastpost">{L_LASTPOST}</div>
 	  </div>
 	  <!-- BEGIN catrow -->
 	  <div class="row d-flex bg-body-secondary rounded-2 bdr-cat align-items-center py-1 mx-0 my-1"> 
@@ -39,9 +39,9 @@
 	  <div class="row mx-0 px-0 d-flex align-items-center flex-nowrap bg-body-secondary rounded-2 bdr-cat"> 
 		<div class="fixed px-0 d-flex align-items-start" style="width:50px;"><img src="{catrow.forumrow.FORUM_FOLDER_IMG}" alt="{catrow.forumrow.L_FORUM_FOLDER_ALT}" title="{catrow.forumrow.L_FORUM_FOLDER_ALT}" /></div>
 		<div class="col-5 text-start pt-1 hr3"><span class="forumlink"><a href="{catrow.forumrow.U_VIEWFORUM}" class="forumlink">{catrow.forumrow.FORUM_NAME}</a><br /></span><span class="genmed">{catrow.forumrow.FORUM_DESC}<br /></span><span class="gensmall">{catrow.forumrow.L_MODERATOR} {catrow.forumrow.MODERATORS}</span></div>
-		<div class="col-1 hr3 text-center"><span class="gensmall text-center">{catrow.forumrow.TOPICS}</span></div>
-		<div class="col-1 hr3 text-center"><span class="gensmall">{catrow.forumrow.POSTS}</span></div>
-		<div class="col-4 text-start"> <span class="gensmall">{catrow.forumrow.LAST_POST}</span></div>
+		<div class="col-1 hr3 text-center topics"><span class="gensmall text-center">{catrow.forumrow.TOPICS}</span></div>
+		<div class="col-1 hr3 text-center posts"><span class="gensmall">{catrow.forumrow.POSTS}</span></div>
+		<div class="col-4 text-start lastpost"> <span class="gensmall">{catrow.forumrow.LAST_POST}</span></div>
 	  </div>
 	  <!-- END forumrow -->
 	  <!-- END catrow -->

@@ -16,19 +16,19 @@
 	    <div class="row nav mx-0 pl-2 pb-1 d-flex flex-row align-items-center">
 		  <div class="fixed" style="width:50px"></div>
      	  <div class="col-5 text-start">&nbsp;{L_TOPICS}&nbsp;</div>
-    	  <div class="col-1 px-0 text-center">&nbsp;{L_REPLIES}&nbsp;</div>
+    	  <div class="col-1 px-0 text-center replies">&nbsp;{L_REPLIES}&nbsp;</div>
     	  <div class="col-2 px-0 text-center">&nbsp;{L_AUTHOR}&nbsp;</div>
-    	  <div class="col-1 px-0 text-center">&nbsp;{L_VIEWS}&nbsp;</div>
-    	  <div class="col-2 px-0 text-center">&nbsp;{L_LASTPOST}&nbsp;</div>
+    	  <div class="col-1 px-0 text-center views">&nbsp;{L_VIEWS}&nbsp;</div>
+    	  <div class="col px-0 text-center">&nbsp;{L_LASTPOST}&nbsp;</div>
     	</div>
     	<!-- BEGIN topicrow -->
 	    <div class="row mx-0 px-0 d-flex align-items-center flex-nowrap bg-body-secondary rounded-2 bdr-cat"> 
     	  <div class="fixed px-0 d-flex align-items-start" style="width:50px;"><img src="{topicrow.TOPIC_FOLDER_IMG}" alt="{topicrow.L_TOPIC_FOLDER_ALT}" title="{topicrow.L_TOPIC_FOLDER_ALT}" /></div>
     	  <div class="col-5 pl-2 pt-3 pb-1 text-start hr3"><span class="topictitle">{topicrow.NEWEST_POST_IMG}{topicrow.TOPIC_TYPE}<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a></span><span class="gensmall"><br />{topicrow.GOTO_PAGE}</span></div>
-    	  <div class="col-1 px-0 pt-3 pb-1 text-center hr3"><span class="postdetails">{topicrow.REPLIES}</span></div>
+    	  <div class="col-1 px-0 pt-3 pb-1 text-center hr3 replies"><span class="postdetails">{topicrow.REPLIES}</span></div>
     	  <div class="col-2 px-0 pt-3 pb-1 text-center hr3"><span class="author">{topicrow.TOPIC_AUTHOR}</span></div>
-    	  <div class="col-1 px-0 pt-3 pb-1 text-center hr3"><span class="postdetails">{topicrow.VIEWS}</span></div>
-    	  <div class="col-2 px-0 pt-3 pb-1 text-center"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></div>
+    	  <div class="col-1 px-0 pt-3 pb-1 text-center hr3 views"><span class="postdetails">{topicrow.VIEWS}</span></div>
+    	  <div class="col px-0 pt-3 pb-1 text-center"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></div>
     	</div>
     	<!-- END topicrow -->
     	<!-- BEGIN switch_no_topics -->

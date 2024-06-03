@@ -348,10 +348,7 @@ button:hover {
     html { 
         -webkit-text-size-adjust: 100%;
     }
-	.topics, .posts {
+	.topics, .posts, .views, .replies {
 	  display: none;
 	}
-	.lastpost {
-	  display: inline-block;
-	}	
 } 

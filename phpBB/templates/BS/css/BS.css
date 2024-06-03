@@ -459,11 +459,11 @@ input.button, input.mainoption {
         user-select: none;
       }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+       font-size: 3.5rem;
+    }
+}
 
       .b-example-divider {
         width: 100%;
@@ -528,4 +528,21 @@ input.button, input.mainoption {
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+}
+
+.topp {
+  padding-top: 8px;
+}
+
+.topp2 {
+  padding-top: 12px;
+}
+	  
+@media only screen and (max-width: 767px) {
+    html { 
+        -webkit-text-size-adjust: 100%;
+    }
+	.topics, .posts, .views, .replies {
+	  display: none;
+	}
 }
