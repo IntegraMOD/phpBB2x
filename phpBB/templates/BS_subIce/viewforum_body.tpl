@@ -16,7 +16,7 @@
           <div class="row d-flex th align-items-center hr1 mx-0"> 
     	    <div class="col-6 px-0 text-center">&nbsp;{L_TOPICS}&nbsp;</div>
     	    <div class="col-1 px-0 text-center replies">&nbsp;{L_REPLIES}&nbsp;</div>
-    	    <div class="col-2 px-0 text-center">&nbsp;{L_AUTHOR}&nbsp;</div>
+    	    <div class="col-2 px-0 text-center author">&nbsp;{L_AUTHOR}&nbsp;</div>
     	    <div class="col-1 px-0 text-center views">&nbsp;{L_VIEWS}&nbsp;</div>
     	    <div class="col px-0 text-center">&nbsp;{L_LASTPOST}&nbsp;</div>
     	  </div>

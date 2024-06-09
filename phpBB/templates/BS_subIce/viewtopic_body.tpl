@@ -6,10 +6,11 @@
         	<div class="col text-start"><a class="maintitle" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a><br /><span class="gensmall"><b>{PAGINATION}</b><br />&nbsp; </span></div>
           </div>
         </div>
-        <div class="row mb-1 py-1 mx-0"> 
-          <div class="col-7 col-md-12"><a href="{U_POST_NEW_TOPIC}" class="gen pbtn"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></div>
-          <div class="col col-md-12 text-end navbr"><a href="{U_INDEX}" class="navbr">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></div>
-        </div>
+		<div class="row my-2 mx-0 align-items-center"> 
+          <div class="col-sm-5 col-md-6 my-2"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 my-2"><span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span></div>
+		</div>
+		
         <div class="forumline p-0 mx-1">
           <div class="row m-0">
         	<div class="col catHead d-flex align-items-center text-end navbr"><a href="{U_VIEW_OLDER_TOPIC}">{L_VIEW_PREVIOUS_TOPIC}</a> :: <a href="{U_VIEW_NEWER_TOPIC}">{L_VIEW_NEXT_TOPIC}</a> &nbsp;</div>
@@ -46,11 +47,10 @@
 			</div>
 		  </div>        	
 		</div>
-		<div class="row mb-1 pt-2 mx-0"> 
-          <div class="col d-flex align-items-center"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a>
-          <span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}" class="navbr">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span>
-          </div>
-		</div>
+		<span class="row my-2 mx-0 align-items-center"> 
+          <span class="col-sm-7 col-md-7 my-2"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></span>
+          <span class="col-sm-4 offset-sm-1 col-md-5 offset-md-0 my-2"><span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span></span>
+		</span>
 		<div class="row mx-0">
 		  <div class="col"><span class="navbr">{PAGE_NUMBER}</span><span class="gensmall text-end">{S_TIMEZONE}</span><br /><span class="navbr">{PAGINATION}</span></div>
 		</div>

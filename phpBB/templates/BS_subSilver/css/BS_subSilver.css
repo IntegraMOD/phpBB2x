@@ -344,11 +344,17 @@ button:hover {
   padding-top: 12px;
 }
 
+
 @media only screen and (max-width: 767px) {
     html { 
         -webkit-text-size-adjust: 100%;
     }
-	.topics, .posts, .views, .replies {
+	.topics, .posts, .views, .replies, .searchbar {
 	  display: none;
 	}
-} 
+}
+
+@media only screen and (max-width: 400px) {
+	.author, .lastpost {display: none;}
+	.topics {display: block;}
+}

@@ -398,7 +398,7 @@ button:hover {
         padding-bottom: 1rem;
         margin-top: -1px;
         overflow-x: auto;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
@@ -406,7 +406,6 @@ button:hover {
       .btn-bd-primary {
         --bd-violet-bg: #712cf9;
         --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
         --bs-btn-font-weight: 600;
         --bs-btn-color: var(--bs-white);
         --bs-btn-bg: var(--bd-violet-bg);
@@ -422,7 +421,92 @@ button:hover {
       .bd-mode-toggle {
         z-index: 1500;
       }
-      
+    
+.offcanvas-body ul, .offcanvas-body li {
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+.offcanvas-body ul {
+	width: 100%;
+	text-align: left;
+}
+.offcanvas-body li {
+	display: inline-block;
+	position: relative;
+}
+.offcanvas-body li.vertbar :after {
+  content: '  \000a0  \0007c';
+}
+.offcanvas-body a {
+	display: inline-block;
+	line-height: 25px;
+	text-decoration: none;
+	font-size: 1em;
+}
+.offcanvas-body a.dropdown-arrow:after {
+	content: "\25BE";
+	margin-left: 5px;
+}
+.offcanvas-body li a:hover {
+	
+}
+.offcanvas-body input {
+	display: none;
+	margin: 0;
+	padding: 0;
+	height: 27px;
+	width: 100%;
+	opacity: 0;
+	cursor: pointer
+}
+.offcanvas-body label {
+	display: none;
+	line-height: 25px;
+	text-align: center;
+	position: absolute;
+}
+.offcanvas-body label:before {
+	font-size: 1.6em;
+	content: "\2261"; 
+}
+.offcanvas-body ul.sub-menus{
+	height: auto;
+	overflow: hidden;
+	width: 200px;
+	background: #CBD7E3;
+	border: 1px solid #98AAB1;
+	position: absolute;
+	z-index: 99;
+	display: none;
+}
+.offcanvas-body ul.sub-menus li {
+	display: block;
+	text-align: left;
+	width: 100%;
+	line-height:1.5em;
+}
+.offcanvas-body ul.sub-menus a {
+	font-size: 1.2em;
+}
+li:hover ul.sub-menus {
+	display: block;
+}
+ul.sub-menus a:hover{
+	display: block;
+	background-color: #B9C8D8;	
+}
+@media screen and (max-width: 900px){
+    .offcanvas-body ul.sub-menus {width:98%;position:static;border:0px;}
+	.offcanvas-body ul.sub-menus a {padding-left:0px;}
+	.offcanvas-body li {display:block;float:left;width:auto;margin-left:0px}
+	.offcanvas-body input, .offcanvas-body label {position:absolute;top:0;left:0;display:block}
+	.offcanvas-body input {z-index:4}
+	.offcanvas-body input:checked + label {}
+	.offcanvas-body input:checked + label:before {content:"\00d7"}
+	.offcanvas-body input:checked ~ ul {display:block}
+}
+
 .topp {
   padding-top: 8px;
 }
@@ -430,7 +514,7 @@ button:hover {
 .topp2 {
   padding-top: 12px;
 }
-	  
+	
 @media only screen and (max-width: 767px) {
     html { 
         -webkit-text-size-adjust: 100%;
@@ -439,7 +523,12 @@ button:hover {
       padding-left: 0px !important;
       padding-right: 0px !important;
     }
-	.topics, .posts, .views, .replies {
+	.topics, .posts, .views, .replies, .searchbar {
 	  display: none;
 	}
+}
+
+@media only screen and (max-width: 400px) {
+	.author, .lastpost {display: none;}
+	.topics {display: block;}
 }

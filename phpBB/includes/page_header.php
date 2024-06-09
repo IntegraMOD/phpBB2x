@@ -409,7 +409,7 @@ $template->assign_vars(array(
 // Language Anywhere
 	'S_LANG' => 'lang_'.$board_config['default_lang'],
 // Language Anywhere
-
+	'THISUSER' => $userdata['username'],	
 	'T_HEAD_STYLESHEET' => $theme['head_stylesheet'],
 	'T_BODY_BACKGROUND' => $theme['body_background'],
 	'T_BODY_BGCOLOR' => '#'.$theme['body_bgcolor'],
