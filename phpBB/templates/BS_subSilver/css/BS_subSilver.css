@@ -355,6 +355,5 @@ button:hover {
 }
 
 @media only screen and (max-width: 400px) {
-	.author, .lastpost {display: none;}
-	.topics {display: block;}
+	.author {display: none;}
 }

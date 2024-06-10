@@ -18,16 +18,16 @@
     	    <div class="col-1 px-0 text-center replies">&nbsp;{L_REPLIES}&nbsp;</div>
     	    <div class="col-2 px-0 text-center author">&nbsp;{L_AUTHOR}&nbsp;</div>
     	    <div class="col-1 px-0 text-center views">&nbsp;{L_VIEWS}&nbsp;</div>
-    	    <div class="col px-0 text-center">&nbsp;{L_LASTPOST}&nbsp;</div>
+    	    <div class="col px-0 text-center lastpost">&nbsp;{L_LASTPOST}&nbsp;</div>
     	  </div>
     	  <!-- BEGIN topicrow -->
     	  <div class="row mx-0 row1 hr1"> 
     	    <div class="col-1 px-0 hr3 text-center my-auto"><img src="{topicrow.TOPIC_FOLDER_IMG}" alt="{topicrow.L_TOPIC_FOLDER_ALT}" title="{topicrow.L_TOPIC_FOLDER_ALT}" /></div>
     	    <div class="col-5 pl-2 text-start hr3"><span class="topictitle">{topicrow.NEWEST_POST_IMG}{topicrow.TOPIC_TYPE}<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a></span><span class="gensmall"><br />{topicrow.GOTO_PAGE}</span></div>
     	    <div class="col-1 px-0 text-center row2 hr3 replies"><span class="postdetails">{topicrow.REPLIES}</span></div>
-    	    <div class="col-2 px-0 text-center row3 hr3"><span class="name">{topicrow.TOPIC_AUTHOR}</span></div>
+    	    <div class="col-2 px-0 text-center row3 hr3 author"><span class="name">{topicrow.TOPIC_AUTHOR}</span></div>
     	    <div class="col-1 px-0 text-center row2 hr3 views"><span class="postdetails">{topicrow.VIEWS}</span></div>
-    	    <div class="col px-0 text-start row3"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></div>
+    	    <div class="col px-0 text-start row3 lastpost"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></div>
     	  </div>
     	  <!-- END topicrow -->
     	  <!-- BEGIN switch_no_topics -->
