@@ -1,3 +1,7 @@
+
+
+
+
 /* Button Styles
 ---------------------------------------- */
 
@@ -214,6 +218,7 @@ ul.linklist.bulletin > li.small-icon:before {
 .post-buttons .icon-button:before {
 	margin-left: 0;
 }
+
 .quote-icon:before							{ background-position: -122px 0; }
 .quote-icon:hover:before					{ background-position: -122px -21px; }
 .edit-icon:before							{ background-position: -137px 0; }
@@ -250,7 +255,7 @@ button::-moz-focus-inner {
 	border: 0
 }
 
---------------------------------------------------------------
+/*--------------------------------------------------------------
 Colours and backgrounds for buttons.css
 -------------------------------------------------------------- */
 .button {

@@ -367,7 +367,7 @@ $select_post_days .= '</select>';
 //
 if ( !empty($HTTP_POST_VARS['postorder']) || !empty($HTTP_GET_VARS['postorder']) )
 {
-	$post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder'], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS['postorder'], ENT_COMPAT, 'ISO-8859-1');
+	$post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder'], ENT_COMPAT, 'UTF-8') : htmlspecialchars($HTTP_GET_VARS['postorder'], ENT_COMPAT, 'UTF-8');
 	$post_time_order = ($post_order == "asc") ? "ASC" : "DESC";
 }
 else
@@ -488,7 +488,7 @@ $highlight_match = $highlight = '';
 if (isset($HTTP_GET_VARS['highlight']))
 {
 	// Split words and phrases
-	$words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'], ENT_COMPAT, 'ISO-8859-1')));
+	$words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'], ENT_COMPAT, 'UTF-8')));
 
 	for($i = 0; $i < sizeof($words); $i++)
 	{
@@ -1268,5 +1268,3 @@ for($i = 0; $i < $total_posts; $i++)
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

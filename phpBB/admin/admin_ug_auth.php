@@ -45,8 +45,8 @@ require('./pagestart.' . $phpEx);
 
 $params = array('mode' => 'mode', 'user_id' => POST_USERS_URL, 'group_id' => POST_GROUPS_URL, 'adv' => 'adv');
 
-while( list($var, $param) = @each($params) )
-{
+// while( list($var, $param) = @each($params) ) {
+foreach ((array) $params as $var => $param) {
 	if ( !empty($HTTP_POST_VARS[$param]) || !empty($HTTP_GET_VARS[$param]) )
 	{
 		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? $HTTP_POST_VARS[$param] : $HTTP_GET_VARS[$param];
@@ -60,7 +60,7 @@ while( list($var, $param) = @each($params) )
 $user_id = intval($user_id);
 $group_id = intval($group_id);
 $adv = intval($adv);
-$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 
 //
 // Start program - define vars
@@ -98,9 +98,9 @@ function check_auth($type, $key, $u_access, $is_admin)
 {
 	$auth_user = 0;
 
-	if( count($u_access) )
+	if( is_countable($u_access) ? count($u_access) : 0 )
 	{
-		for($j = 0; $j < count($u_access); $j++)
+		for($j = 0; $j < (is_countable($u_access) ? count($u_access) : 0); $j++)
 		{
 			$result = 0;
 			switch($type)
@@ -254,20 +254,29 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 				}
 				$db->sql_freeresult($result);
 
-				for($i = 0; $i < count($forum_access); $i++)
+				for($i = 0; $i < (is_countable($forum_access) ? count($forum_access) : 0); $i++)
 				{
 					$forum_id = $forum_access[$i]['forum_id'];
 
-					for($j = 0; $j < count($forum_auth_fields); $j++)
+					for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 					{
 						$forum_auth_level_fields[$forum_id][$forum_auth_fields[$j]] = $forum_access[$i][$forum_auth_fields[$j]] == AUTH_ACL;
 					}
 				}
 
-				while( list($forum_id, $value) = @each($HTTP_POST_VARS['private']) )
-				{
-					while( list($auth_field, $exists) = @each($forum_auth_level_fields[$forum_id]) )
-					{
+//				while( list($forum_id, $value) = @each($_POST['private']) )
+//				{
+//					while( list($auth_field, $exists) = @each($forum_auth_level_fields[$forum_id]) )
+//					{
+//						if ($exists)
+//						{
+//							$change_acl_list[$forum_id][$auth_field] = $value;
+//						}
+//					}
+//				}
+
+                foreach ((array) $_POST['private'] ?? null as $forum_id => $value) {
+                    foreach ((array) $forum_auth_level_fields[$forum_id] as $auth_field => $exists) {
 						if ($exists)
 						{
 							$change_acl_list[$forum_id][$auth_field] = $value;
@@ -278,12 +287,13 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 			else
 			{
 				$change_acl_list = array();
-				for($j = 0; $j < count($forum_auth_fields); $j++)
+				for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 				{
 					$auth_field = $forum_auth_fields[$j];
 
-					while( list($forum_id, $value) = @each($HTTP_POST_VARS['private_' . $auth_field]) )
-					{
+//					while( [$forum_id, $value] = @each($HTTP_POST_VARS['private_' . $auth_field]) )	{
+                    foreach ((array) $HTTP_POST_VARS['private_' . $auth_field] as $forum_id => $value) {
+
 						$change_acl_list[$forum_id][$auth_field] = $value;
 					}
 				}
@@ -322,7 +332,7 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 			$update_acl_status = array();
 			$update_mod_status = array();
 
-			for($i = 0; $i < count($forum_access); $i++)
+			for($i = 0; $i < (is_countable($forum_access) ? count($forum_access) : 0); $i++)
 			{
 				$forum_id = $forum_access[$i]['forum_id'];
 
@@ -347,7 +357,7 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 					}
 				}
 
-				for($j = 0; $j < count($forum_auth_fields); $j++)
+				for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 				{
 					$auth_field = $forum_auth_fields[$j];
 
@@ -389,8 +399,8 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 			// Checks complete, make updates to DB
 			//
 			$delete_sql = '';
-			while( list($forum_id, $action) = @each($forum_auth_action) )
-			{
+//			while( list($forum_id, $action) = @each($forum_auth_action) ) {
+            foreach ((array) $forum_auth_action as $forum_id => $action) {
 				if ( $action == 'delete' )
 				{
 					$delete_sql .= ( ( $delete_sql != '' ) ? ', ' : '' ) . $forum_id;
@@ -401,8 +411,9 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 					{
 						$sql_field = '';
 						$sql_value = '';
-						while ( list($auth_type, $value) = @each($update_acl_status[$forum_id]) )
-						{
+//						while ( list($auth_type, $value) = @each($update_acl_status[$forum_id]) ) {
+                        foreach ((array) $update_acl_status[$forum_id] as $auth_type => $value) {
+
 							$sql_field .= ( ( $sql_field != '' ) ? ', ' : '' ) . $auth_type;
 							$sql_value .= ( ( $sql_value != '' ) ? ', ' : '' ) . $value;
 						}
@@ -415,8 +426,9 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 					else
 					{
 						$sql_values = '';
-						while ( list($auth_type, $value) = @each($update_acl_status[$forum_id]) )
-						{
+//						while ( list($auth_type, $value) = @each($update_acl_status[$forum_id]) ){
+                        foreach ((array) $update_acl_status[$forum_id] as $auth_type => $value) {
+
 							$sql_values .= ( ( $sql_values != '' ) ? ', ' : '' ) . $auth_type . ' = ' . $value;
 						}
 						$sql_values .= ( ( $sql_values != '' ) ? ', ' : '' ) . 'auth_mod = ' . ( ( !isset($update_mod_status[$forum_id]) ) ? 0 : $update_mod_status[$forum_id]);
@@ -628,13 +640,13 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 
 	if( empty($adv) )
 	{
-		for($i = 0; $i < count($forum_access); $i++)
+		for($i = 0; $i < (is_countable($forum_access) ? count($forum_access) : 0); $i++)
 		{
 			$forum_id = $forum_access[$i]['forum_id'];
 
 			$forum_auth_level[$forum_id] = AUTH_ALL;
 
-			for($j = 0; $j < count($forum_auth_fields); $j++)
+			for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 			{
 				$forum_access[$i][$forum_auth_fields[$j]] . ' :: ';
 				if ( $forum_access[$i][$forum_auth_fields[$j]] == AUTH_ACL )
@@ -679,12 +691,12 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 
 	$is_admin = ( $mode == 'user' ) ? ( ( $ug_info[0]['user_level'] == ADMIN && $ug_info[0]['user_id'] != ANONYMOUS ) ? 1 : 0 ) : 0;
 
-	for($i = 0; $i < count($forum_access); $i++)
+	for($i = 0; $i < (is_countable($forum_access) ? count($forum_access) : 0); $i++)
 	{
 		$forum_id = $forum_access[$i]['forum_id'];
 
 		unset($prev_acl_setting);
-		for($j = 0; $j < count($forum_auth_fields); $j++)
+		for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 		{
 			$key = $forum_auth_fields[$j];
 			$value = $forum_access[$i][$key];
@@ -734,15 +746,15 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 	
 	$i = 0;
 	@reset($auth_ug);
-	while( list($forum_id, $user_ary) = @each($auth_ug) )
-	{
+//	while( list($forum_id, $user_ary) = @each($auth_ug) ) {
+    foreach ((array) $auth_ug as $forum_id => $user_ary) {
 		if ( empty($adv) )
 		{
 			if ( $forum_auth_level[$forum_id] == AUTH_ACL )
 			{
 				$allowed = 1;
 
-				for($j = 0; $j < count($forum_auth_level_fields[$forum_id]); $j++)
+				for($j = 0; $j < (is_countable($forum_auth_level_fields[$forum_id]) ? count($forum_auth_level_fields[$forum_id]) : 0); $j++)
 				{
 					if ( !$auth_ug[$forum_id][$forum_auth_level_fields[$forum_id][$j]] )
 					{
@@ -774,11 +786,11 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 		}
 		else
 		{
-			for($j = 0; $j < count($forum_access); $j++)
+			for($j = 0; $j < (is_countable($forum_access) ? count($forum_access) : 0); $j++)
 			{
 				if ( $forum_access[$j]['forum_id'] == $forum_id )
 				{
-					for($k = 0; $k < count($forum_auth_fields); $k++)
+					for($k = 0; $k < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $k++)
 					{
 						$field_name = $forum_auth_fields[$k];
 
@@ -842,9 +854,9 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 		}
 		else
 		{
-			for($j = 0; $j < count($forum_auth_fields); $j++)
+			for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 			{
-				$optionlist_acl_adv[$forum_id][$j] = (isset($optionlist_acl_adv[$forum_id][$j])) ? $optionlist_acl_adv[$forum_id][$j] : '';
+				$optionlist_acl_adv[$forum_id][$j] ??= '';
 				$template->assign_block_vars('forums.aclvalues', array(
 					'S_ACL_SELECT' => $optionlist_acl_adv[$forum_id][$j])
 				);
@@ -867,7 +879,7 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 
 	$name = array();
 	$id = array();
-	for($i = 0; $i < count($ug_info); $i++)
+	for($i = 0; $i < (is_countable($ug_info) ? count($ug_info) : 0); $i++)
 	{
 		if( ( $mode == 'user' && !$ug_info[$i]['group_single_user'] ) || $mode == 'group' )
 		{
@@ -877,13 +889,13 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 	}
 
 	$t_usergroup_list = $t_pending_list = '';
-	if( count($name) )
+	if( is_countable($name) ? count($name) : 0 )
 	{
-		for($i = 0; $i < count($ug_info); $i++)
+		for($i = 0; $i < (is_countable($ug_info) ? count($ug_info) : 0); $i++)
 		{
 			$ug = ( $mode == 'user' ) ? 'group&amp;' . POST_GROUPS_URL : 'user&amp;' . POST_USERS_URL;
-			$id[$i] = (isset($id[$i])) ? $id[$i] : '';
-			$name[$i] = (isset($name[$i])) ? $name[$i] : '';
+			$id[$i] ??= '';
+			$name[$i] ??= '';
 			if (!$ug_info[$i]['user_pending'])
 			{
 				$t_usergroup_list .= ( ( $t_usergroup_list != '' ) ? ', ' : '' ) . '<a href="' . append_sid("admin_ug_auth.$phpEx?mode=$ug=" . $id[$i]) . '">' . $name[$i] . '</a>';
@@ -908,7 +920,7 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 	}
 	else
 	{
-		for($i = 0; $i < count($forum_auth_fields); $i++)
+		for($i = 0; $i < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $i++)
 		{
 			$cell_title = $field_names[$forum_auth_fields[$i]];
 
@@ -1040,5 +1052,3 @@ else
 $template->pparse('body');
 
 include('./page_footer_admin.'.$phpEx);
-
-?>

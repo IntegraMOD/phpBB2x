@@ -60,6 +60,9 @@ if ( $board_config['gzip_compress'] )
 	}
 }
 
+$userdata['user_level'] = (isset($userdata['user_level'])) ? $userdata['user_level'] : '';
+$admin_short_link = ( $userdata['user_level'] == ADMIN ) ? '<a href="admin/index.' . $phpEx . '?sid=' . $userdata['session_id'] . '&amp;p_sid=' . $userdata['priv_session_id'] . '"><span><i class="fa-solid fa-gears"></i>&nbsp;' . $lang['Admin_short'] . '</span></a>' : '';
+
 //
 // Parse and show the overall header.
 //
@@ -172,8 +175,10 @@ if (defined('SHOW_ONLINE'))
 	{
 		$online_userlist = $lang['None'];
 	}
+	if ( !empty($online_userlist) )
+	{
 	$online_userlist = ( ( isset($forum_id) ) ? $lang['Browsing_forum'] : $lang['Registered_users'] ) . ' ' . $online_userlist;
-
+	}
 	$total_online_users = $logged_visible_online + $logged_hidden_online + $guests_online;
 
 	if ( $total_online_users > $board_config['record_online_users'])
@@ -322,8 +327,11 @@ if (!isset($nav_links))
 
 $nav_links_html = '';
 $nav_link_proto = '<link rel="%s" href="%s" title="%s" />' . "\n";
-while( list($nav_item, $nav_array) = @each($nav_links) )
-{
+
+
+
+// while( list($nav_item, $nav_array) = @each($nav_links) ) {
+foreach ((Array) $nav_links as $nav_item => $nav_array) {
 	if ( !empty($nav_array['url']) )
 	{
 		$nav_links_html .= sprintf($nav_link_proto, $nav_item, append_sid($nav_array['url']), $nav_array['title']);
@@ -331,8 +339,9 @@ while( list($nav_item, $nav_array) = @each($nav_links) )
 	else
 	{
 		// We have a nested array, used for items like <link rel='chapter'> that can occur more than once.
-		while( list(,$nested_array) = each($nav_array) )
-		{
+
+//		while( list(,$nested_array) = each($nav_array) ) {
+        foreach ((Array) $nav_array as $nested_array) {
 			$nav_links_html .= sprintf($nav_link_proto, $nav_item, $nested_array['url'], $nested_array['title']);
 		}
 	}
@@ -348,6 +357,7 @@ $l_timezone = (count($l_timezone) > 1 && $l_timezone[count($l_timezone)-1] != 0)
 $page_title = (empty($page_title)) ? '' : $page_title;
 
 $template->assign_vars(array(
+	'ADMIN_SHORT_LINK' => $admin_short_link,
 	'SITENAME' => $board_config['sitename'],
 	'SITE_DESCRIPTION' => $board_config['site_desc'],
 	'PAGE_TITLE' => $page_title,
@@ -368,6 +378,7 @@ $template->assign_vars(array(
 	'L_LOGIN' => $lang['Login'],
 	'L_LOG_ME_IN' => $lang['Log_me_in'],
 	'L_AUTO_LOGIN' => $lang['Log_me_in'],
+	'L_FORUM' => $lang['Forum'],
 	'L_HOME' => $lang['Home'],
 	'L_INDEX' => sprintf($lang['Forum_Index'], $board_config['sitename']),
 	'L_REGISTER' => $lang['Register'],
@@ -390,6 +401,7 @@ $template->assign_vars(array(
 	'U_INDEX' => append_sid('index.'.$phpEx),
 	'U_REGISTER' => append_sid('profile.'.$phpEx.'?mode=register'),
 	'U_PROFILE' => append_sid('profile.'.$phpEx.'?mode=editprofile'),
+
 	'U_PRIVATEMSGS' => append_sid('privmsg.'.$phpEx.'?folder=inbox'),
 	'U_PRIVATEMSGS_POPUP' => append_sid('privmsg.'.$phpEx.'?mode=newpm'),
 	'U_SEARCH' => append_sid('search.'.$phpEx),
@@ -503,5 +515,3 @@ header ('Expires: 0');
 header ('Pragma: no-cache');
 
 $template->pparse('overall_header');
-
-?>

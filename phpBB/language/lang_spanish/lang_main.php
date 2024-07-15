@@ -1020,15 +1020,13 @@ $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 //
 // language buttons
 //
-$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
-$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
-$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
-$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
-$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
-$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
-$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
-
-
+$lang['button_pm_new'] = 'Nueva<span class="bld">mensaje</span>';
+$lang['button_pm_reply'] = 'Enviar<span class="bld">respuesta</span>';
+$lang['button_topic_locked'] = 'Tema<span class="bld">bloqueado</span>';
+$lang['button_topic_new'] = 'Nueva<span class="bld">tema</span>';
+$lang['button_topic_reply'] = 'Enviar<span class="bld">respuesta</span>';
+$lang['icon_post_edit'] = '<span class="sml bld">Editar</span>';
+$lang['icon_post_quote'] = '<span class="sml bld">Cita</span>';
 
 //
 // ¡Eso es todo amigos!

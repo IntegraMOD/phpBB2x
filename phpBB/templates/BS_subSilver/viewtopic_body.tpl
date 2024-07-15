@@ -6,10 +6,11 @@
         	<div class="col text-start"><a class="maintitle" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a><br /><span class="gensmall"><b>{PAGINATION}</b><br />&nbsp; </span></div>
           </div>
         </div>
-		<span class="row my-2 mx-0 align-items-center"> 
-          <span class="col-sm-7 col-md-7 my-2"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></span>
-          <span class="col-sm-4 offset-sm-1 col-md-5 offset-md-0 my-2"><span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span></span>
-		</span>
+		<div class="row my-2 mx-0 align-items-center"> 
+          <div class="col-sm-5 col-md-6 my-2"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 my-2"><span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span></div>
+		</div>
+		
         <div class="forumline p-0 mx-1">
           <div class="row m-0">
         	<div class="col catHead d-flex align-items-center text-end navbr"><a href="{U_VIEW_OLDER_TOPIC}">{L_VIEW_PREVIOUS_TOPIC}</a> :: <a href="{U_VIEW_NEWER_TOPIC}">{L_VIEW_NEXT_TOPIC}</a> &nbsp;</div>
@@ -36,7 +37,7 @@
         	  </div>
         	</div>
         	<div class="row py-0 mx-0 row1"> 
-        	  <div class="col-2 pt-2 pb-1 hr3"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
+        	  <div class="col-2 pt-2 pb-1 hr3"><a class="navbr" href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
         	  <div class="col pt-2 pb-1 gen">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG} {postrow.ICQ_IMG}</div>
         	</div>
          	<!-- END postrow -->

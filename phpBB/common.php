@@ -25,11 +25,11 @@ if ( !defined('IN_PHPBB') )
 }
 
 // Uncomment these and comment out "error_reporting" to debug errors
-//ini_set('display_startup_errors',1); 
-//ini_set('display_errors',1);
-//error_reporting(-1);
+ini_set('display_startup_errors',1); 
+ini_set('display_errors',1);
+error_reporting(-1);
 
-error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
+// error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
 
 // Page generation time
 $starttime = 0;
@@ -57,6 +57,13 @@ if (@phpversion() >= '5.0.0' && (!@ini_get('register_long_arrays') || @ini_get('
 		$HTTP_SESSION_VARS = $_SESSION;
 	}
 }
+
+if(!function_exists('ereg'))            { function ereg($pattern, $subject, &$matches = []) { return preg_match('/'.$pattern.'/', $subject, $matches); } }
+if(!function_exists('eregi'))           { function eregi($pattern, $subject, &$matches = []) { return preg_match('/'.$pattern.'/i', $subject, $matches); } }
+if(!function_exists('ereg_replace'))    { function ereg_replace($pattern, $replacement, $string) { return preg_replace('/'.$pattern.'/', $replacement, $string); } }
+if(!function_exists('eregi_replace'))   { function eregi_replace($pattern, $replacement, $string) { return preg_replace('/'.$pattern.'/i', $replacement, $string); } }
+if(!function_exists('split'))           { function split($pattern, $subject, $limit = -1) { return preg_split('/'.$pattern.'/', $subject, $limit); } }
+if(!function_exists('spliti'))          { function spliti($pattern, $subject, $limit = -1) { return preg_split('/'.$pattern.'/i', $subject, $limit); } }
 
 // Protect against GLOBALS tricks
 if (isset($HTTP_POST_VARS['GLOBALS']) || isset($HTTP_POST_FILES['GLOBALS']) || isset($HTTP_GET_VARS['GLOBALS']) || isset($HTTP_COOKIE_VARS['GLOBALS']))
@@ -90,13 +97,14 @@ if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals
 	unset($input['input']);
 	unset($input['not_unset']);
 
-	while (list($var,) = @each($input))
+//	while (list($var,) = @each($input))
+	foreach($input as [$var])
 	{
 		if (in_array($var, $not_unset))
 		{
 			die('Hacking attempt!');
 		}
-		unset($$var);
+		unset(${$var});
 	}
 
 	unset($input);
@@ -236,5 +244,3 @@ if( $board_config['board_disable'] && !defined("IN_ADMIN") && !defined("IN_LOGIN
 {
 	message_die(GENERAL_MESSAGE, 'Board_disable', 'Information');
 }
-
-?>

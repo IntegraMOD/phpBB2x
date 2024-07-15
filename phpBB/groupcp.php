@@ -157,7 +157,7 @@ else
 if ( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-    $mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+    $mode = htmlspecialchars($mode, ENT_COMPAT, 'UTF-8');
 }
 else
 {
@@ -1370,5 +1370,3 @@ else
 }
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

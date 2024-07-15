@@ -361,8 +361,8 @@ if( ( $total_categories = count($category_rows) ) )
 									{
 										$forum_last_post_time = 0;
 
-										while( list($check_topic_id, $check_post_time) = @each($new_topic_data[$forum_id]) )
-										{
+//										while( list($check_topic_id, $check_post_time) = @each($new_topic_data[$forum_id]) ) {
+                                        foreach ((Array) $new_topic_data[$forum_id] as $check_topic_id => $check_post_time) {
 											if ( empty($tracking_topics[$check_topic_id]) )
 											{
 												$unread_topics = true;
@@ -468,5 +468,3 @@ else
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

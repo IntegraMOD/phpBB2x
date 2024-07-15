@@ -78,10 +78,10 @@ $months = array(
 function common_header()
 {
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css">
 <!--
@@ -1940,5 +1940,3 @@ if ( !empty($next) )
 print "<br />If the upgrade completed without error you may click <a href=\"./../index.$phpEx\">Here</a> to proceed to the index<br />";
 
 common_footer();
-
-?>

@@ -212,6 +212,54 @@
 					<td><input type="text" size="25" maxlength="25" name="span_class3" value="{SPAN_CLASS3}"></td>
 					<td><input type="text" size="25" maxlength="100" name="span_class3_name" value="{SPAN_CLASS3_NAME}">
 				</tr>
+				
+				
+				
+				<tr>
+					<td>{L_DIV_CLASS_1}:</td>
+					<td><input type="text" size="25" maxlength="25" name="div_class3" value="{DIV_CLASS1}"></td>
+					<td><input type="text" size="25" maxlength="100" name="div_class3_name" value="{DIV_CLASS1_NAME}">
+				</tr>
+				<tr>
+					<td>{L_DIV_CLASS_2}:</td>
+					<td><input type="text" size="25" maxlength="25" name="div_class3" value="{DIV_CLASS2}"></td>
+					<td><input type="text" size="25" maxlength="100" name="div_class3_name" value="{DIV_CLASS2_NAME}">
+				</tr>
+				<tr>
+					<td>{L_DIV_CLASS_3}:</td>
+					<td><input type="text" size="25" maxlength="25" name="div_class3" value="{DIV_CLASS3}"></td>
+					<td><input type="text" size="25" maxlength="100" name="div_class3_name" value="{DIV_CLASS3_NAME}">
+				</tr>
+				<tr>
+					<td>{L_ROW_CLASS_1}:</td>
+					<td><input type="text" size="25" maxlength="25" name="row_class3" value="{ROW_CLASS1}"></td>
+					<td><input type="text" size="25" maxlength="100" name="row_class3_name" value="{ROW_CLASS1_NAME}">
+				</tr>
+				<tr>
+					<td>{L_ROW_CLASS_2}:</td>
+					<td><input type="text" size="25" maxlength="25" name="row_class3" value="{ROW_CLASS2}"></td>
+					<td><input type="text" size="25" maxlength="100" name="row_class3_name" value="{ROW_CLASS2_NAME}">
+				</tr>
+				<tr>
+					<td>{L_ROW_CLASS_3}:</td>
+					<td><input type="text" size="25" maxlength="25" name="row_class3" value="{ROW_CLASS3}"></td>
+					<td><input type="text" size="25" maxlength="100" name="row_class3_name" value="{ROW_CLASS3_NAME}">
+				</tr>
+				<tr>
+					<td>{L_COL_CLASS_1}:</td>
+					<td><input type="text" size="25" maxlength="25" name="col_class3" value="{COL_CLASS1}"></td>
+					<td><input type="text" size="25" maxlength="100" name="col_class3_name" value="{COL_CLASS1_NAME}">
+				</tr>
+				<tr>
+					<td>{L_COL_CLASS_2}:</td>
+					<td><input type="text" size="25" maxlength="25" name="col_class3" value="{COL_CLASS2}"></td>
+					<td><input type="text" size="25" maxlength="100" name="col_class3_name" value="{COL_CLASS2_NAME}">
+				</tr>
+				<tr>
+					<td>{L_COL_CLASS_3}:</td>
+					<td><input type="text" size="25" maxlength="25" name="col_class3" value="{COL_CLASS3}"></td>
+					<td><input type="text" size="25" maxlength="100" name="col_class3_name" value="{COL_CLASS3_NAME}">
+				</tr>
 				</tbody>
 				</table>
 				<p class="submit-buttons">

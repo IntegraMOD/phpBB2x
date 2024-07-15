@@ -712,9 +712,9 @@ $lang['Admin_Username'] = 'Administrator Username';
 $lang['Admin_Password'] = 'Administrator Password';
 $lang['Admin_Password_confirm'] = 'Administrator Password [ Confirm ]';
 
-$lang['Inst_Step_2'] = '<h2>Please delete the install and contrib folders now</h2> Your admin username has been created.  At this point your basic installation is complete. You will now be taken to a screen which will allow you to administer your new installation. Please be sure to check the General Configuration details and make any required changes. Thank you for choosing phpBB2x.';
+$lang['Inst_Step_2'] = 'Your admin username has been created.  At this point your basic installation is complete. <br />You will now be taken to a screen which will allow you to administer your new installation. <br />Please be sure to check the General Configuration details and make any required changes. <br />Thank you for choosing phpBB2x.';
 
-$lang['Unwriteable_config'] = 'Your config file is un-writeable at present. A copy of the config file will be downloaded to your computer when you click the button below. You should upload this file to the same directory as phpBB2x. Once this is done you should log in using the administrator name and password you provided on the previous form and visit the admin control center (a link will appear at the bottom of each screen once logged in) to check the general configuration. Thank you for choosing phpBB2x.';
+$lang['Unwriteable_config'] = 'Your config file is un-writeable at present. A copy of the config file will be downloaded to your computer when you click the button below. You should upload this file to the same directory as phpBB2x. Once this is done you should log in using the administrator name and password you provided on the previous form and visit the admin control center (a link will appear at the bottom of each screen once logged in) to check the general configuration. <br />Thank you for choosing phpBB2x.';
 $lang['Download_config'] = 'Download Config';
 
 $lang['ftp_choose'] = 'Choose Download Method';

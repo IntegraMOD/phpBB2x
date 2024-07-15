@@ -50,7 +50,7 @@ if ($cancel)
 if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
 	$mode = (isset($HTTP_GET_VARS['mode'])) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 }
 else 
 {
@@ -120,7 +120,8 @@ if( $mode != "" )
 		$template->assign_vars(array(
 			"RANK" => (isset($rank_info['rank_title'])) ? $rank_info['rank_title'] : '',
 			"SPECIAL_RANK" => $rank_is_special,
-			"MINIMUM" => ( $rank_is_special ) ? "" : (isset($rank_info['rank_min'])) ? $rank_info['rank_min'] : '',
+//			"MINIMUM" => ( $rank_is_special ) ? "" : (isset($rank_info['rank_min'])) ? $rank_info['rank_min'] : '',
+			"MINIMUM" => ( $rank_is_special ) ? "" : $rank_info['rank_min'],
 			"IMAGE" => ( isset($rank_info['rank_image']) && $rank_info['rank_image'] != "" ) ? $rank_info['rank_image'] : "",
 			"IMAGE_DISPLAY" => ( isset($rank_info['rank_image']) && $rank_info['rank_image'] != "" ) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
 			

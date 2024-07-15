@@ -4,4 +4,6 @@
 	dd.lastpost span {display:none;}
 	dd.topics, dd.posts {width:15%;}
 	span.res::before { content: "\A"; white-space: pre;}
+
+
 }

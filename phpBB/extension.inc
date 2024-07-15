@@ -22,5 +22,3 @@ if ( !defined('IN_PHPBB') )
 $phpEx = "php";
 
 $starttime = 0;
-
-?>

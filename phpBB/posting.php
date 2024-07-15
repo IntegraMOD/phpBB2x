@@ -34,11 +34,12 @@ include($phpbb_root_path . 'includes/functions_post.'.$phpEx);
 // Check and set various parameters
 //
 $params = array('submit' => 'post', 'preview' => 'preview', 'delete' => 'delete', 'poll_delete' => 'poll_delete', 'poll_add' => 'add_poll_option', 'poll_edit' => 'edit_poll_option', 'mode' => 'mode');
-while( list($var, $param) = @each($params) )
-{
+	
+// while( list($var, $param) = @each($params) ) {
+foreach ((Array) $params as $var => $param) {
 	if ( !empty($HTTP_POST_VARS[$param]) || !empty($HTTP_GET_VARS[$param]) )
 	{
-		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS[$param], ENT_COMPAT, 'ISO-8859-1');
+		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? htmlspecialchars($HTTP_POST_VARS[$param], ENT_COMPAT, 'UTF-8') : htmlspecialchars($HTTP_GET_VARS[$param], ENT_COMPAT, 'UTF-8');
 	}
 	else
 	{
@@ -50,8 +51,8 @@ $confirm = isset($HTTP_POST_VARS['confirm']) ? true : false;
 $sid = (isset($HTTP_POST_VARS['sid'])) ? $HTTP_POST_VARS['sid'] : 0;
 
 $params = array('forum_id' => POST_FORUM_URL, 'topic_id' => POST_TOPIC_URL, 'post_id' => POST_POST_URL);
-while( list($var, $param) = @each($params) )
-{
+// while( list($var, $param) = @each($params) ) {
+foreach ((Array) $params as $var => $param) {
 	if ( !empty($HTTP_POST_VARS[$param]) || !empty($HTTP_GET_VARS[$param]) )
 	{
 		$$var = ( !empty($HTTP_POST_VARS[$param]) ) ? intval($HTTP_POST_VARS[$param]) : intval($HTTP_GET_VARS[$param]);
@@ -631,11 +632,11 @@ else if ( $submit || $confirm )
 
 if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 {
-	$username = ( !empty($HTTP_POST_VARS['username']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['username'])), ENT_COMPAT, 'ISO-8859-1') : '';
-	$subject = ( !empty($HTTP_POST_VARS['subject']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['subject'])), ENT_COMPAT, 'ISO-8859-1') : '';
-	$message = ( !empty($HTTP_POST_VARS['message']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['message'])), ENT_COMPAT, 'ISO-8859-1') : '';
+	$username = ( !empty($HTTP_POST_VARS['username']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['username'])), ENT_COMPAT, 'UTF-8') : '';
+	$subject = ( !empty($HTTP_POST_VARS['subject']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['subject'])), ENT_COMPAT, 'UTF-8') : '';
+	$message = ( !empty($HTTP_POST_VARS['message']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['message'])), ENT_COMPAT, 'UTF-8') : '';
 
-	$poll_title = ( !empty($HTTP_POST_VARS['poll_title']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['poll_title'])), ENT_COMPAT, 'ISO-8859-1') : '';
+	$poll_title = ( !empty($HTTP_POST_VARS['poll_title']) ) ? htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['poll_title'])), ENT_COMPAT, 'UTF-8') : '';
 	$poll_length = ( isset($HTTP_POST_VARS['poll_length']) ) ? max(0, intval($HTTP_POST_VARS['poll_length'])) : 0;
 
 	$poll_options = array();
@@ -649,14 +650,14 @@ if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 			}
 			else if ( !empty($option_text) ) 
 			{
-				$poll_options[intval($option_id)] = htmlspecialchars(trim(stripslashes($option_text)), ENT_COMPAT, 'ISO-8859-1');
+				$poll_options[intval($option_id)] = htmlspecialchars(trim(stripslashes($option_text)), ENT_COMPAT, 'UTF-8');
 			}
 		}
 	}
 
 	if ( isset($poll_add) && !empty($HTTP_POST_VARS['add_poll_option_text']) )
 	{
-		$poll_options[] = htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['add_poll_option_text'])), ENT_COMPAT, 'ISO-8859-1');
+		$poll_options[] = htmlspecialchars(trim(stripslashes($HTTP_POST_VARS['add_poll_option_text'])), ENT_COMPAT, 'UTF-8');
 	}
 
 	if ( $mode == 'newtopic' || $mode == 'reply')
@@ -1139,5 +1140,3 @@ if( $mode == 'reply' && $is_auth['auth_read'] )
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

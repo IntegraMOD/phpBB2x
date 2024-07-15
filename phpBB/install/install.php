@@ -27,7 +27,7 @@ function page_header($text, $form_action = false)
 	global $phpEx, $lang;
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang['ENCODING']; ?>">
@@ -139,7 +139,7 @@ function page_error($error_title, $error)
 // match on a second pass instead of a straight "fuzzy" match.
 function guess_lang()
 {
-	global $phpbb_root_path, $_SERVER;
+	global $phpbb_root_path, $HTTP_SERVER_VARS;
 
 	// The order here _is_ important, at least for major_minor
 	// matches. Don't go moving these around without checking with
@@ -195,11 +195,11 @@ function guess_lang()
 		'chinese_simplified'		=> 'zh', 
 	);
 
-	if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+    global $lang;
+	if (isset($HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']))
 	{
-		$accept_lang_ary = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-		$sizeArr = count($accept_lang_ary);
-		for ($i = 0; $i < $sizeArr; $i++)
+		$accept_lang_ary = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
+		for ($i = 0; $i < sizeof($accept_lang_ary); $i++)
 		{
 			@reset($match_lang);
 //			while (list($lang, $match) = each($match_lang))	{
@@ -225,70 +225,84 @@ function guess_lang()
 // Begin
 error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
 
+// PHP5 with register_long_arrays off?
+if (!isset($HTTP_POST_VARS) && isset($_POST))
+{
+	$HTTP_POST_VARS = $_POST;
+	$HTTP_GET_VARS = $_GET;
+	$HTTP_SERVER_VARS = $_SERVER;
+	$HTTP_COOKIE_VARS = $_COOKIE;
+	$HTTP_ENV_VARS = $_ENV;
+	$HTTP_POST_FILES = $_FILES;
+
+	// _SESSION is the only superglobal which is conditionally set
+	if (isset($_SESSION))
+	{
+		$HTTP_SESSION_VARS = $_SESSION;
+	}
+}
 
 // Slash data if it isn't slashed
 if (true)
 {
-	if (is_array($_GET))
+	if (is_array($HTTP_GET_VARS))
 	{
-//		while (list($k, $v) = each($_GET)){
-	    foreach((Array) $_GET as list ($k => $v)) {
-			
-			if (is_array($_GET[$k]))
+//		while (list($k, $v) = each($HTTP_GET_VARS)) {
+        foreach ((Array) $HTTP_GET_VARS as $k => $v) {
+			if (is_array($HTTP_GET_VARS[$k]))
 			{
-//				while (list($k2, $v2) = each($_GET[$k])){
-				foreach((Array) $_GET[$k] as list ($k2 => $v2)) {
-					$_GET[$k][$k2] = addslashes($v2);
+//				while (list($k2, $v2) = each($HTTP_GET_VARS[$k])) {
+                foreach ((Array) $HTTP_GET_VARS[$k] as $k2 => $v2) {
+					$HTTP_GET_VARS[$k][$k2] = addslashes($v2);
 				}
-				@reset($_GET[$k]);
+				@reset($HTTP_GET_VARS[$k]);
 			}
 			else
 			{
-				$_GET[$k] = addslashes($v);
+				$HTTP_GET_VARS[$k] = addslashes($v);
 			}
 		}
-		@reset($_GET);
+		@reset($HTTP_GET_VARS);
 	}
 
-	if (is_array($_POST))
+	if (is_array($HTTP_POST_VARS))
 	{
-//		while (list($k, $v) = each($_POST))	{
-		foreach((Array) $_POST as list ($k => $v)) {
-			if (is_array($_POST[$k]))
+//		while (list($k, $v) = each($HTTP_POST_VARS)) {
+        foreach ((Array) $HTTP_POST_VARS as $k => $v) {
+			if (is_array($HTTP_POST_VARS[$k]))
 			{
-//				while (list($k2, $v2) = each($_POST[$k])) {
-		        foreach((Array) $_POST[$k] as list ($k2 => $v2)) {
-					$_POST[$k][$k2] = addslashes($v2);
+//				while (list($k2, $v2) = each($HTTP_POST_VARS[$k])) {
+                foreach ((Array) $HTTP_POST_VARS[$k] as $k2 => $v2) {
+					$HTTP_POST_VARS[$k][$k2] = addslashes($v2);
 				}
-				@reset($_POST[$k]);
+				@reset($HTTP_POST_VARS[$k]);
 			}
 			else
 			{
-				$_POST[$k] = addslashes($v);
+				$HTTP_POST_VARS[$k] = addslashes($v);
 			}
 		}
-		@reset($_POST);
+		@reset($HTTP_POST_VARS);
 	}
 
-	if (is_array($_COOKIE))
+	if (is_array($HTTP_COOKIE_VARS))
 	{
-//		while (list($k, $v) = each($_COOKIE)) {
-		foreach((Array) $_COOKIE as list ($k => $v)) {
-			
-			if (is_array($_COOKIE[$k]))
+//		while (list($k, $v) = each($HTTP_COOKIE_VARS)) {
+        foreach ((Array) $HTTP_COOKIE_VARS as $k => $v) {
+			if (is_array($HTTP_COOKIE_VARS[$k]))
 			{
-//				while (list($k2, $v2) = each($_COOKIE[$k])) {
-		        foreach((Array) $_COOKIE[$k] as list ($k2 => $v2)) {
-					$_COOKIE[$k][$k2] = addslashes($v2);
+//				while (list($k2, $v2) = each($HTTP_COOKIE_VARS[$k])) {
+                foreach ((Array) $HTTP_COOKIE_VARS[$k] as $k2 => $v2) {
+					$HTTP_COOKIE_VARS[$k][$k2] = addslashes($v2);
 				}
-				@reset($_COOKIE[$k]);
+				@reset($HTTP_COOKIE_VARS[$k]);
 			}
 			else
 			{
-				$_COOKIE[$k] = addslashes($v);
+				$HTTP_COOKIE_VARS[$k] = addslashes($v);
 			}
 		}
-		@reset($_COOKIE);
+		@reset($HTTP_COOKIE_VARS);
 	}
 }
 
@@ -352,64 +366,64 @@ $available_dbms = array(
 );
 
 // Obtain various vars
-$confirm = (isset($_POST['confirm'])) ? true : false;
-$cancel = (isset($_POST['cancel'])) ? true : false;
+$confirm = (isset($HTTP_POST_VARS['confirm'])) ? true : false;
+$cancel = (isset($HTTP_POST_VARS['cancel'])) ? true : false;
 
-if (isset($_POST['install_step']) || isset($_GET['install_step']))
+if (isset($HTTP_POST_VARS['install_step']) || isset($HTTP_GET_VARS['install_step']))
 {
-	$install_step = (isset($_POST['install_step'])) ? $_POST['install_step'] : $_GET['install_step'];
+	$install_step = (isset($HTTP_POST_VARS['install_step'])) ? $HTTP_POST_VARS['install_step'] : $HTTP_GET_VARS['install_step'];
 }
 else
 {
 	$install_step = '';
 }
 
-$upgrade = (!empty($_POST['upgrade'])) ? $_POST['upgrade']: '';
-$upgrade_now = (!empty($_POST['upgrade_now'])) ? $_POST['upgrade_now']:'';
+$upgrade = (!empty($HTTP_POST_VARS['upgrade'])) ? $HTTP_POST_VARS['upgrade']: '';
+$upgrade_now = (!empty($HTTP_POST_VARS['upgrade_now'])) ? $HTTP_POST_VARS['upgrade_now']:'';
 
-$dbms = isset($_POST['dbms']) ? $_POST['dbms'] : '';
+$dbms = isset($HTTP_POST_VARS['dbms']) ? $HTTP_POST_VARS['dbms'] : '';
 
-$dbhost = (!empty($_POST['dbhost'])) ? $_POST['dbhost'] : 'localhost';
-$dbuser = (!empty($_POST['dbuser'])) ? $_POST['dbuser'] : '';
-$dbpasswd = (!empty($_POST['dbpasswd'])) ? $_POST['dbpasswd'] : '';
-$dbname = (!empty($_POST['dbname'])) ? $_POST['dbname'] : '';
+$dbhost = (!empty($HTTP_POST_VARS['dbhost'])) ? $HTTP_POST_VARS['dbhost'] : 'localhost';
+$dbuser = (!empty($HTTP_POST_VARS['dbuser'])) ? $HTTP_POST_VARS['dbuser'] : '';
+$dbpasswd = (!empty($HTTP_POST_VARS['dbpasswd'])) ? $HTTP_POST_VARS['dbpasswd'] : '';
+$dbname = (!empty($HTTP_POST_VARS['dbname'])) ? $HTTP_POST_VARS['dbname'] : '';
 
-$table_prefix = (!empty($_POST['prefix'])) ? $_POST['prefix'] : '';
+$table_prefix = (!empty($HTTP_POST_VARS['prefix'])) ? $HTTP_POST_VARS['prefix'] : '';
 
-$admin_name = (!empty($_POST['admin_name'])) ? $_POST['admin_name'] : '';
-$admin_pass1 = (!empty($_POST['admin_pass1'])) ? $_POST['admin_pass1'] : '';
-$admin_pass2 = (!empty($_POST['admin_pass2'])) ? $_POST['admin_pass2'] : '';
+$admin_name = (!empty($HTTP_POST_VARS['admin_name'])) ? $HTTP_POST_VARS['admin_name'] : '';
+$admin_pass1 = (!empty($HTTP_POST_VARS['admin_pass1'])) ? $HTTP_POST_VARS['admin_pass1'] : '';
+$admin_pass2 = (!empty($HTTP_POST_VARS['admin_pass2'])) ? $HTTP_POST_VARS['admin_pass2'] : '';
 
-$ftp_path = (!empty($_POST['ftp_path'])) ? $_POST['ftp_path'] : '';
-$ftp_user = (!empty($_POST['ftp_user'])) ? $_POST['ftp_user'] : '';
-$ftp_pass = (!empty($_POST['ftp_pass'])) ? $_POST['ftp_pass'] : '';
+$ftp_path = (!empty($HTTP_POST_VARS['ftp_path'])) ? $HTTP_POST_VARS['ftp_path'] : '';
+$ftp_user = (!empty($HTTP_POST_VARS['ftp_user'])) ? $HTTP_POST_VARS['ftp_user'] : '';
+$ftp_pass = (!empty($HTTP_POST_VARS['ftp_pass'])) ? $HTTP_POST_VARS['ftp_pass'] : '';
 
-if (isset($_POST['lang']) && preg_match('#^[a-z_]+$#', $_POST['lang']))
+if (isset($HTTP_POST_VARS['lang']) && preg_match('#^[a-z_]+$#', $HTTP_POST_VARS['lang']))
 {
-	$language = strip_tags($_POST['lang']);
+	$language = strip_tags($HTTP_POST_VARS['lang']);
 }
 else
 {
 	$language = guess_lang();
 }
 
-$board_email = (!empty($_POST['board_email'])) ? $_POST['board_email'] : '';
-$script_path = (!empty($_POST['script_path'])) ? $_POST['script_path'] : str_replace('install', '', dirname($_SERVER['PHP_SELF']));
+$board_email = (!empty($HTTP_POST_VARS['board_email'])) ? $HTTP_POST_VARS['board_email'] : '';
+$script_path = (!empty($HTTP_POST_VARS['script_path'])) ? $HTTP_POST_VARS['script_path'] : str_replace('install', '', dirname($HTTP_SERVER_VARS['PHP_SELF']));
 
-if (!empty($_POST['server_name']))
+if (!empty($HTTP_POST_VARS['server_name']))
 {
-	$server_name = $_POST['server_name'];
+	$server_name = $HTTP_POST_VARS['server_name'];
 }
 else
 {
 	// Guess at some basic info used for install..
-	if (!empty($_SERVER['SERVER_NAME']) || !empty($HTTP_ENV_VARS['SERVER_NAME']))
+	if (!empty($HTTP_SERVER_VARS['SERVER_NAME']) || !empty($HTTP_ENV_VARS['SERVER_NAME']))
 	{
-		$server_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $HTTP_ENV_VARS['SERVER_NAME'];
+		$server_name = (!empty($HTTP_SERVER_VARS['SERVER_NAME'])) ? $HTTP_SERVER_VARS['SERVER_NAME'] : $HTTP_ENV_VARS['SERVER_NAME'];
 	}
-	else if (!empty($_SERVER['HTTP_HOST']) || !empty($HTTP_ENV_VARS['HTTP_HOST']))
+	else if (!empty($HTTP_SERVER_VARS['HTTP_HOST']) || !empty($HTTP_ENV_VARS['HTTP_HOST']))
 	{
-		$server_name = (!empty($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : $HTTP_ENV_VARS['HTTP_HOST'];
+		$server_name = (!empty($HTTP_SERVER_VARS['HTTP_HOST'])) ? $HTTP_SERVER_VARS['HTTP_HOST'] : $HTTP_ENV_VARS['HTTP_HOST'];
 	}
 	else
 	{
@@ -417,15 +431,15 @@ else
 	}
 }
 
-if (!empty($_POST['server_port']))
+if (!empty($HTTP_POST_VARS['server_port']))
 {
-	$server_port = $_POST['server_port'];
+	$server_port = $HTTP_POST_VARS['server_port'];
 }
 else
 {
-	if (!empty($_SERVER['SERVER_PORT']) || !empty($HTTP_ENV_VARS['SERVER_PORT']))
+	if (!empty($HTTP_SERVER_VARS['SERVER_PORT']) || !empty($HTTP_ENV_VARS['SERVER_PORT']))
 	{
-		$server_port = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : $HTTP_ENV_VARS['SERVER_PORT'];
+		$server_port = (!empty($HTTP_SERVER_VARS['SERVER_PORT'])) ? $HTTP_SERVER_VARS['SERVER_PORT'] : $HTTP_ENV_VARS['SERVER_PORT'];
 	}
 	else
 	{
@@ -459,7 +473,7 @@ if ($upgrade == 1)
 }
 
 // What do we need to do?
-if (!empty($_POST['send_file']) && $_POST['send_file'] == 1 && empty($_POST['upgrade_now']))
+if (!empty($HTTP_POST_VARS['send_file']) && $HTTP_POST_VARS['send_file'] == 1 && empty($HTTP_POST_VARS['upgrade_now']))
 {
 	header('Content-Type: text/x-delimtext; name="config.' . $phpEx . '"');
 	header('Content-disposition: attachment; filename="config.' . $phpEx . '"');
@@ -467,13 +481,13 @@ if (!empty($_POST['send_file']) && $_POST['send_file'] == 1 && empty($_POST['upg
 	// We need to stripslashes no matter what the setting of magic_quotes_gpc is
 	// because we add slashes at the top if its off, and they are added automaticlly 
 	// if it is on.
-	echo stripslashes($_POST['config_data']);
+	echo stripslashes($HTTP_POST_VARS['config_data']);
 
 	exit;
 }
-else if (!empty($_POST['send_file']) && $_POST['send_file'] == 2)
+else if (!empty($HTTP_POST_VARS['send_file']) && $HTTP_POST_VARS['send_file'] == 2)
 {
-	$s_hidden_fields = '<input type="hidden" name="config_data" value="' . htmlspecialchars(stripslashes($_POST['config_data'])) . '" />';
+	$s_hidden_fields = '<input type="hidden" name="config_data" value="' . htmlspecialchars(stripslashes($HTTP_POST_VARS['config_data'])) . '" />';
 	$s_hidden_fields .= '<input type="hidden" name="ftp_file" value="1" />';
 
 	if ($upgrade == 1)
@@ -506,7 +520,7 @@ else if (!empty($_POST['send_file']) && $_POST['send_file'] == 2)
 	exit;
 
 }
-else if (!empty($_POST['ftp_file']))
+else if (!empty($HTTP_POST_VARS['ftp_file']))
 {
 	// Try to connect ...
 	$conn_id = @ftp_connect('localhost');
@@ -517,7 +531,7 @@ else if (!empty($_POST['ftp_file']))
 		page_header($lang['NoFTP_config']);
 
 		// Error couldn't get connected... Go back to option to send file...
-		$s_hidden_fields = '<input type="hidden" name="config_data" value="' . htmlspecialchars(stripslashes($_POST['config_data'])) . '" />';
+		$s_hidden_fields = '<input type="hidden" name="config_data" value="' . htmlspecialchars(stripslashes($HTTP_POST_VARS['config_data'])) . '" />';
 		$s_hidden_fields .= '<input type="hidden" name="send_file" value="1" />';
 
 		// If we're upgrading ...
@@ -558,7 +572,7 @@ else if (!empty($_POST['ftp_file']))
 
 		$fp = @fopen($tmpfname, 'w');
 
-		@fwrite($fp, stripslashes($_POST['config_data']));
+		@fwrite($fp, stripslashes($HTTP_POST_VARS['config_data']));
 
 		@fclose($fp);
 
@@ -604,8 +618,8 @@ else if ((empty($install_step) || $admin_pass1 != $admin_pass2 || empty($admin_p
 
 	if (!empty($install_step))
 	{
-		if ((($_POST['admin_pass1'] != $_POST['admin_pass2'])) ||
-			(empty($_POST['admin_pass1']) || empty($dbhost)) && $_POST['cur_lang'] == $language)
+		if ((($HTTP_POST_VARS['admin_pass1'] != $HTTP_POST_VARS['admin_pass2'])) ||
+			(empty($HTTP_POST_VARS['admin_pass1']) || empty($dbhost)) && $HTTP_POST_VARS['cur_lang'] == $language)
 		{
 			$error = $lang['Password_mismatch'];
 		}
@@ -632,16 +646,16 @@ else if ((empty($install_step) || $admin_pass1 != $admin_pass2 || empty($admin_p
 	@reset($lang_options);
 
 	$lang_select = '<select name="lang" onchange="this.form.submit()">';
-	while (list($displayname, $filename) = @each($lang_options))
-	{
+//	while ([$displayname, $filename] = @each($lang_options)) {
+	foreach($lang_options as $displayname => $filename)	{
 		$selected = ($language == $filename) ? ' selected="selected"' : '';
-		$lang_select .= '<option value="' . $filename . '"' . $selected . '>' . ucwords($displayname) . '</option>';
+		$lang_select .= '<option value="' . $filename . '"' . $selected . '>' . ucwords((string) $displayname) . '</option>';
 	}
 	$lang_select .= '</select>';
 
 	$dbms_select = '<select name="dbms" onchange="if(this.form.upgrade.options[this.form.upgrade.selectedIndex].value == 1){ this.selectedIndex = 0;}">';
-	while (list($dbms_name, $details) = @each($available_dbms))	
-	{
+//	while ([$dbms_name, $details] = @each($available_dbms)) {
+	foreach($available_dbms as $dbms_name => $details) {
 		$selected = ($dbms_name == $dbms) ? 'selected="selected"' : '';
 		$dbms_select .= '<option value="' . $dbms_name . '">' . $details['LABEL'] . '</option>';
 	}
@@ -883,8 +897,8 @@ else
 				'server_name'	=> $server_name,
 			);
 
-			while (list($config_name, $config_value) = each($update_config)){
-//	        foreach((Array) $update_config as list ($config_name => $config_value)) {
+//			while (list($config_name, $config_value) = each($update_config)) {
+	        foreach($update_config as list ($config_name => $config_value)) {
 				$sql = "UPDATE " . $table_prefix . "config 
 					SET config_value = '$config_value' 
 					WHERE config_name = '$config_name'";
@@ -924,7 +938,7 @@ else
 		{
 			// Write out the config file.
 			$config_data = '<?php'."\n\n";
-			$config_data .= "\n// phpBB 2.x auto-generated config file\n// Do not change anything in this file!\n\n";
+			$config_data .= "\n// phpBB 2.x auto-generated config file\n// Do not edit this file unless you know what you are doing!\n\n";
 			$config_data .= '$dbms = \'' . $dbms . '\';' . "\n\n";
 			$config_data .= '$dbhost = \'' . $dbhost . '\';' . "\n";
 			$config_data .= '$dbname = \'' . $dbname . '\';' . "\n";
@@ -932,10 +946,9 @@ else
 			$config_data .= '$dbpasswd = \'' . $dbpasswd . '\';' . "\n\n";
 			$config_data .= '$table_prefix = \'' . $table_prefix . '\';' . "\n\n";
 			$config_data .= 'define(\'PHPBB_INSTALLED\', true);'."\n\n";
-			$config_data .= "\n//  To enable developer mode change line below from false to true\n";
-			$config_data .= "define('DEV_MODE', false);\n\n";
+            $config_data .= "//  To enable developer mode change line below from false to true\n";
+			$config_data .= 'define(\'DEV_MODE\', false);'."\n\n";
 //			$config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
-
 			@umask(0111);
 			$no_open = FALSE;
 
@@ -1028,5 +1041,3 @@ else
 		exit;
 	}
 }
-
-?>

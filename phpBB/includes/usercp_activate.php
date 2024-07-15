@@ -37,7 +37,7 @@ if ( !($result = $db->sql_query($sql)) )
 
 if ( $row = $db->sql_fetchrow($result) )
 {
-	if ( $row['user_active'] && trim($row['user_actkey']) == '' )
+	if ( $row['user_active'] && trim((string) $row['user_actkey']) == '' )
 	{
 		$template->assign_vars(array(
 			'META' => '<meta http-equiv="refresh" content="10;url=' . append_sid("index.$phpEx") . '">')
@@ -45,13 +45,13 @@ if ( $row = $db->sql_fetchrow($result) )
 
 		message_die(GENERAL_MESSAGE, $lang['Already_activated']);
 	}
-	else if ((trim($row['user_actkey']) == trim($HTTP_GET_VARS['act_key'])) && (trim($row['user_actkey']) != ''))
+	else if ((trim((string) $row['user_actkey']) == trim((string) $HTTP_GET_VARS['act_key'])) && (trim((string) $row['user_actkey']) != ''))
 	{
 		if (intval($board_config['require_activation']) == USER_ACTIVATION_ADMIN && $row['user_newpasswd'] == '')
 		{
 			if (!$userdata['session_logged_in'])
 			{
-				redirect(append_sid('login.' . $phpEx . '?redirect=profile.' . $phpEx . '&mode=activate&' . POST_USERS_URL . '=' . $row['user_id'] . '&act_key=' . trim($HTTP_GET_VARS['act_key'])));
+				redirect(append_sid('login.' . $phpEx . '?redirect=profile.' . $phpEx . '&mode=activate&' . POST_USERS_URL . '=' . $row['user_id'] . '&act_key=' . trim((string) $HTTP_GET_VARS['act_key'])));
 			}
 			else if ($userdata['user_level'] != ADMIN)
 			{
@@ -59,7 +59,7 @@ if ( $row = $db->sql_fetchrow($result) )
 			}
 		}
 
-		$sql_update_pass = ( $row['user_newpasswd'] != '' ) ? ", user_password = '" . str_replace("\'", "''", $row['user_newpasswd']) . "', user_newpasswd = ''" : '';
+		$sql_update_pass = ( $row['user_newpasswd'] != '' ) ? ", user_password = '" . str_replace("\'", "''", (string) $row['user_newpasswd']) . "', user_newpasswd = ''" : '';
 
 		$sql = "UPDATE " . USERS_TABLE . "
 			SET user_active = 1, user_actkey = ''" . $sql_update_pass . " 
@@ -115,5 +115,4 @@ else
 {
 	message_die(GENERAL_MESSAGE, $lang['No_such_user']);
 }
-
-?>
+ 

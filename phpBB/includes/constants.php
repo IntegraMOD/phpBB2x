@@ -146,6 +146,7 @@ define('AUTH_POLLCREATE', 9);
 define('AUTH_VOTE', 10);
 define('AUTH_ATTACH', 11);
 
+global $table_prefix;
 
 // Table names
 define('CONFIRM_TABLE', $table_prefix.'confirm');
@@ -179,5 +180,3 @@ define('WORDS_TABLE', $table_prefix.'words');
 define('VOTE_DESC_TABLE', $table_prefix.'vote_desc');
 define('VOTE_RESULTS_TABLE', $table_prefix.'vote_results');
 define('VOTE_USERS_TABLE', $table_prefix.'vote_voters');
-
-?>

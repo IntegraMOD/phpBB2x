@@ -118,7 +118,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 	// Check subject
 	if (!empty($subject))
 	{
-		$subject = htmlspecialchars(trim($subject), ENT_COMPAT, 'ISO-8859-1');
+		$subject = htmlspecialchars(trim($subject), ENT_COMPAT, 'UTF-8');
 	}
 	else if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
@@ -145,18 +145,19 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$html_on, &$smilies_on,
 
 		if (!empty($poll_title))
 		{
-			$poll_title = htmlspecialchars(trim($poll_title), ENT_COMPAT, 'ISO-8859-1');
+			$poll_title = htmlspecialchars(trim($poll_title), ENT_COMPAT, 'UTF-8');
 		}
 
 		if(!empty($poll_options))
 		{
 			$temp_option_text = array();
-			while(list($option_id, $option_text) = @each($poll_options))
-			{
+			
+//			while(list($option_id, $option_text) = @each($poll_options)) {
+            foreach ((Array) $poll_options as $option_id => $option_text) {
 				$option_text = trim($option_text);
 				if (!empty($option_text))
 				{
-					$temp_option_text[intval($option_id)] = htmlspecialchars($option_text, ENT_COMPAT, 'ISO-8859-1');
+					$temp_option_text[intval($option_id)] = htmlspecialchars($option_text, ENT_COMPAT, 'UTF-8');
 				}
 			}
 			$option_text = $temp_option_text;
@@ -301,7 +302,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		{
 			if (!empty($option_text))
 			{
-				$option_text = str_replace("\'", "''", htmlspecialchars($option_text, ENT_COMPAT, 'ISO-8859-1'));
+				$option_text = str_replace("\'", "''", htmlspecialchars($option_text, ENT_COMPAT, 'UTF-8'));
 				$poll_result = ($mode == "editpost" && isset($old_poll_result[$option_id])) ? $old_poll_result[$option_id] : 0;
 
 				$sql = ($mode != "editpost" || !isset($old_poll_result[$option_id])) ? "INSERT INTO " . VOTE_RESULTS_TABLE . " (vote_id, vote_option_id, vote_option_text, vote_result) VALUES ($poll_id, $poll_option_id, '$option_text', $poll_result)" : "UPDATE " . VOTE_RESULTS_TABLE . " SET vote_option_text = '$option_text', vote_result = $poll_result WHERE vote_option_id = $option_id AND vote_id = $poll_id";
@@ -774,8 +775,9 @@ function generate_smilies($mode, $page_id)
 			$row = 0;
 			$col = 0;
 
-			while (list($smile_url, $data) = @each($rowset))
-			{
+//			while (list($smile_url, $data) = @each($rowset)) {
+            foreach ((Array) $rowset as $smile_url => $data) {
+
 				if (!$col)
 				{
 					$template->assign_block_vars('smilies_row', array());
@@ -857,7 +859,7 @@ function clean_html($tag)
 		}
 		else
 		{
-			return  htmlspecialchars('</' . $matches[1] . '>', ENT_COMPAT, 'ISO-8859-1');
+			return  htmlspecialchars('</' . $matches[1] . '>', ENT_COMPAT, 'UTF-8');
 		}
 	}
 
@@ -874,7 +876,7 @@ function clean_html($tag)
 				{
 					continue;
 				}
-				$attributes .= ' ' . $test[1][$i] . '=' . $test[2][$i] . str_replace(array('[', ']'), array('&#91;', '&#93;'), htmlspecialchars($test[3][$i], ENT_COMPAT, 'ISO-8859-1')) . $test[2][$i];
+				$attributes .= ' ' . $test[1][$i] . '=' . $test[2][$i] . str_replace(array('[', ']'), array('&#91;', '&#93;'), htmlspecialchars($test[3][$i], ENT_COMPAT, 'UTF-8')) . $test[2][$i];
 			}
 		}
 		if (in_array(strtolower($tag[1]), $allowed_html_tags))
@@ -883,13 +885,12 @@ function clean_html($tag)
 		}
 		else
 		{
-			return htmlspecialchars('<' . $tag[1] . $attributes . '>', ENT_COMPAT, 'ISO-8859-1');
+			return htmlspecialchars('<' . $tag[1] . $attributes . '>', ENT_COMPAT, 'UTF-8');
 		}
 	}
 	// Finally, this is not an allowed tag so strip all the attibutes and escape it
 	else
 	{
-		return htmlspecialchars('<' .   $tag[1] . '>', ENT_COMPAT, 'ISO-8859-1');
+		return htmlspecialchars('<' .   $tag[1] . '>', ENT_COMPAT, 'UTF-8');
 	}
 }
-?>

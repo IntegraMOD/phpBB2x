@@ -60,7 +60,7 @@ CREATE TABLE phpbb_groups (
 CREATE TABLE phpbb_banlist (
    ban_id mediumint(8) UNSIGNED NOT NULL auto_increment,
    ban_userid mediumint(8) NOT NULL,
-   ban_ip char(32) NOT NULL,
+   ban_ip char(8) NOT NULL,
    ban_email varchar(255),
    PRIMARY KEY (ban_id),
    KEY ban_ip_user_id (ban_ip, ban_userid)
@@ -172,7 +172,7 @@ CREATE TABLE phpbb_posts (
    forum_id smallint(5) UNSIGNED DEFAULT '0' NOT NULL,
    poster_id mediumint(8) DEFAULT '0' NOT NULL,
    post_time int(11) DEFAULT '0' NOT NULL,
-   poster_ip char(32) NOT NULL,
+   poster_ip char(8) NOT NULL,
    post_username varchar(25),
    enable_bbcode tinyint(1) DEFAULT '1' NOT NULL,
    enable_html tinyint(1) DEFAULT '0' NOT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE phpbb_privmsgs (
    privmsgs_from_userid mediumint(8) DEFAULT '0' NOT NULL,
    privmsgs_to_userid mediumint(8) DEFAULT '0' NOT NULL,
    privmsgs_date int(11) DEFAULT '0' NOT NULL,
-   privmsgs_ip char(32) NOT NULL,
+   privmsgs_ip char(8) NOT NULL,
    privmsgs_enable_bbcode tinyint(1) DEFAULT '1' NOT NULL,
    privmsgs_enable_html tinyint(1) DEFAULT '0' NOT NULL,
    privmsgs_enable_smilies tinyint(1) DEFAULT '1' NOT NULL,
@@ -321,7 +321,7 @@ CREATE TABLE phpbb_sessions (
 CREATE TABLE phpbb_sessions_keys (
   key_id varchar(32) DEFAULT '0' NOT NULL,
   user_id mediumint(8) DEFAULT '0' NOT NULL,
-  last_ip varchar(32) DEFAULT '0' NOT NULL,
+  last_ip varchar(8) DEFAULT '0' NOT NULL,
   last_login int(11) DEFAULT '0' NOT NULL,
   PRIMARY KEY (key_id, user_id),
   KEY last_login (last_login)
@@ -589,7 +589,7 @@ CREATE TABLE phpbb_vote_results (
 CREATE TABLE phpbb_vote_voters (
   vote_id mediumint(8) UNSIGNED NOT NULL DEFAULT '0',
   vote_user_id mediumint(8) NOT NULL DEFAULT '0',
-  vote_user_ip char(32) NOT NULL,
+  vote_user_ip char(8) NOT NULL,
   KEY vote_id (vote_id),
   KEY vote_user_id (vote_user_id),
   KEY vote_user_ip (vote_user_ip)

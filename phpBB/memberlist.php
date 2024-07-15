@@ -41,7 +41,7 @@ $start = ($start < 0) ? 0 : $start;
 
 if ( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 {
-	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? htmlspecialchars($HTTP_POST_VARS['mode'], ENT_COMPAT, 'ISO-8859-1') : htmlspecialchars($HTTP_GET_VARS['mode'], ENT_COMPAT, 'ISO-8859-1');
+	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? htmlspecialchars($HTTP_POST_VARS['mode'], ENT_COMPAT, 'UTF-8') : htmlspecialchars($HTTP_GET_VARS['mode'], ENT_COMPAT, 'UTF-8');
 }
 else
 {
@@ -346,5 +346,3 @@ $template->assign_vars(array(
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

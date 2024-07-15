@@ -149,5 +149,3 @@ for($i = 0; $i < count($faq_block); $i++)
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

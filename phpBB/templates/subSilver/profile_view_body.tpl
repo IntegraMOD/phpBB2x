@@ -57,18 +57,6 @@
 		  <td class="row1" valign="middle"><b><span class="gen">{PM_IMG}</span></b></td>
 		</tr>
 		<tr> 
-		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_MESSENGER}:</span></td>
-		  <td class="row1" valign="middle"><span class="gen">{MSN}</span></td>
-		</tr>
-		<tr> 
-		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_YAHOO}:</span></td>
-		  <td class="row1" valign="middle"><span class="gen">{YIM_IMG}</span></td>
-		</tr>
-		<tr> 
-		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_AIM}:</span></td>
-		  <td class="row1" valign="middle"><span class="gen">{AIM_IMG}</span></td>
-		</tr>
-		<tr> 
 		  <td valign="middle" nowrap="nowrap" align="right"><span class="gen">{L_ICQ_NUMBER}:</span></td>
 		  <td class="row1"><script language="JavaScript" type="text/javascript"><!-- 
 

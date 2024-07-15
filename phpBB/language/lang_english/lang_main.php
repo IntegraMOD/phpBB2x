@@ -33,7 +33,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'iso-8859-1';
+$lang['ENCODING'] = 'UTF-8';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -48,6 +48,7 @@ $lang['DATE_FORMAT'] =  'd M Y'; // This should be changed to the default date f
 // Common, these terms are used
 // extensively on several pages
 //
+$lang['Admin_short'] = 'Administration';
 $lang['Forum'] = 'Forum';
 $lang['Category'] = 'Category';
 $lang['Topic'] = 'Topic';
@@ -100,16 +101,6 @@ $lang['View_latest_post'] = 'View latest post';
 $lang['View_newest_post'] = 'View newest post';
 $lang['Page_of'] = 'Page <b>%d</b> of <b>%d</b>'; // Replaces with: Page 1 of 2 for example
 
-$lang['ICQ'] = 'ICQ Number';
-$lang['FB'] = 'Facebook';
-$lang['IG'] = 'Instagram';
-$lang['PT'] = 'Pinterest';
-$lang['TWR'] = 'Twitter';
-$lang['SKP'] = 'Skype';
-$lang['TG'] = 'Telegram';
-$lang['LI'] = 'LinkedIn';
-$lang['TT'] = 'TikTok';
-$lang['DC'] = 'Discord';
 $lang['USER_ID_EXPLAIN'] = 'Numbers Only';
 $lang['Forum_Index'] = '%s Forum Index';  // eg. sitename Forum Index, %s can be removed if you prefer
 
@@ -1042,7 +1033,18 @@ $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
 //
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'Twitter';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
 // That's all, Folks!
 // -------------------------------------------------
-
-?>

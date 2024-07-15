@@ -30,12 +30,12 @@ if ( !defined('IN_PHPBB') )
 if ( isset($HTTP_POST_VARS['submit']) )
 {
 	$username = ( !empty($HTTP_POST_VARS['username']) ) ? phpbb_clean_username($HTTP_POST_VARS['username']) : '';
-	$email = ( !empty($HTTP_POST_VARS['email']) ) ? trim(strip_tags(htmlspecialchars($HTTP_POST_VARS['email'], ENT_COMPAT, 'ISO-8859-1'))) : '';
+	$email = ( !empty($HTTP_POST_VARS['email']) ) ? trim(strip_tags(htmlspecialchars((string) $HTTP_POST_VARS['email'], ENT_COMPAT, 'UTF-8'))) : '';
 
 	$sql = "SELECT user_id, username, user_email, user_active, user_lang 
 		FROM " . USERS_TABLE . " 
 		WHERE user_email = '" . str_replace("\'", "''", $email) . "' 
-			AND username = '" . str_replace("\'", "''", $username) . "'";
+			AND username = '" . str_replace("\'", "''", (string) $username) . "'";
 	if ( $result = $db->sql_query($sql) )
 	{
 		if ( $row = $db->sql_fetchrow($result) )
@@ -49,13 +49,13 @@ if ( isset($HTTP_POST_VARS['submit']) )
 			$user_id = $row['user_id'];
 
 			$user_actkey = gen_rand_string(true);
-			$key_len = 54 - strlen($server_url);
+			$key_len = 54 - strlen((string) $server_url);
 			$key_len = ($key_len > 6) ? $key_len : 6;
-			$user_actkey = substr($user_actkey, 0, $key_len);
+			$user_actkey = substr((string) $user_actkey, 0, $key_len);
 			$user_password = gen_rand_string(false);
 			
 			$sql = "UPDATE " . USERS_TABLE . " 
-				SET user_newpasswd = '" . md5($user_password) . "', user_actkey = '$user_actkey'  
+				SET user_newpasswd = '" . md5((string) $user_password) . "', user_actkey = '$user_actkey'  
 				WHERE user_id = " . $row['user_id'];
 			if ( !$db->sql_query($sql) )
 			{
@@ -134,5 +134,4 @@ $template->assign_vars(array(
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>
+ 

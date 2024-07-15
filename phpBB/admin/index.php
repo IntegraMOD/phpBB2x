@@ -94,21 +94,22 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 	ksort($module);
 	$menu_cat_id = 0;
 
-	while( list($cat, $action_array) = each($module) )
-	{
+//	while( list($cat, $action_array) = each($module) ) {
+    foreach ((Array) $module as $cat => $action_array) {
 		$cat = ( !empty($lang[$cat]) ) ? $lang[$cat] : preg_replace("/_/", " ", $cat);
 
 		$template->assign_block_vars("catrow", array(
 			"ADMIN_CATEGORY" => $cat,
 			"MENU_CAT_ID" => $menu_cat_id,
-			"MENU_CAT_ROWS" => count($action_array))
+			"MENU_CAT_ROWS" => is_countable($action_array) ? count($action_array) : 0)
 		);
 
 		ksort($action_array);
 
 		$row_count = 0;
-		while( list($action, $file)	= each($action_array) )
-		{
+//		while( list($action, $file)	= each($action_array) )	{
+        foreach ((Array) $action_array as $action => $file) {
+
 			$row_color = ( !($row_count%2) ) ? $theme['td_color1'] : $theme['td_color2'];
 			$row_class = ( !($row_count%2) ) ? $theme['td_class1'] : $theme['td_class2'];
 
@@ -259,14 +260,14 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$tabledata_ary = $db->sql_fetchrowset($result);
 
 					$dbsize = 0;
-					for($i = 0; $i < count($tabledata_ary); $i++)
+					for($i = 0; $i < (is_countable($tabledata_ary) ? count($tabledata_ary) : 0); $i++)
 					{
-						$tabledata_ary[$i]['Type'] = (isset($tabledata_ary[$i]['Type'])) ? $tabledata_ary[$i]['Type'] : '';
+						$tabledata_ary[$i]['Type'] ??= '';
 						if( $tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
 						{
 							if( $table_prefix != "" )
 							{
-								if( strstr($tabledata_ary[$i]['Name'], $table_prefix) )
+								if( strstr($tabledata_ary[$i]['Name'], (string) $table_prefix) )
 								{
 									$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
 								}
@@ -589,78 +590,7 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		);
 	}
 
-	// Check for new version
-	$current_version = explode('.', '2' . $board_config['version']);
-	$minor_revision = (int) $current_version[2];
 
-	$errno = 0;
-	$errstr = $version_info = '';
-
-	if ($fsock = @fsockopen('www.phpbb2x.com', 80, $errno, $errstr, 10))
-	{
-		@fputs($fsock, "GET /_version/20x.txt HTTP/1.1\r\n");
-		@fputs($fsock, "HOST: www.phpbb2x.com\r\n");
-		@fputs($fsock, "Connection: close\r\n\r\n");
-
-		$get_info = false;
-		while (!@feof($fsock))
-		{
-			if ($get_info)
-			{
-				$version_info .= @fread($fsock, 1024);
-			}
-			else
-			{
-				if (@fgets($fsock, 1024) == "\r\n")
-				{
-					$get_info = true;
-				}
-			}
-		}
-		@fclose($fsock);
-
-		$version_info = explode("\n", $version_info);
-		$latest_head_revision = (int) $version_info[0];
-		$latest_minor_revision = (int) $version_info[2];
-		$latest_version = (int) $version_info[0] . '.' . (int) $version_info[1] . '.' . (int) $version_info[2];
-
-		if ($latest_head_revision == 2 && $minor_revision == $latest_minor_revision)
-		{
-			$version_info = '<p style="color:green">' . $lang['Version_up_to_date'] . '</p>';
-			$html = file_get_contents('../docs/updates.html');
-			  	echo $html;
-		}
-		else
-		{
-			$version_info = '<p><span style="color:green">' . $lang['Version_up_to_date'] . '</span><br />' . $lang['Version_support'] . '<br />';
-			$version_info .= '<br /><a href="https://www.phpbb.com/downloads/" target="_blank">' . sprintf($lang['Latest_version_info'], $latest_version) . '</a> ' . sprintf($lang['Current_version_info'], '2' . $board_config['version']) . '</p>';
-			$html = file_get_contents('../docs/updates.html');
-			  	echo $html;
-/**
-			$version_info = '<p style="color:red">' . $lang['Version_not_up_to_date'];
-			$version_info .= '<br />' . sprintf($lang['Latest_version_info'], $latest_version) . ' ' . sprintf($lang['Current_version_info'], '2' . $board_config['version']) . '</p>';
-**/
-		}
-	}
-	else
-	{
-		if ($errstr)
-		{
-			$version_info = '<p style="color:red">' . sprintf($lang['Connect_socket_error'], $errstr) . '</p>';
-		}
-		else
-		{
-			$version_info = '<p>' . $lang['Socket_functions_disabled'] . '</p>';
-		}
-	}
-	
-	$version_info .= '<p>' . $lang['Mailing_list_subscribe_reminder'] . '</p>';
-	
-
-	$template->assign_vars(array(
-		'VERSION_INFO'	=> $version_info,
-		'L_VERSION_INFORMATION'	=> $lang['Version_information'])
-	);
 
 	$template->pparse("body");
 
@@ -690,5 +620,3 @@ else
 	exit;
 
 }
-
-?>

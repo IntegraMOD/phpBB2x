@@ -62,7 +62,7 @@ $mark_list = ( !empty($HTTP_POST_VARS['mark']) ) ? $HTTP_POST_VARS['mark'] : 0;
 if ( isset($HTTP_POST_VARS['folder']) || isset($HTTP_GET_VARS['folder']) )
 {
 	$folder = ( isset($HTTP_POST_VARS['folder']) ) ? $HTTP_POST_VARS['folder'] : $HTTP_GET_VARS['folder'];
-	$folder = htmlspecialchars($folder, ENT_COMPAT, 'ISO-8859-1');
+	$folder = htmlspecialchars($folder, ENT_COMPAT, 'UTF-8');
 
 	if ( $folder != 'inbox' && $folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox' )
 	{
@@ -97,7 +97,7 @@ if ( $cancel )
 if ( !empty($HTTP_POST_VARS['mode']) || !empty($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( !empty($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'UTF-8');
 }
 else
 {
@@ -835,7 +835,7 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 								break;
 
 							case PRIVMSGS_UNREAD_MAIL:
-								$update_users['unread'][$row['privmsgs_to_userid']]++;
+								$update_users['unread' ?? null][$row['privmsgs_to_userid']]++;
 								break;
 						}
 					}
@@ -843,17 +843,17 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 
 					if (sizeof($update_users))
 					{
-						while (list($type, $users) = each($update_users))
-						{
-							while (list($user_id, $dec) = each($users))
-							{
+//						while (list($type, $users) = each($update_users)) {
+                        foreach ((Array) $update_users as $type => $users) {
+//							while (list($user_id, $dec) = each($users))	{
+                            foreach ((Array) $users as $user_id => $dec) {
 								$update_list[$type][$dec][] = $user_id;
 							}
 						}
 						unset($update_users);
 
-						while (list($type, $dec_ary) = each($update_list))
-						{
+//						while (list($type, $dec_ary) = each($update_list)){
+                        foreach ((Array) $update_list as $type => $dec_ary) {
 							switch ($type)
 							{
 								case 'new':
@@ -865,8 +865,8 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 									break;
 							}
 
-							while (list($dec, $user_ary) = each($dec_ary))
-							{
+//							while (list($dec, $user_ary) = each($dec_ary)) {
+                            foreach ((Array) $dec_ary as $dec => $user_ary) {
 								$user_ids = implode(', ', $user_ary);
 
 								$sql = "UPDATE " . USERS_TABLE . " 
@@ -1038,17 +1038,17 @@ else if ( $save && $mark_list && $folder != 'savebox' && $folder != 'outbox' )
 
 				if (sizeof($update_users))
 				{
-					while (list($type, $users) = each($update_users))
-					{
-						while (list($user_id, $dec) = each($users))
-						{
+//					while (list($type, $users) = each($update_users)) {
+                    foreach ((Array) $update_users as $type => $users) {
+//						while (list($user_id, $dec) = each($users))	{
+                        foreach ((Array) $users as $user_id => $dec) {
 							$update_list[$type][$dec][] = $user_id;
 						}
 					}
 					unset($update_users);
 
-					while (list($type, $dec_ary) = each($update_list))
-					{
+//					while (list($type, $dec_ary) = each($update_list)) {
+                    foreach ((Array) $update_list as $type => $dec_ary) {
 						switch ($type)
 						{
 							case 'new':
@@ -1060,10 +1060,9 @@ else if ( $save && $mark_list && $folder != 'savebox' && $folder != 'outbox' )
 								break;
 						}
 
-						while (list($dec, $user_ary) = each($dec_ary))
-						{
+//						while (list($dec, $user_ary) = each($dec_ary)) {
+                        foreach ((Array)$dec_ary as $dec => $user_ary) {
 							$user_ids = implode(', ', $user_ary);
-
 							$sql = "UPDATE " . USERS_TABLE . " 
 								SET $type = $type - $dec 
 								WHERE user_id IN ($user_ids)";
@@ -1235,7 +1234,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$error_msg .= ( ( !empty($error_msg) ) ? '<br />' : '' ) . $lang['No_to_user'];
 		}
 
-		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'ISO-8859-1'));
+		$privmsg_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'UTF-8'));
 		if ( empty($privmsg_subject) )
 		{
 			$error = TRUE;
@@ -1426,9 +1425,9 @@ else if ( $submit || $refresh || $mode != '' )
 		// passed to the script, process it a little, do some checks
 		// where neccessary, etc.
 		//
-		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'ISO-8859-1')) : '';
+		$to_username = (isset($HTTP_POST_VARS['username']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['username']), ENT_COMPAT, 'UTF-8')) : '';
 
-		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'ISO-8859-1')) : '';
+		$privmsg_subject = ( isset($HTTP_POST_VARS['subject']) ) ? trim(htmlspecialchars(stripslashes($HTTP_POST_VARS['subject']), ENT_COMPAT, 'UTF-8')) : '';
 		$privmsg_message = ( isset($HTTP_POST_VARS['message']) ) ? trim($HTTP_POST_VARS['message']) : '';
 		// $privmsg_message = preg_replace('#<textarea>#si', '&lt;textarea&gt;', $privmsg_message);
 		if ( !$preview )
@@ -2097,7 +2096,7 @@ $post_pm = '<a href="' . $post_pm . '">' . $lang['Post_new_pm'] . '</a>';
 if ( $folder != 'outbox' )
 {
 	$inbox_limit_pct = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? round(( $pm_all_total / $board_config['max_' . $folder . '_privmsgs'] ) * 100) : 100;
-	$inbox_limit_img_length = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? round(( $pm_all_total / $board_config['max_' . $folder . '_privmsgs'] ) * $board_config['privmsg_graphic_length']) : $board_config['privmsg_graphic_length'];
+	$inbox_limit_img_length = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? round(( $pm_all_total / $board_config['max_' . $folder . '_privmsgs'] ) * $board_config['privmsg_graphic_length'] ?? null) : $board_config['privmsg_graphic_length'] ?? null;
 	$inbox_limit_remain = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? $board_config['max_' . $folder . '_privmsgs'] - $pm_all_total : 0;
 
 	$template->assign_block_vars('switch_box_size_notice', array());
@@ -2255,5 +2254,3 @@ else
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

@@ -33,17 +33,18 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	$cookiepath = $board_config['cookie_path'];
 	$cookiedomain = $board_config['cookie_domain'];
 	$cookiesecure = $board_config['cookie_secure'];
+    $SameSite =  'SameSite=lax';
 
 	if ( isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) || isset($HTTP_COOKIE_VARS[$cookiename . '_data']) )
 	{
-		$session_id = isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) ? $HTTP_COOKIE_VARS[$cookiename . '_sid'] : '';
+		$session_id = $HTTP_COOKIE_VARS[$cookiename . '_sid'] ?? '';
 		$sessiondata = isset($HTTP_COOKIE_VARS[$cookiename . '_data']) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$cookiename . '_data'])) : array();
 		$sessionmethod = SESSION_METHOD_COOKIE;
 	}
 	else
 	{
 		$sessiondata = array();
-		$session_id = ( isset($HTTP_GET_VARS['sid']) ) ? $HTTP_GET_VARS['sid'] : '';
+		$session_id = $HTTP_GET_VARS['sid'] ?? '';
 		$sessionmethod = SESSION_METHOD_GET;
 	}
 
@@ -252,8 +253,8 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	$userdata['session_admin'] = $admin;
 	$userdata['session_key'] = $sessiondata['autologinid'];
 
-	setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath, $cookiedomain, $cookiesecure);
-	setcookie($cookiename . '_sid', $session_id, 0, $cookiepath, $cookiedomain, $cookiesecure);
+	setcookie($cookiename . '_data', serialize($sessiondata), ['expires' => $current_time + 31_536_000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
+	setcookie($cookiename . '_sid', $session_id, ['expires' => 0, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
 
 	$SID = 'sid=' . $session_id;
 
@@ -273,20 +274,21 @@ function session_pagestart($user_ip, $thispage_id)
 	$cookiepath = $board_config['cookie_path'];
 	$cookiedomain = $board_config['cookie_domain'];
 	$cookiesecure = $board_config['cookie_secure'];
-
+    $SameSite =  'SameSite=lax';
+	
 	$current_time = time();
 	unset($userdata);
 
 	if ( isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) || isset($HTTP_COOKIE_VARS[$cookiename . '_data']) )
 	{
 		$sessiondata = isset( $HTTP_COOKIE_VARS[$cookiename . '_data'] ) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$cookiename . '_data'])) : array();
-		$session_id = isset( $HTTP_COOKIE_VARS[$cookiename . '_sid'] ) ? $HTTP_COOKIE_VARS[$cookiename . '_sid'] : '';
+		$session_id = $HTTP_COOKIE_VARS[$cookiename . '_sid'] ?? '';
 		$sessionmethod = SESSION_METHOD_COOKIE;
 	}
 	else
 	{
 		$sessiondata = array();
-		$session_id = ( isset($HTTP_GET_VARS['sid']) ) ? $HTTP_GET_VARS['sid'] : '';
+		$session_id = $HTTP_GET_VARS['sid'] ?? '';
 		$sessionmethod = SESSION_METHOD_GET;
 	}
 
@@ -365,8 +367,8 @@ function session_pagestart($user_ip, $thispage_id)
 
 					session_clean($userdata['session_id']);
 
-					setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath, $cookiedomain, $cookiesecure);
-					setcookie($cookiename . '_sid', $session_id, 0, $cookiepath, $cookiedomain, $cookiesecure);
+					setcookie($cookiename . '_data', serialize($sessiondata), ['expires' => $current_time + 31_536_000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
+					setcookie($cookiename . '_sid', $session_id, ['expires' => 0, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
 				}
 
 				// Add the session_key to the userdata array if it is set
@@ -409,7 +411,8 @@ function session_end($session_id, $user_id)
 	$cookiepath = $board_config['cookie_path'];
 	$cookiedomain = $board_config['cookie_domain'];
 	$cookiesecure = $board_config['cookie_secure'];
-
+    $SameSite =  'SameSite=lax';
+	
 	$current_time = time();
 
 	if (!preg_match('/^[A-Za-z0-9]*$/', $session_id))
@@ -461,8 +464,8 @@ function session_end($session_id, $user_id)
 	$db->sql_freeresult($result);
 
 
-	setcookie($cookiename . '_data', '', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure);
-	setcookie($cookiename . '_sid', '', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure);
+	setcookie($cookiename . '_data', '', ['expires' => $current_time - 31_536_000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
+	setcookie($cookiename . '_sid', '', ['expires' => $current_time - 31_536_000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
 
 	return true;
 }
@@ -550,8 +553,9 @@ function session_reset_keys($user_id, $user_ip)
 		$cookiepath = $board_config['cookie_path'];
 		$cookiedomain = $board_config['cookie_domain'];
 		$cookiesecure = $board_config['cookie_secure'];
-
-		setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath, $cookiedomain, $cookiesecure);
+        $SameSite =  'SameSite=lax';
+	
+		setcookie($cookiename . '_data', serialize($sessiondata), ['expires' => $current_time + 31_536_000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
 		
 		$userdata['session_key'] = $auto_login_key;
 		unset($sessiondata);
@@ -579,5 +583,3 @@ function append_sid($url, $non_html_amp = false)
 	}
 	return $url;
 }
-
-?>

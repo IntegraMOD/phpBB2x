@@ -37,17 +37,9 @@
 					{postrow.ICQ_IMG}
 					{postrow.YIM_IMG}
 					{postrow.AIM_IMG}
-					{postrow.FB_IMG}
-					{postrow.IG_IMG}
-					{postrow.PT_IMG}
-					{postrow.TWR_IMG}
-					{postrow.SKP_IMG}
-					{postrow.TG_IMG}
-					{postrow.LI_IMG}
-					{postrow.TT_IMG}					
 				</ul></dd>
 			</dl>
-			<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
+			<div class="back2top"><a href="#wrap" class="top2" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
 			<span class="corners-bottom"><span></span></span></div>
 		</div>
 		<hr class="divider" />

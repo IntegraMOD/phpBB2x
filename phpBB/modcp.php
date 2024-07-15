@@ -91,7 +91,7 @@ $unlock = ( isset($HTTP_POST_VARS['unlock']) ) ? TRUE : FALSE;
 if ( isset($HTTP_POST_VARS['mode']) || isset($HTTP_GET_VARS['mode']) )
 {
 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? $HTTP_POST_VARS['mode'] : $HTTP_GET_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = htmlspecialchars($mode, ENT_COMPAT, 'UTF-8');
 }
 else
 {
@@ -797,7 +797,7 @@ switch( $mode )
 				}
 				while ($row = $db->sql_fetchrow($result));
 
-				$post_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'ISO-8859-1'));
+				$post_subject = trim(htmlspecialchars($HTTP_POST_VARS['subject'], ENT_COMPAT, 'UTF-8'));
 				if (empty($post_subject))
 				{
 					message_die(GENERAL_MESSAGE, $lang['Empty_subject']);
@@ -1032,7 +1032,7 @@ switch( $mode )
 		}
 
 		$ip_this_post = decode_ip($post_row['poster_ip']);
-		$ip_this_post = ( $rdns_ip_num == $ip_this_post ) ? htmlspecialchars(gethostbyaddr($ip_this_post), ENT_COMPAT, 'ISO-8859-1') : $ip_this_post;
+		$ip_this_post = ( $rdns_ip_num == $ip_this_post ) ? htmlspecialchars(gethostbyaddr($ip_this_post), ENT_COMPAT, 'UTF-8') : $ip_this_post;
 
 		$poster_id = $post_row['poster_id'];
 
@@ -1078,7 +1078,7 @@ switch( $mode )
 				}
 
 				$ip = decode_ip($row['poster_ip']);
-				$ip = ( $rdns_ip_num == $row['poster_ip'] || $rdns_ip_num == 'all') ? htmlspecialchars(gethostbyaddr($ip), ENT_COMPAT, 'ISO-8859-1') : $ip;
+				$ip = ( $rdns_ip_num == $row['poster_ip'] || $rdns_ip_num == 'all') ? htmlspecialchars(gethostbyaddr($ip), ENT_COMPAT, 'UTF-8') : $ip;
 
 				$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 				$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
@@ -1281,5 +1281,3 @@ switch( $mode )
 }
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

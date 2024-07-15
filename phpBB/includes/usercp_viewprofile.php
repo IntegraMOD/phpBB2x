@@ -182,7 +182,7 @@ $tt = ( $profiledata['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $profi
 $dc_img = ( $profiledata['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $profiledata['user_dc'] . '" target="blank"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
 $dc = ( $profiledata['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $profiledata['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
 
-$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($profiledata['username']) . "&amp;showresults=posts");
+$temp_url = append_sid("search.$phpEx?search_author=" . urlencode((string) $profiledata['username']) . "&amp;showresults=posts");
 $search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $profiledata['username']) . '" title="' . sprintf($lang['Search_user_posts'], $profiledata['username']) . '" border="0" /></a>';
 $search = '<a href="' . $temp_url . '">' . sprintf($lang['Search_user_posts'], $profiledata['username']) . '</a>';
 
@@ -198,7 +198,7 @@ if (function_exists('get_html_translation_table'))
 }
 else
 {
-	$u_search_author = urlencode(str_replace(array('&amp;', '&#039;', '&quot;', '&lt;', '&gt;'), array('&', "'", '"', '<', '>'), $profiledata['username']));
+	$u_search_author = urlencode(str_replace(array('&amp;', '&#039;', '&quot;', '&lt;', '&gt;'), array('&', "'", '"', '<', '>'), (string) $profiledata['username']));
 }
 
 $template->assign_vars(array(
@@ -281,5 +281,4 @@ $template->assign_vars(array(
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>
+ 

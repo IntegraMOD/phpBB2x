@@ -38,7 +38,7 @@ if (empty($HTTP_GET_VARS['id']))
 	exit;
 }
 
-$confirm_id = htmlspecialchars($HTTP_GET_VARS['id']);
+$confirm_id = htmlspecialchars((string) $HTTP_GET_VARS['id']);
 
 // Define available charset
 $chars = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',  'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9');
@@ -76,21 +76,21 @@ $img_height = 40;
 $img_width = 0;
 $l = 0;
 
-list($usec, $sec) = explode(' ', microtime()); 
+[$usec, $sec] = explode(' ', microtime()); 
 mt_srand($sec * $usec); 
 
 $char_widths = array();
-for ($i = 0; $i < strlen($code); $i++)
+for ($i = 0; $i < strlen((string) $code); $i++)
 {
-	$char = $code{$i};
+	$char = $code[$i];
 
-	$width = mt_rand(0, 4);
+	$width = random_int(0, 4);
 	$char_widths[] = $width;
 	$img_width += $_png[$char]['width'] - $width;
 }
 
-$offset_x = mt_rand(0, $total_width - $img_width);
-$offset_y = mt_rand(0, $total_height - $img_height);
+$offset_x = random_int(0, $total_width - $img_width);
+$offset_y = random_int(0, $total_height - $img_height);
 
 $image = '';
 $hold_chars = array();
@@ -104,16 +104,16 @@ for ($i = 0; $i < $total_height; $i++)
 
 		for ($k = 0; $k < $offset_x; $k++)
 		{
-			$image .= chr(mt_rand(140, 255));
+			$image .= chr(random_int(140, 255));
 		}
 
-		for ($k = 0; $k < strlen($code); $k++)
+		for ($k = 0; $k < strlen((string) $code); $k++)
 		{
-			$char = $code{$k};
+			$char = $code[$k];
 
 			if (empty($hold_chars[$char]))
 			{
-				$hold_chars[$char] = explode("\n", chunk_split(base64_decode($_png[$char]['data']), $_png[$char]['width'] + 1, "\n"));
+				$hold_chars[$char] = explode("\n", chunk_split(base64_decode((string) $_png[$char]['data']), $_png[$char]['width'] + 1, "\n"));
 			}
 			$image .= randomise(substr($hold_chars[$char][$l], 1), $char_widths[$j]);
 			$j++;
@@ -121,7 +121,7 @@ for ($i = 0; $i < $total_height; $i++)
 
 		for ($k = $offset_x + $img_width; $k < $total_width; $k++)
 		{
-			$image .= chr(mt_rand(140, 255));
+			$image .= chr(random_int(140, 255));
 		}
 
 		$l++;
@@ -130,7 +130,7 @@ for ($i = 0; $i < $total_height; $i++)
 	{
 		for ($k = 0; $k < $total_width; $k++)
 		{
-			$image .= chr(mt_rand(140, 255));
+			$image .= chr(random_int(140, 255));
 		}
 	}
 
@@ -156,23 +156,23 @@ function randomise($scanline, $width)
 {
 	$new_line = '';
 	$start = floor($width/2);
-	$end = strlen($scanline) - ceil($width/2);
+	$end = strlen((string) $scanline) - ceil($width/2);
 
 	for ($i = $start; $i < $end; $i++)
 	{
-		$pixel = ord($scanline{$i});
+		$pixel = ord($scanline[$i]);
 
 		if ($pixel < 190)
 		{
-			$new_line .= chr(mt_rand(0, 205));
+			$new_line .= chr(random_int(0, 205));
 		}
 		else if ($pixel > 190)
 		{
-			$new_line .= chr(mt_rand(145, 255));
+			$new_line .= chr(random_int(145, 255));
 		}
 		else
 		{
-			$new_line .= $scanline{$i};
+			$new_line .= $scanline[$i];
 		}
 	}
 
@@ -207,7 +207,7 @@ function create_png($raw_image, $width, $height)
 
 	if (@extension_loaded('zlib'))
 	{
-		$raw_image = gzcompress($raw_image);
+		$raw_image = gzcompress((string) $raw_image);
 		$length = strlen($raw_image);
 	}
 	else
@@ -456,5 +456,4 @@ function define_raw_pngs()
 
 	return $_png;
 }
-
-?>
+ 

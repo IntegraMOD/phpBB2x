@@ -38,9 +38,9 @@ init_userprefs($userdata);
 //
 
 // session id check
-if (!empty($HTTP_POST_VARS['sid']) || !empty($HTTP_GET_VARS['sid']))
+if (!empty($_POST['sid']) || !empty($_GET['sid']))
 {
-	$sid = (!empty($HTTP_POST_VARS['sid'])) ? $HTTP_POST_VARS['sid'] : $HTTP_GET_VARS['sid'];
+	$sid = (!empty($_POST['sid'])) ? $_POST['sid'] : $_GET['sid'];
 }
 else
 {
@@ -50,11 +50,11 @@ else
 //
 // Set default email variables
 //
-$script_name = preg_replace('/^\/?(.*?)\/?$/', '\1', trim($board_config['script_path']));
+$script_name = preg_replace('/^\/?(.*?)\/?$/', '\1', trim((string) $board_config['script_path']));
 $script_name = ( $script_name != '' ) ? $script_name . '/profile.'.$phpEx : 'profile.'.$phpEx;
-$server_name = trim($board_config['server_name']);
+$server_name = trim((string) $board_config['server_name']);
 $server_protocol = ( $board_config['cookie_secure'] ) ? 'https://' : 'http://';
-$server_port = ( $board_config['server_port'] <> 80 ) ? ':' . trim($board_config['server_port']) . '/' : '/';
+$server_port = ( $board_config['server_port'] <> 80 ) ? ':' . trim((string) $board_config['server_port']) . '/' : '/';
 
 $server_url = $server_protocol . $server_name . $server_port . $script_name;
 
@@ -65,7 +65,7 @@ function gen_rand_string($hash)
 {
 	$rand_str = dss_rand();
 
-	return ( $hash ) ? md5($rand_str) : substr($rand_str, 0, 8);
+	return ( $hash ) ? md5((string) $rand_str) : substr((string) $rand_str, 0, 8);
 }
 //
 // End page specific functions
@@ -74,10 +74,10 @@ function gen_rand_string($hash)
 //
 // Start of program proper
 //
-if ( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
+if ( isset($_GET['mode']) || isset($_POST['mode']) )
 {
-	$mode = ( isset($HTTP_GET_VARS['mode']) ) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
-	$mode = htmlspecialchars($mode, ENT_COMPAT, 'ISO-8859-1');
+	$mode = $_GET['mode'] ?? $_POST['mode'];
+	$mode = htmlspecialchars((string) $mode, ENT_COMPAT, 'utf-8');
 
 	if ( $mode == 'viewprofile' )
 	{
@@ -123,5 +123,4 @@ if ( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
 }
 
 redirect(append_sid("index.$phpEx", true));
-
-?>
+ 

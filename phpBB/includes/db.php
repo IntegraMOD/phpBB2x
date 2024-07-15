@@ -27,16 +27,12 @@ if ( !defined('IN_PHPBB') )
 
 switch($dbms)
 {
-	case 'mysql':
-		include($phpbb_root_path . 'db/mysql.'.$phpEx);
+	case 'mysqli':
+		include($phpbb_root_path . 'db/mysqli.'.$phpEx);
 		break;
 
 	case 'mysql4':
 		include($phpbb_root_path . 'db/mysql4.'.$phpEx);
-		break;
-
-	case 'mysqli':
-		include($phpbb_root_path . 'db/mysqli.'.$phpEx);
 		break;
 
 	case 'postgres':
@@ -66,5 +62,3 @@ if(!$db->db_connect_id)
 {
 	message_die(CRITICAL_ERROR, "Could not connect to the database");
 }
-
-?>

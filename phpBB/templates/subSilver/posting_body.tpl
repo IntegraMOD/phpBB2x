@@ -1,4 +1,4 @@
-<script language="JavaScript" type="text/javascript">
+<script>
 <!--
 // bbCode control by
 // subBlue design

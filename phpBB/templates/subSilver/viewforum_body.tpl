@@ -15,9 +15,9 @@
   <table border="0" cellpadding="4" cellspacing="1" width="100%" class="forumline">
 	<tr> 
 	  <th colspan="2" align="center" height="25" class="thCornerL" nowrap="nowrap">&nbsp;{L_TOPICS}&nbsp;</th>
-	  <th width="50" align="center" class="thTop replies" nowrap="nowrap">&nbsp;{L_REPLIES}&nbsp;</th>
+	  <th width="50" align="center" class="thTop" nowrap="nowrap">&nbsp;{L_REPLIES}&nbsp;</th>
 	  <th width="100" align="center" class="thTop" nowrap="nowrap">&nbsp;{L_AUTHOR}&nbsp;</th>
-	  <th width="50" align="center" class="thTop views" nowrap="nowrap">&nbsp;{L_VIEWS}&nbsp;</th>
+	  <th width="50" align="center" class="thTop" nowrap="nowrap">&nbsp;{L_VIEWS}&nbsp;</th>
 	  <th align="center" class="thCornerR" nowrap="nowrap">&nbsp;{L_LASTPOST}&nbsp;</th>
 	</tr>
 	<!-- BEGIN topicrow -->
@@ -25,9 +25,9 @@
 	  <td class="row1" align="center" valign="middle" width="20"><img src="{topicrow.TOPIC_FOLDER_IMG}" width="19" height="18" alt="{topicrow.L_TOPIC_FOLDER_ALT}" title="{topicrow.L_TOPIC_FOLDER_ALT}" /></td>
 	  <td class="row1" width="100%"><span class="topictitle">{topicrow.NEWEST_POST_IMG}{topicrow.TOPIC_TYPE}<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a></span><span class="gensmall"><br />
 		{topicrow.GOTO_PAGE}</span></td>
-	  <td class="row2 replies" align="center" valign="middle"><span class="postdetails">{topicrow.REPLIES}</span></td>
+	  <td class="row2" align="center" valign="middle"><span class="postdetails">{topicrow.REPLIES}</span></td>
 	  <td class="row3" align="center" valign="middle"><span class="name">{topicrow.TOPIC_AUTHOR}</span></td>
-	  <td class="row2 views" align="center" valign="middle"><span class="postdetails">{topicrow.VIEWS}</span></td>
+	  <td class="row2" align="center" valign="middle"><span class="postdetails">{topicrow.VIEWS}</span></td>
 	  <td class="row3Right" align="center" valign="middle" nowrap="nowrap"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></td>
 	</tr>
 	<!-- END topicrow -->

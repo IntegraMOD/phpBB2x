@@ -696,5 +696,3 @@ $template->pparse('body');
 // Page footer
 //
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

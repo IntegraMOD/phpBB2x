@@ -678,12 +678,15 @@ span.breadcrumbs{
 	color:#D31141;
 }
 
+ul.nav{margin-left: 1.5em}
+
 ul.nav li{
 	text-align:left;
     margin: 0 1.5em; 
+	font-size:1.05em;
 	line-height: 1.5em;
-	display:list-item;
-	list-style-type: circle;
+	display:list-item !important;
+	list-style-type: circle !important;
 }
 
 .openclose {

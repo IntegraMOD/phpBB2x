@@ -38,7 +38,14 @@ if(!defined("SQL_LAYER"))
 		//
 		// Constructor
 		//
-		function sql_db($sqlserver, $sqluser, $sqlpassword, $database, $port = false, $persistency = false)
+		
+public $persistency = "";
+public $user = "";
+public $password = "";
+public $server = "";		
+public $dbname = "";
+		
+		function __construct($sqlserver, $sqluser, $sqlpassword, $database, $port = false, $persistency = false)
 		{
 			$this->persistency = (version_compare(PHP_VERSION, '5.3.0', '>=')) ? $persistency : false;
 			$this->user = $sqluser;
@@ -53,7 +60,7 @@ if(!defined("SQL_LAYER"))
 			
 			if( $this->db_connect_id && $database != '')
 			{
-				@mysqli_query($this->db_connect_id, "SET NAMES 'utf-8'");
+				@mysqli_query($this->db_connect_id, "SET NAMES 'utf8'");
 				
 				$this->dbname = $database;
 				$dbselect = @mysqli_select_db($this->db_connect_id, $this->dbname);
@@ -140,7 +147,7 @@ if(!defined("SQL_LAYER"))
 				}
 			}
 
-			$this->query_result = (isset($this->query_result)) ? $this->query_result : false;
+			$this->query_result ??= false;
 			if ($this->query_result)
 			{
 				unset($this->row[(bool)$this->query_result]);
@@ -378,5 +385,3 @@ if(!defined("SQL_LAYER"))
 	} // class sql_db
 
 } // if ... define
-
-?>

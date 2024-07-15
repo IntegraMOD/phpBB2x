@@ -70,48 +70,24 @@
 					<fieldset>
 						<dl>
 							<dt><label>{L_ICQ_NUMBER}:</label></dt>
-							<dd><input type="text" name="icq" maxlength="15" value="{ICQ}" class="inputbox" placeholder="{L_USER_ID_EXPLAIN}" /></dd>
+							<dd><input type="text" name="icq" maxlength="15" value="{ICQ}" class="inputbox" /></dd>
 						</dl>
 						<dl>
-							<dt><label>{L_DISCORD}:</label></dt>
-							<dd><input type="text" name="dc" maxlength="255" value="{DC}" class="inputbox" placeholder="{L_USER_ID_EXPLAIN}" /></dd>
+							<dt><label>{L_AIM}:</label></dt>
+							<dd><input type="text" name="aim" maxlength="255" value="{AIM}" class="inputbox" /></dd>
 						</dl>
 						<dl>
-							<dt><label>{L_FACEBOOK}:</label></dt>
-							<dd><input type="text" name="fb" maxlength="255" value="{FB}" class="inputbox" /></dd>
+							<dt><label>{L_MESSENGER}:</label></dt>
+							<dd><input type="text" name="msn" maxlength="255" value="{MSN}" class="inputbox" /></dd>
 						</dl>
 						<dl>
-							<dt><label>{L_INSTAGRAM}:</label></dt>
-							<dd><input type="text" name="ig" maxlength="255" value="{IG}" class="inputbox" /></dd>
-						</dl>
-						<dl>
-							<dt><label>{L_LINKEDIN}:</label></dt>
-							<dd><input type="text" name="li" maxlength="255" value="{LI}" class="inputbox" /></dd>
-						</dl>						
-						<dl>
-							<dt><label>{L_PINTEREST}:</label></dt>
-							<dd><input type="text" name="pt" maxlength="255" value="{PT}" class="inputbox" /></dd>
-						</dl>
-						<dl>
-							<dt><label>{L_SKYPE}:</label></dt>
-							<dd><input type="text" name="skp" maxlength="255" value="{SKP}" class="inputbox" /></dd>
-						</dl>
-						<dl>
-							<dt><label>{L_TELEGRAM}:</label></dt>
-							<dd><input type="text" name="tg" maxlength="255" value="{TG}" class="inputbox" /></dd>
-						</dl>
-						<dl>
-							<dt><label>{L_TIKTOK}:</label></dt>
-							<dd><input type="text" name="tt" maxlength="255" value="{TT}" class="inputbox" /></dd>
-						</dl>						
-						<dl>
-							<dt><label>{L_TWITTER}:</label></dt>
-							<dd><input type="text" name="twr" maxlength="255" value="{TWR}" class="inputbox" /></dd>
+							<dt><label>{L_YAHOO}:</label></dt>
+							<dd><input type="text" name="yim" maxlength="255" value="{YIM}" class="inputbox" /></dd>
 						</dl>
 						<dl>
 							<dt><label>{L_WEBSITE}:</label></dt>
 							<dd><input type="text" name="website" maxlength="255" value="{WEBSITE}" class="inputbox" /></dd>
-						</dl>						
+						</dl>
 						<dl>
 							<dt><label>{L_LOCATION}:</label></dt>
 							<dd><input type="text" name="location" maxlength="255" value="{LOCATION}" class="inputbox" /></dd>

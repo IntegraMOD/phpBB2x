@@ -366,8 +366,9 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 						if ( $current_match_type == 'and' && $word_count )
 						{
 							@reset($result_list);
-							while( list($post_id, $match_count) = @each($result_list) )
-							{
+//							while( list($post_id, $match_count) = @each($result_list) )	{
+                            foreach ((Array) $result_list as $post_id => $match_count) {
+
 								if ( !$row[$post_id] )
 								{
 									$result_list[$post_id] = 0;
@@ -384,8 +385,8 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			@reset($result_list);
 
 			$search_ids = array();
-			while( list($post_id, $matches) = each($result_list) )
-			{
+//			while( list($post_id, $matches) = each($result_list) ) {
+            foreach ((Array) $result_list as $post_id => $matches) {
 				if ( $matches )
 				{
 					$search_ids[] = $post_id;
@@ -424,8 +425,8 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			}
 
 			$ignore_forum_sql = '';
-			while( list($key, $value) = each($is_auth_ary) )
-			{
+//			while( list($key, $value) = each($is_auth_ary) ) {
+            foreach ((Array) $is_auth_ary as $key => $value) {
 				if ( !$value['auth_read'] )
 				{
 					$ignore_forum_sql .= ( ( $ignore_forum_sql != '' ) ? ', ' : '' ) . $key;
@@ -693,9 +694,9 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 		for($i = 0; $i < count($store_vars); $i++)
         {
-            if (isset($$store_vars[$i]))
+            if (isset(${$store_vars}[$i]))
             {
-                $store_search_data[$store_vars[$i]] = $$store_vars[$i];
+                $store_search_data[$store_vars[$i]] = ${$store_vars}[$i];
             }
 			else
 			{
@@ -740,7 +741,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 				$search_data = unserialize($row['search_array']);
 				for($i = 0; $i < count($store_vars); $i++)
 				{
-					$$store_vars[$i] = $search_data[$store_vars[$i]];
+					${$store_vars}[$i] = $search_data[$store_vars[$i]];
 				}
 			}
 		}
@@ -1355,8 +1356,8 @@ if ( $s_forums != '' )
 	// Category to search
 	//
 	$s_categories = '<option value="-1">' . $lang['All_available'] . '</option>';
-	while( list($cat_id, $cat_title) = @each($list_cat))
-	{
+//	while( list($cat_id, $cat_title) = @each($list_cat)) {
+    foreach ((Array) $list_cat as $cat_id => $cat_title) {		
 		$s_categories .= '<option value="' . $cat_id . '">' . $cat_title . '</option>';
 	}
 }
@@ -1447,5 +1448,3 @@ $template->assign_vars(array(
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

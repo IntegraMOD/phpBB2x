@@ -288,5 +288,3 @@ if ( $guest_users == 0 )
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-
-?>

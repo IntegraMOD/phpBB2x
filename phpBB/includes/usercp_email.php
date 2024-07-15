@@ -72,7 +72,7 @@ if ( $result = $db->sql_query($sql) )
 	
 				if ( !empty($HTTP_POST_VARS['subject']) )
 				{
-					$subject = trim(stripslashes($HTTP_POST_VARS['subject']));
+					$subject = trim(stripslashes((string) $HTTP_POST_VARS['subject']));
 				}
 				else
 				{
@@ -82,7 +82,7 @@ if ( $result = $db->sql_query($sql) )
 	
 				if ( !empty($HTTP_POST_VARS['message']) )
 				{
-					$message = trim(stripslashes($HTTP_POST_VARS['message']));
+					$message = trim(stripslashes((string) $HTTP_POST_VARS['message']));
 				}
 				else
 				{
@@ -212,5 +212,4 @@ else
 {
 	message_die(GENERAL_ERROR, 'Could not select user data', '', __LINE__, __FILE__, $sql);
 }
-
-?>
+ 
