@@ -7,31 +7,32 @@
 <meta http-equiv="content-style-type" content="text/css" />
 <meta name="copyright" content="2001, 2005 phpBB Group" />
 {META}
-{NAV_LINKS}
 <title>{SITENAME} &bull; {PAGE_TITLE}</title>
-<script src="templates/importal.js"></script>
+<!-- fontawesome 6.4.0 CSS-->  
+<link rel="stylesheet" href="templates/assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="templates/prosilver/{T_HEAD_STYLESHEET}" type="text/css" media="screen, projection" />
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<script src="templates/prosilver/forum_fn.js"></script>
+
 <!-- BEGIN switch_enable_pm_popup -->
 <script>
 <!--
-	if ( {PRIVATE_MESSAGE_NEW_FLAG} )
-	{
-		window.open('{U_PRIVATEMSGS_POPUP}', '_phpbbprivmsg', 'height=225,resizable=yes,width=400');;
-	}
+	if ({PRIVATE_MESSAGE_NEW_FLAG}) {
+    window.location.href = '{U_PRIVATEMSGS_POPUP}';
+}
 //-->
 </script>
 <!-- END switch_enable_pm_popup -->
-<script src="templates/prosilver/forum_fn.js"></script>
-<link href="templates/prosilver/{T_HEAD_STYLESHEET}" rel="stylesheet" media="screen" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 </head>
 <body id="phpbb" class="section-index {S_CONTENT_DIRECTION}">
 <div id="wrap">
-<a id="top" accesskey="t"></a>
+	<a id="top" name="top" accesskey="t"></a>
 	<div id="page-header">
 		<div class="headerbar">
 			<div class="inner"><span class="corners-top"><span></span></span>
 			<div id="site-description">
-				<a href="{U_INDEX}" title="{L_INDEX}" id="logo"><img src="templates/prosilver/images/site_logo.svg" width="139" height="52" alt="" title="{SITENAME}" /></a>
+				<a href="{U_INDEX}" title="{L_INDEX}" id="logo"><img src="templates/prosilver/images/site_logo.gif" width="139" height="52" alt="" title="{SITENAME}" /></a>
 				<h1>{SITENAME}</h1>
 				<p>{SITE_DESCRIPTION}</p>
 			</div>
@@ -50,7 +51,7 @@
 		<div class="navbar">
 			<div class="inner"><span class="corners-top"><span></span></span>
 			<ul class="linklist navlinks">
-				<li class="icon-home"><a href="{U_HOME}">{L_HOME}</a>&nbsp;&bull;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a><span class="breadcrumbs">&nbsp;&bull;&nbsp;{PAGE_TITLE}</span></li>
+				<li class="icon-home"><a href="{U_INDEX}">{L_INDEX}</a><span class="breadcrumbs">&nbsp;&bull;&nbsp;{PAGE_TITLE}</span></li>
 			</ul>
 			<!-- BEGIN switch_user_logged_in -->
 			<ul class="linklist leftside">
@@ -63,7 +64,7 @@
 			<!-- END switch_user_logged_in -->
 			<ul class="linklist rightside">
 				<li class="icon-faq"><a href="{U_FAQ}">{L_FAQ}</a></li>
-				<li class="icon-search"><a href="{U_SEARCH}">{L_SEARCH}</a></li>
+				<li class="icon-search"><a href="{U_SEARCH}">{L_SEARCH}</a</li>
 				<!-- BEGIN switch_user_logged_in -->
 				<li class="icon-members"><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
 				<!-- END switch_user_logged_in -->
@@ -76,8 +77,3 @@
 		    </div>
 		</div>
 	<div id="page-body">
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr> 
-    {PORTAL_HEADER}
-    <td valign="top">

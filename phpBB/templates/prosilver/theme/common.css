@@ -247,6 +247,10 @@ ul.navlinks{
 	margin-bottom:1px;
 	border-bottom:1px solid #FFF;
 	font-weight:bold;
+} 
+
+ul.navlinksf{
+	font-weight:bold;
 }
 
 ul.leftside{
@@ -463,6 +467,8 @@ li.pagination{margin-top:0;}
 	text-align:center;
 	color:#555;
 }
+
+.copyrightxs{font-size:0.6em !important;}
 
 .small{font-size:0.9em !important;}
 
@@ -1105,7 +1111,7 @@ dl.pmlist dd{
 
 .buttons div a:hover span{background-position:0 100%;}
 
-.sitehome,.icon-faq,.icon-members,.icon-home,.icon-ucp,.icon-register,.icon-logout,.icon-bookmark,.icon-pages,.icon-search{
+.sitehome,.icon-faq,.icon-members,.icon-home,.icon-ucp,.icon-register,.icon-logout,.icon-bookmark,.icon-pages,.icon-search,.icon-dl{
 	background-position:0 50%;
 	background-repeat:no-repeat;
 	padding:1px 0 0 17px;
@@ -1120,6 +1126,7 @@ dl.pmlist dd{
 .icon-bookmark{background-image:url("images/icon_bookmark.gif")}
 .icon-pages{background-image:url("images/icon_pages.gif")}
 .icon-search{background-image:url("images/icon_search.gif")}
+.icon-dl{background-image:url("images/icon_dl.gif")}
 
 ul.profile-icons{
 	padding-top:10px;
@@ -1655,35 +1662,10 @@ table#gallery{
 }
 
 span.breadcrumbs{
+	text-decoration:italic;
 	color:#D31141;
-}
-
-ul.nav li{
-	text-align:left;
-    margin: 0 1.5em; 
-	font-size:1.05em;
-	line-height: 1.5em;
-	display:list-item;
-	list-style-type: circle;
 }
 
 .openclose {
 	width:100%;
-}
-
-.image1 {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.responsive {
-  	width: 100%;
-  	height: auto;
-}
-
-.collaps {
-	padding: 5px;
-	height: 7px;
-	clear: left;
 }

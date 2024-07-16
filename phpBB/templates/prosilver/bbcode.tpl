@@ -31,6 +31,8 @@
 
 <!-- BEGIN img --><img src="{URL}" alt="" /><!-- END img -->
 
+<!-- BEGIN p_img -->{L_PRIV_IMG}:{URL}<!-- END p_img -->
+
 <!-- BEGIN url --><a href="{URL}" class="postlink">{DESCRIPTION}</a><!-- END url -->
 
 <!-- BEGIN email --><a href="mailto:{EMAIL}">{EMAIL}</a><!-- END email -->

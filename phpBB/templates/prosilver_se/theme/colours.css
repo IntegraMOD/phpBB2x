@@ -704,13 +704,20 @@ a.fontsize {
 .icon-unsubscribe				{ background-image: url("images/icon_unsubscribe.gif"); }
 .icon-pages						{ background-image: url("images/icon_pages.gif"); }
 .icon-search					{ background-image: url("images/icon_search.gif"); }
+.icon-dl                        { background-image: url("images/icon_dl.gif")}
 
 /* Profile & navigation icons */
 .email-icon, .email-icon a		{ background-image: url("{IMG_ICON_CONTACT_EMAIL_SRC}"); }
-.aim-icon, .aim-icon a			{ background-image: url("{IMG_ICON_CONTACT_AIM_SRC}"); }
-.yahoo-icon, .yahoo-icon a		{ background-image: url("{IMG_ICON_CONTACT_YAHOO_SRC}"); }
 .web-icon, .web-icon a			{ background-image: url("{IMG_ICON_CONTACT_WWW_SRC}"); }
-.msnm-icon, .msnm-icon a		{ background-image: url("{IMG_ICON_CONTACT_MSNM_SRC}"); }
+.fb-icon, .fb-icon a			{ background-image: url("{IMG_ICON_CONTACT_FB_SRC}"); }
+.ig-icon, .ig-icon a		    { background-image: url("{IMG_ICON_CONTACT_IG_SRC}"); }
+.pt-icon, .pt-icon a		    { background-image: url("{IMG_ICON_CONTACT_PT_SRC}"); }
+.twr-icon, .twr-icon a			{ background-image: url("{IMG_ICON_CONTACT_TWR_SRC}"); }
+.skp-icon, .skp-icon a			{ background-image: url("{IMG_ICON_CONTACT_SKP_SRC}"); }
+.tg-icon, .tg-icon a			{ background-image: url("{IMG_ICON_CONTACT_TG_SRC}"); }
+.li-icon, .li-icon a			{ background-image: url("{IMG_ICON_CONTACT_LI_SRC}"); }
+.tt-icon, .tt-icon a			{ background-image: url("{IMG_ICON_CONTACT_TT_SRC}"); }
+.dc-icon, .dc-icon a			{ background-image: url("{IMG_ICON_CONTACT_DC_SRC}"); }
 .icq-icon, .icq-icon a			{ background-image: url("{IMG_ICON_CONTACT_ICQ_SRC}"); }
 .jabber-icon, .jabber-icon a	{ background-image: url("{IMG_ICON_CONTACT_JABBER_SRC}"); }
 .pm-icon, .pm-icon a			{ background-image: url("{IMG_ICON_CONTACT_PM_SRC}"); }

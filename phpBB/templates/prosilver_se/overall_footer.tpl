@@ -1,4 +1,3 @@
-{PORTAL_TAIL}</tr></table>
 	</div>
 	<div id="page-footer">
 		<div class="navbar">
@@ -13,7 +12,7 @@
 			</ul>
 			<span class="corners-bottom"><span></span></span></div>
 		</div>
-		<div class="copyright">Portal powered by <a href="http://www.integramod.com/" target="_blank" class="copyright">IM Portal</a> &copy; 2018 IntegraMOD<br />
+		<div class="copyright">
 			Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; 2001, 2005 phpBB Group
 			<br />{TRANSLATION_INFO}
 			<br /><strong>{ADMIN_LINK}</strong>
@@ -37,7 +36,6 @@
 
 <div>
 	<a id="bottom" name="bottom" accesskey="z"></a>
-	<!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
 </div>
 
 </body>

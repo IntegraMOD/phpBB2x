@@ -7,27 +7,24 @@
 <meta http-equiv="content-style-type" content="text/css" />
 <meta name="copyright" content="2001, 2005 phpBB Group" />
 {META}
-{NAV_LINKS}
 <title>{SITENAME} &bull; {PAGE_TITLE}</title>
-<script src="templates/importal.js"></script>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <!-- BEGIN switch_enable_pm_popup -->
-<script type="text/javascript">
+<script>
 <!--
-	if ( {PRIVATE_MESSAGE_NEW_FLAG} )
-	{
-		window.open('{U_PRIVATEMSGS_POPUP}', '_phpbbprivmsg', 'height=225,resizable=yes,width=400');;
-	}
+	if ({PRIVATE_MESSAGE_NEW_FLAG}) {
+    window.location.href = '{U_PRIVATEMSGS_POPUP}';
+}
 //-->
 </script>
 <!-- END switch_enable_pm_popup -->
+
 <script type="text/javascript" src="templates/prosilver_se/styleswitcher.js"></script>
 <script type="text/javascript" src="templates/prosilver_se/forum_fn.js"></script>
 <link href="templates/prosilver_se/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css" media="screen, projection" />
 <link href="templates/prosilver_se/theme/normal.css" rel="stylesheet" type="text/css" title="A" />
 <link href="templates/prosilver_se/theme/medium.css" rel="alternate stylesheet" type="text/css" title="A+" />
 <link href="templates/prosilver_se/theme/large.css" rel="alternate stylesheet" type="text/css" title="A++" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
 </head>
 <body id="phpbb" class="section-index">
 
@@ -45,54 +42,53 @@
         	<div id="page-header">
         		<div class="headerbar">
         			<div class="inner"><span class="corners-top"><span></span></span>
-           			<div id="site-description">
-        				<a href="{U_INDEX}" title="Forumoverzicht" id="logo"><img src="./templates/proSilver_SE_for_phpBB2/images/site_logo.gif" alt="" title="" width="139" height="52"></a>
+        
+        			<div id="site-description">
+        				<a href="{U_INDEX}" title="" id="logo"><img src="./templates/prosilver_se/theme/images/site_logo.gif" alt="" title="" width="139" height="52"></a>
         				<h1>{SITENAME}</h1>
         				<p>{SITE_DESCRIPTION}</p>
         				<p style="display: none;"><a href="#start_here">#start_here</a></p>
         			</div>
-        		    <div id="search-box">
+        
+        		        			<div id="search-box">
         				<form action="./search.php" method="post" id="search">
         				<fieldset>
-        					<input name="search_keywords" id="keywords" maxlength="128" title="Zoek naar trefwoorden" class="inputbox search" value="{L_SEARCH} ..." onclick="if(this.value=='{L_SEARCH} ...')this.value='';" onblur="if(this.value=='')this.value='{L_SEARCH} ...';" type="text"> 
+        					<input name="search_keywords" id="keywords" maxlength="128" title="search" class="inputbox search" value="{L_SEARCH} ..." onclick="if(this.value=='{L_SEARCH} ...')this.value='';" onblur="if(this.value=='')this.value='{L_SEARCH} ...';" type="text"> 
         					<input class="button2" value="{L_SEARCH}" type="submit"><br>
          				</fieldset>
         				</form>
         			</div>
+        		        
         			<span class="corners-bottom"><span></span></span></div>
         		</div>
-				<div class="navbar">
-					<div class="inner"><span class="corners-top"><span></span></span>
-					<ul class="linklist navlinks">
-						<li class="icon-home"><a href="{U_HOME}">{L_HOME}</a>&nbsp;&bull;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a><span class="breadcrumbs">&nbsp;&bull;&nbsp;{PAGE_TITLE}</span></li>
-					</ul>
-					<!-- BEGIN switch_user_logged_in -->
-					<ul class="linklist leftside">
-						<li class="icon-ucp">
-							<a href="{U_PROFILE}" title="{L_PROFILE}">{L_PROFILE}</a>
-							 (<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a>) &bull; 
-							<a href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>
-						</li>
-					</ul>
-					<!-- END switch_user_logged_in -->
-					<ul class="linklist rightside">
-						<li class="icon-faq"><a href="{U_FAQ}">{L_FAQ}</a></li>
-						<li class="icon-search"><a href="{U_SEARCH}">{L_SEARCH}</a</li>
-						<!-- BEGIN switch_user_logged_in -->
-						<li class="icon-members"><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
-						<!-- END switch_user_logged_in -->
-						<!-- BEGIN switch_user_logged_out -->
-						<li class="icon-register"><a href="{U_REGISTER}">{L_REGISTER}</a></li>
-						<!-- END switch_user_logged_out -->
-						<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
-					</ul>
-					<span class="corners-bottom"><span></span></span></div>
-				    </div>
-				</div>
+        
+		<div class="navbar">
+			<div class="inner"><span class="corners-top"><span></span></span>
+			<ul class="linklist navlinks">
+				<li class="icon-home"><a href="{U_INDEX}">{L_INDEX}</a><span class="breadcrumbs">&nbsp;&bull;&nbsp;{PAGE_TITLE}</span></li>
+			</ul>
+			<!-- BEGIN switch_user_logged_in -->
+			<ul class="linklist leftside">
+				<li class="icon-ucp">
+					<a href="{U_PROFILE}" title="{L_PROFILE}">{L_PROFILE}</a>
+					 (<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a>) &bull; 
+					<a href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>
+				</li>
+			</ul>
+			<!-- END switch_user_logged_in -->
+			<ul class="linklist rightside">
+				<li class="icon-faq"><a href="{U_FAQ}">{L_FAQ}</a></li>
+				<li class="icon-search"><a href="{U_SEARCH}">{L_SEARCH}</a</li>
+				<!-- BEGIN switch_user_logged_in -->
+				<li class="icon-members"><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
+				<!-- END switch_user_logged_in -->
+				<!-- BEGIN switch_user_logged_out -->
+				<li class="icon-register"><a href="{U_REGISTER}">{L_REGISTER}</a></li>
+				<!-- END switch_user_logged_out -->
+				<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
+			</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		    </div>
+		</div>
 
-<div id="page-body">
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr> 
-{PORTAL_HEADER}
-<td valign="top">
+	<div id="page-body">

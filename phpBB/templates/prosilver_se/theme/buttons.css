@@ -231,7 +231,7 @@ ul.linklist.bulletin > li.small-icon:before {
 .button.responsive-menu-link:hover:before	{ background-position: -191px -21px; }
 
 .sitehome, .icon-faq, .icon-members, .icon-home, .icon-ucp, .icon-register, .icon-logout,
-.icon-bookmark, .icon-bump, .icon-subscribe, .icon-unsubscribe, .icon-pages, .icon-search {
+.icon-bookmark, .icon-bump, .icon-subscribe, .icon-unsubscribe, .icon-pages, .icon-search, .icon-dl {
 	background-position: 0 50%;
 	background-repeat: no-repeat;
 	background-image: none;

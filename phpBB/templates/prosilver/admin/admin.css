@@ -28,11 +28,19 @@ hr{border:0 none;border-top:1px dashed #999;margin-bottom:5px;padding-bottom:5px
 
 .small{font-size:0.85em}
 
+.med{font-size:0.92em}
+
 a:link,a:visited{color:#105289;text-decoration:none}
 
 a:hover{color:#BC2A4D;text-decoration:underline}
 
 a:active{color:#368AD2;text-decoration:none}
+
+.copyright{font-size:0.70em;text-align:center;padding-top:8px;}
+
+ul.credits{list-style:none;margin:0px;}
+
+li.author{font-size:0.70em;text-align:left;padding-left:8px;}
 
 #wrap{padding:0 0 15px 0}
 
@@ -281,4 +289,4 @@ a.button2:hover,input.button2:hover{border:1px solid #BC2A4D;background:#EFEFEF 
 
 .successbox a:hover{color:#FFF;text-decoration:none;font-weight:bold}
 
-.clearfix,#tabs,.row,.prow,#content,fieldset dl,#page-body{height:1%;overflow:hidden}
+.clearfix,#tabs,.row,#content,fieldset dl,#page-body{height:1%;overflow:hidden}
