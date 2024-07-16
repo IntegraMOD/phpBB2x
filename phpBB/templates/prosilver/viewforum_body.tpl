@@ -2,11 +2,7 @@
 		<h2><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h2>
 		<p>{L_MODERATOR}: {MODERATORS}</p>
 		<div class="topic-actions">
-
-
 			<div class="lbuttons"><a href="{U_POST_NEW_TOPIC}" class="button icon-button post-icon" title="{L_POST_NEW_TOPIC}">{L_BUTTON_TOPIC_NEW}</a></div>
-
-
 			<div class="pagination">
 				<!-- BEGIN switch_user_logged_in -->
 				<a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a> &bull; 
@@ -57,8 +53,6 @@
 		</form>
 		<hr />
 		<div class="topic-actions">
-
-
 			<div class="lbuttons"><a href="{U_POST_NEW_TOPIC}" class="button icon-button post-icon" title="{L_POST_NEW_TOPIC}">{L_BUTTON_TOPIC_NEW}</a></div>
 			<div class="pagination">
 				<!-- BEGIN switch_user_logged_in -->

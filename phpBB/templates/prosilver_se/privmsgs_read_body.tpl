@@ -43,6 +43,14 @@
 							{ICQ_IMG}
 							{YIM_IMG}
 							{AIM_IMG}
+        					{FB_IMG}
+        					{IG_IMG}
+        					{PT_IMG}
+        					{TWR_IMG}
+        					{SKP_IMG}
+        					{TG_IMG}
+        					{LI_IMG}
+        					{TT_IMG}
 						</ul></dd>
 					</dl>
 					<span class="corners-bottom"><span></span></span></div>

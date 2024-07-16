@@ -28,16 +28,24 @@
 				<dd>{postrow.POSTER_POSTS}</dd>
 				<dd>{postrow.POSTER_JOINED}</dd>
 				<dd>{postrow.POSTER_FROM}</dd>
-				<dd><ul class="profile-icons">
+				<dd>
+				  <ul class="profile-icons">
 					{postrow.PM_IMG}
 					{postrow.PROFILE_IMG}
 					{postrow.EMAIL_IMG}
 					{postrow.WWW_IMG}
-					{postrow.MSN_IMG}
+					{postrow.DC_IMG}
+					{postrow.FB_IMG}					
+					{postrow.IG_IMG}
+					{postrow.LI_IMG}					
+					{postrow.PT_IMG}
+					{postrow.SKP_IMG}
+					{postrow.TG_IMG}
+					{postrow.TT_IMG}
+					{postrow.TWR_IMG}
 					{postrow.ICQ_IMG}
-					{postrow.YIM_IMG}
-					{postrow.AIM_IMG}
-				</ul></dd>
+				  </ul>
+				</dd>
 			</dl>
 			<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}">{L_BACK_TO_TOP}</a></div>
 			<span class="corners-bottom"><span></span></span></div>
@@ -51,7 +59,7 @@
 		</form>
 		<hr />
 		<div class="topic-actions">
-			<div class="lbuttons"><a href="{U_POST_REPLY_TOPIC}" class="button icon-button post-icon" title="{L_POST_REPLY_TOPIC}">{L_BUTTON_TOPIC_REPLY}</a></div>
+			<div class="lbuttons"><a href="{U_POST_NEW_TOPIC}" class="button icon-button post-icon" title="{L_POST_NEW_TOPIC}">{L_BUTTON_TOPIC_NEW}</a><a href="{U_POST_REPLY_TOPIC}" class="button icon-button post-icon" title="{L_POST_REPLY_TOPIC}">{L_BUTTON_TOPIC_REPLY}</a></div>
 			<div class="pagination">{PAGE_NUMBER}&nbsp; <span>{PAGINATION}</span></div>
 		</div>
 		<p></p><p><a href="{U_VIEW_FORUM}" class="left-box left">{FORUM_NAME}</a></p>

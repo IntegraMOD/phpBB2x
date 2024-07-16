@@ -26,6 +26,14 @@
 					<dt>{L_YAHOO}: </dt><dd>{YIM}</dd>
 					<dt>{L_AIM}: </dt><dd>{AIM}</dd>
 					<dt>{L_ICQ_NUMBER}: </dt><dd>{ICQ}</dd>
+					<dt>{L_FACEBOOK}: </dt><dd>{FB}</dd>
+					<dt>{L_INSTAGRAM}: </dt><dd>{IG}</dd>
+					<dt>{L_PINTEREST}: </dt><dd>{PT}</dd>
+					<dt>{L_TWITTER}: </dt><dd>{TWR}</dd>					
+					<dt>{L_SKYPE}: </dt><dd>{SKP}</dd>
+					<dt>{L_TELEGRAM}: </dt><dd>{TG}</dd>					
+					<dt>{L_LINKEDIN}: </dt><dd>{LI}</dd>
+					<dt>{L_TIKTOK}: </dt><dd>{TT}</dd>					
 				</dl>
 			</div>
 			<div class="column2">
