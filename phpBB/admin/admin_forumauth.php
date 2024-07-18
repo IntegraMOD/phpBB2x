@@ -216,7 +216,9 @@ else
 	$forum_name = $forum_rows[0]['forum_name'];
 
 	@reset($simple_auth_ary);
-	while( list($key, $auth_levels) = each($simple_auth_ary))
+	
+//	while( list($key, $auth_levels) = each($simple_auth_ary))
+	foreach ($simple_auth_ary as $key => $auth_levels)
 	{
 		$matched = 1;
 		for($k = 0; $k < (is_countable($auth_levels) ? count($auth_levels) : 0); $k++)
@@ -248,25 +250,31 @@ else
 
 	$s_column_span == 0;
 
-	if ( empty($adv) )
+	// Ensure $s_column_span is defined as a numeric value before this block
+	if (!isset($s_column_span) || !is_numeric($s_column_span))
+		{
+		    $s_column_span = 0;
+	    }
+	 
+	if (empty($adv)) 
 	{
 		$simple_auth = '<select name="simpleauth">';
-
-		for($j = 0; $j < (is_countable($simple_auth_types) ? count($simple_auth_types) : 0); $j++)
+	 
+		for($j = 0; $j < (is_countable($simple_auth_types) ? count($simple_auth_types) : 0); $j++) 
 		{
 			$selected = ( $matched_type == $j ) ? ' selected="selected"' : '';
 			$simple_auth .= '<option value="' . $j . '"' . $selected . '>' . $simple_auth_types[$j] . '</option>';
 		}
-
+	 
 		$simple_auth .= '</select>';
-
+	 
 		$template->assign_block_vars('forum_auth_titles', array(
 			'CELL_TITLE' => $lang['Simple_mode'])
 		);
 		$template->assign_block_vars('forum_auth_data', array(
 			'S_AUTH_LEVELS_SELECT' => $simple_auth)
 		);
-
+	 
 		$s_column_span++;
 	}
 	else
@@ -329,5 +337,3 @@ include('./page_header_admin.'.$phpEx);
 $template->pparse('body');
 
 include('./page_footer_admin.'.$phpEx);
-
-?>
