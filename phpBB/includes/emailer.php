@@ -30,9 +30,10 @@ class emailer
     public $subject;
     public $extra_headers;
     public $addresses;
+    public $vars;	
     public $reply_to;
     public $from;
-
+    public $encoding;
     public $tpl_msg = array();
 
     public function __construct(public $use_smtp)
