@@ -447,11 +447,12 @@ function setup_style($style)
 
         $img_lang = (file_exists(@phpbb_realpath($phpbb_root_path . $current_template_path . '/images/lang_' . $board_config['default_lang']))) ? $board_config['default_lang'] : 'english';
 			
-        foreach ($images as [$key, $value]) {
-            if (!is_array($value)) {
-                $images[$key] = str_replace('{LANG}', 'lang_' . $img_lang, (string) $value);
-            }
-        }
+	    foreach ($images as $key => $value) 
+		{
+			if (!is_array($value)) {
+				$images[$key] = str_replace('{LANG}', 'lang_' . $img_lang, (string) $value);
+			}
+		}
     }
 
     return $row;
