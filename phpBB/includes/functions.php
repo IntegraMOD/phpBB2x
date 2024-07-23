@@ -460,100 +460,122 @@ function setup_style($style)
 
 function encode_ip($dotquad_ip)
 {
-    if (function_exists('filter_var')) {
-        if (filter_var($dotquad_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
-            // ipv6 - "::1" => "0000000000000000000000000001"
-            $new_ip = '';
-            if(strstr((string) $dotquad_ip, "::")) {
-                $ip_sep = array();
-                $e = explode(":", (string) $dotquad_ip);
-                $s = 8 - count($e);
-
-                foreach($e as $value) {
-                    if ($value == '') {
-                        for($i = 0; $i <= $s; $i++) {
-                            $ip_sep[] = 0;
-                        }
-                    } else {
-                        $ip_sep[] = $value;
-                    }
-                }
-            } else {
-                $ip_sep = explode(':', (string) $dotquad_ip);
-            }
-            for ($i = 0; $i <= 7; $i++) {
-                $new_ip .= str_pad($ip_sep[$i], 4, '0', STR_PAD_LEFT);
-            }
-            return $new_ip;
-        } elseif (filter_var($dotquad_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false) {
-            // ipv4 - "127.0.0.1" => "7F000001"
-            $ip_sep = explode('.', (string) $dotquad_ip);
-            return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
-        }
-    } else {
-        if (preg_match('/^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(([0-9A-Fa-f]{1,4}:){0,5}:((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(::([0-9A-Fa-f]{1,4}:){0,5}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/', (string) $dotquad_ip)) {
-            // ipv6 - "::1" => "0000000000000000000000000001"
-            $new_ip = '';
-            if(strstr((string) $dotquad_ip, "::")) {
-                $ip_sep = array();
-                $e = explode(":", (string) $dotquad_ip);
-                $s = 8 - count($e);
-
-                foreach($e as $value) {
-                    if ($value == '') {
-                        for($i = 0; $i <= $s; $i++) {
-                            $ip_sep[] = 0;
-                        }
-                    } else {
-                        $ip_sep[] = $value;
-                    }
-                }
-            } else {
-                $ip_sep = explode(':', (string) $dotquad_ip);
-            }
-            for ($i = 0; $i <= 7; $i++) {
-                $new_ip .= str_pad($ip_sep[$i], 4, '0', STR_PAD_LEFT);
-            }
-            return $new_ip;
-        } elseif (preg_match('/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/', (string) $dotquad_ip)) {
-            // ipv4 - "127.0.0.1" => "7F000001"
-            $ip_sep = explode('.', (string) $dotquad_ip);
-            return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
-        }
-
-    }
+	if (function_exists('filter_var'))
+	{
+		if (filter_var($dotquad_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false)
+		{
+			// ipv6 - "::1" => "0000000000000000000000000001"
+			$new_ip = '';
+			if(strstr((string) $dotquad_ip,"::" ))
+			{
+				$ip_sep = array();
+				$e = explode(":", (string) $dotquad_ip);
+				$s = 8-count($e);
+				
+				foreach($e as $value)
+				{
+					if ($value == '')
+					{
+						for($i = 0; $i <= $s; $i++) $ip_sep[] = 0;
+					}
+					else
+					{
+						$ip_sep[] = $value;
+					}
+				}
+			}
+			else
+			{
+				$ip_sep = explode(':', (string) $dotquad_ip);
+			}
+			for ($i = 0; $i <= 7; $i++) $new_ip .= str_pad($ip_sep[$i], 4, '0', STR_PAD_LEFT);
+			return $new_ip;
+		}
+		else if (filter_var($dotquad_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false)
+		{
+			// ipv4 - "127.0.0.1" => "7F000001"
+			$ip_sep = explode('.', (string) $dotquad_ip);
+			return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	   }
+	}
+	else
+	{
+		if (preg_match('/^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(([0-9A-Fa-f]{1,4}:){0,5}:((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|(::([0-9A-Fa-f]{1,4}:){0,5}((b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b).){3}(b((25[0-5])|(1d{2})|(2[0-4]d)|(d{1,2}))b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/', (string) $dotquad_ip))
+		{
+			// ipv6 - "::1" => "0000000000000000000000000001"
+			$new_ip = '';
+			if(strstr((string) $dotquad_ip,"::" ))
+			{
+				$ip_sep = array();
+				$e = explode(":", (string) $dotquad_ip);
+				$s = 8-count($e);
+				
+				foreach($e as $value)
+				{
+					if ($value == '')
+					{
+						for($i = 0; $i <= $s; $i++) $ip_sep[] = 0;
+					}
+					else
+					{
+						$ip_sep[] = $value;
+					}
+				}
+			}
+			else
+			{
+				$ip_sep = explode(':', (string) $dotquad_ip);
+			}
+			for ($i = 0; $i <= 7; $i++) $new_ip .= str_pad($ip_sep[$i], 4, '0', STR_PAD_LEFT);
+			return $new_ip;
+		}
+		else if (preg_match('/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/', (string) $dotquad_ip))
+		{
+			// ipv4 - "127.0.0.1" => "7F000001"
+			$ip_sep = explode('.', (string) $dotquad_ip);
+			return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	   }
+	
+	}
 }
 
 function decode_ip($int_ip)
 {
-    if (strlen((string) $int_ip) == 32) {
-        // ipv6 - "0000000000000000000000000001" => "::1"
-        $hexipbang = array();
-
-        if (function_exists('str_split')) {
-            $e = str_split((string) $int_ip, 4);
-        } else {
-            $e = explode(':', chunk_split((string) $int_ip, 4, ':'));
-        }
-
-        foreach($e as $key => $value) {
-            $value = ltrim($value, '0');
-            $hexipbang[] = $value ? $value : '0';
-        }
-
-        $new_ip = implode(':', $hexipbang);
-        if (preg_match_all('/:(0:)+/s', $new_ip, $zeros, PREG_PATTERN_ORDER)) {
-            rsort($zeros[0], SORT_STRING);
-            $new_ip = str_replace($zeros[0][0], '::', $new_ip);
-        }
-        return $new_ip;
-    } elseif (strlen((string) $int_ip) == 8) {
-        // ipv4 - "7F000001" => "127.0.0.1"
-        $hexipbang = explode('.', chunk_split((string) $int_ip, 2, '.'));
-        return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
-    }
+   if (strlen((string) $int_ip) == 32)
+   {
+		// ipv6 - "0000000000000000000000000001" => "::1"
+		$hexipbang = array();
+		
+		if (function_exists('str_split'))
+		{
+			$e = str_split((string) $int_ip, 4);
+		}
+		else
+		{
+			$e = explode(':', chunk_split((string) $int_ip, 4, ':'));
+		}
+		
+		foreach($e as $key => $value)
+		{
+			$value = ltrim($value, '0');
+			$hexipbang[] = $value ? $value : '0';
+		}
+		
+		$new_ip = implode(':', $hexipbang);
+		if (preg_match_all('/:(0:)+/s', $new_ip, $zeros, PREG_PATTERN_ORDER))
+		{
+			rsort($zeros[0], SORT_STRING);
+			$new_ip = str_replace($zeros[0][0], '::', $new_ip);
+		}
+		return $new_ip;
+	}
+	else if (strlen((string) $int_ip) == 8)
+	{
+		// ipv4 - "7F000001" => "127.0.0.1"
+		$hexipbang = explode('.', chunk_split((string) $int_ip, 2, '.'));
+		return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
+	}
 }
-
 
 //
 // Create date/time from format and timezone
@@ -562,14 +584,16 @@ function create_date($format, $gmepoch, $tz)
 {
     global $board_config, $lang;
     static $translate;
-
-    if (empty($translate) && $board_config['default_lang'] != 'english') {
+ 
+    if (empty($translate) && $board_config['default_lang'] != 'english') 
+	{
         @reset($lang['datetime']);
-        while ([$match, $replace] = @each($lang['datetime'])) {
+        foreach ($lang['datetime'] as $match => $replace) 
+		{
             $translate[$match] = $replace;
         }
     }
-
+ 
     return (!empty($translate)) ? strtr(@gmdate($format, $gmepoch + (3600 * $tz)), $translate) : @gmdate($format, $gmepoch + (3600 * $tz));
 }
 

@@ -76,7 +76,7 @@ $img_height = 40;
 $img_width = 0;
 $l = 0;
 
-[$usec, $sec] = explode(' ', microtime()); 
+list($usec, $sec) = explode(' ', microtime()); 
 mt_srand($sec * $usec); 
 
 $char_widths = array();

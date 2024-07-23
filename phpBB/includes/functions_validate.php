@@ -179,16 +179,16 @@ function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &
 	}
 	
 	// Discord ID is only numbers.
-	if (!preg_match('/^[0-9]+$/', $dc ?? ''))
+	if (!is_null($dc) && !preg_match('/^[0-9]+$/', $dc)) 
 	{
-		$dc = '';
-	}
+        $dc = '';
+    }
 
 	// ICQ number has to be only numbers.
-	if (!preg_match('/^[0-9]+$/', $icq ?? ''))
+	if (isset($icq) && !preg_match('/^[0-9]+$/', $icq)) 
 	{
-		$icq = '';
-	}
+        $icq = '';
+    }
 	
 	// website has to start with http://, followed by something with length at least 3 that
 	// contains at least one dot.

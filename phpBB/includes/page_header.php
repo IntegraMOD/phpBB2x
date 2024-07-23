@@ -61,7 +61,7 @@ if ( $board_config['gzip_compress'] )
 }
 
 $userdata['user_level'] = (isset($userdata['user_level'])) ? $userdata['user_level'] : '';
-$admin_short_link = ( $userdata['user_level'] == ADMIN ) ? '<a class="adm" href="admin/index.' . $phpEx . '?sid=' . $userdata['session_id'] . '&amp;p_sid=' . $userdata['priv_session_id'] . '"><span><i class="fa-solid fa-gears"></i>&nbsp;' . $lang['Admin_short'] . '</span></a>' : '';
+$admin_short_link = ( $userdata['user_level'] == ADMIN ) ? '<a class="adm" href="admin/index.' . $phpEx . '?sid=' . $userdata['session_id'] . '&amp;p_sid=' . $userdata['priv_session_id'] . '"><span><i class="fa-solid fa-gears"></i>&nbsp;' . ($lang['Admin_short'] ?? null) . '</span></a>' : '';
 
 //
 // Parse and show the overall header.
@@ -327,11 +327,8 @@ if (!isset($nav_links))
 
 $nav_links_html = '';
 $nav_link_proto = '<link rel="%s" href="%s" title="%s" />' . "\n";
-
-
-
-// while( list($nav_item, $nav_array) = @each($nav_links) ) {
-foreach ((Array) $nav_links as $nav_item => $nav_array) {
+foreach ((Array) $nav_links as $nav_item => $nav_array) 
+{
 	if ( !empty($nav_array['url']) )
 	{
 		$nav_links_html .= sprintf($nav_link_proto, $nav_item, append_sid($nav_array['url']), $nav_array['title']);
@@ -340,8 +337,8 @@ foreach ((Array) $nav_links as $nav_item => $nav_array) {
 	{
 		// We have a nested array, used for items like <link rel='chapter'> that can occur more than once.
 
-//		while( list(,$nested_array) = each($nav_array) ) {
-        foreach ((Array) $nav_array as $nested_array) {
+        foreach ((Array) $nav_array as $nested_array) 
+		{
 			$nav_links_html .= sprintf($nav_link_proto, $nav_item, $nested_array['url'], $nested_array['title']);
 		}
 	}
@@ -379,7 +376,7 @@ $template->assign_vars(array(
 	'L_LOG_ME_IN' => $lang['Log_me_in'],
 	'L_AUTO_LOGIN' => $lang['Log_me_in'],
 	'L_FORUM' => $lang['Forum'],
-	'L_HOME' => $lang['Home'],
+	'L_HOME' => ($lang['Home'] ?? null),
 	'L_INDEX' => sprintf($lang['Forum_Index'], $board_config['sitename']),
 	'L_REGISTER' => $lang['Register'],
 	'L_PROFILE' => $lang['Profile'],

@@ -391,12 +391,8 @@ function display_avatar_gallery($mode, &$category, &$user_id, &$email, &$current
 
 	for($i = 0; $i < count($params); $i++)
 	{
-// original		
-//      $s_hidden_vars .= '<input type="hidden" name="' . $params[$i] . '" value="' . str_replace('"', '&quot;', $$params[$i]) . '" />';
-		$s_hidden_vars .= '<input type="hidden" name="' . $params[$i] . '" value="' . str_replace('"', '&quot;', (string) ${$params}[$i]) . '" />';
-//		$s_hidden_vars .= '<input type="hidden" name="' . $params[$i] . '" value="' . str_replace('"', '&quot;', (string) $params[$i]) . '" />';
-//		$s_hidden_vars .= '<input type="hidden" name="' . $params[$i] . '" value="' . str_replace('"', '&quot;', $params[$i]) . '" />';
-
+		$value = isset($params[$i]) && isset(${$params[$i]}) ? ${$params[$i]} : ''; // Ensure the variable is set
+		$s_hidden_vars .= '<input type="hidden" name="' . htmlspecialchars($params[$i]) . '" value="' . htmlspecialchars($value) . '" />';
 	}
 	
 	$template->assign_vars(array(
