@@ -123,23 +123,23 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	// * User does not exist
 	// * User is inactive
 	//
-	if (!sizeof($userdata) || !is_array($userdata) || !$userdata)
-	{
-		$sessiondata['autologinid'] = '';
-		$sessiondata['userid'] = $user_id = ANONYMOUS;
-		$enable_autologin = $login = 0;
-
-		$sql = 'SELECT *
-			FROM ' . USERS_TABLE . '
-			WHERE user_id = ' . (int) $user_id;
-		if (!($result = $db->sql_query($sql)))
-		{
-			message_die(CRITICAL_ERROR, 'Error doing DB query userdata row fetch', '', __LINE__, __FILE__, $sql);
-		}
-
-		$userdata = $db->sql_fetchrow($result);
-		$db->sql_freeresult($result);
-	}
+    if (!isset($userdata) || !is_array($userdata) || empty($userdata)) 
+    {
+        $sessiondata['autologinid'] = '';
+        $sessiondata['userid'] = $user_id = ANONYMOUS;
+        $enable_autologin = $login = 0;
+     
+        $sql = 'SELECT *
+            FROM ' . USERS_TABLE . '
+            WHERE user_id = ' . (int) $user_id;
+        if (!($result = $db->sql_query($sql))) 
+        {
+            message_die(CRITICAL_ERROR, 'Error doing DB query userdata row fetch', '', __LINE__, __FILE__, $sql);
+        }
+     
+        $userdata = $db->sql_fetchrow($result);
+        $db->sql_freeresult($result);
+    }
 
 
 	//
