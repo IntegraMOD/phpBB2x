@@ -1,0 +1,649 @@
+##############################################################
+## MOD Title: IM Portal
+## MOD Author: Masterdavid < webmaster@integramod.com > (Ronald John David) http://www.integramod.com
+## MOD Author: secondary: kvfb97 < info@kvfb97.co.uk > (Robert Dougan) http://www.integramod.com
+## MOD Author: Helter https://integramod.com
+## MOD Description: Flexible and full-featured portal management addon for phpBB (forum-wide integration). Multiple-page version with cache system
+## MOD Version: 1.3.3
+## 
+## Installation Level: Easy
+## Installation Time: 20 minutes
+## Files To Edit:  includes/constants.php
+##                 includes/page_header.php
+##                 includes/page_tail.php
+##                 includes/functions.php
+##                 login.php
+##                 templates/subSilver/overall_header.tpl
+##                 templates/subSilver/overall_footer.tpl
+##                 templates/subSilver/admin/index_navigate.tpl
+##                 admin/index.php
+## Included Files: phpbbroot/fetchposts.php
+##                 phpbbroot/portal.php
+##                 phpbbroot/admin/admin_blocks.php
+##                 phpbbroot/admin/admin_blocks_pos.php
+##                 phpbbroot/admin/admin_blocks_var.php
+##                 phpbbroot/admin/admin_clear_cache.php
+##                 phpbbroot/admin/admin_layout.php
+##                 phpbbroot/admin/admin_portal.php
+##                 phpbbroot/blocks/blocks_imp_forum.cfg
+##                 phpbbroot/blocks/blocks_imp_forum.php
+##                 phpbbroot/blocks/blocks_imp_online_users.php
+##                 phpbbroot/blocks/blocks_imp_poll.cfg
+##                 phpbbroot/blocks/blocks_imp_poll.php
+##                 phpbbroot/blocks/blocks_imp_recent_topics.cfg
+##                 phpbbroot/blocks/blocks_imp_recent_topics.php
+##                 phpbbroot/blocks/blocks_imp_search.cfg
+##                 phpbbroot/blocks/blocks_imp_search.php
+##                 phpbbroot/blocks/blocks_imp_statistics.php
+##                 phpbbroot/blocks/blocks_imp_user_block.php
+##                 phpbbroot/blocks/language/lang_english/lang_forum_block.php
+##                 phpbbroot/blocks/language/lang_english/lang_online_users_block.php
+##                 phpbbroot/blocks/language/lang_english/lang_poll_block.php
+##                 phpbbroot/blocks/language/lang_english/lang_search_block.php
+##                 phpbbroot/blocks/language/lang_english/lang_statistics_block.php
+##                 phpbbroot/blocks/language/lang_english/lang_user_block_block.php
+##                 phpbbroot/includes/functions_portal.php
+##                 phpbbroot/includes/lite.php
+##                 phpbbroot/templates/assets/js/scripts.js
+##                 phpbbroot/templates/subSilver/portal_page_header.tpl
+##                 phpbbroot/templates/subSilver/portal_page_tail.tpl
+##                 phpbbroot/templates/subSilver/portal_poll_ballot.tpl
+##                 phpbbroot/templates/subSilver/portal_poll_result.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_edit_body.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_layout_list_body.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_list_body.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_position_edit_body.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_position_list_body.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_variables_edit_body.tpl
+##                 phpbbroot/templates/subSilver/admin/blocks_variables_list_body.tpl
+##                 phpbbroot/templates/subSilver/admin/confirm_body.tpl
+##                 phpbbroot/templates/subSilver/admin/layout_edit_body.tpl
+##                 phpbbroot/templates/subSilver/admin/layout_list_body.tpl
+##                 phpbbroot/templates/subSilver/admin/portal_config_body.tpl
+##                 phpbbroot/templates/subSilver/blocks/forum_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/online_users_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/poll_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/recent_topics_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/search_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/statistics_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/user_block_block.tpl
+##                 phpbbroot/templates/subSilver/blocks/users_visited_block.tpl
+##                 phpbbroot/templates/subSilver/images/block_close.gif
+##                 phpbbroot/templates/subSilver/images/block_open.gif
+##                 phpbbroot/templates/subSilver/images/layout_arrowl.gif
+##                 phpbbroot/templates/subSilver/images/layout_arrowr.gif
+##                 phpbbroot/templates/subSilver/layout/3_column.cfg
+##                 phpbbroot/templates/subSilver/layout/3_column.tpl
+##                 phpbbroot/templates/subSilver/layout/3_column_scroll.cfg
+##                 phpbbroot/templates/subSilver/layout/3_column_scroll.tpl
+##                 phpbbroot/templates/subSilver/layout/4_column.cfg
+##                 phpbbroot/templates/subSilver/layout/4_column.tpl
+##                 phpbbroot/templates/subSilver/layout/5_column.cfg
+##                 phpbbroot/templates/subSilver/layout/5_column.tpl
+##                 phpbbroot/templates/subSilver/layout/6_column.cfg
+##                 phpbbroot/templates/subSilver/layout/6_column.tpl
+##                 phpbbroot/templates/subSilver/layout/layout1.cfg
+##                 phpbbroot/templates/subSilver/layout/layout1.tpl
+##                 phpbbroot/templates/subSilver/layout/portal_body.cfg
+##                 phpbbroot/templates/subSilver/layout/portal_pody.tpl
+##
+##############################################################
+## Author Notes: Backup first your files and database before proceeding with the installation.
+##############################################################
+## MOD History:
+##
+##
+##   2024-06-14   Version 1.3.3
+## - Merged versions
+## - Updated code to support php7&8
+## - renamed groups to pgroup due to `groups` mysqli protected status
+## - added Select Style block
+## 
+##   2012-09-19 - Version 1.2.3 BETA (MWE_001 - https://integramod.com)
+## 
+## - fixed database installer (missing field for collapsible block in block layouts)
+## - updated the install file with a couple missing items that are needed to run IMPortal
+## 
+## 
+##   2005-03-31 - Version 1.2.2 BETA
+## 
+## - fixed database installer
+## 
+## First BETA of the new IM Portal 1.3.0 released to BETA testers
+## - Added the feature of changing the page title name in the ACP
+## - you can now colapse blocks with the a simple push of a button under each block. You can chooce in the ACP whether or not you want this button showed (so the blocks are always showing)
+## - added navagation links in the top menu
+## - added copyright to the overall_footer.tpl file
+## - added a link in the ACP to goto the portal.php file
+## 
+##   2004-05-29 - Version 1.2.0
+## 
+## - beta period ended with no bug reports :) just a repackaged version
+##      - planned IM Portal addons will be made available separately
+##      - IM Portal Manual is also made available separately
+## 
+##   2004-05-25 - Version 1.1.1
+## 
+## - per portal page permission (user level)
+##      - usergroups permission for each block and for each portal page
+##      - automatic block position tags using a config file for each layout
+##      - automatic block variables in Portal Configuration per installed block 
+##   using a config file
+##      - complete control of the cache system through the Portal Configuration in ACP
+##      - blocks with or without border, with or without titlebar and with or without background
+## 
+##   2004-05-09 - Version 1.1.0
+## 
+##      - add missing procedures in install file to make it forum_wide
+## 
+##   2004-05-02 - Version 1.1.0
+## 
+##      - minor changes
+##      - changes in blocks to enable duplicate blocks in a page
+## - add some debugging code for problems not showing forum-wide blocks
+## 
+##   2004-04-30 - Version 1.0.3
+## 
+##      - cache system using Cache Lite class with the choice to enable system-wide caching of data; 
+##   administrators can also choose which blocks to cache and the life of cached blocks in seconds
+##      - fix minor bugs in some default blocks
+## - requirement for eXtreme Styles mod removed; now, it can be used with the standard
+##   templating system
+## 
+##   2004-04-26 - Version 1.0.2
+## 
+##      - multi-page portal where each page can have a different layout (you can have extra pages with
+##        different information/blocks and layout per page (read readme.txt for usage)
+##      - tight integration of layouts, block position tags and blocks in the ACP
+##      - confirmation dialog for all delete actions
+##      - use of either HTML or BBCode for Text Content for the blocks with standard post capability
+##        of phpBB using BBCode
+##      - centralization of functions to a file: includes/function_portal.php
+##      - portal pages with choice of displaying or not displaying forum-wide blocks
+##      - block variables localization through the use of block functions
+## 
+##   2004-04-18 - Version 1.0.1
+## 
+##      - forum-wide integration of the portal engine
+##      - each block now has its own language file
+##      - removed the user selection of layout because of the planned multi-page portal
+## 
+##   2004-03-27 - Version 1.0.0
+## 
+##      - first complete release of portal engine
+##      - includes 7 blocks
+##      - includes 2 layouts
+## 
+##   2004-03-23 - Version 0.1.0
+## 
+##      - first release 
+## 
+##############################################################
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD 
+##############################################################
+
+#
+#-----[ COPY ]------------------------------------------
+#
+copy phpbbroot/fetchposts.php to phpbbroot/fetchposts.php
+copy phpbbroot/portal.php to phpbbroot/portal.php
+copy phpbbroot/admin/admin_blocks.php to phpbbroot/admin/admin_blocks.php
+copy phpbbroot/admin/admin_blocks_pos.php to phpbbroot/admin/admin_blocks_pos.php
+copy phpbbroot/admin/admin_blocks_var.php to phpbbroot/admin/admin_blocks_var.php
+copy phpbbroot/admin/admin_clear_cache.php to phpbbroot/admin/admin_clear_cache.php
+copy phpbbroot/admin/admin_layout.php to phpbbroot/admin/admin_layout.php
+copy phpbbroot/admin/admin_portal.php to phpbbroot/admin/admin_portal.php
+copy phpbbroot/blocks/blocks_imp_forum.cfg to phpbbroot/blocks/blocks_imp_forum.cfg
+copy phpbbroot/blocks/blocks_imp_forum.php to phpbbroot/blocks/blocks_imp_forum.php
+copy phpbbroot/blocks/blocks_imp_online_users.php to phpbbroot/blocks/blocks_imp_online_users.php
+copy phpbbroot/blocks/blocks_imp_poll.cfg to phpbbroot/blocks/blocks_imp_poll.cfg
+copy phpbbroot/blocks/blocks_imp_poll.php to phpbbroot/blocks/blocks_imp_poll.php
+copy phpbbroot/blocks/blocks_imp_recent_topics.cfg to phpbbroot/blocks/blocks_imp_recent_topics.cfg
+copy phpbbroot/blocks/blocks_imp_recent_topics.php to phpbbroot/blocks/blocks_imp_recent_topics.php
+copy phpbbroot/blocks/blocks_imp_search.cfg to phpbbroot/blocks/blocks_imp_search.cfg
+copy phpbbroot/blocks/blocks_imp_search.php to phpbbroot/blocks/blocks_imp_search.php
+copy phpbbroot/blocks/blocks_imp_statistics.php to phpbbroot/blocks/blocks_imp_statistics.php
+copy phpbbroot/blocks/blocks_imp_user_block.php to phpbbroot/blocks/blocks_imp_user_block.php
+copy phpbbroot/blocks/language/lang_english/lang_forum_block.php to phpbbroot/blocks/language/lang_english/lang_forum_block.php
+copy phpbbroot/blocks/language/lang_english/lang_online_users_block.php to phpbbroot/blocks/language/lang_english/lang_online_users_block.php
+copy phpbbroot/blocks/language/lang_english/lang_poll_block.php to phpbbroot/blocks/language/lang_english/lang_poll_block.php
+copy phpbbroot/blocks/language/lang_english/lang_search_block.php to phpbbroot/blocks/language/lang_english/lang_search_block.php
+copy phpbbroot/blocks/language/lang_english/lang_statistics_block.php to phpbbroot/blocks/language/lang_english/lang_statistics_block.php
+copy phpbbroot/blocks/language/lang_english/lang_user_block_block.php to phpbbroot/blocks/language/lang_english/lang_user_block_block.php
+copy phpbbroot/includes/functions_portal.php to phpbbroot/includes/functions_portal.php
+copy phpbbroot/includes/lite.php to phpbbroot/includes/lite.php
+copy phpbbroot/templates/assets/js/scripts.js to phpbbroot/templates/assets/js/scripts.js
+copy phpbbroot/templates/subSilver/portal_page_header.tpl to phpbbroot/templates/subSilver/portal_page_header.tpl
+copy phpbbroot/templates/subSilver/portal_page_tail.tpl to phpbbroot/templates/subSilver/portal_page_tail.tpl
+copy phpbbroot/templates/subSilver/portal_poll_ballot.tpl to phpbbroot/templates/subSilver/portal_poll_ballot.tpl
+copy phpbbroot/templates/subSilver/portal_poll_result.tpl to phpbbroot/templates/subSilver/portal_poll_result.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_edit_body.tpl to phpbbroot/templates/subSilver/admin/blocks_edit_body.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_layout_list_body.tpl to phpbbroot/templates/subSilver/admin/blocks_layout_list_body.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_list_body.tpl to phpbbroot/templates/subSilver/admin/blocks_list_body.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_position_edit_body.tpl to phpbbroot/templates/subSilver/admin/blocks_position_edit_body.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_position_list_body.tpl to phpbbroot/templates/subSilver/admin/blocks_position_list_body.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_variables_edit_body.tpl to phpbbroot/templates/subSilver/admin/blocks_variables_edit_body.tpl
+copy phpbbroot/templates/subSilver/admin/blocks_variables_list_body.tpl to phpbbroot/templates/subSilver/admin/blocks_variables_list_body.tpl
+copy phpbbroot/templates/subSilver/admin/confirm_body.tpl to phpbbroot/templates/subSilver/admin/confirm_body.tpl
+copy phpbbroot/templates/subSilver/admin/layout_edit_body.tpl to phpbbroot/templates/subSilver/admin/layout_edit_body.tpl
+copy phpbbroot/templates/subSilver/admin/layout_list_body.tpl to phpbbroot/templates/subSilver/admin/layout_list_body.tpl
+copy phpbbroot/templates/subSilver/admin/portal_config_body.tpl to phpbbroot/templates/subSilver/admin/portal_config_body.tpl
+copy phpbbroot/templates/subSilver/blocks/forum_block.tpl to phpbbroot/templates/subSilver/blocks/forum_block.tpl
+copy phpbbroot/templates/subSilver/blocks/online_users_block.tpl to phpbbroot/templates/subSilver/blocks/online_users_block.tpl
+copy phpbbroot/templates/subSilver/blocks/poll_block.tpl to phpbbroot/templates/subSilver/blocks/poll_block.tpl
+copy phpbbroot/templates/subSilver/blocks/recent_topics_block.tpl to phpbbroot/templates/subSilver/blocks/recent_topics_block.tpl
+copy phpbbroot/templates/subSilver/blocks/search_block.tpl to phpbbroot/templates/subSilver/blocks/search_block.tpl
+copy phpbbroot/templates/subSilver/blocks/statistics_block.tpl to phpbbroot/templates/subSilver/blocks/statistics_block.tpl
+copy phpbbroot/templates/subSilver/blocks/user_block_block.tpl to phpbbroot/templates/subSilver/blocks/user_block_block.tpl
+copy phpbbroot/templates/subSilver/blocks/users_visited_block.tpl to phpbbroot/templates/subSilver/blocks/users_visited_block.tpl
+copy phpbbroot/templates/subSilver/layout/ to phpbbroot/templates/subSilver/layout/layout1.cfg
+copy phpbbroot/templates/subSilver/layout/ to phpbbroot/templates/subSilver/layout/layout1.cfg
+copy phpbbroot/templates/subSilver/layout/ to phpbbroot/templates/subSilver/layout/portal_body.cfg
+copy phpbbroot/templates/subSilver/layout/ to phpbbroot/templates/subSilver/layout/portal_body.tpl
+#
+#-----[note: ] if you are using another template aside from subsilver, copy the contents of the subsilver directory in all the template directories that you have installed
+#
+ 
+#-----[ SQL ]------------------------------------------ 
+#
+Important! BEFORE editing any files, log in to your forum as admin. Then and browse to "install_imp.php"
+Example: https://yoursite.com/install_imp.php
+Important! After succesfull install, delete sql_installer.php from your webspace.
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/constants.php
+#
+#-----[ FIND ]------------------------------------------
+#
+?>
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+//
+// IM Portal https://integramod.com
+//
+define ('BLOCKS_TABLE', $table_prefix.'blocks');
+define ('BLOCK_POSITION_TABLE', $table_prefix.'block_position');
+define ('LAYOUT_TABLE',$table_prefix.'layout');
+define ('PORTAL_CONFIG_TABLE',$table_prefix.'portal_config');
+define ('BLOCK_VARIABLE_TABLE',$table_prefix.'block_variable');
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/page_header.php
+#
+#-----[ FIND ]------------------------------------------
+#
+define('HEADER_INC', TRUE);
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+//
+// IM Portal https://integramod.com
+//
+if(!defined('PORTAL_INIT'))
+{
+	include($phpbb_root_path . 'includes/functions_portal.' . $phpEx);
+	portal_config_init($portal_config);
+	include_once($phpbb_root_path . 'includes/lite.'.$phpEx);
+	$options = array(
+		'cacheDir' => $phpbb_root_path . 'var_cache/',
+		'fileLocking' => $portal_config['md_cache_file_locking'],
+		'writeControl' => $portal_config['md_cache_write_control'],
+		'readControl' => $portal_config['md_cache_read_control'],
+		'readControlType' => $portal_config['md_cache_read_type'],
+		'fileNameProtection' => $portal_config['md_cache_filename_protect'],
+		'automaticSerialization' => $portal_config['md_cache_serialize']
+	);
+	$var_cache = new Cache_Lite($options);
+	define('PORTAL_INIT', TRUE);
+}
+if($portal_config['collapse_layout'] == 1)
+{
+	$template->assign_block_vars('layout_collapse',array(
+		'LAYOUT_IMAGER' => $images['layout_imager'],
+		'LAYOUT_IMAGEL' => $images['layout_imagel']
+		)
+	);
+}
+else
+{
+	$template->assign_block_vars('no_layout_collapse',array(
+		'SPACER' => $images['spacer'],
+		)
+	);
+}
+
+#
+#-----[ FIND ]------------------------------------------
+#
+'U_GROUP_CP' => append_sid('groupcp.'.$phpEx),
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+//
+// IM Portal https://integramod.com
+//
+	'L_HOME' => $lang['Home'],
+	'U_HOME' => append_sid('portal.'.$phpEx),
+	'L_FORUMS' => $lang['Forums'],
+	'U_FORUMS' => append_sid('index.'.$phpEx),
+
+#
+#-----[ FIND ]------------------------------------------
+#
+$template->pparse('overall_header');
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+//
+// IM Portal https://integramod.com
+//
+
+// debug forum wide Portal
+/*if($layout_forum_wide_flag)
+	$temp_debug = 1;
+else
+	$temp_debug = 0;
+die('debug: ' . strval(empty($gen_simple_header)) . ' | ' . strval($temp_debug) . ' | ' . strval($portal_config['portal_header']) . ' | ' . strval(defined('HAS_DIED')) . ' | ' . strval(defined('IN_LOGIN')));*/
+// debug forum wide Portal
+
+//
+// IM Portal blocks
+//
+if(empty($gen_simple_header))
+{
+	if(!isset($layout_forum_wide_flag) || !$layout_forum_wide_flag && $portal_config['portal_header']) 
+	{
+		if(defined('HAS_DIED') || defined('IN_LOGIN')) 
+		{
+			$template->assign_vars(array('FOOTER_WIDTH' => 0));
+		} 
+		else 
+		{
+			if($portal_config['portal_tail']) 
+			{
+				$template->assign_block_vars('switch_portal_both', array());
+				$template->assign_vars(array('FOOTER_WIDTH' => $portal_config['footer_width']));
+			} else {
+				$template->assign_block_vars('switch_portal_header', array());
+			}
+			$template->set_filenames(array(
+				'portal_header' => 'portal_page_header.tpl')
+			);
+			portal_parse_blocks($portal_config['default_portal'], TRUE, 'header');
+			$template->assign_vars(array('HEADER_WIDTH' => $portal_config['header_width']));
+			$template->assign_vars(array('PORTAL_HEADER' => portal_assign_var_from_handle($template, 'portal_header')));
+		}
+	}
+	else if ($portal_config['portal_tail'])
+	{
+		$template->assign_block_vars('switch_portal_tail', array());
+		$template->assign_vars(array('FOOTER_WIDTH' => $portal_config['footer_width']));
+	}
+}
+//
+// end of IM Portal blocks
+//
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/page_tail.php
+#
+#-----[ FIND ]------------------------------------------
+#
+$template->pparse('overall_footer');
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+
+//
+// IM Portal https://integramod.com
+//
+
+$layout_forum_wide_flag = isset($layout_forum_wide_flag) ? $layout_forum_wide_flag : false;
+if(!$layout_forum_wide_flag && $portal_config['portal_tail'] && (!defined('HAS_DIED')) && (!defined('IN_LOGIN'))) 
+{
+	$template->set_filenames(array(
+		'portal_tail'         => 'portal_page_tail.tpl')
+	);
+	portal_parse_blocks($portal_config['default_portal'], TRUE, 'tail');
+	$template->assign_vars(array('PORTAL_TAIL' => portal_assign_var_from_handle($template, 'portal_tail')));
+}
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/functions.php
+#
+#-----[ FIND ]------------------------------------------
+#
+    include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_main.' . $phpEx);
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+	//
+	// IM Portal https://integramod.com
+	//
+	include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_portal.' . $phpEx);
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+language/lang_english/lang_main.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+//
+// That's all, Folks!
+// -------------------------------------------------
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+//
+// IM Portal https://integramod.com
+//
+$lang['Home'] = 'Home';
+$lang['Forums'] = 'Forums';
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+login.php
+#
+#-----[ FIND ]------------------------------------------
+#
+				redirect(append_sid("index.$phpEx", true));
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+				redirect(append_sid("portal.$phpEx", true));
+#
+#-----[ FIND ]------------------------------------------
+#
+						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "index.$phpEx";
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "portal.$phpEx";
+#
+#-----[ FIND ]------------------------------------------
+#
+			redirect(append_sid("index.$phpEx", true));
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+			redirect(append_sid("portal.$phpEx", true));
+#
+#-----[ FIND ]------------------------------------------
+#
+		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "index.$phpEx";
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "portal.$phpEx";
+#
+#-----[ FIND ]------------------------------------------
+#
+		redirect(append_sid("index.$phpEx", true));
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+		redirect(append_sid("portal.$phpEx", true));
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/overall_header.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+<title>{SITENAME} :: {PAGE_TITLE}</title>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+<script src="templates/assets/js/importal.js"></script>
+
+#
+#-----[ FIND ]------------------------------------------
+#
+<td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">
+
+# 
+#-----[ IN-LINE FIND ]------------------------------------------ 
+# 
+<td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">
+
+#
+#-----[ IN-LINE AFTER, ADD ]------------------------------------------ 
+#
+&nbsp;<a href="{U_HOME}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_groups.gif" width="12" height="13" border="0" alt="{L_HOME}" hspace="3" />{L_HOME}</a></span>&nbsp; &nbsp;<a href="{U_FORUMS}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_members.gif" width="12" height="13" border="0" alt="{L_FORUMS}" hspace="3" />{L_FORUMS}</a></span>&nbsp;
+
+#
+#-----[ FIND ]------------------------------------------
+#
+						<td height="25" align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_PROFILE}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_profile.gif" width="12" height="13" border="0" alt="{L_PROFILE}" hspace="3" />{L_PROFILE}</a>&nbsp; &nbsp;<a href="{U_PRIVATEMSGS}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_message.gif" width="12" height="13" border="0" alt="{PRIVATE_MESSAGE_INFO}" hspace="3" />{PRIVATE_MESSAGE_INFO}</a>&nbsp; &nbsp;<a href="{U_LOGIN_LOGOUT}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_login.gif" width="12" height="13" border="0" alt="{L_LOGIN_LOGOUT}" hspace="3" />{L_LOGIN_LOGOUT}</a>&nbsp;</span></td>
+					</tr>
+				</table></td>
+			</tr>
+		</table>
+
+		<br />
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+{PORTAL_HEADER}
+<td valign="top">
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/overall_footer.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+<div align="center"><span class="copyright"><br />{ADMIN_LINK}<br />
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+{PORTAL_TAIL}</tr></table>
+
+#
+#-----[ FIND ]------------------------------------------
+#
+Powered by <a href="https://www.phpbb.com/" target="_phpbb"
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+Portal powered by <a href="https://integramod.com/" target="_blank" class="copyright">IM Portal</a> &copy; 2005 IntegraMOD<br />
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+admin/index.php
+#
+#-----[ FIND ]------------------------------------------
+#
+		"L_FORUM_INDEX" => $lang['Main_index'],
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+		"L_HOME_INDEX" => $lang['Home_index'],
+		"U_HOME_INDEX" => append_sid("../portal.$phpEx"),
+		"L_PREVIEW_HOME" => $lang['Home_preview'],
+		"U_PREVIEW_HOME" => append_sid("../portal.$phpEx"),
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/admin/index_navigate.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
+		</tr>
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_HOME_INDEX}" target="_parent" class="genmed">{L_HOME_INDEX}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_PREVIEW_HOME}" target="main" class="genmed">{L_PREVIEW_HOME}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
+		</tr>
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/subSilver.cfg
+#
+#-----[ FIND ]------------------------------------------
+#
+$images['voting_graphic_left'] = "$current_template_images/vote_lcap.gif";
+$images['voting_graphic_right'] = "$current_template_images/vote_rcap.gif";
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+$images['block_close'] = "$current_template_images/block_close.gif";
+$images['block_open'] = "$current_template_images/block_open.gif";
+$images['layout_imager'] = "$current_template_images/layout_arrowr.gif";
+$images['layout_imagel'] = "$current_template_images/layout_arrowl.gif";
+$images['spacer'] = "$current_template_images/spacer.gif";
+
+# 
+#-----[ CHMOD ]------------------------------------------ 
+#
+
+create directory var_cache under your phpbb root directory and CHMOD it to 777.
+
+#
+#-----[ OTHERS ]-----------------------------------------
+#
+
+For a detailed information on using IM Portal, please visit https://integramod.com and go the knowledgebase section of the site and check the IM Portal Information category.  For questions/suggestions/requests/bug reports/downloads, go to https://integramod.com.  IM Portal manual is now also available at the download section of the site.
+
+Please support the site by checking the ads.  Thanks! :)
+
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
+#
+# EoM
