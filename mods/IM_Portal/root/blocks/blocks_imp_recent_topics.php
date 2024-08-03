@@ -51,14 +51,20 @@ if(!function_exists(imp_recent_topics_block_func)) {
         $is_auth_ary = array();
         $is_auth_ary = auth(AUTH_ALL, AUTH_LIST_ALL, $userdata, $forum_data);
 
-        if($portal_config['md_except_forum_id'] == '') {
+        if($portal_config['md_except_forum_id'] == '') 
+		{
             $except_forum_id = '\'start\'';
-        } else {
+        } 
+		else 
+		{
             $except_forum_id = $portal_config['md_except_forum_id'];
         }
-        for ($i = 0; $i < count($forum_data); $i++) {
-            if ((!$is_auth_ary[$forum_data[$i]['forum_id']]['auth_read']) or (!$is_auth_ary[$forum_data[$i]['forum_id']]['auth_view'])) {
-                if ($except_forum_id == '\'start\'') {
+        for ($i = 0; $i < count($forum_data); $i++) 
+		{
+            if ((!$is_auth_ary[$forum_data[$i]['forum_id']]['auth_read']) or (!$is_auth_ary[$forum_data[$i]['forum_id']]['auth_view'])) 
+			{
+                if ($except_forum_id == '\'start\'') 
+				{
                     $except_forum_id = $forum_data[$i]['forum_id'];
                 } else {
                     $except_forum_id .= ',' . $forum_data[$i]['forum_id'];
@@ -80,7 +86,9 @@ if(!function_exists(imp_recent_topics_block_func)) {
 					$extra
 				ORDER BY p.post_time DESC 
 				LIMIT " . $portal_config['md_num_recent_topics'];
-        } else {
+        } 
+		else 
+		{
             $sql = "SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.forum_id, p.post_id, p.poster_id, p.post_time, u.user_id, u.username
 				FROM " . TOPICS_TABLE . " AS t, " . POSTS_TABLE . " AS p, " . USERS_TABLE . " AS u
 				WHERE t.forum_id NOT IN (" . $except_forum_id . ")
