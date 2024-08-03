@@ -4,7 +4,7 @@
 ## MOD Author: secondary: kvfb97 < info@kvfb97.co.uk > (Robert Dougan) http://www.integramod.com
 ## MOD Author: Helter https://integramod.com
 ## MOD Description: Flexible and full-featured portal management addon for phpBB (forum-wide integration). Multiple-page version with cache system
-## MOD Version: 1.3.3
+## MOD Version: 1.3.4
 ## 
 ## Installation Level: Easy
 ## Installation Time: 20 minutes
@@ -253,13 +253,30 @@ Important! After succesfull install, delete sql_installer.php from your webspace
 #
 #-----[ OPEN ]------------------------------------------
 #
+admin/index.php
+#
+#-----[ FIND ]------------------------------------------
+#
+		"L_FORUM_INDEX" => $lang['Main_index'],
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+		"L_HOME_INDEX" => $lang['Home_index'],
+		"U_HOME_INDEX" => append_sid("../portal.$phpEx"),
+		"L_PREVIEW_HOME" => $lang['Home_preview'],
+		"U_PREVIEW_HOME" => append_sid("../portal.$phpEx"),
+		
+#
+#-----[ OPEN ]------------------------------------------
+#
 includes/constants.php
 #
 #-----[ FIND ]------------------------------------------
 #
-?>
+define('VOTE_USERS_TABLE', $table_prefix.'vote_voters');
+
 #
-#-----[ BEFORE, ADD ]------------------------------------------
+#-----[ AFTER, ADD ]------------------------------------------
 #
 //
 // IM Portal https://integramod.com
@@ -269,6 +286,7 @@ define ('BLOCK_POSITION_TABLE', $table_prefix.'block_position');
 define ('LAYOUT_TABLE',$table_prefix.'layout');
 define ('PORTAL_CONFIG_TABLE',$table_prefix.'portal_config');
 define ('BLOCK_VARIABLE_TABLE',$table_prefix.'block_variable');
+define ('THEMES_SELECT_INFO_TABLE',$table_prefix.'themes_select_info');
 #
 #-----[ OPEN ]------------------------------------------
 #
@@ -300,13 +318,15 @@ if(!defined('PORTAL_INIT'))
 	$var_cache = new Cache_Lite($options);
 	define('PORTAL_INIT', TRUE);
 }
-if($portal_config['collapse_layout'] == 1)
+if(isset($portal_config['collapse_layout']) && $portal_config['collapse_layout'] == 1)
 {
-	$template->assign_block_vars('layout_collapse',array(
-		'LAYOUT_IMAGER' => $images['layout_imager'],
-		'LAYOUT_IMAGEL' => $images['layout_imagel']
-		)
-	);
+    $layout_imager = isset($images['layout_imager']) ? $images['layout_imager'] : '';
+    $layout_imagel = isset($images['layout_imagel']) ? $images['layout_imagel'] : '';
+ 
+    $template->assign_block_vars('layout_collapse', array(
+        'LAYOUT_IMAGER' => $layout_imager,
+        'LAYOUT_IMAGEL' => $layout_imagel
+    ));
 }
 else
 {
@@ -430,6 +450,75 @@ includes/functions.php
 	//
 	include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_portal.' . $phpEx);
 
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+function init_userprefs($userdata)
+{
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+      // BEGIN Style Select MOD
+	global $_GET, $_POST, $_COOKIE;
+	// END Style Select MOD
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+	//
+	// Set up style
+	//
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+	// BEGIN Style Select MOD
+	if ( isset($_POST[STYLE_URL]) || isset($_GET[STYLE_URL]) ) 
+	{
+		$style = urldecode( (isset($_POST[STYLE_URL])) ? $_POST[STYLE_URL] : $_GET[STYLE_URL] );
+		if ( $theme = setup_style($style) )
+		{
+			setcookie($board_config['cookie_name'] . '_style', $style, time() + 31536000, $board_config['cookie_path'], $board_config['cookie_domain'], $board_config['cookie_secure']);
+			return;
+		}
+	}
+
+
+	if ( isset($_COOKIE[$board_config['cookie_name'] . '_style']) )
+	{
+		$style = $_COOKIE[$board_config['cookie_name'] . '_style'];
+		if ( $theme = setup_style($style) )
+		{
+			return;
+		}
+	}
+	// END Style Select MOD
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+function setup_style($style)
+{
+	global $db, $board_config, $template, $images, $phpbb_root_path;
+#
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+	// BEGIN Style Select MOD
+	if ( intval($style) == 0 )
+	{
+		$sql = "SELECT themes_id
+				FROM " . THEMES_TABLE . "
+				WHERE style_name = '$style'";
+		if( ($result = $db->sql_query($sql)) && ($row = $db->sql_fetchrow($result)) )
+		{
+			$style = $row['themes_id'];
+		}
+		else
+		{
+			message_die(GENERAL_ERROR, "Could not find style name $style.");
+		}
+	}
+	// END Style Select MOD
 #
 #-----[ OPEN ]------------------------------------------
 #
@@ -451,6 +540,28 @@ language/lang_english/lang_main.php
 $lang['Home'] = 'Home';
 $lang['Forums'] = 'Forums';
 
+# 
+#-----[ OPEN ]------------------------------------------ 
+#
+language/lang_english/lang_admin.php
+# 
+#-----[ AT THE END, ADD ]------------------------------- 
+#
+
+// BEGIN Style Select MOD
+$lang['Style_select_manage'] = 'Style select manage';
+$lang['Style_select_explain'] = 'Using this facility you can manage style select info table';
+$lang['Style_select_author'] = 'Author';
+$lang['Style_select_version'] = 'Version';
+$lang['Style_select_website'] = 'Web Site';
+$lang['Style_select_viewings'] = 'Viewings';
+$lang['Style_select_dlurl'] = 'File URL';
+$lang['Style_select_dls'] = 'Download Total';
+$lang['Style_select_loaclurl'] = 'Localization URL';
+$lang['Style_select_ludls'] = 'Localization Download Total';
+$lang['Click_return_style_sel_admin'] = 'Click %sHere%s to return to Style Select Administration';
+$lang['Style_select_update'] = 'Data was successfully updated';
+// END Style Select MOD
 #
 #-----[ OPEN ]------------------------------------------
 #
@@ -466,11 +577,11 @@ login.php
 #
 #-----[ FIND ]------------------------------------------
 #
-						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "index.$phpEx";
+						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'UTF-8')) : "index.$phpEx";
 #
 #-----[ REPLACE WITH ]------------------------------------------
 #
-						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "portal.$phpEx";
+						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'UTF-8')) : "portal.$phpEx";
 #
 #-----[ FIND ]------------------------------------------
 #
@@ -482,11 +593,11 @@ login.php
 #
 #-----[ FIND ]------------------------------------------
 #
-		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "index.$phpEx";
+		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'UTF-8')) : "index.$phpEx";
 #
 #-----[ REPLACE WITH ]------------------------------------------
 #
-		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'])) : "portal.$phpEx";
+		$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'UTF-8')) : "portal.$phpEx";
 #
 #-----[ FIND ]------------------------------------------
 #
@@ -495,6 +606,34 @@ login.php
 #-----[ REPLACE WITH ]------------------------------------------
 #
 		redirect(append_sid("portal.$phpEx", true));
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/admin/index_navigate.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
+		</tr>
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_HOME_INDEX}" target="_parent" class="genmed">{L_HOME_INDEX}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_PREVIEW_HOME}" target="main" class="genmed">{L_PREVIEW_HOME}</a></span></td>
+		</tr>
+		<tr> 
+		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
+		</tr>
 #
 #-----[ OPEN ]------------------------------------------
 #
@@ -538,9 +677,9 @@ templates/subSilver/overall_header.tpl
 #-----[ AFTER, ADD ]------------------------------------------
 #
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr> 
-{PORTAL_HEADER}
-<td valign="top">
+  <tr> 
+    {PORTAL_HEADER}
+    <td valign="top">
 
 #
 #-----[ OPEN ]------------------------------------------
@@ -554,7 +693,10 @@ templates/subSilver/overall_footer.tpl
 #
 #-----[ BEFORE, ADD ]------------------------------------------
 #
-{PORTAL_TAIL}</tr></table>
+    {PORTAL_TAIL}
+    </td>
+  </tr>
+</table>
 
 #
 #-----[ FIND ]------------------------------------------
@@ -563,51 +705,7 @@ Powered by <a href="https://www.phpbb.com/" target="_phpbb"
 #
 #-----[ BEFORE, ADD ]------------------------------------------
 #
-Portal powered by <a href="https://integramod.com/" target="_blank" class="copyright">IM Portal</a> &copy; 2005 IntegraMOD<br />
-
-#
-#-----[ OPEN ]------------------------------------------
-#
-admin/index.php
-#
-#-----[ FIND ]------------------------------------------
-#
-		"L_FORUM_INDEX" => $lang['Main_index'],
-#
-#-----[ BEFORE, ADD ]------------------------------------------
-#
-		"L_HOME_INDEX" => $lang['Home_index'],
-		"U_HOME_INDEX" => append_sid("../portal.$phpEx"),
-		"L_PREVIEW_HOME" => $lang['Home_preview'],
-		"U_PREVIEW_HOME" => append_sid("../portal.$phpEx"),
-#
-#-----[ OPEN ]------------------------------------------
-#
-templates/subSilver/admin/index_navigate.tpl
-#
-#-----[ FIND ]------------------------------------------
-#
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
-		</tr>
-#
-#-----[ REPLACE WITH ]------------------------------------------
-#
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_HOME_INDEX}" target="_parent" class="genmed">{L_HOME_INDEX}</a></span></td>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="_parent" class="genmed">{L_FORUM_INDEX}</a></span></td>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_PREVIEW_HOME}" target="main" class="genmed">{L_PREVIEW_HOME}</a></span></td>
-		</tr>
-		<tr> 
-		  <td class="row1"><span class="genmed"><a href="{U_FORUM_INDEX}" target="main" class="genmed">{L_PREVIEW_FORUM}</a></span></td>
-		</tr>
+Portal powered by <a href="https://integramod.com/" target="_blank" class="copyright">IntegraMOD</a> &copy; 2005 IntegraMOD<br />
 
 #
 #-----[ OPEN ]------------------------------------------

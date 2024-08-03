@@ -184,7 +184,7 @@ class Cache_Lite
     * @param array $options options
     * @access public
     */
-    function Cache_Lite($options = array(NULL))
+    function __construct($options = array(NULL))
     {
         $availableOptions = array('automaticSerialization', 'fileNameProtection', 'memoryCaching', 'onlyMemoryCaching', 'memoryCachingLimit', 'cacheDir', 'caching', 'lifeTime', 'fileLocking', 'writeControl', 'readControl', 'readControlType', 'pearErrorMode');
         foreach($options as $key => $value) {
@@ -471,7 +471,7 @@ class Cache_Lite
     function _writeAndControl($data)
     {
         $this->_write($data);
-        $dataRead = $this->_read($data);
+        $dataRead = $this->_read();
         return ($dataRead==$data);
     }
     

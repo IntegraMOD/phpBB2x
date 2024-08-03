@@ -118,72 +118,69 @@ function generate_smilies2($mode, $page_id)
 		{
 			if ( empty($rowset[$row['smile_url']]) )
 			{
-				$rowset[$row['smile_url']]['code'] = str_replace('\\', '\\\\', str_replace("'", "\\'", $row['code']));
+				$rowset[$row['smile_url']]['code'] = str_replace('\\', '\\\\', str_replace("'", "\\'", (string) $row['code']));
 				$rowset[$row['smile_url']]['emoticon'] = $row['emoticon'];
 				$num_smilies++;
 			}
 		}
 
-		if ( $num_smilies )
+	if ( $num_smilies )
+	{
+		$smilies_count = ( $mode == 'inline' ) ? min(19, $num_smilies) : $num_smilies;
+		$smilies_split_row = ( $mode == 'inline' ) ? $inline_columns - 1 : $window_columns - 1;
+	 
+		$s_colspan = 0;
+		$row = 0;
+		$col = 0;
+	 
+		foreach ($rowset as $smile_url => $data)
 		{
-			$smilies_count = ( $mode == 'inline' ) ? min(19, $num_smilies) : $num_smilies;
-			$smilies_split_row = ( $mode == 'inline' ) ? $inline_columns - 1 : $window_columns - 1;
-
-			$s_colspan = 0;
-			$row = 0;
-			$col = 0;
-
-			while ( list($smile_url, $data) = @each($rowset) )
+			if ( !$col )
 			{
-				if ( !$col )
-				{
-					$template->assign_block_vars('smilies_row', array());
-				}
-
-				$template->assign_block_vars('smilies_row.smilies_col', array(
-					'SMILEY_CODE' => $data['code'],
-
-					// NUTTZY - changed the path to the smilely images
-//					'SMILEY_IMG' => $board_config['smilies_path'] . '/' . $smile_url,
-					'SMILEY_IMG' => '../' . $board_config['smilies_path'] . '/' . $smile_url,
-
-					'SMILEY_DESC' => $data['emoticon'])
-				);
-
-				$s_colspan = max($s_colspan, $col + 1);
-
-				if ( $col == $smilies_split_row )
-				{
-					if ( $mode == 'inline' && $row == $inline_rows - 1 )
-					{
-						break;
-					}
-					$col = 0;
-					$row++;
-				}
-				else
-				{
-					$col++;
-				}
+				$template->assign_block_vars('smilies_row', array());
 			}
-
-			if ( $mode == 'inline' && $num_smilies > $inline_rows * $inline_columns )
+	 
+			$template->assign_block_vars('smilies_row.smilies_col', array(
+				'SMILEY_CODE' => $data['code'],
+				'SMILEY_IMG' => '../' . $board_config['smilies_path'] . '/' . $smile_url,
+				'SMILEY_DESC' => $data['emoticon'])
+			);
+	 
+			$s_colspan = max($s_colspan, $col + 1);
+	 
+			if ( $col == $smilies_split_row )
 			{
-				$template->assign_block_vars('switch_smilies_extra', array());
-
-				$template->assign_vars(array(
-					'L_MORE_SMILIES' => $lang['More_emoticons'],
-//					'U_MORE_SMILIES' => append_sid("../posting.$phpEx?mode=smilies"))
-					'U_MORE_SMILIES' => append_sid("admin_blocks.$phpEx?mode=smilies"))
-				);
+				if ( $mode == 'inline' && $row == $inline_rows - 1 )
+				{
+					break;
+				}
+				$col = 0;
+				$row++;
 			}
-
+			else
+			{
+				$col++;
+			}
+		}
+	 
+		if ( $mode == 'inline' && $num_smilies > $inline_rows * $inline_columns )
+		{
+			$template->assign_block_vars('switch_smilies_extra', array());
+	 
 			$template->assign_vars(array(
-				'L_EMOTICONS' => $lang['Emoticons'],
-				'L_CLOSE_WINDOW' => $lang['Close_window'],
-				'S_SMILIES_COLSPAN' => $s_colspan)
+				'L_MORE_SMILIES' => $lang['More_emoticons'],
+				'U_MORE_SMILIES' => append_sid("admin_blocks.$phpEx?mode=smilies"))
 			);
 		}
+	 
+		$template->assign_vars(array(
+			'L_EMOTICONS' => $lang['Emoticons'],
+			'L_CLOSE_WINDOW' => $lang['Close_window'],
+			'S_SMILIES_COLSPAN' => $s_colspan)
+		);
+	}
+
+
 	}
 
 	if ( $mode == 'window' )
@@ -197,7 +194,7 @@ function generate_smilies2($mode, $page_id)
 if( isset($_GET['mode']) || isset($_POST['mode']) )
 {
 	$mode = ($_GET['mode']) ? $_GET['mode'] : $_POST['mode'];
-	$mode = htmlspecialchars($mode);
+	$mode = htmlspecialchars((string) $mode);
 }
 else 
 {
@@ -249,7 +246,7 @@ if( $mode != "" && $mode != "blocks" )
 
 		// Generate smilies listing for page output
 		generate_smilies2('inline', PAGE_POSTING);
-
+        global $s_hidden_fields;
 		$s_hidden_fields .= '<input type="hidden" name="lid" value="' . $l_id . '" />';
 
 		$message='';
@@ -283,7 +280,7 @@ if( $mode != "" && $mode != "blocks" )
 				{
 					message_die(CRITICAL_ERROR, "Could not query blocks position information", "", __LINE__, __FILE__, $sql);
 				}
-
+                global $position;
 				while ($row = $db->sql_fetchrow($result))
 				{
 					$position .= '<option value="' . $row['bposition'] . '" ';
@@ -341,10 +338,10 @@ if( $mode != "" && $mode != "blocks" )
 				$message = $b_info['content'];
 				if ( $b_info['block_bbcode_uid'] != '' )
 				{
-					$message = preg_replace('/\:(([a-z0-9]:)?)' . $b_info['block_bbcode_uid'] . '/s', '', $message);
+					$message = preg_replace('/\:(([a-z0-9]:)?)' . $b_info['block_bbcode_uid'] . '/s', '', (string) $message);
 				}
 
-				$message = str_replace('<', '&lt;', $message);
+				$message = str_replace('<', '&lt;', (string) $message);
 				$message = str_replace('>', '&gt;', $message);
 				$message = str_replace('<br />', "\n", $message);
 
@@ -353,7 +350,15 @@ if( $mode != "" && $mode != "blocks" )
 				{
 					message_die(CRITICAL_ERROR, "Could not query user groups information", "", __LINE__, __FILE__, $sql);
 				}
-				$group_array = explode(",", $b_info['pgroup']);
+//				$group_array = explode(",", (string) $b_info['pgroup']);
+                if (isset($b_info['pgroup'])) 
+                {
+                    $group_array = explode(",", (string) $b_info['pgroup']);
+                }
+                else
+                {
+                    $group_array = []; // or handle the case when 'pgroup' is not set
+                }
 				$group = '';
 				while ($row = $db->sql_fetchrow($result))
 				{
@@ -535,16 +540,16 @@ if( $mode != "" && $mode != "blocks" )
 	{
 		$b_id = ( isset($_POST['id']) ) ? intval($_POST['id']) : 0;
 		$l_id = ( isset($_POST['lid']) ) ? intval($_POST['lid']) : 0;
-		$b_title = ( isset($_POST['title']) ) ? trim($_POST['title']) : "";
-		$b_title_image = ( isset($_POST['title_image']) ) ? trim($_POST['title_image']) : "";
-		$b_bposition = ( isset($_POST['bposition']) ) ? trim($_POST['bposition']) : "";
+		$b_title = ( isset($_POST['title']) ) ? trim((string) $_POST['title']) : "";
+		$b_title_image = ( isset($_POST['title_image']) ) ? trim((string) $_POST['title_image']) : "";
+		$b_bposition = ( isset($_POST['bposition']) ) ? trim((string) $_POST['bposition']) : "";
 		$b_active = ( isset($_POST['active']) ) ? intval($_POST['active']) : 0;
 		$b_type = ( isset($_POST['type']) ) ? intval($_POST['type']) : 0;
 		$b_cache = ( isset($_POST['cache']) ) ? intval($_POST['cache']) : 0;
 		$b_cachetime = ( isset($_POST['cachetime']) ) ? intval($_POST['cachetime']) : 0;
-		$b_content = ( isset($_POST['message']) ) ? trim($_POST['message']) : "";
-		$b_blockfile = ( isset($_POST['blockfile']) ) ? trim($_POST['blockfile']) : "";
-		$b_view = ( isset($_POST['view']) ) ? trim($_POST['view']) : 0;
+		$b_content = ( isset($_POST['message']) ) ? trim((string) $_POST['message']) : "";
+		$b_blockfile = ( isset($_POST['blockfile']) ) ? trim((string) $_POST['blockfile']) : "";
+		$b_view = ( isset($_POST['view']) ) ? trim((string) $_POST['view']) : 0;
 		$b_border = ( isset($_POST['border']) ) ? intval($_POST['border']) : 0;
 		$b_titlebar = ( isset($_POST['titlebar']) ) ? intval($_POST['titlebar']) : 0;
 		$b_openclose = ( isset($_POST['openclose']) ) ? intval($_POST['openclose']) : 0;
@@ -594,7 +599,7 @@ if( $mode != "" && $mode != "blocks" )
 			{
 				$bbcode_uid = make_bbcode_uid();
 				$b_content = prepare_message(trim($b_content), TRUE, TRUE, TRUE, $bbcode_uid);
-				$b_content = str_replace("\'", "''", $b_content);
+				$b_content = str_replace("\'", "''", (string) $b_content);
 			}
 		}
 		
@@ -648,14 +653,14 @@ if( $mode != "" && $mode != "blocks" )
 						if(!$row['existing'])
 						{
 							$sql = "INSERT INTO " . BLOCK_VARIABLE_TABLE . " (label, sub_label, config_name, field_options, field_values, type, block) 
-								VALUES ('" . str_replace("\'", "''", $block_variables[$i][0]) . "', '" . str_replace("\'", "''", $block_variables[$i][1]) . "', '" . str_replace("\'", "''", $block_variables[$i][2]) . "', '" . str_replace("\'", "''", $block_variables[$i][3]) . "', '" . $block_variables[$i][4] . "', '" . $block_variables[$i][5] . "', '" . str_replace("\'", "''", $block_variables[$i][6]) . "')";
+								VALUES ('" . str_replace("\'", "''", (string) $block_variables[$i][0]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][1]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][2]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][3]) . "', '" . $block_variables[$i][4] . "', '" . $block_variables[$i][5] . "', '" . str_replace("\'", "''", (string) $block_variables[$i][6]) . "')";
 							if(!$result = $db->sql_query($sql))
 							{
 								message_die(GENERAL_ERROR, "Could not insert data into block variable table", $lang['Error'], __LINE__, __FILE__, $sql);
 							}
 							
 							$sql = "INSERT INTO " . PORTAL_CONFIG_TABLE . " (config_name, config_value)
-								VALUES ('" . str_replace("\'", "''", $block_variables[$i][2]) . "', '" . str_replace("\'", "''", $block_variables[$i][7]) . "')";
+								VALUES ('" . str_replace("\'", "''", (string) $block_variables[$i][2]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][7]) . "')";
 							if(!$result = $db->sql_query($sql))
 							{
 								message_die(GENERAL_ERROR, "Could not insert data into portal config table", $lang['Error'], __LINE__, __FILE__, $sql);
@@ -704,14 +709,14 @@ if( $mode != "" && $mode != "blocks" )
 						if(!$row['existing'])
 						{
 							$sql = "INSERT INTO " . BLOCK_VARIABLE_TABLE . " (label, sub_label, config_name, field_options, field_values, type, block) 
-								VALUES ('" . str_replace("\'", "''", $block_variables[$i][0]) . "', '" . str_replace("\'", "''", $block_variables[$i][1]) . "', '" . str_replace("\'", "''", $block_variables[$i][2]) . "', '" . str_replace("\'", "''", $block_variables[$i][3]) . "', '" . $block_variables[$i][4] . "', '" . $block_variables[$i][5] . "', '" . str_replace("\'", "''", $block_variables[$i][6]) . "')";
+								VALUES ('" . str_replace("\'", "''", (string) $block_variables[$i][0]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][1]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][2]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][3]) . "', '" . $block_variables[$i][4] . "', '" . $block_variables[$i][5] . "', '" . str_replace("\'", "''", (string) $block_variables[$i][6]) . "')";
 							if(!$result = $db->sql_query($sql))
 							{
 								message_die(GENERAL_ERROR, "Could not insert data into block variable table", $lang['Error'], __LINE__, __FILE__, $sql);
 							}
 							
 							$sql = "INSERT INTO " . PORTAL_CONFIG_TABLE . " (config_name, config_value)
-								VALUES ('" . str_replace("\'", "''", $block_variables[$i][2]) . "', '" . str_replace("\'", "''", $block_variables[$i][7]) . "')";
+								VALUES ('" . str_replace("\'", "''", (string) $block_variables[$i][2]) . "', '" . str_replace("\'", "''", (string) $block_variables[$i][7]) . "')";
 							if(!$result = $db->sql_query($sql))
 							{
 								message_die(GENERAL_ERROR, "Could not insert data into portal config table", $lang['Error'], __LINE__, __FILE__, $sql);
@@ -809,13 +814,13 @@ else if ($mode == "blocks")
 	{
 		$l_id = 0;
 	}
-	$move = ( isset($_GET['move']) ) ? $_GET['move'] : -1;
+	$move = $_GET['move'] ?? -1;
 
 	if( $move == '0' || $move == '1' )
 	{
 		$b_id = ( isset($_GET['bid']) ) ? intval($_GET['bid']) : 0;
-		$b_weight = ( isset($_GET['weight']) ) ? $_GET['weight'] : 0;
-		$b_position = ( isset($_GET['pos']) ) ? $_GET['pos'] : 0;
+		$b_weight = $_GET['weight'] ?? 0;
+		$b_position = $_GET['pos'] ?? 0;
 		if($b_position == '@' || $b_position == '*')
 		{
 			$layout = 0;
@@ -864,7 +869,7 @@ else if ($mode == "blocks")
 
 	$b_rows = $db->sql_fetchrowset($result);
 	$b_count = count($b_rows);
-	
+	global $s_hidden_fields;
 	$s_hidden_fields .= '<input type="hidden" name="lid" value="' . $l_id . '" />';
 
 	$template->assign_vars(array(
@@ -1037,5 +1042,3 @@ else
 $template->pparse("body");
 
 include('./page_footer_admin.'.$phpEx);
-
-?>

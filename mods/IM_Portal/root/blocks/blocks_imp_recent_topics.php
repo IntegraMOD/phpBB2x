@@ -107,7 +107,7 @@ if(!function_exists(imp_recent_topics_block_func)) {
             $style_row = 'static';
         }
 
-        $template->assign_block_vars($style_row, "");
+        $template->assign_block_vars($style_row,array());
 
         for ($i = 0; $i < $number_recent_topics; $i++) {
             $orig_word = array();

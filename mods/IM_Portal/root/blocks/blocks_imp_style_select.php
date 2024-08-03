@@ -61,24 +61,16 @@ if(!function_exists('imp_style_select_block_func'))
 		//
 		// Style details
 		//
-        $style_author = null;
-        $style_version = null;
-        $style_website = null;
-        $style_views = null;
-        $style_dlurl = null;
-        $style_dls = null;
-	    $style_loaclurl = null;
-	    $style_ludls = null;
 		$sql = "SELECT t.themes_id, tdi.* 
 				FROM ( " . THEMES_TABLE . "  t
-				LEFT JOIN " . 'THEMES_SELECT_INFO_TABLE' . " tdi ON t.themes_id = tdi.themes_id )
+				LEFT JOIN " . THEMES_SELECT_INFO_TABLE . " tdi ON t.themes_id = tdi.themes_id )
 				WHERE t.themes_id = " . $style;
 		if( ($result = $db->sql_query($sql)) && ($row = $db->sql_fetchrow($result)) )
 		{
 			$style_author = $row['style_author'];
 			$style_version = $row['style_version'];
 			$style_website = $row['style_website'];
-			$style_views = ( !empty($row['style_views']) ) ? $row['style_views'] : '0&nbsp;';
+			//$style_views = ( !empty($row['style_views']) ) ? $row['style_views'] : '0&nbsp;';
 			$style_dlurl = $row['style_dlurl'];
 			$style_dls = ( !empty($row['style_dls']) ) ? $row['style_dls'] : '0';
 			$style_loaclurl = $row['style_loaclurl'];
@@ -153,32 +145,35 @@ if(!function_exists('imp_style_select_block_func'))
 			'S_SELECT_STYLE' => $select_theme)
 		);
 		//$template->assign_vars(array('S_SELECT_STYLE' => $select_theme));
-
+	    $style_author = isset($style_author) ? $style_author : 0; // Initialize $style_author if not set
 		if ( $style_author )
 		{
 			$template->assign_block_vars('switch_style_author', array());
 			$template->assign_vars(array('L_STYLE_AUTHOR' => $lang['Style_select_author'] . $style_author));
 		}
+	    $style_dlurl = isset($style_dlurl) ? $style_dlurl : 0; // Initialize $style_dlurl if not set
 		if ( $style_dlurl )
 		{
 			$template->assign_block_vars('switch_style_dlurl', array());
 			$template->assign_vars(array('L_STYLE_DLURL' => "<a href=select_style.$phpEx?".DL_STYLE."=". $style ." target=\"_blank\">".$lang['Style_select_dlurl']."</a>:&nbsp;".$style_dls));
 		}
+	    $style_loaclurl = isset($style_loaclurl) ? $style_loaclurl : 0; // Initialize $style_loaclurl if not set
 		if ( $style_loaclurl )
 		{
 			$template->assign_block_vars('switch_style_loaclurl', array());
 			$template->assign_vars(array('L_STYLE_LOCALURL' => $select_style_localurl));
 		}
+	    $style_version = isset($style_version) ? $style_version : 0; // Initialize $style_version if not set
 		if ( $style_version )
 		{
 			$template->assign_block_vars('switch_style_version', array());
 			$template->assign_vars(array('L_STYLE_VERSION' => $lang['Style_select_version'] . $style_version));
 		}
-		if ( $style_views )
-		{
-			$template->assign_block_vars('switch_style_views', array());
-			$template->assign_vars(array('L_STYLE_VIEWINGS' => $lang['Style_select_viewings'] . $style_views));
-		}
+	    $style_views = isset($style_views) ? $style_views : 0; // Initialize $style_views if not set
+        if ( $style_views ) {
+            $template->assign_block_vars('switch_style_views', array());
+            $template->assign_vars(array('L_STYLE_VIEWINGS' => $lang['Style_select_viewings'] . $style_views));
+        }
 		// END Style Select MOD
 	}
 }

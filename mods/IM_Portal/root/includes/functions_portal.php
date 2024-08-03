@@ -237,10 +237,10 @@ function portal_parse_blocks($layout, $forum_wide = FALSE, $type='')
 	for ($b_counter = 0; $b_counter < $block_count; $b_counter++)
 	{
 		$is_group_allowed = TRUE;
-		if (!empty($block_info[$b_counter]['pgroup']))
+		if (!empty($block_info[$b_counter]['groups']))
 		{
 			$is_group_allowed = FALSE;
-			$group_content = explode(",",$block_info[$b_counter]['pgroup']);
+			$group_content = explode(",",$block_info[$b_counter]['groups']);
 
 			for ($i = 0; $i < count($group_content); $i++)
 			{
@@ -298,13 +298,13 @@ function portal_parse_blocks($layout, $forum_wide = FALSE, $type='')
 					'OUTPUT' => $output_block,
 					'BLOCKID' => $block_info[$b_counter]['bid']
 				));
-			
+
 				if ($block_info[$b_counter]['titlebar'] == 1 && $block_info[$b_counter]['title_image'] == '')
 				{
 					if (($lang_exist) && ($block_info[$b_counter]['local'] == 1))
 					{
 						$template->assign_block_vars($position . '_blocks_row.title',array(
-							'TITLE' => $lang['Title_' . $block_name]
+							'TITLE' => ($lang['Title_' . $block_name] ?? null)
 						));
 					}
 					else
@@ -330,8 +330,8 @@ function portal_parse_blocks($layout, $forum_wide = FALSE, $type='')
 				if ($block_info[$b_counter]['openclose'] == 1)
 				{
 					$template->assign_block_vars($position . '_blocks_row.openclose',array(
-						'OPEN_IMG' => $images['block_open'],
-						'CLOSE_IMG' => $images['block_close']
+						'OPEN_IMG' => ($images['block_open'] ?? null),
+						'CLOSE_IMG' => ($images['block_close'] ?? null)
 					));
 				}
 
@@ -439,8 +439,8 @@ function portal_parse_blocks($layout, $forum_wide = FALSE, $type='')
 				if ($block_info[$b_counter]['openclose'] == 1)
 				{
 					$template->assign_block_vars($position . '_blocks_row.openclose',array(
-						'OPEN_IMG' => $images['block_open'],
-						'CLOSE_IMG' => $images['block_close']
+						'OPEN_IMG' => ($images['block_open'] ?? null),
+						'CLOSE_IMG' => ($images['block_close'] ?? null)
 					));
 				}
 				if ($block_info[$b_counter]['background'] == 1)
@@ -451,5 +451,3 @@ function portal_parse_blocks($layout, $forum_wide = FALSE, $type='')
 		}
 	}
 }
-
-?>

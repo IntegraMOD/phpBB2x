@@ -162,4 +162,3 @@ portal_parse_blocks($layout);
 $template->pparse('body');
 
 include($phpbb_root_path . 'includes/page_tail.'.$phpEx);
-

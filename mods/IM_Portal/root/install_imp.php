@@ -252,7 +252,7 @@ $sql = array (
 	themes_id mediumint(8) unsigned NOT NULL auto_increment,
 	style_author varchar(50) NOT NULL default \'\',
 	style_version varchar(10) NOT NULL default \'\',
-	style_date int NOT NULL default \'0\',
+	style_date int(11) NOT NULL default \'0\',
 	style_website varchar(100) NOT NULL default \'\',
 	style_views mediumint(8) unsigned NOT NULL default \'0\',
 	style_dlurl varchar(100) NOT NULL default \'\',
