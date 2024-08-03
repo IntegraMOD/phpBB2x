@@ -237,10 +237,10 @@ function portal_parse_blocks($layout, $forum_wide = FALSE, $type='')
 	for ($b_counter = 0; $b_counter < $block_count; $b_counter++)
 	{
 		$is_group_allowed = TRUE;
-		if (!empty($block_info[$b_counter]['groups']))
+		if (!empty($block_info[$b_counter]['pgroup']))
 		{
 			$is_group_allowed = FALSE;
-			$group_content = explode(",",$block_info[$b_counter]['groups']);
+			$group_content = explode(",",$block_info[$b_counter]['pgroup']);
 
 			for ($i = 0; $i < count($group_content); $i++)
 			{
