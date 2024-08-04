@@ -1,0 +1,223 @@
+############################################################## 
+## MOD Title: Admin Userlist
+## MOD Author: Milkboy31 < N/A > (Brent Pirolli) N/A
+## MOD Author: wGEric < N/A > (Eric Faerber) http://mods.best-dev.com
+## MOD Description: This MOD lets you view all of you members and various information about 
+##			them in the Admin Control Panel.  From the list, you can perform 
+##			various actions on multiple users.
+## MOD Version: 2.1
+## 
+## Installation Level: Easy 
+## Installation Time: 10 Minutes 
+## Files To Edit: language/lang_english/lang_admin.php
+##			templates/subSilver/subSilver.cfg
+## Included Files: admin/admin_userlist.php
+##		   templates/subSilver/admin/userlist_body.tpl
+##		   templates/subSilver/admin/userlist_group.tpl
+##		   templates/subSilver/images/arrowright.png
+##		   templates/subSilver/images/arrowdown.png
+##
+## License: http://opensource.org/licenses/gpl-license.php GNU General Public License v2 
+############################################################## 
+## For security purposes, please check: http://www.phpbb.com/mods/ 
+## for the latest version of this MOD. Although MODs are checked 
+## before being allowed in the MODs Database there is no guarantee 
+## that there are no security problems within the MOD. No support 
+## will be given for MODs not found within the MODs Database which 
+## can be found at http://www.phpbb.com/mods/ 
+############################################################## 
+## Author Notes: 
+##
+##	Deleting users cannot be undone!
+##
+##	If you have an error when deleting a user that references a line from 295-325 of admin_userlist.php,
+##	please run the script found here for the solution:
+##	http://www.phpbb.com/phpBB/viewtopic.php?t=49996
+##	The problem is not caused by this mod, but can be exposed when using this mod.
+##
+##	A special thanks to all those who helped test this MOD and to those who have helped improve it.
+##		GPHemsley
+##		R45
+##		Asinshesq
+##		BlueRook
+##		Uncle.F
+##		Rreptile
+##		Freitag
+##		eviL<3
+##		Porutchik
+##
+##	If you wish to use Nivisec's Color Groups mod with this mod, you can install the
+##	patch provided:  contrib/colorgroups_userlist_101.txt
+##
+############################################################## 
+## MOD History: 
+##
+##   2024-04-07 - version 2.1 by Helter
+##	- Updated to php8.3.9
+##
+##   2006-12-13 - version 2.0.6c
+##	- Re-wrote the sort feature to close SQL injection vulnerability
+##	- Cleaned up code formatting a bit (nothing major)
+##
+##   2006-11-01 - version 2.0.6b
+##	- Modified delete group ID script to not fail when user doesn't have individual usergroup
+##	- Moved arrow image code to be in the template config file instead of hard coded
+##	- Made a few cosmetic changes to code (version number now included)
+##
+##   2006-06-16 - version 2.0.6
+##    - Added an inversing select all button
+##    - Added an inversing open-all button
+##    - Removed Open/Close text and replaced with small graphic
+##    - Updated mod to be compatible with versions beyond 2.0.17 when deleting or banning users
+##    - Security update on input tags
+##    - Added "Unban" feature
+##    - Fixed a couple of typos
+##    - Improved error handling with failed loops
+##
+##   2006-01-18 - version 2.0.5c
+##	- Cleaned up some code to be more uniform
+##	- Fixed the sql error readout bug
+##	- Added Email, Post, and Website columns
+##	- Added ability to sort by Website
+##	- Added "upgrades" folder to hold optional files
+##
+##   2005-10-20 - version 2.0.5b
+##	- Removed some hard coded language to be officially PHPBB MOD Compatible
+##
+##   2005-10-12 - version 2.0.5
+##	- Updated template disclaimer/license to be officially PHPBB MOD Compatible
+##
+##   2005-10-10 - version 2.0.4
+##	- Added support for Nivisec's Color Groups mod (see colorgroups_userlist.mod)
+##	- Fixed admin/mod color scheme from 2.0.3 release
+##
+##   2005-10-06 - version 2.0.3 (wGEric, the original author, passed the MOD to Milkboy31)
+##	- Fixed sort function
+## 	- Selected sorting option remains highlighted on results page
+##	- Prevent setting 0 users from causing error
+##	- Deleting group mods fixed
+##	- Sorts by newest registration first (by ASC instead of DESC by default)
+##	- Names link back to "manage user" instead of "profile" now
+##	- Userlist length is set to topics_per_page instead of posts_per_page
+##	- Added Select / De-select all buttons
+##	- Corrected placement of </Form> code
+##	- Added "time" to last activity column
+##	- Deleting a member keeps their ID on posts instead of using Anonymous
+##	- Spelling correction of "Delete" in userlist delete confirmation
+##
+##   2004-07-13 - Versoin 2.0.2
+##	- Fixed bugs with adding users to groups
+##	- fixed other bugs as well
+##
+##   2004-05-24 - Version 2.0.1
+##	- Fixed security issues
+##	- Made compatible with php 3
+##	- Fixed minor bugs
+##
+##   2004-05-18 - Version 2.0.0 
+##    - complete rewrite of code
+##	- added ability to add multiple users to a group
+##	- changed look, Open/Close Feature
+##	- Fixed all known bugs
+## 
+############################################################## 
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD 
+############################################################## 
+
+# 
+#-----[ COPY ]------------------------------------------ 
+#
+copy admin/admin_userlist.php to admin/admin_userlist.php
+copy templates/subSilver/admin/userlist_body.tpl to templates/subSilver/admin/userlist_body.tpl
+copy templates/subSilver/admin/userlist_group.tpl to templates/subSilver/admin/userlist_group.tpl
+copy templates/subSilver/images/arrowright.png to templates/subSilver/images/arrowright.png
+copy templates/subSilver/images/arrowdown.png to templates/subSilver/images/arrowdown.png
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+#
+language/lang_english/lang_admin.php
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#
+# Full Line:
+#	$lang['Install_No_PCRE'] = 'phpBB2 Requires the Perl-Compatible Regular Expressions Module for PHP which your PHP configuration doesn\'t appear to support!';
+#
+$lang['Install_No_PCRE'] = 
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+#
+
+//
+// Admin Userlist Start
+//
+$lang['Userlist'] = 'User list';
+$lang['Userlist_description'] = 'View a complete list of your users and perform various actions on them';
+
+$lang['Add_group'] = 'Add to a Group';
+$lang['Add_group_explain'] = 'Select which group to add the selected users to';
+
+$lang['Open_close'] = 'Open/Close';
+$lang['Active'] = 'Active';
+$lang['Group'] = 'Group(s)';
+$lang['Rank'] = 'Rank';
+$lang['Last_activity'] = 'Last Activity';
+$lang['Never'] = 'Never';
+$lang['User_manage'] = 'Manage';
+$lang['Find_all_posts'] = 'Find All Posts';
+
+$lang['Select_one'] = 'Select One';
+$lang['Ban'] = 'Ban';
+$lang['Is_Banned'] = 'Banned!'; 
+$lang['UnBan'] = 'Un-Ban';
+$lang['Activate_deactivate'] = 'Activate/De-activate';
+$lang['Select_All'] = 'Select All';
+$lang['Deselect_All'] = 'Deselect All';
+
+$lang['User_id'] = 'User id';
+$lang['User_level'] = 'User Level';
+$lang['Ascending'] = 'Ascending';
+$lang['Descending'] = 'Descending';
+$lang['Show'] = 'Show';
+$lang['All'] = 'All';
+
+$lang['Member'] = 'Member';
+$lang['Pending'] = 'Pending';
+
+$lang['Confirm_user_ban'] = 'Are you sure you want to ban the selected user(s)?';
+$lang['Confirm_user_un_ban'] = 'Are you sure you want to unban the selected user(s)?';
+$lang['Confirm_user_deleted'] = 'Are you sure you want to delete the selected user(s)?';
+
+$lang['User_status_updated'] = 'User(s) status updated successfully!';
+$lang['User_banned_successfully'] = 'User(s) banned successfully!';
+$lang['User_un_banned_successfully'] = 'User(s) unbanned successfully!';
+$lang['User_deleted_successfully'] = 'User(s) deleted successfully!';
+$lang['User_add_group_successfully'] = 'User(s) added to group successfully!';
+
+$lang['Click_return_userlist'] = 'Click %shere%s to return to the User List';
+//
+// Admin Userlist End
+//
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+templates/subSilver/subSilver.cfg
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+$current_template_images = $current_template_path . "/images";
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+ 
+$images['arrowdown'] = "$current_template_images/arrowdown.png";
+$images['arrowright'] = "$current_template_images/arrowright.png";
+# 
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------ 
+# 
+# EoM 
