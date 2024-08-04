@@ -40,18 +40,20 @@ if(!function_exists(imp_recent_topics_block_func)) {
             if (!$result1 = $db->sql_query($sql)) {
                 message_die(GENERAL_ERROR, 'Could not query forums information', '', __LINE__, __FILE__, $sql);
             }
-            while($row1 = $db->sql_fetchrow($result1)) {
-                $forum_data[] = $row1;
-            }
-            if($portal_config['cache_enabled']) {
+			$forum_data = []; // Initialize the array before using it
+			while($row1 = $db->sql_fetchrow($result1)) 
+			{
+			    $forum_data[] = $row1;
+			}	
+            if($portal_config['cache_enabled']) 
+			{
                 $var_cache->save($forum_data, 'forum', 'forum');
             }
         }
 
         $is_auth_ary = array();
         $is_auth_ary = auth(AUTH_ALL, AUTH_LIST_ALL, $userdata, $forum_data);
-
-        if($portal_config['md_except_forum_id'] == '') 
+        if (($portal_config['md_except_forum_id'] ?? null) == '')
 		{
             $except_forum_id = '\'start\'';
         } 
@@ -130,14 +132,15 @@ if(!function_exists(imp_recent_topics_block_func)) {
                 $template->assign_block_vars($style_row . '.recent_topic_row', array(
                         'U_TITLE' => append_sid("viewtopic.$phpEx?" . POST_POST_URL . '=' . $recent_topic_row[$i]['post_id']) . '#' .$recent_topic_row[$i]['post_id'],
                         'L_TITLE' => smilies_pass($recent_topic_row[$i]['topic_title']),
-                        'L_BY' => $lang['By'],
+                        'L_BY' => ($lang['By'] ?? null),
                         'U_POSTER' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=" . $recent_topic_row[$i]['user_id']),
                         'S_POSTER' => $recent_topic_row[$i]['username'],
                         'S_POSTTIME' => create_date($board_config['default_dateformat'], $recent_topic_row[$i]['post_time'], $board_config['board_timezone'])
                     )
                 );
             }
-            else {
+            else
+			{
                 $template->assign_block_vars($style_row . '.recent_topic_row', array(
                         'U_TITLE' => append_sid("viewtopic.$phpEx?" . POST_POST_URL . '=' . $recent_topic_row[$i]['post_id']) . '#' .$recent_topic_row[$i]['post_id'],
                         'L_TITLE' => smilies_pass($recent_topic_row[$i]['topic_title']),
