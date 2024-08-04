@@ -79,14 +79,15 @@ if(!function_exists('imp_online_users_block_func'))
 					else
 					{
 						$user_online_link = '<a href="' . append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"' . $style_color .'><i>' . $row['username'] . '</i></a>';
-						$logged_hidden_online++;
+						$logged_hidden_online = isset($logged_hidden_online) ? $logged_hidden_online : 0;
+						$logged_hidden_online++;						
 					}
 
                     $online_userlist = ''; // Initialize the variable to avoid undefined warning
-                    if ( $row['user_allow_viewonline'] || $userdata['user_level'] == ADMIN )
-                    {
-                        $online_userlist .= ( $online_userlist != '' ) ? ', ' . $user_online_link : $user_online_link;
-                    }
+					if ( $row['user_allow_viewonline'] || (isset($userdata) && $userdata['user_level'] == ADMIN) )
+					{
+						$online_userlist .= ( $online_userlist != '' ) ? ', ' . $user_online_link : $user_online_link;
+					}
 				}
 				$prev_user_id = $row['user_id'];
 			}
@@ -213,5 +214,3 @@ if(!function_exists('imp_online_users_block_func'))
 }
 
 imp_online_users_block_func();
-
-?>
