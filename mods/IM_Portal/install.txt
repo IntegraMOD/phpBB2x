@@ -248,7 +248,7 @@ copy phpbbroot/templates/subSilver/layout/ to phpbbroot/templates/subSilver/layo
 #
 Important! BEFORE editing any files, log in to your forum as admin. Then and browse to "install_imp.php"
 Example: https://yoursite.com/install_imp.php
-Important! After succesfull install, delete sql_installer.php from your webspace.
+Important! After succesfull install, delete install_imp.php from your webspace.
 
 #
 #-----[ OPEN ]------------------------------------------
