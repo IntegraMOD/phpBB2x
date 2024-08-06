@@ -36,7 +36,7 @@
             <li>AIM</li>
 	    </ul>
 	</li>			
-	<li>updated to run on php versions up to 7.4 and mysql/mysqli by the <b>IntegraMOD</b> developers</li>
+	<li>updated to run on php versions up to 8.3.9 and mysql/mysqli by the <b>IntegraMOD</b> developers</li>
 </ol>
 <br />
 <p>phpBB 2.0.25 template edits:
