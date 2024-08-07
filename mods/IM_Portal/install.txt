@@ -473,9 +473,9 @@ function init_userprefs($userdata)
 #-----[ AFTER, ADD ]------------------------------------------ 
 # 
 	// BEGIN Style Select MOD
-	if ( isset($_POST[STYLE_URL]) || isset($_GET[STYLE_URL]) ) 
+	if ( isset($_POST[ 'STYLE_URL' ]) || isset($_GET[ 'STYLE_URL' ]) ) 
 	{
-		$style = urldecode( (isset($_POST[STYLE_URL])) ? $_POST[STYLE_URL] : $_GET[STYLE_URL] );
+		$style = urldecode( (isset($_POST[ 'STYLE_URL' ])) ? $_POST[ 'STYLE_URL' ] : $_GET[ 'STYLE_URL' ] );
 		if ( $theme = setup_style($style) )
 		{
 			setcookie($board_config['cookie_name'] . '_style', $style, time() + 31536000, $board_config['cookie_path'], $board_config['cookie_domain'], $board_config['cookie_secure']);
