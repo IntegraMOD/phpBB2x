@@ -336,7 +336,7 @@ echo '
   </tr>
   <tr>
     <td class="row1">
-      <span class="genmed">Please delete this file (sql_install.' . $phpEx . ').<br />
+      <span class="genmed">Please delete this file (install_imp.' . $phpEx . ').<br />
       If you have any problems, please visit <a href="' . $phpbb_url . '" target="_new">integramod.com (IM Portal Support Thread)</a> and ask for help.</span>
     </td>
   </tr>
