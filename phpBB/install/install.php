@@ -878,15 +878,16 @@ else
             'server_name'   => $server_name,
          );
 
-	        foreach($update_config as list ($config_name => $config_value)) {
-            $sql = "UPDATE " . $table_prefix . "config
-               SET config_value = '$config_value'
-               WHERE config_name = '$config_name'";
-            if (!$db->sql_query($sql))
-            {
-               $error .= "Could not insert default_lang :: " . $sql . " :: " . __LINE__ . " :: " . __FILE__ . "<br /><br />";
+	        foreach($update_config as ($config_name => $config_value)) 
+			{
+				$sql = "UPDATE " . $table_prefix . "config
+				   SET config_value = '$config_value'
+				   WHERE config_name = '$config_name'";
+				if (!$db->sql_query($sql))
+				{
+				   $error .= "Could not insert default_lang :: " . $sql . " :: " . __LINE__ . " :: " . __FILE__ . "<br /><br />";
+				}
             }
-         }
 
          $admin_pass_md5 = ($confirm && $userdata['user_level'] == ADMIN) ? $admin_pass1 : md5($admin_pass1);
 
