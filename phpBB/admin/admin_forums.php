@@ -237,12 +237,13 @@ if( isset($HTTP_POST_VARS['addforum']) || isset($HTTP_POST_VARS['addcategory']) 
 
 	if( $mode == "addforum" )
 	{
-		list($cat_id) = each($HTTP_POST_VARS['addforum']);
+        $cat_id = current($HTTP_POST_VARS['addforum']);
+        $key = key($HTTP_POST_VARS['addforum']);
 		$cat_id = intval($cat_id);
 		// 
 		// stripslashes needs to be run on this because slashes are added when the forum name is posted
 		//
-		$forumname = stripslashes($HTTP_POST_VARS['forumname'][$cat_id]);
+        $forumname = stripslashes($HTTP_POST_VARS['forumname'][$key]);
 	}
 }
 
@@ -392,16 +393,15 @@ if( !empty($mode) )
 			//
 			$field_sql = "";
 			$value_sql = "";
-			while( list($field, $value) = each($forum_auth_ary) )
+	        foreach($forum_auth_ary as $field => $value)
 			{
 				$field_sql .= ", $field";
 				$value_sql .= ", $value";
-
 			}
 
 			// There is no problem having duplicate forum names so we won't check for it.
 			$sql = "INSERT INTO " . FORUMS_TABLE . " (forum_id, forum_name, cat_id, forum_desc, forum_order, forum_status, prune_enable" . $field_sql . ")
-				VALUES ('" . $next_id . "', '" . str_replace("\'", "''", $HTTP_POST_VARS['forumname']) . "', " . intval($HTTP_POST_VARS[POST_CAT_URL]) . ", '" . str_replace("\'", "''", $HTTP_POST_VARS['forumdesc']) . "', $next_order, " . intval($HTTP_POST_VARS['forumstatus']) . ", " . intval($HTTP_POST_VARS['prune_enable']) . $value_sql . ")";
+				VALUES ('" . $next_id . "', '" . str_replace("\'", "''", $HTTP_POST_VARS['forumname']) . "', " . intval($HTTP_POST_VARS[POST_CAT_URL]) . ", '" . str_replace("\'", "''", $HTTP_POST_VARS['forumdesc']) . "', $next_order, " . intval($HTTP_POST_VARS['forumstatus']) . ", " . intval($HTTP_POST_VARS['prune_enable'] ?? null) . $value_sql . ")";
 			if( !$result = $db->sql_query($sql) )
 			{
 				message_die(GENERAL_ERROR, "Couldn't insert row in forums table", "", __LINE__, __FILE__, $sql);
