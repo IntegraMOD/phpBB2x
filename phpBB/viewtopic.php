@@ -1148,17 +1148,22 @@ for($i = 0; $i < $total_posts; $i++)
 	//
 	// Replace naughty words
 	//
-	if (count($orig_word))
+	if (count($orig_word)) 
 	{
-		$post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
-
-		if ($user_sig != '')
+    $post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
+ 
+		if ($user_sig !== null && $user_sig !== '') 
 		{
-			$user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
+			$user_sig = str_replace('\"', '"', substr(preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#', function($matches) use ($orig_word, $replacement_word) 
+			{
+				return preg_replace($orig_word, $replacement_word, $matches[0]);
+			}, '>' . $user_sig . '<'), 1, -1));
 		}
-
-		$message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
-	}
+		$message = str_replace('\"', '"', substr(preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#', function($matches) use ($orig_word, $replacement_word) 
+		{
+			return preg_replace($orig_word, $replacement_word, $matches[0]);
+		}, '>' . $message . '<'), 1, -1));
+    }
 
 	//
 	// Replace newlines (we use this rather than nl2br because
