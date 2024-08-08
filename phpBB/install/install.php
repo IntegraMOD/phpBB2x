@@ -27,7 +27,7 @@ function page_header($text, $form_action = false)
    global $phpEx, $lang;
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $lang['ENCODING']; ?>">
@@ -195,24 +195,24 @@ function guess_lang()
       'chinese_simplified'      => 'zh',
    );
 
+   global $lang;
    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
    {
-      $accept_lang_ary = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-      $sizeArr = count($accept_lang_ary);
-      for ($i = 0; $i < $sizeArr; $i++)
-      {
-         @reset($match_lang);
-//         while (list($lang, $match) = each($match_lang))   {
-           foreach((Array) $match_lang as list ($lang => $match)) {
-            if (preg_match('#' . $match . '#i', trim($accept_lang_ary[$i])))
-            {
-               if (file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $lang)))
+       $accept_lang_ary = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+	   for ($i = 0; $i < sizeof($accept_lang_ary); $i++)
+       {
+           @reset($match_lang);
+           foreach((Array) $match_lang as list ($lang => $match)) 
+		   {
+               if (preg_match('#' . $match . '#i', trim($accept_lang_ary[$i])))
                {
-                  return $lang;
+                   if (file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $lang)))
+                   {
+                       return $lang;
+                   }
                }
-            }
-         }
-      }
+           }
+       }
    }
 
    return 'english';
@@ -231,40 +231,40 @@ if (true)
 {
    if (is_array($_GET))
    {
-//      while (list($k, $v) = each($_GET)){
-       foreach((Array) $_GET as list ($k => $v)) {
+       foreach((Array) $_GET as list ($k => $v)) 
+	   {
          
-         if (is_array($_GET[$k]))
-         {
-//            while (list($k2, $v2) = each($_GET[$k])){
-            foreach((Array) $_GET[$k] as list ($k2 => $v2)) {
-               $_GET[$k][$k2] = addslashes($v2);
-            }
-            @reset($_GET[$k]);
-         }
-         else
-         {
-            $_GET[$k] = addslashes($v);
-         }
-      }
-      @reset($_GET);
+           if (is_array($_GET[$k]))
+           {
+		       foreach((Array) $_GET[$k] as list ($k2 => $v2)) 
+			   {
+			       $_GET[$k][$k2] = addslashes($v2);
+			   }
+				   @reset($_GET[$k]);
+           }
+           else
+           {
+               $_GET[$k] = addslashes($v);
+           }
+       }
+       @reset($_GET);
    }
 
    if (is_array($_POST))
    {
-//      while (list($k, $v) = each($_POST))   {
-      foreach((Array) $_POST as list ($k => $v)) {
+      foreach((Array) $_POST as list ($k => $v)) 
+	  {
          if (is_array($_POST[$k]))
          {
-//            while (list($k2, $v2) = each($_POST[$k])) {
-              foreach((Array) $_POST[$k] as list ($k2 => $v2)) {
-               $_POST[$k][$k2] = addslashes($v2);
-            }
-            @reset($_POST[$k]);
+             foreach((Array) $_POST[$k] as list ($k2 => $v2)) 
+			 {
+                 $_POST[$k][$k2] = addslashes($v2);
+             }
+             @reset($_POST[$k]);
          }
          else
          {
-            $_POST[$k] = addslashes($v);
+             $_POST[$k] = addslashes($v);
          }
       }
       @reset($_POST);
@@ -272,21 +272,20 @@ if (true)
 
    if (is_array($_COOKIE))
    {
-//      while (list($k, $v) = each($_COOKIE)) {
-      foreach((Array) $_COOKIE as list ($k => $v)) {
-         
-         if (is_array($_COOKIE[$k]))
-         {
-//            while (list($k2, $v2) = each($_COOKIE[$k])) {
-              foreach((Array) $_COOKIE[$k] as list ($k2 => $v2)) {
-               $_COOKIE[$k][$k2] = addslashes($v2);
-            }
-            @reset($_COOKIE[$k]);
-         }
-         else
-         {
+      foreach((Array) $_COOKIE as list ($k => $v)) 
+	  {
+          if (is_array($_COOKIE[$k]))
+          {
+              foreach((Array) $_COOKIE[$k] as list ($k2 => $v2)) 
+			  {
+                  $_COOKIE[$k][$k2] = addslashes($v2);
+              }
+              @reset($_COOKIE[$k]);
+          }
+          else
+          {
             $_COOKIE[$k] = addslashes($v);
-         }
+          }
       }
       @reset($_COOKIE);
    }
@@ -634,8 +633,8 @@ else if ((empty($install_step) || $admin_pass1 != $admin_pass2 || empty($admin_p
    $lang_select = '<select name="lang" onchange="this.form.submit()">';
    foreach ($lang_options as $displayname => $filename)
 	{
-      $selected = ($language == $filename) ? ' selected="selected"' : '';
-      $lang_select .= '<option value="' . $filename . '"' . $selected . '>' . ucwords($displayname) . '</option>';
+        $selected = ($language == $filename) ? ' selected="selected"' : '';
+		$lang_select .= '<option value="' . $filename . '"' . $selected . '>' . ucwords((string) $displayname) . '</option>';
    }
    $lang_select .= '</select>';
 
@@ -644,7 +643,7 @@ else if ((empty($install_step) || $admin_pass1 != $admin_pass2 || empty($admin_p
 	{
       $selected = ($dbms_name == $dbms) ? 'selected="selected"' : '';
       $dbms_select .= '<option value="' . $dbms_name . '">' . $details['LABEL'] . '</option>';
-   }
+    }
    $dbms_select .= '</select>';
 
    $upgrade_option = '<select name="upgrade"';
@@ -883,8 +882,7 @@ else
             'server_name'   => $server_name,
          );
 
-         while (list($config_name, $config_value) = each($update_config)){
-//           foreach((Array) $update_config as list ($config_name => $config_value)) {
+	        foreach($update_config as list ($config_name => $config_value)) {
             $sql = "UPDATE " . $table_prefix . "config
                SET config_value = '$config_value'
                WHERE config_name = '$config_name'";
@@ -924,7 +922,7 @@ else
       {
          // Write out the config file.
          $config_data = '<?php'."\n\n";
-         $config_data .= "\n// phpBB 2.x auto-generated config file\n// Do not change anything in this file!\n\n";
+		 $config_data .= "\n// phpBB 2.x auto-generated config file\n// Do not edit this file unless you know what you are doing!\n\n";
          $config_data .= '$dbms = \'' . $dbms . '\';' . "\n\n";
          $config_data .= '$dbhost = \'' . $dbhost . '\';' . "\n";
          $config_data .= '$dbname = \'' . $dbname . '\';' . "\n";
@@ -932,9 +930,9 @@ else
          $config_data .= '$dbpasswd = \'' . $dbpasswd . '\';' . "\n\n";
          $config_data .= '$table_prefix = \'' . $table_prefix . '\';' . "\n\n";
          $config_data .= 'define(\'PHPBB_INSTALLED\', true);'."\n\n";
-         $config_data .= "\n//  To enable developer mode change line below from false to true\n";
-         $config_data .= "define('DEV_MODE', false);\n\n";
-//         $config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
+         $config_data .= "//  To enable developer mode change line below from false to true\n";
+		 $config_data .= 'define(\'DEV_MODE\', false);'."\n\n";
+//       $config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
 
          @umask(0111);
          $no_open = FALSE;
