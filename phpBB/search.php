@@ -691,18 +691,17 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 			$total_match_count = count(explode(', ', $search_results));
 		}
 		*/
-
 		for($i = 0; $i < count($store_vars); $i++)
-        {
-            if (isset(${$store_vars}[$i]))
-            {
-                $store_search_data[$store_vars[$i]] = ${$store_vars}[$i];
-            }
+		{
+			if (isset(${$store_vars[$i]}))
+			{
+				$store_search_data[$store_vars[$i]] = ${$store_vars[$i]};
+			}
 			else
 			{
-                $store_search_data[$store_vars[$i]] = '';
-            }
-        }
+				$store_search_data[$store_vars[$i]] = '';
+			}
+		}
 
 		$result_array = serialize($store_search_data);
 		unset($store_search_data);
