@@ -878,7 +878,8 @@ else
             'server_name'   => $server_name,
          );
 
-	        foreach($update_config as ($config_name => $config_value)) 
+	        //foreach($update_config as ($config_name => $config_value))
+			 foreach($update_config as $config_name => $config_value)
 			{
 				$sql = "UPDATE " . $table_prefix . "config
 				   SET config_value = '$config_value'
