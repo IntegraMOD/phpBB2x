@@ -121,7 +121,8 @@ if( $mode != "" )
 			"RANK" => (isset($rank_info['rank_title'])) ? $rank_info['rank_title'] : '',
 			"SPECIAL_RANK" => $rank_is_special,
 //			"MINIMUM" => ( $rank_is_special ) ? "" : (isset($rank_info['rank_min'])) ? $rank_info['rank_min'] : '',
-			"MINIMUM" => ( $rank_is_special ) ? "" : $rank_info['rank_min'],
+//			"MINIMUM" => ( $rank_is_special ) ? "" : $rank_info['rank_min'],
+			"MINIMUM" => !empty( $rank_is_special ) ? "" : ( isset($rank_info['rank_min']) ? $rank_info['rank_min'] : '' ),
 			"IMAGE" => ( isset($rank_info['rank_image']) && $rank_info['rank_image'] != "" ) ? $rank_info['rank_image'] : "",
 			"IMAGE_DISPLAY" => ( isset($rank_info['rank_image']) && $rank_info['rank_image'] != "" ) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
 			
