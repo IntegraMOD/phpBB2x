@@ -235,7 +235,7 @@ if (
         $occupation = stripslashes((string) $occupation);
         $interests = stripslashes((string) $interests);
         $signature = htmlspecialchars(stripslashes($signature), ENT_COMPAT, 'UTF-8');
-        $user_lang = stripslashes((string) $user_lang);
+        $user_lang = isset($user_lang) ? stripslashes((string) $user_lang) : 'default_language';
         $user_dateformat = stripslashes((string) $user_dateformat);
 
         if (!isset($_POST['cancelavatar'])) 
