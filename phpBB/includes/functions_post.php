@@ -298,8 +298,8 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		@reset($poll_options);
 
 		$poll_option_id = 1;
-		while (list($option_id, $option_text) = each($poll_options))
-		{
+		foreach ($poll_options as $option_id => $option_text)
+			{
 			if (!empty($option_text))
 			{
 				$option_text = str_replace("\'", "''", htmlspecialchars($option_text, ENT_COMPAT, 'UTF-8'));

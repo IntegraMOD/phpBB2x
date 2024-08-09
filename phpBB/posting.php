@@ -642,7 +642,7 @@ if( $refresh || isset($HTTP_POST_VARS['del_poll_option']) || $error_msg != '' )
 	$poll_options = array();
 	if ( !empty($HTTP_POST_VARS['poll_option_text']) )
 	{
-		while( list($option_id, $option_text) = @each($HTTP_POST_VARS['poll_option_text']) )
+		foreach ($_POST['poll_option_text'] as $option_id => $option_text)
 		{
 			if( isset($HTTP_POST_VARS['del_poll_option'][$option_id]) )
 			{
@@ -1112,7 +1112,7 @@ if( ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['edit_poll']) )
 
 	if( !empty($poll_options) )
 	{
-		while( list($option_id, $option_text) = each($poll_options) )
+		foreach ($poll_options as $option_id => $option_text)
 		{
 			$template->assign_block_vars('poll_option_rows', array(
 				'POLL_OPTION' => str_replace('"', '&quot;', $option_text), 
