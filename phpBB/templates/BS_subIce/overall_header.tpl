@@ -10,17 +10,14 @@
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
 <!-- Bootstrap 5.2.3 CSS -->
-<link rel="stylesheet" href="templates/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="templates/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="templates/BS_subIce/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
-
+<script src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js"></script>
 <!-- BEGIN switch_enable_pm_popup -->
 <script>
-<!--
-	if ( {PRIVATE_MESSAGE_NEW_FLAG} )
-	{
-		window.open('{U_PRIVATEMSGS_POPUP}', '_phpbbprivmsg', 'HEIGHT=225,resizable=yes,WIDTH=400');;
-	}
-//-->
+	if ({PRIVATE_MESSAGE_NEW_FLAG}) {
+    window.location.href = '{U_PRIVATEMSGS_POPUP}';
+}
 </script>
 <!-- END switch_enable_pm_popup -->
 
@@ -63,6 +60,7 @@
 						  <ul class='sub-menus'>
 							<li><a class="nav-link" href="{U_PROFILE}"><i class="fa-solid fa-user-gear"></i>&nbsp;{L_PROFILE}</a></li>
 							<li><a class="nav-link" href="{U_SEARCH_SELF}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;{L_SEARCH_SELF}</a></li>
+							<li class="px-0"><span class="py-4 ps-2">{ADMIN_SHORT_LINK}</span></li>
 							<li><a class="nav-link" href="{U_LOGIN_LOGOUT}"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;{L_LOGIN_LOGOUT}</a></li>
 						  </ul>
 						</li>

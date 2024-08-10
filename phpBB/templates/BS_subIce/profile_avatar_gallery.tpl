@@ -7,9 +7,9 @@
     <div class="col nav"><a href="{U_INDEX}">{L_INDEX}</a></div>
   </div>
 </div>
-
 <form action="{S_PROFILE_ACTION}" method="post">
-  <div class="container-fluid forumline">
+    
+<div class="container-fluid forumline">
 	<div class="row"> 
 	  <div class="col th pt-2 text-center">{L_AVATAR_GALLERY}</div>
 	</div>
@@ -29,7 +29,10 @@
 	</div>
 	<!-- END avatar_row -->
 	<div class="row hr1"> 
-	  <div class="col catBottom text-center pt-1">{S_HIDDEN_FIELDS}<input type="submit" name="submitavatar" value="{L_SELECT_AVATAR}" class="mainoption" />&nbsp;&nbsp;<input type="submit" name="cancelavatar" value="{L_RETURN_PROFILE}" class="liteoption" />
+	  <div class="col catBottom text-center pt-1">{S_HIDDEN_FIELDS} 
+		<input type="submit" name="submitavatar" value="{L_SELECT_AVATAR}" class="mainoption" />
+		&nbsp;&nbsp; 
+		<input type="submit" name="cancelavatar" value="{L_RETURN_PROFILE}" class="liteoption" />
 	  </div>
 	</div>
   </div>

@@ -12,14 +12,13 @@
 <link href="templates/BS_subSilver/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <title>{SITENAME} :: {PAGE_TITLE}</title>
-
+<script src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js"></script>
 <!-- BEGIN switch_enable_pm_popup -->
 <script>
 <!--
-	if ( {PRIVATE_MESSAGE_NEW_FLAG} )
-	{
-		window.open('{U_PRIVATEMSGS_POPUP}', '_phpbbprivmsg', 'HEIGHT=225,resizable=yes,WIDTH=400');;
-	}
+	if ({PRIVATE_MESSAGE_NEW_FLAG}) {
+    window.location.href = '{U_PRIVATEMSGS_POPUP}';
+}
 //-->
 </script>
 <!-- END switch_enable_pm_popup -->
@@ -80,7 +79,8 @@
             				<!-- END switch_user_logged_out -->
             				{L_LOGIN_LOGOUT}
             			</a>
-                      </li>	
+                      </li>
+					  <li class="nav-item"><span class="nav-link text-nowrap navbr">{ADMIN_SHORT_LINK}</span></li>
                     </ul>
                     <form action="{U_SEARCH}" method="get" id="search">
             		<fieldset>

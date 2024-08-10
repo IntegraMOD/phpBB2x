@@ -14,7 +14,7 @@
       <form method="post" action="{S_PRIVMSGS_ACTION}">
       <div class="container-fluid">
         <div class="row px-0">
-	      <div class="col-3 py-1 pl-0 d-flex nw"><span class="pbtn">{REPLY_PM_IMG}&nbsp;{REPLY_PM}</span></div>
+          <div class="col-3 py-1 pl-0 d-flex nw btntxt"><span class="pbtn gen"><i class="fa-solid fa-share-from-square"></i>&nbsp;{REPLY_PM}</span></div>
           <div class="col"><span class="text-end navbr"><a href="{U_INDEX}">{L_INDEX}</a></span></div>
         </div>
         <div class="row mx-0"> 
@@ -57,7 +57,7 @@
     
         <br clear="all" />
         <div class="row px-0"> 
-	      <div class="col-3 py-1 pl-0 d-flex nw"><span class="pbtn">{REPLY_PM_IMG}&nbsp;{REPLY_PM}</span></div>
+          <div class="col-3 py-1 pl-0 d-flex nw btntxt"><span class="pbtn gen"><i class="fa-solid fa-share-from-square"></i>&nbsp;{REPLY_PM}</span></div>
           <div class="col pl-0 mb-0 text-end gensmall">{S_TIMEZONE}</div>
         </div>
       </div>
