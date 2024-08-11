@@ -927,8 +927,11 @@ else
          $config_data .= '$dbpasswd = \'' . $dbpasswd . '\';' . "\n\n";
          $config_data .= '$table_prefix = \'' . $table_prefix . '\';' . "\n\n";
          $config_data .= 'define(\'PHPBB_INSTALLED\', true);'."\n\n";
-         $config_data .= "//  To enable developer mode change line below from false to true\n";
-		 $config_data .= 'define(\'DEV_MODE\', false);'."\n\n";
+         $config_data .= "//  FOR SECURITY SET BOTH TO 0 or false IN PRODUCTION\n";
+         $config_data .= "//  To enable debug change line below from 0 to 1\n";
+		 $config_data .= 'define(\'DEBUG\', 0);'."\n\n";
+         $config_data .= "//  To enable developer mode change line below from 0 to 1\n";
+		 $config_data .= 'define(\'DEV_MODE\', 0);'."\n\n";
 //       $config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
 
          @umask(0111);
