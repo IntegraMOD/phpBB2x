@@ -55,8 +55,13 @@ define('CHARSET', 'utf-8');
 define('REPLACE_FLAGS', ENT_COMPAT | ENT_XHTML);
 
 function htmlspecialchars_wrapped($str, $ent=REPLACE_FLAGS, $charset=CHARSET) {
-return htmlspecialchars ( $str , $ent, $charset);
+    if ($str === null) 
+	{
+        return ''; // Return an empty string if $str is null
+    }
+    return htmlspecialchars($str, $ent, $charset);
 }
+
 
 //
 // Start session management
@@ -75,7 +80,7 @@ define('script_path', 'script_path');
 define('server_port', 'server_port');
 define('cookie_secure', 'cookie_secure');
 
-if (htmlspecialchars_wrapped($HTTP_POST_VARS['action']) == "write")
+if (htmlspecialchars_wrapped($HTTP_POST_VARS['action'] ?? null) == "write")
 {
    $sql = "UPDATE " . CONFIG_TABLE . " SET config_value = '" . str_replace("\'", "''", htmlspecialchars_wrapped($HTTP_POST_VARS['cookie_domain'], ENT_COMPAT, 'utf-8')) . "' WHERE config_name = '" . cookie_domain . "'";
    if( !$db->sql_query($sql) )
@@ -238,5 +243,3 @@ else
    echo('</body>');
    echo('</html>');
 }
-
-?>
