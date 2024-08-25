@@ -302,6 +302,8 @@ if( ( $total_categories = count($category_rows) ) )
 		'L_FORUM_LOCKED' => $lang['Forum_is_locked'],
 		'L_MARK_FORUMS_READ' => $lang['Mark_all_forums'], 
 
+	    'S_IN_INDEX'  => true,
+	
 		'U_MARK_READ' => append_sid("index.$phpEx?mark=forums"))
 	);
 

@@ -125,19 +125,12 @@ public $dbname = "";
 					}
 					$this->in_transaction = TRUE;
 				}
-			 
+			
 				$qstart = microtime(true);
-				if ($this->db_connect_id) 
-				{
-					$this->query_result = @mysqli_query($this->db_connect_id, $query);
-				} 
-				else 
-				{
-					return false; // Handle the case where the database connection is closed
-				}
+				$this->query_result = @mysqli_query($this->db_connect_id, $query);
 				$qend = microtime(true);
 				$this->sql_time += $qend - $qstart;
-			 
+
 				if (defined('DEV_MODE') && DEV_MODE)
 				{
 					ob_start();

@@ -671,7 +671,7 @@ $template->assign_vars(array(
 	'S_AUTH_LIST' => $s_auth_can,
 	'S_TOPIC_ADMIN' => $topic_mod,
 	'S_WATCH_TOPIC' => $s_watching_topic,
-	'S_WATCH_TOPIC_IMG' => $s_watching_topic_img,
+    'S_WATCH_TOPIC_IMG' => isset($s_watching_topic_img) ? $s_watching_topic_img : null,
 
 	'U_VIEW_TOPIC' => append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start&amp;postdays=$post_days&amp;postorder=$post_order&amp;highlight=$highlight"),
 	'U_VIEW_FORUM' => $view_forum_url,
