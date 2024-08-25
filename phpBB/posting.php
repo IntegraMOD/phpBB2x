@@ -850,6 +850,7 @@ else
 //
 // Signature toggle selection
 //
+$user_sig = ''; // Initialize the variable to avoid undefined warning
 if( $user_sig != '' )
 {
 	$template->assign_block_vars('switch_signature_checkbox', array());

@@ -484,27 +484,28 @@ function delete_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 			message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
 		}
 
-		if ($post_data['last_post'])
-		{
-			if ($post_data['first_post'])
-			{
-				$forum_update_sql .= ', forum_topics = forum_topics - 1';
-				$sql = "DELETE FROM " . TOPICS_TABLE . " 
-					WHERE topic_id = $topic_id 
-						OR topic_moved_id = $topic_id";
-				if (!$db->sql_query($sql))
-				{
-					message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
-				}
+        if ($post_data['last_post'])
+        {
+            $forum_update_sql = ''; // Initialize the variable to avoid undefined warning
+            if ($post_data['first_post'])
+            {
+                $forum_update_sql .= ', forum_topics = forum_topics - 1';
+                $sql = "DELETE FROM " . TOPICS_TABLE . " 
+                    WHERE topic_id = $topic_id 
+                        OR topic_moved_id = $topic_id";
+                if (!$db->sql_query($sql))
+                {
+                    message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
+                }
 
-				$sql = "DELETE FROM " . TOPICS_WATCH_TABLE . "
-					WHERE topic_id = $topic_id";
-				if (!$db->sql_query($sql))
-				{
-					message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
-				}
-			}
-		}
+                $sql = "DELETE FROM " . TOPICS_WATCH_TABLE . "
+                    WHERE topic_id = $topic_id";
+                if (!$db->sql_query($sql))
+                {
+                    message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
+                }
+            }
+        }
 
 		remove_search_post($post_id);
 	}
