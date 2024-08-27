@@ -113,7 +113,8 @@ public $dbname = "";
 			// Remove any pre-existing queries
 			//
 			unset($this->query_result);
-			if( $query != "" )
+			if (isset($query) && $query !== "")
+//			if( $query != "" )
 			{
 				$this->num_queries++;
 				if( $transaction == BEGIN_TRANSACTION && !$this->in_transaction )
