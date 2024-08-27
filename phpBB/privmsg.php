@@ -834,8 +834,12 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 								$update_users['new'][$row['privmsgs_to_userid']]++;
 								break;
 
-							case PRIVMSGS_UNREAD_MAIL:
-								$update_users['unread' ?? null][$row['privmsgs_to_userid']]++;
+								case PRIVMSGS_UNREAD_MAIL:
+								if (!isset($update_users['unread'][$row['privmsgs_to_userid']])) 
+								{
+									$update_users['unread'][$row['privmsgs_to_userid']] = 0;
+								}
+								$update_users['unread'][$row['privmsgs_to_userid']]++;
 								break;
 						}
 					}
