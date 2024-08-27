@@ -519,7 +519,7 @@ switch( $mode )
 				
 				if ( $selected_values = $db->sql_fetchrow($result) )
 				{
-					while(list($key, $val) = @each($selected_values))
+					foreach ($selected_values as $key => $val)
 					{
 						$selected[$key] = $val;
 					}
