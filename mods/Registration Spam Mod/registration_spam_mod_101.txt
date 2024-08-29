@@ -1,0 +1,227 @@
+##############################################################
+## MOD Title: Add a Registration code during registration
+## MOD Author: Jadestone, http://mpsmod.com
+## MOD Description: User has to enter a Registration Code during registration, otherwise the registration fails.
+## MOD Version: 1.0.1 - updated by DjPorkchop for unofficial phpBB2x php 8+ by Helter at Integramod.com
+##
+## Installation Level: (Easy)
+## Installation Time: ~1 Minutes
+## Included Files: 0
+## Files To Edit: 5
+##   admin/admin_board.php
+##   includes/usercp_register.php
+##   language/lang_english/lang_admin.php
+##   language/lang_english/lang_main.php
+##   templates/subSilver/agreement.tpl
+##   templates/subSilver/profile_add_body.tpl
+##   templates/subSilver/admin/board_config_body.tpl
+##   
+## License: http://opensource.org/licenses/gpl-license.php GNU General Public License v2
+##############################################################
+## Author Notes:
+##   This is a Registration Code system i use on my site.
+##   Just releasing the code if others want to use it.
+##   I have 0 bot registrations after install
+##############################################################
+## Editor Notes: 
+##	 I have exhausted efforts to reach Jadestone (he did change his screen name at a later time)
+##   to attempt to get permission to alter the code and upload to share. So far all attempts have
+##   been unanswered or unable to do so. This mod is considered abandoned by definition. I take no ownership of it
+##   what so ever. If Jadestone resurfaces and wants me to not share or stop working on this, I will do just that.
+##
+############################################################## 
+## MOD History:
+##
+##   2024-08-27 - Version 1.0.1
+##      - php Upgrade by DjPorkchop Integramod.com
+##
+##   2008-06-11 - Version 1.0.0
+##      - First Build
+##
+##############################################################
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD
+##############################################################
+##
+## If using any other templates than subSilver, be sure to edit those template files as well
+##
+##############################################################
+
+#
+#-----[ SQL ]------------------------------------------
+#
+INSERT INTO `phpbb_config` ( `config_name` , `config_value` )
+VALUES (
+'vip_code', 'iNp34W2'
+) ;
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+admin/admin_board.php
+#
+#-----[ FIND ]------------------------------------------
+#
+   "SERVER_NAME" => $new['server_name'],
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+
+    "L_COCOCODE" => $lang['Registration_Code'],
+    "COCOCODE" => $new['vip_code'],
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/usercp_register.php
+#
+#-----[ FIND ]------------------------------------------
+#
+   global $userdata, $template, $lang, $phpbb_root_path, $phpEx;
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+   global $userdata, $template, $lang, $phpbb_root_path, $phpEx, $board_config;
+#
+#-----[ FIND ]------------------------------------------
+#
+      'DO_NOT_AGREE' => $lang['Agree_not'],
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+      'COCO' => sprintf($lang['Registration_Code_Display'], $board_config['vip_code']),
+
+#
+#-----[ FIND ]------------------------------------------
+#
+      rawurlencode((string) $website);
+    }
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Start vipcoco mod
+        if ( ($mode == 'register') && ($HTTP_POST_VARS['vipcoco'] != $board_config['vip_code']) )
+        {
+           message_die(GENERAL_MESSAGE, $lang['Registration_Code_Error']);
+        }
+// End vipcoco mod
+
+#
+#-----[ FIND ]------------------------------------------
+#
+      $template->assign_block_vars('switch_confirm', array());
+   }
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Start vipcoco mod
+        if ($mode == 'register')
+   {
+      $template->assign_block_vars('switch_vipcoco', array());
+   }
+// End vipcoco mod
+
+#
+#-----[ FIND ]------------------------------------------
+#
+      'SMILIES_STATUS' => $smilies_status,
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+      'L_REGISTRATION_CODE' => $lang['Registration_Code'],
+      'L_REGISTRATION_CODE_EXPLAIN' => $lang['Registration_Code_Explain'],
+      
+#
+#-----[ OPEN ]------------------------------------------
+#
+language/lang_english/lang_admin.php
+#
+#-----[ FIND ]------------------------------------------
+#
+?>
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+$lang['Registration_Code'] = 'Registration Code';
+#
+#-----[ OPEN ]------------------------------------------
+#
+language/lang_english/lang_main.php
+#
+#-----[ FIND ]------------------------------------------
+#
+//
+// That's all Folks!
+// -------------------------------------------------
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+$lang['Registration_Code'] = 'Registration Code';
+$lang['Registration_Code_Display'] = 'Registration Code : <strong>%s</strong>';
+$lang['Registration_Code_Explain'] = 'You can find a valid <strong>Registration Code</strong> on the previous page!';
+$lang['Registration_Code_Error'] = 'Sorry, but your <strong>Registration Code</strong> is NOT correct.<br /><br />You can find a valid <strong>Registration Code</strong> on the EULA Page.';
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/agreement.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+         <tr>
+            <td><span class="genmed"><br />{AGREEMENT}<br /><br /><br /><div align="center"><a href="{U_AGREE_OVER13}" class="genmed">{AGREE_OVER_13}</a><br /><br /><a href="{U_AGREE_UNDER13}" class="genmed">{AGREE_UNDER_13}</a><br /><br /><a href="{U_INDEX}" class="genmed">{DO_NOT_AGREE}</a></div><br /></span></td>
+         </tr>
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+         <tr>
+            <td><span class="gen"><br />{COCO}<br /></span><span class="genmed"><br />{AGREEMENT}<br /><br /><br /><div align="center"><a href="{U_AGREE_OVER13}" class="genmed">{AGREE_OVER_13}</a><br /><br /><a href="{U_AGREE_UNDER13}" class="genmed">{AGREE_UNDER_13}</a><br /><br /><a href="{U_INDEX}" class="genmed">{DO_NOT_AGREE}</a></div><br /></span></td>
+         </tr>
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/profile_add_body.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+   <!-- END switch_confirm -->
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+        <!-- BEGIN switch_vipcoco -->
+   <tr>
+     <td class="row1"><span class="gen"><strong>{L_REGISTRATION_CODE}:</strong> *</span><br />
+      <span class="gensmall">{L_REGISTRATION_CODE_EXPLAIN}</span></td>
+     <td class="row2">
+      <input type="text" class="post" style="width: 200px" name="vipcoco" size="25" maxlength="32" value="" />
+     </td>
+   </tr>
+        <!-- END switch_vipcoco -->
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/admin/board_config_body.tpl
+#
+#-----[ FIND ]------------------------------------------
+#
+   <tr>
+      <td class="row1">{L_SITE_DESCRIPTION}</td>
+      <td class="row2"><input class="post" type="text" size="40" maxlength="255" name="site_desc" value="{SITE_DESCRIPTION}" /></td>
+   </tr>
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+   <tr>
+      <td class="row1">{L_COCOCODE}</td>
+      <td class="row2"><input class="post" type="text" size="40" maxlength="255" name="vip_code" value="{COCOCODE}" /></td>
+   </tr>
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
+#
+# EoM
