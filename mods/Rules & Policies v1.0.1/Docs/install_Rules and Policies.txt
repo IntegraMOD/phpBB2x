@@ -1,0 +1,234 @@
+#################################################################
+## Mod Title: Board Rules & Policies
+## Mod Version: 1.0.1
+## Author: ~HG~ 
+## Description: This Hack will add four configurable policies to your 
+## board and adds an unobtrusive link to the pages in the forum footer.
+##
+##		Moderators Manual
+##		Privacy Policy
+##		Rules of the board
+##		Terms of Use
+##
+## Installation Level: easy
+## Installation Time: 10 minutes
+## Files To Edit: 5
+##		viewonline.php
+##		includes/constants.php
+##		includes/page header.php
+##		language/lang_english/lang_main.php
+##		templates/subSilver/overall_header.tpl
+##		
+## Included Files 12: 
+##		lang_moderators_manual.php
+##		lang_privacy.php
+##		lang_rules.php
+##		lang_terms.php 
+##		moderators_manual.php
+##		privacy.php
+##		rules.php
+##		terms.php
+##		moderators_manual_body.tpl
+##		privacy_body.tpl
+##		rules_body.tpl
+##		terms_body.tpl
+##
+################################################################
+##
+## Author Note: 
+##
+## To add or modify the existing moderators manual open and edit the files
+## language/lang_english/lang_moderators_manual.php
+##
+## To add or modify the existing privacy policy open and edit the files
+## language/lang_english/lang_privacy.php
+##
+## To add or modify the existing rules open and edit the files
+## language/lang_english/lang_rules.php
+##
+## To add or modify the existing terms of use open and edit the files
+## language/lang_english/lang_terms.php
+##
+## While this hack,is based on the FAQ page it also creates a new session
+## so now when you view 'Who's Online' You can see if the person is viewing the Board on 
+## these pages,
+##
+#################################################################
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD
+#################################################################
+##
+## Change Log
+##
+## 2024-08-28 DjPorkchop Integramod.com
+## 		Several bug fixes (template issues and 1 php file)
+##		Update Install txt file
+##		
+################################################################
+##
+## This has been tested and runs fine on all 2x platforms from .23,
+## the unofficial .24 fixed version and all the way to Helter's phpBB2x (integramod.com)
+## version running up to php 8.3
+##
+################################################################
+
+-----[ COPY ]------------------------------------------
+
+## copy  moderators_manual.php 	         to 	moderators_manual.php
+## copy  privacy.php 	                 to 	privacy.php
+## copy  rules.php 	                 to     rules.php
+## copy  terms.php 	                 to     terms.php
+## copy  lang_moderators_manual.php 	 to 	language/lang_english/lang_moderators_manual.php
+## copy  lang_privacy.php 	         to   	language/lang_english/lang_privacy.php
+## copy  lang_rules.php 	         to     language/lang_english/lang_rules.php
+## copy  lang_terms.php 	         to    	language/lang_english/lang_terms.php
+## copy  moderators_manual_body.tpl	 to	templates/subSilver/moderators_manual_body.tpl
+## copy  privacy_body.tpl	         to   	templates/subSilver/privacy_body.tpl
+## copy  rules_body.tpl	                 to   	templates/subSilver/rules_body.tpl
+## copy  terms_body.tpl	                 to   	templates/subSilver/terms_body.tpl
+
+#################################################################
+
+-----[ OPEN ]------------------------------------------
+
+viewonline.php
+
+
+-----[ FIND ]------------------------------------------
+#
+				case PAGE_FAQ:
+					$location = $lang['Viewing_FAQ'];
+					$location_url = "faq.$phpEx";
+					break;
+#
+-----[ AFTER, ADD ]-----------------------------------
+#
+				case PAGE_MODERATORS_MANUAL:
+					$location = $lang['Viewing_moderators_manual'];
+					$location_url = "moderators_manual.$phpEx";
+					break;
+				case PAGE_PRIVACY:
+					$location = $lang['Viewing_privacy'];
+					$location_url = "privacy.$phpEx";
+					break;
+				case PAGE_RULES:
+					$location = $lang['Viewing_rules'];
+					$location_url = "rules.$phpEx";
+					break;
+				case PAGE_TERMS:
+					$location = $lang['Viewing_terms'];
+					$location_url = "terms.$phpEx";
+					break;
+
+#
+-----[ OPEN ]------------------------------------------
+
+includes/constants.php
+
+#
+-----[ FIND ]----------------
+#
+define('PAGE_GROUPCP', -11);
+
+#
+-----[ AFTER, ADD ]-----------------------------------
+#
+
+define('PAGE_MODERATORS_MANUAL', -12);
+define('PAGE_PRIVACY', -13);
+define('PAGE_RULES', -14);
+define('PAGE_TERMS', -15);
+
+#
+
+**TAKE NOTE, YOU MAY NEED TO USE ANOTHER NUMBER OTHER THAN -12 IF IS IS ALREADY USED BY ONE OF THE OTHER SESSIONS ie, -14, OR -15, ETC. AND ADD IT IN THE CORRECT NUMERICAL ORDER.
+#
+
+-----[ OPEN ]------------------------------------------
+
+includes/page header.php
+
+
+-----[ FIND ]------------------------------------------
+#
+	'L_FAQ' => $lang['FAQ'],
+
+#
+-----[ AFTER, ADD ]-----------------------------------
+#
+      'L_MODERATORS_MANUAL' => $lang['Moderators_Manual'],
+      'L_PRIVACY' => $lang['Privacy'],
+      'L_RULES' => $lang['Rules'],
+      'L_TERMS' => $lang['Terms'],
+
+#
+-----[ FIND ]------------------------------------------
+#
+	'U_FAQ' => append_sid('faq.'.$phpEx),
+
+#
+-----[ AFTER, ADD ]------------------------------------
+#
+	'U_MODERATORS_MANUAL' => append_sid('moderators_manual.'.$phpEx),
+	'U_PRIVACY' => append_sid('privacy.'.$phpEx),
+	'U_RULES' => append_sid('rules.'.$phpEx),
+	'U_TERMS' => append_sid('terms.'.$phpEx),
+
+#
+-----[ OPEN ]------------------------------------------
+
+language/lang_english/lang_main.php
+
+
+-----[ FIND ]------------------------------------------
+#
+$lang['FAQ'] = 'FAQ';
+
+#
+-----[  AFTER, ADD ]----------------------------------
+#
+$lang['Moderators_Manual'] = 'Moderators Manual';
+$lang['Privacy'] = 'Privacy Policy';
+$lang['Rules'] = 'Board Rules';
+$lang['Terms'] = 'Terms of Use';
+
+#
+-----[ FIND ]------------------------------------------
+#
+$lang['Viewing_FAQ'] = 'Viewing FAQ';
+
+#
+-----[ AFTER, ADD ]-----------------------------------
+#
+$lang['Viewing_moderators_manual'] = 'Viewing Moderators Manual';
+$lang['Viewing_privacy'] = 'Viewing Privacy Policy';
+$lang['Viewing_rules'] = 'Viewing Rules';
+$lang['Viewing_terms'] = 'Viewing Terms';
+
+#
+-----[ OPEN ]------------------------------------------
+
+templates/subSilver/overall_footer.tpl
+
+
+-----[ FIND ]------------------------------------------
+#
+<div align="center"><span class="copyright"><br />{ADMIN_LINK}<br />
+
+#
+-----[ AFTER, ADD ]------------------------------------------
+#
+<span class="mainmenu">&nbsp;&nbsp;<a href="{U_MODERATORS_MANUAL}" class="mainmenu">{L_MODERATORS_MANUAL}</a>&nbsp; - &nbsp;<a href="{U_PRIVACY}" class="mainmenu">{L_PRIVACY}</a>&nbsp; - &nbsp;<a href="{U_RULES}" class="mainmenu">{L_RULES}</a>&nbsp; - &nbsp;<a href="{U_TERMS}" class="mainmenu">{L_TERMS}</a></span><br /><br />
+
+#
+-----[ FURTHER EDITS REQUIRED ]---------------------------------
+#
+-----[ OPEN ]------------------------------------------
+
+lang_terms.php
+
+# EDIT THIS FILES TO SUIT YOUR OWN WEBSITE/BOARD REQUIREMENTS.
+#
+#
+-----[ SAVE/CLOSE/UPLOAD ALL FILES ]-----------------------------------
+
+
