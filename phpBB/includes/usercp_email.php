@@ -163,9 +163,9 @@ if ( $result = $db->sql_query($sql) )
 				'body' => 'profile_send_email.tpl')
 			);
 			make_jumpbox('viewforum.'.$phpEx);
-	
-                        $error = '';
-                        if ( $error )
+	        global $error;
+            $error = '';
+            if ( $error )
 			{
 				$template->set_filenames(array(
 					'reg_header' => 'error_body.tpl')

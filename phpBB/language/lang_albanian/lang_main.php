@@ -32,7 +32,7 @@
 //
 
 //setlocale(LC_ALL, "en");
-$lang['ENCODING'] = "utf-8";
+$lang['ENCODING'] = 'UTF-8';
 $lang['DIRECTION'] = "LTR";
 $lang['LEFT'] = "LEFT";
 $lang['RIGHT'] = "RIGHT";
@@ -985,6 +985,12 @@ $lang['Critical_Error'] = "Problem kritik";
 $lang['An_error_occured'] = "Pati një problem";
 $lang['A_critical_error'] = "Pati një problem kritik";
 
+$lang['Admin_reauthenticate'] = 'To administer the board you must re-authenticate yourself.';
+$lang['Login_attempts_exceeded'] = 'The maximum number of %s login attempts has been exceeded. You are not allowed to login for the next %s minutes.';
+$lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and contrib/ directories are deleted';
+
+$lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
+
 //
 // language buttons
 //
@@ -997,7 +1003,18 @@ $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
 //
-// That's all Folks!
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
+// That's all, Folks!
 // -------------------------------------------------
-
-?>

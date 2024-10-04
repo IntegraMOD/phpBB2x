@@ -41,7 +41,7 @@
 
 // setlocale(LC_ALL, 'English');
 
-$lang['ENCODING'] = 'utf-8';	// put the correct character set here!
+$lang['ENCODING'] = 'UTF-8';	// put the correct character set here!
 $lang['DIRECTION'] = 'ltr';	// {ltr|rtl} -- DO NOT TRANSLATE!
 $lang['LEFT'] = 'left';	// DO NOT TRANSLATE!
 $lang['RIGHT'] = 'right';	// DO NOT TRANSLATE!
@@ -1014,6 +1014,21 @@ $lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
 $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
+//
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+
+
 //Add on for Gender Mod 
 $lang['Gender'] = 'Kyn';	//used in users profile to display witch gender he/she is 
 $lang['Male'] = 'Karl'; 
@@ -1176,5 +1191,3 @@ $lang['Gallery'] = 'Myndasafn';
 //
 // That's all Folks!
 // -------------------------------------------------
-
-?>

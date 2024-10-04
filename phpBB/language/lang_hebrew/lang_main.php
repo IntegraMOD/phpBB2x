@@ -31,7 +31,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'utf-8';
+$lang['ENCODING'] = 'UTF-8';
 $lang['DIRECTION'] = 'RTL';
 $lang['LEFT'] = 'RIGHT';
 $lang['RIGHT'] = 'LEFT';
@@ -1018,9 +1018,19 @@ $lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
 $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
-
 //
-// That's all Folks!
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
+// That's all, Folks!
 // -------------------------------------------------
-
-?>

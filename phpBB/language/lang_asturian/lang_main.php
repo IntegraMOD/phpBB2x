@@ -34,7 +34,7 @@
 // sintaxis varia ... escueya como meyor-y paeza!
 //
 
-$lang['ENCODING'] = "utf-8";
+$lang['ENCODING'] = "UTF-8";
 $lang['DIRECTION'] = "ltr";
 $lang['LEFT'] = "left";
 $lang['RIGHT'] = "right";
@@ -1023,9 +1023,19 @@ $lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
 $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
-
 //
-// ¡Y POR FIN FINAMOOOOOOSSSSSSS!
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
+// That's all, Folks!
 // -------------------------------------------------
-
-?>

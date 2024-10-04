@@ -82,7 +82,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	if ( !empty($row['user_icq']) )
 	{
 		$icq_status_img = '<a href="http://wwp.icq.com/' . $row['user_icq'] . '#pager"><img src="http://web.icq.com/whitepages/online?icq=' . $row['user_icq'] . '&img=5" width="18" height="18" border="0" /></a>';
-		$icq_img = '<a href="http://wwp.icq.com/scripts/search.dll?to=' . $row['user_icq'] . '"><img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ'] . '" title="' . $lang['ICQ'] . '" border="0" /></a>';
+        $icq_img = isset($images['icon_icq']) ? '<a href="http://wwp.icq.com/scripts/search.dll?to=' . $row['user_icq'] . '"><img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ'] . '" title="' . $lang['ICQ'] . '" border="0" /></a>' : '';
 		$icq =  '<a href="http://wwp.icq.com/scripts/search.dll?to=' . $row['user_icq'] . '">' . $lang['ICQ'] . '</a>';
 	}
 	else
@@ -116,7 +116,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$tt_img = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '&amp;.src=pg"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
 	$tt = ( $row['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $row['user_tt'] . '" target="blank">' . $lang['TT'] . '</a>' : '';
 
-	$dc_img = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $row['user_dc'] . '&amp;.src=pg"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
+    $dc_img = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $row['user_dc'] . '" target="blank"><img src="' . (isset($images['icon_dc']) ? $images['icon_dc'] : '') . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
 	$dc = ( $row['user_dc'] ) ? '<a href="https://www.discordapp.com/users/@' . $row['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
 
 	$temp_url = append_sid("search.$phpEx?search_author=" . urlencode($row['username']) . "&amp;showresults=posts");

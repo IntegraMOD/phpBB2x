@@ -19,7 +19,7 @@
  *
  ***************************************************************************/
 
-$lang['ENCODING'] = 'utf-8';
+$lang['ENCODING'] = 'UTF-8';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -1002,7 +1002,18 @@ $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
 //
-// To je to. South park je zakon.
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
+// That's all, Folks!
 // -------------------------------------------------
-
-?>

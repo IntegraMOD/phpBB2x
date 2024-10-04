@@ -1013,7 +1013,29 @@ $lang['A_critical_error'] = 'Ağır xəta baş vermişdir.';
 $lang['TRANSLATION_INFO'] = "Azərbaycan dilinə tərcümə : <a href=\"http://www.fikrini.de\">Zəminə Məmmədova";
 
 //
-// That's all Folks!
-// -------------------------------------------------
+// language buttons
+//
+$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
+$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
+$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
+$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
+$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
+$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
+$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
-?>
+//
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
+// That's all, Folks!
+// -------------------------------------------------

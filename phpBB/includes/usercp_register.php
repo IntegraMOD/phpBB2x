@@ -212,7 +212,7 @@ if (
 
     if ((isset($_POST['avatargallery']) || isset($_POST['submitavatar']) || isset($_POST['cancelavatar'])) && (!isset($_POST['submit']))) 
     {
-        global $cur_password, $new_password, $password_confirm, $email;
+        global $cur_password, $new_password, $password_confirm, $email, $user_lang;
         $username = stripslashes((string) $username);
         $email = stripslashes((string) $email);
         $cur_password = htmlspecialchars(stripslashes((string) $cur_password), ENT_COMPAT, 'UTF-8');

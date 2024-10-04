@@ -22,9 +22,6 @@
 					<dt>{L_EMAIL_ADDRESS}: </dt><dd>{EMAIL}</dd>
 					<dt>{L_WEBSITE}: </dt><dd>{WWW}</dd>
 					<dt>{L_PM}: </dt><dd>{PM}</dd>
-					<dt>{L_MESSENGER}: </dt><dd>{MSN}</dd>
-					<dt>{L_YAHOO}: </dt><dd>{YIM}</dd>
-					<dt>{L_AIM}: </dt><dd>{AIM}</dd>
 					<dt>{L_ICQ_NUMBER}: </dt><dd>{ICQ}</dd>
 					<dt>{L_FACEBOOK}: </dt><dd>{FB}</dd>
 					<dt>{L_INSTAGRAM}: </dt><dd>{IG}</dd>

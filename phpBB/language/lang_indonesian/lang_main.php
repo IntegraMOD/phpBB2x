@@ -30,7 +30,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'utf-8';
+$lang['ENCODING'] = 'UTF-8';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -1028,6 +1028,20 @@ $lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
 $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
+//
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+
 // START - SEND PM ON REGISTER MOD - AbelaJohnB 
 $lang['register_pm_subject'] = 'Selamat Datang di %s'; 
 $lang['register_pm'] = 'Halo!<br /><br />Selamat Datang di %s. <br /><br />Kami harap Anda menikmati situs ini!<br /><br />Silakan bergabung dan berbagi dengan para Anggota lain di forum diskusi ini.<br /><br />~Admin %s '; 
@@ -1040,5 +1054,3 @@ $lang['Welcome'] = "Halo"; // Welcome
 //
 // That's all Folks!
 // -------------------------------------------------
-
-?>

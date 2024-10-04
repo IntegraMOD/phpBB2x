@@ -33,7 +33,7 @@
 // varies ... give it your best guess!
 //
 
-$lang['ENCODING'] = 'utf-8';
+$lang['ENCODING'] = 'UTF-8';
 $lang['DIRECTION'] = 'ltr';
 $lang['LEFT'] = 'left';
 $lang['RIGHT'] = 'right';
@@ -1002,6 +1002,10 @@ $lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and co
 
 $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 
+// Translator credit
+
+$lang['TRANSLATION_INFO'] = '<br><br> Vegera phpBB bi kurdî bo gelê kurd û kurdistanê ji destê Serhat IÞIK (RONAHÎ) <br> <a href="http://www.kurdistan-webmaster.de" target=_blank>http://www.kurdistan-webmaster.de</a><br><br> BELAVKIRIN Û BIKARANÎN SERBEST IN.<br>';
+
 //
 // language buttons
 //
@@ -1013,8 +1017,19 @@ $lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
 $lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
 $lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
 
-
-// Translator credit
-
-$lang['TRANSLATION_INFO'] = '<br><br> Vegera phpBB bi kurdî bo gelê kurd û kurdistanê ji destê Serhat IÞIK (RONAHÎ) <br> <a href="http://www.kurdistan-webmaster.de" target=_blank>http://www.kurdistan-webmaster.de</a><br><br> BELAVKIRIN Û BIKARANÎN SERBEST IN.<br>';
-?>
+//
+// Social media
+//
+$lang['ICQ'] = 'ICQ Number';
+$lang['FB'] = 'Facebook';
+$lang['IG'] = 'Instagram';
+$lang['PT'] = 'Pinterest';
+$lang['TWR'] = 'X';
+$lang['SKP'] = 'Skype';
+$lang['TG'] = 'Telegram';
+$lang['LI'] = 'LinkedIn';
+$lang['TT'] = 'TikTok';
+$lang['DC'] = 'Discord';
+//
+// That's all, Folks!
+// -------------------------------------------------
