@@ -2,20 +2,22 @@
     </section>
 	<!-- /forum Section -->
 	
-     <!-- Hero Section -->
+    <!-- Home Section -->
     <section id="home" class="hero section">
       <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
         <h1>Welcome to <span>{SITENAME}</span></h1>
         <p>{SITE_DESCRIPTION}</p>
         <img src="templates/Hero/images/logo/phpbb-img.png" class="img-fluid animated" alt="">
         <div class="d-flex">
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+		<!-- BEGIN switch_user_logged_out -->
+          <a href="{U_LOGIN_LOGOUT}" class="btn-get-started scrollto">Get Started</a>
+		<!-- END switch_user_logged_out -->
           <a href="https://www.youtube.com/watch?v=CVezH6uj77I" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Sample Video</span></a>
         </div>
 		<div class="space">&nbsp;</div>
       </div>
     </section>
-	<!-- /Hero Section -->
+	<!-- /Home Section -->
 
 
     <!-- About Section -->
