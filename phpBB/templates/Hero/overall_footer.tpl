@@ -3,11 +3,11 @@
 	<!-- /forum Section -->
 	
      <!-- Hero Section -->
-    <section id="hero" class="hero section">
+    <section id="home" class="hero section">
       <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
-        <img src="templates/Hero/images/logo/phpbb-img.png" class="img-fluid animated" alt="">
         <h1>Welcome to <span>{SITENAME}</span></h1>
         <p>{SITE_DESCRIPTION}</p>
+        <img src="templates/Hero/images/logo/phpbb-img.png" class="img-fluid animated" alt="">
         <div class="d-flex">
           <a href="#about" class="btn-get-started scrollto">Get Started</a>
           <a href="https://www.youtube.com/watch?v=CVezH6uj77I" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Sample Video</span></a>

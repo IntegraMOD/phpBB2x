@@ -52,7 +52,7 @@
 
      <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{U_INDEX}#hero" class="active">{L_HOME}</a></li>
+          <li><a href="{U_INDEX}#home" class="active">{L_HOME}</a></li>
           <li><a href="{U_INDEX}#forum">{L_FORUM}</a></li>
 		  
           <li class="dropdown"><a href="{U_SEARCH}"><span>{L_SEARCH}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
