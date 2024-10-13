@@ -206,5 +206,3 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 
 	return TRUE;
 }
-
-?>
