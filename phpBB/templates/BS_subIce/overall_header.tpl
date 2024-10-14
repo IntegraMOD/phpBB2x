@@ -58,6 +58,7 @@
                         <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_PRIVATEMSGS}"><i class="fa-solid fa-message"></i>&nbsp;{PRIVATE_MESSAGE_INFO}</a></li>
 						<li class="nav-item"><a class='nav-link nav_important navbr dropdown-arrow' href='#'><i class="fa-solid fa-user-gear"></i>&nbsp;{THISUSER}</a>
 						  <ul class='sub-menus'>
+						  	<li><a class="nav-link" href="{U_THISUSER}"><i class="fa-solid fa-user-circle"></i>&nbsp;{THISUSER}</a></li>
 							<li><a class="nav-link" href="{U_PROFILE}"><i class="fa-solid fa-user-gear"></i>&nbsp;{L_PROFILE}</a></li>
 							<li><a class="nav-link" href="{U_SEARCH_SELF}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;{L_SEARCH_SELF}</a></li>
 							<li class="px-0"><span class="py-4 ps-2">{ADMIN_SHORT_LINK}</span></li>

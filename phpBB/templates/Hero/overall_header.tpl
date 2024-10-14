@@ -75,6 +75,7 @@
 		  </span> <i class="bi bi-chevron-down toggle-dropdown"></i>
 		  </a>
             <ul>
+			  <li><a href="{U_THISUSER}"><span><i class="fa-solid fa-user-circle"></i>&nbsp;{THISUSER}</span></a></li>
               <li><a href="{U_PROFILE}"><span><i class="fa-solid fa-user-gear"></i>&nbsp;{L_PROFILE}</span></a></li>
               <li><a href="{U_PRIVATEMSGS}"><span><i class="fa-solid fa-message"></i>&nbsp;{PRIVATE_MESSAGE_INFO}</span></a></li>
               <li class="dropdown"><a href="#"><span><i class="fa-solid fa-magnifying-glass"></i>&nbsp;{L_SEARCH} <i class="bi bi-chevron-down toggle-dropdown"></i></span></a>
