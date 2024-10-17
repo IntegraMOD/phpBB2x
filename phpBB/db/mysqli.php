@@ -34,18 +34,28 @@ if(!defined("SQL_LAYER"))
 		public $queries;
 		public $sql_time;
 		public $cache, $cached, $caching;
- 
+		private $user, $password, $persistency, $server, $dbname;
+
+		
 		//
 		// Constructor
 		//
 		public function __construct($sqlserver, $sqluser, $sqlpassword, $database, $port = false, $persistency = false)
 		{
-			$this->persistency = (version_compare(PHP_VERSION, '5.3.0', '>=')) ? $persistency : false;
+            $this->persistency = $persistency;
 			$this->user = $sqluser;
-			
+
 			$this->password = $sqlpassword;
-			$this->server = ($this->persistency) ? 'p:' . (($sqlserver) ? $sqlserver : 'localhost') : $sqlserver;
-			
+
+			if ($this->persistency) 
+			{
+				$this->server = 'p:' . (($sqlserver) ? $sqlserver : 'localhost');
+			} 
+			else 
+			{
+				$this->server = $sqlserver;
+			}
+
 			$this->dbname = $database;
 			$port = (!$port) ? NULL : $port;
  
