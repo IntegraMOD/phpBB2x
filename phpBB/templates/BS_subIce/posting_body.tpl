@@ -264,7 +264,9 @@ function storeCaret(textEl) {
 
 <div class="container-fluid forumline">
   <div class="bdrw">
-  <div class="row  d-flex th align-items-center pl-2">{L_POST_A}</div>    
+  <div class="row th px-0"> 
+    <div class="col my-auto">{L_POST_A}</div>
+  </div>    
 <!-- BEGIN switch_username_select -->
   <div class="row">
     <div class="col-3 row1 gen font-weight-bold">{L_USERNAME}</div>
