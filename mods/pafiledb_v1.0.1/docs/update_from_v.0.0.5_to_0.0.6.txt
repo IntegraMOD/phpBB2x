@@ -1,0 +1,26 @@
+ALTER TABLE pafiledb_settings 
+  ADD settings_viewall int(5) NOT NULL default '0',
+  ADD settings_showss int(5) NOT NULL default '0',
+  ADD settings_disable int(5) NOT NULL default '0',
+  ADD allow_html int(5) NOT NULL default '0',
+  ADD allow_bbcode int(5) NOT NULL default '0',
+  ADD allow_smilies int(5) NOT NULL default '0',
+  ADD allow_comment_links int(5) NOT NULL default '0',
+  ADD no_comment_link_message varchar(255) NOT NULL default '',
+  ADD allow_comment_images int(5) NOT NULL default '0',
+  ADD no_comment_image_message varchar(255) NOT NULL default '',
+  ADD max_comment_chars int(255) NOT NULL default '0';
+
+
+CREATE TABLE pafiledb_comments 
+  comments_id int(10) NOT NULL auto_increment, 
+  file_id int(10) NOT NULL default '0', 
+  comments_text text NOT NULL, 
+  comments_title text NOT NULL, 
+  comments_time int(50) NOT NULL default '0', 
+  comment_bbcode_uid varchar(10) default NULL, 
+  poster_id mediumint(8) NOT NULL default '0',
+  PRIMARY KEY  (comments_id),
+  KEY comments_id (comments_id),
+  FULLTEXT KEY comment_bbcode_uid (comment_bbcode_uid)
+  TYPE=MyISAM;

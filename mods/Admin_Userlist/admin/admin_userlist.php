@@ -147,10 +147,14 @@ if ( isset($_GET['alphanum']) || isset($_POST['alphanum']) )
 { 
 	$alphanum = ( isset($_POST['alphanum']) ) ? htmlspecialchars((string) $_POST['alphanum']) : htmlspecialchars((string) $_GET['alphanum']);
 	$alphanum = str_replace("\'", "''", $alphanum);
-	$alpha_where = match ($dbms) {
-     'postgres' => ( $alphanum == 'num' ) ? "AND username !~ '^[A-Z]+'" : "AND username ILIKE '$alphanum%'",
-     default => ( $alphanum == 'num' ) ? "AND username NOT RLIKE '^[A-Z]'" : "AND username LIKE '$alphanum%'",
- };
+	if ($dbms == 'postgres') 
+	{
+	    $alpha_where = ( $alphanum == 'num' ) ? "AND username !~ '^[A-Z]+'" : "AND username ILIKE '$alphanum%'";
+	} 
+	else
+	{
+	    $alpha_where = ( $alphanum == 'num' ) ? "AND username NOT RLIKE '^[A-Z]'" : "AND username LIKE '$alphanum%'";
+	}
 }
 else
 {
@@ -661,16 +665,22 @@ switch( $mode )
 				//
 				// For security, get the ID of the group moderator.
 				//
-				$sql = match (SQL_LAYER) {
-        'oracle' => "SELECT g.group_moderator, g.group_type, aa.auth_mod 
-							FROM " . GROUPS_TABLE . " g, " . AUTH_ACCESS_TABLE . " aa 
-							WHERE g.group_id = $group_id
-								AND aa.group_id = g.group_id(+)",
-        default => "SELECT g.group_moderator, g.group_type, aa.auth_mod 
-							FROM ( " . GROUPS_TABLE . " g 
-							LEFT JOIN " . AUTH_ACCESS_TABLE . " aa ON aa.group_id = g.group_id )
-							WHERE g.group_id = $group_id",
-    };
+				$sql = '';
+				switch (SQL_LAYER) 
+				{
+	                case 'oracle':
+	                    $sql = "SELECT g.group_moderator, g.group_type, aa.auth_mod 
+	                    FROM " . GROUPS_TABLE . " g, " . AUTH_ACCESS_TABLE . " aa 
+	                    WHERE g.group_id = $group_id
+	                        AND aa.group_id = g.group_id(+)";
+	                    break;
+	                default:
+	                    $sql = "SELECT g.group_moderator, g.group_type, aa.auth_mod 
+	                    FROM ( " . GROUPS_TABLE . " g 
+	                    LEFT JOIN " . AUTH_ACCESS_TABLE . " aa ON aa.group_id = g.group_id )
+	                    WHERE g.group_id = $group_id";
+	                    break;
+	            }
 				if ( !($result = $db->sql_query($sql)) )
 				{
 					message_die(GENERAL_ERROR, 'Could not get moderator information', '', __LINE__, __FILE__, $sql);

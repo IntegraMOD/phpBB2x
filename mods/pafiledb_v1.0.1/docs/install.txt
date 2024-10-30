@@ -1,0 +1,537 @@
+############################################################## 
+## MOD Title: pafiledb integration
+## MOD Version: 1.0.1
+## MOD Author: squall < mohdalbasri@yahoo.com > (Mohammed Al-Basri) www.mohd.tk 
+##	       MJ < mj@phpbbfm.net > www.phpbbfm.com
+## MOD Description: pafiledb for phpbb2.
+##                  
+##		    Updated 08/30/2024
+##			Updated for phpBB 2.0.23 - phpBB2x 2.0.25
+##          Requires php ver 5.6 - 8.3.9 
+## Installation Level: (easy) 
+## Installation Time: 10-15 Minutes 
+## Files To Edit (10) : 
+##             admin/index.php,
+##		       admin/admin_db_utilities.php
+##             includes/constants.php
+##		       includes/page_header.php, 
+##		       includes/page_tail.php,
+##             language/lang_english/lang_main.php,
+##             templates/subSilver/admin/page_header.tpl,
+##             templates/subSilver/overall_header.tpl,
+##		       templates/subSilver/overall_footer.tpl
+##			   templates/subSilver/subSilver.cfg
+##             templates/BS_subSilver/admin/page_header.tpl,
+##             templates/BS_subSilver/overall_header.tpl,
+##		       templates/BS_subSilver/overall_footer.tpl
+##			   templates/BS_subSilver/subSilver.cfg
+##
+## Included Files:
+##             dload.php,
+##		       admin/admin_category.php,
+##		       admin/admin_custom.php,
+##		       admin/admin_file.php,
+##		       admin/admin_license.php,
+##		       admin/admin_settings.php,
+##		       language/*/lang_admin_pafiledb.php
+##		       language/*/lang_pafiledb.php
+##		       pafiledb/*.*,
+##		       templates/subSilver/pa_*.tpl ( 12 )
+##		       templates/subSilver/admin/pa_*.tpl ( 16 )
+##		       templates/subSilver/images/icon_mini_download.gif
+##		       templates/subSilver/images/lang_english/icon_pa_.gif ( 3 )
+##
+## Included Language Files:     english
+##					            dutch
+##					            german
+##					            italian
+##
+############################################################## 
+############################################################## 
+## For Security Purposes, Please Check: http://www.phpbb.com/mods/downloads/ for the 
+## latest version of this MOD. Downloading this MOD from other sites could cause malicious code 
+## to enter into your phpBB Forum. As such, phpBB will not offer support for MOD's not offered 
+## in our MOD-Database, located at: http://www.phpbb.com/mods/downloads/ 
+############################################################## 
+############################################################## 
+## Author Note: 
+## follow all the instruction below first then upload and run from your browser, 
+## paFileDB_installer.php and if you have the table already installed, 
+## you won't need to change anything in them except that you won't need the admin table 
+## since you are going to use ACP. 
+##
+##	
+##
+## Change History:
+##	0.0.8 : Added/Fixed:
+##		- Fixed the global varaible problem. (you don't have to set global var to on)
+##		- Changed the whole coding structure in all file.
+##		- Comment viewing like the viewtopic.
+##		- Added the file checker feature (beware if this one or you will end up erasing all file.)
+##		- Changed some images and included them into templates/*/images/ folder.
+##		- Main Templates cleaned up, added clickable folder icons.
+##		- Fixed bug with category sort feature.
+##		- Added edit download count when editing file.
+##		- Added Dutch, German and Italian language support .
+##
+##	0.0.7 : Added/Fixed:
+##		- Fixed bug with screen shot upload.
+##		- Fixed bug with templates in ACP.
+##		- Removed Variable $str found in search.php.
+##		- Changed directory for images and icons.
+##		- Changed all url and action to append_sid.
+##
+##	0.0.6 : Added/Fixed:
+##		- Backupdb & restore to phpBB forum backup style
+##		- Changed tables to phpbb style
+##		- Show screenshots as image instead of link. (you may choose now either links or image).
+##		- Long Description - Multiple line text area.
+##		- Replaced pafiledb language with phpbb.
+##		- Unlimited subCategories.
+##		- Added Upload Screenshot feature (there is a small bugs on it)
+##		- Added Disable "View All" link
+##		- Added Disable Database feature
+##		- comment feature (only registered users can post)
+##		- Email is using phpBB class emailer.
+##		- New File indicator you can now set the number of day to show that the file is new
+##		- Added toplist file (you can now specify number of file that in toplist.
+##		- Removed the following bugs:
+##			* Replaced pafiledb Time Zone with phpbb.
+##			* Replaced pafiledb Language with phpbb.
+##			* Email fields can be left blank, but confirmation of email sent is returned. 
+##			* Custom Field data not reading from db
+##			* Time on posted comment
+##			* Edit file (ACP), sub-cats & files not showing
+##			* Backup Database screwed
+##			* removing some un needed row from setting table like language and style.
+##			* fixing the problem of jumpmenu fix in pafiledb.php file because file send the $str instead of $lang
+##			* 'Comment Explain' text missing
+##			* Title on posted comment
+##			* max_comment_chars field in _settings table missing
+##			* Javascript error when posting or previewing comment
+##			* Email not actually sending to address ??? (Not for me anyway!)
+##			* Time on file page
+##
+##	0.0.5 : - Re-packing of all working files
+##     	 	- Changed paFileDB_installer.php
+##
+## 	0.0.4 : Fixed:
+## 		- {dbname} showing in the email instead of the variable that should replace it.
+## 		- Uploaded file not returning full URL.
+## 		- Replaced pafiledb Time Zone with phpbb.
+## 		- Email fields can be left blank, but confirmation of email sent is returned 
+## 		- Fixed sort for viewall.. (sort according to rating not yet due to php version) 
+## 		- Custom Field data not reading from db		
+## 		- Added support for view online when some one in download page.
+##
+##	0.0.3 : - Fixed the editing file bug in ACP
+##		- Fixed the the file in sub category bug.
+##		- Fixed the uploading file url bug when uploading
+##		- Changed message after rating or e-mail sending
+##		- Made copywrite with phpbb copywrite only if you are in download database
+##
+##	0.0.2 : All templates made to fit phpBB default, clean up of code. 
+##
+## 	0.0.1 : First release, I need just to modify the *.tpl file in admin 
+## 		section.
+## 
+##############################################################  
+############################################################## 
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD 
+############################################################## 
+# 
+#-----[ COPY ]------------------------------------------ 
+# 
+copy dload.php to root 
+copy admin/*.php to admin/ 
+copy templates/subSilver/*.tpl to templates/subSilver/ 
+copy templates/subSilver/admin/*.tpl to templates/subSilver/admin/
+copy pafiledb/*.* to pafiledb/
+copy language/lang_english/* to language/lang_english/*
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+includes/constants.php
+# 
+#-----[ FIND ]------------------------------------------ 
+#
+define('PAGE_GROUPCP', -11);
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+#  
+define('PAGE_DOWNLOAD', -12);
+# 
+#-----[ FIND ]------------------------------------------ 
+#
+
+define('GROUPS_TABLE', $table_prefix.'groups');
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+#  
+
+define('PA_CATEGORY_TABLE', $table_prefix.'pa_cat');
+define('PA_COMMENTS_TABLE', $table_prefix.'pa_comments');
+define('PA_CUSTOM_TABLE', $table_prefix.'pa_custom');
+define('PA_CUSTOM_DATA_TABLE', $table_prefix.'pa_customdata');
+define('PA_FILES_TABLE', $table_prefix.'pa_files');
+define('PA_LICENSE_TABLE', $table_prefix.'pa_license');
+define('PA_SETTINGS_TABLE', $table_prefix.'pa_settings');
+define('PA_VOTES_TABLE', $table_prefix.'pa_votes');
+
+# 
+#-----[ SQL ]------------------------------------------ 
+# 
+
+run paFileDB_installed.php or run db_install.sql from phpmyadmin
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+admin/index.php
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+//
+// End functions
+// -------------
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+#  
+//
+// pafiledb
+//
+include_once($phpbb_root_path . 'pafiledb/includes/functions.' . $phpEx); 
+$config = pafiledb_config();
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_admin_pafiledb.' . $phpEx);
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+
+						case PAGE_FAQ:
+							$location = $lang['Viewing_FAQ'];
+							$location_url = "index.$phpEx?pane=right";
+							break;
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+#  
+
+						case PAGE_DOWNLOAD:
+							$location = $lang['Viewing_Download'];
+							$location_url = "../dload.$phpEx";
+							break;            
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+
+					case PAGE_FAQ:
+						$location = $lang['Viewing_FAQ'];
+						$location_url = "index.$phpEx?pane=right";
+						break;
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+#  
+
+					case PAGE_DOWNLOAD:
+						$location = $lang['Viewing_Download'];
+						$location_url = "../dload.$phpEx";
+						break;           
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+admin/admin_db_utilities.php
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+	include('./page_footer_admin.'.$phpEx);
+}
+$tables = array('auth_access', 'banlist', 'categories'....
+
+# 
+#-----[ FIND IN LINE ]------------------------------------------ 
+# 
+'forums', 'forum_prune', 
+
+# 
+#-----[ ADD INTO LINE ]------------------------------------------ 
+# 
+'pa_cat', 'pa_comments', 'pa_custom', 'pa_customdata', 'pa_files', 'pa_license', 'pa_settings', 'pa_votes', 
+
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+templates/subSilver/overall_header.tpl
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  
+<!-- END switch_enable_pm_popup -->
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+<script>
+//  pafiledb
+// Function to jump to a new URL based on select option
+function MM_jumpMenu(targ, selObj, restore) {
+    const targetWindow = window[targ];
+    if (targetWindow) {
+        targetWindow.location = selObj.options[selObj.selectedIndex].value;
+    } else {
+        console.error(`Target window "${targ}" not found`);
+    }
+    if (restore) selObj.selectedIndex = 0;
+}
+ 
+// Function to load and display an image in a new window
+function mpFoto(img) {
+    const foto1 = new Image();
+    foto1.src = img;
+    mpControl(img, foto1);
+}
+ 
+function mpControl(img, foto) {
+    if (foto.complete) {
+        viewFoto(img, foto);
+    } else {
+        setTimeout(() => mpControl(img, foto), 20);
+    }
+}
+ 
+function viewFoto(img, foto) {
+    const largh = foto.width + 20;
+    const altez = foto.height + 20;
+    const windowFeatures = `width=${largh},height=${altez}`;
+    window.open(img, '', windowFeatures);
+}
+</script>
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+					<tr>
+						<td height="25" align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_PROFILE}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_profile.gif" width="12" height="13" border="0" alt="{L_PROFILE}" hspace="3" />{L_PROFILE}</a>&nbsp; &nbsp;<a href="{U_PRIVATEMSGS}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_message.gif" width="12" height="13" border="0" alt="{PRIVATE_MESSAGE_INFO}" hspace="3" />{PRIVATE_MESSAGE_INFO}</a>&nbsp; &nbsp;<a href="{U_LOGIN_LOGOUT}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_login.gif" width="12" height="13" border="0" alt="{L_LOGIN_LOGOUT}" hspace="3" />{L_LOGIN_LOGOUT}</a>&nbsp;</span></td>
+					</tr>
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+					<tr> 
+						<td height="25" align="center" nowrap class="mainmenu" valign="top"> 
+						&nbsp;<a href="{U_DOWNLOAD}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_download.gif" width="13" height="13" border="0" alt="{PRIVATE_MESSAGE_INFO}" title="{PRIVATE_MESSAGE_INFO}" hspace="3" align="top" />{L_DOWNLOAD}</a>&nbsp; 
+						</td>
+					</tr>
+					
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+
+templates/BS_subSilver/overall_header.tpl
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  
+<!-- END switch_enable_pm_popup -->
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+<script>
+//  pafiledb
+// Function to jump to a new URL based on select option
+function MM_jumpMenu(targ, selObj, restore) {
+    const targetWindow = window[targ];
+    if (targetWindow) {
+        targetWindow.location = selObj.options[selObj.selectedIndex].value;
+    } else {
+        console.error(`Target window "${targ}" not found`);
+    }
+    if (restore) selObj.selectedIndex = 0;
+}
+ 
+// Function to load and display an image in a new window
+function mpFoto(img) {
+    const foto1 = new Image();
+    foto1.src = img;
+    mpControl(img, foto1);
+}
+ 
+function mpControl(img, foto) {
+    if (foto.complete) {
+        viewFoto(img, foto);
+    } else {
+        setTimeout(() => mpControl(img, foto), 20);
+    }
+}
+ 
+function viewFoto(img, foto) {
+    const largh = foto.width + 20;
+    const altez = foto.height + 20;
+    const windowFeatures = `width=${largh},height=${altez}`;
+    window.open(img, '', windowFeatures);
+}
+</script>
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+                    </ul>
+                    <form action="{U_SEARCH}" method="get" id="search">
+# 
+#-----[ BEFORE, ADD ]------------------------------------------ 
+#
+                      <li class="nav-item"><a class="nav-link text-nowrap navbr" href="{U_DOWNLOAD}"><i class="fa-solid fa-file-zipper"></i>&nbsp;{L_DOWNLOAD}</a></li>
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+
+language/lang_english/lang_main.php
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+
+$lang['FAQ'] = 'FAQ';
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+$lang['Download'] = 'Download'; 
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+
+$lang['Viewing_FAQ'] = 'Viewing FAQ';
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+$lang['Viewing_Download'] = 'Viewing Downloads';
+
+
+#-----[ OPEN ]------------------------------------------ 
+# 
+
+includes/page_header.php
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+
+	'L_FAQ' => $lang['FAQ'],
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+	'L_DOWNLOAD' => $lang['Download'], 
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+
+	'U_FAQ' => append_sid('faq.'.$phpEx),
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+	'U_DOWNLOAD' => append_sid('dload.'.$phpEx),
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+#
+
+includes/page_tail.php
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+
+	'ADMIN_LINK' => $admin_link)
+);
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+if ( defined('IN_DOWNLOAD') )
+{
+   $template->assign_block_vars("pa_copy", array());	
+}
+# 
+#-----[ OPEN ]------------------------------------------ 
+#
+
+templates/subSilver/overall_footer.tpl
+
+# 
+#-----[ FIND ]------------------------------------------ 
+#  	
+
+Powered by <a href="http://www.phpbb.com/" target="_phpbb" class="copyright">phpBB</a> {PHPBB_VERSION} &copy; 2001, 2002 phpBB Group
+<br />{TRANSLATION_INFO}</span></div>
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+<!-- BEGIN pa_copy -->
+& <a href="http://www.phparena.net/" target="_phparena" class="copyright">PHP Arena</a> paFileDB 3.1 &copy; 2002, 2003
+<!-- END pa_copy -->
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+#
+
+viewonline.php
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+				case PAGE_FAQ:
+					$location = $lang['Viewing_FAQ'];
+					$location_url = "faq.$phpEx";
+					break;
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+
+				case PAGE_DOWNLOAD:
+					$location = $lang['Viewing_Download'];
+					$location_url = "dload.$phpEx";
+					break;     
+
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+#
+
+templates/subSilver/subSilver.cfg & templates/BS_subSilver/subSilver.cfg
+
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+//
+// Vote graphic length defines the maximum length of a vote result
+
+# 
+#-----[ BEFORE, ADD ]------------------------------------------ 
+# 
+$images['pa_search'] = "$current_template_images/{LANG}/icon_pa_search.gif";
+$images['pa_stats'] = "$current_template_images/{LANG}/icon_pa_stats.gif";
+$images['pa_toplist'] = "$current_template_images/{LANG}/icon_pa_toplist.gif";
+$images['pa_download'] = "$current_template_images/icon_pa_download.gif";
+$images['pa_rate'] = "$current_template_images/icon_pa_rate.gif";
+$images['pa_email'] = "$current_template_images/icon_pa_email.gif";
+
+
+# 
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------ 
+# 
+# EoM  
