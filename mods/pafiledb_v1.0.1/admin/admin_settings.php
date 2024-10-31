@@ -65,7 +65,7 @@ if ($settings == 'do')
 
 if (empty($settings)) 
 {
-	if ($config['settings_viewall'] == 0) 
+	if (isset($config['settings_viewall']) && $config['settings_viewall'] == 0)
 	{
 		$vadropmenu .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$vadropmenu .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -75,8 +75,8 @@ if (empty($settings))
 		$vadropmenu .= '<option value="0">' . $lang['No'] . '</option>';
 		$vadropmenu .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
-
-	if ($config['settings_showss'] == 0) 
+	
+    if (isset($config['settings_showss']) && $config['settings_showss'] == 0)
 	{
 		$ssdropmenu .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$ssdropmenu .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -86,8 +86,8 @@ if (empty($settings))
 		$ssdropmenu .= '<option value="0">' . $lang['No'] . '</option>';
 		$ssdropmenu .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
-
-	if ($config['settings_disable'] == 0) 
+	
+    if (isset($config['settings_disable']) && $config['settings_disable'] == 0)
 	{
 		$dddropmenu .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$dddropmenu .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -97,8 +97,8 @@ if (empty($settings))
 		$dddropmenu .= '<option value="0">' . $lang['No'] . '</option>';
 		$dddropmenu .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
-
-   	if ($config['allow_html'] == 0) 
+	
+    if (isset($config['allow_html']) && $config['allow_html'] == 0)
 	{
 		$html .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$html .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -108,8 +108,8 @@ if (empty($settings))
 		$html .= '<option value="0">' . $lang['No'] . '</option>';
 		$html .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
-
-	if ($config['allow_bbcode'] == 0) 
+	
+    if (isset($config['allow_bbcode']) && $config['allow_bbcode'] == 0)
 	{
 		$bbcodea .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$bbcodea .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -120,7 +120,7 @@ if (empty($settings))
 		$bbcodea .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
 
-	if ($config['allow_smilies'] == 0) 
+    if (isset($config['allow_smilies']) && $config['allow_smilies'] == 0)
 	{
 		$smiliesa .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$smiliesa .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -131,7 +131,7 @@ if (empty($settings))
 		$smiliesa .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
 
-	if ($config['allow_comment_links'] == 0) 
+    if (isset($config['allow_comment_links']) && $config['allow_comment_links'] == 0)
 	{
 		$clinks .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$clinks .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -142,7 +142,7 @@ if (empty($settings))
 		$clinks .= '<option value="1" selected>' . $lang['Yes'] . '</option>';
 	}
 
-	if ($config['allow_comment_images'] == 0) 
+    if (isset($config['allow_comment_images']) && $config['allow_comment_images'] == 0)
 	{
 		$cimage .= '<option value="0" selected>' . $lang['No'] . '</option>';
 		$cimage .= '<option value="1">' . $lang['Yes'] . '</option>';
@@ -160,25 +160,25 @@ if (empty($settings))
 		'L_SETTINGSEXPLAIN' => $lang['Settingsexplain'],
 		'L_DBNAME' => $lang['Dbname'],
 		'L_DBNAMEINFO' => $lang['Dbnameinfo'],
-		'SETTINGS_DBNAME' => $config['settings_dbname'],
+        'SETTINGS_DBNAME' => isset($config['settings_dbname']) ? $config['settings_dbname'] : null,
 		'L_SITENAME' => $lang['Sitename'],
 		'L_SITENAMEINFO' => $lang['Sitenameinfo'],
-		'SETTINGS_SITENAME' => $config['settings_sitename'],
+        'SETTINGS_SITENAME' => isset($config['settings_sitename']) ? $config['settings_sitename'] : null,
 		'L_DBURL' => $lang['Dburl'],
 		'L_DBURLINFO' => $lang['Dburlinfo'],
-		'SETTINGS_DBURL' => $config['settings_dburl'],
+        'SETTINGS_DBURL' => isset($config['settings_dburl']) ? $config['settings_dburl'] : null,
 		'L_TOPNUM' => $lang['topnum'] ?? '',
 		'L_TOPNUMINFO' => $lang['Topnuminfo'],
-		'SETTINGS_TOPNUMBER' => $config['settings_topnumber'],
+        'SETTINGS_TOPNUMBER' => isset($config['settings_topnumber']) ? $config['settings_topnumber'] : null,
 		'L_HPURL' => $lang['Hpurl'],
 		'L_HPURLINFO' => $lang['Hpurlinfo'],
-		'SETTINGS_HOMEURL' => $config['settings_homeurl'],
+		'SETTINGS_HOMEURL' => isset($config['settings_homeurl']) ? $config['settings_homeurl'] : null,
 		'L_NFDAYS' => $lang['Nfdays'],
 		'L_NFDAYSINFO' => $lang['Nfdaysinfo'],
-		'SETTINGS_NEWDAYS' => $config['settings_newdays'],
+		'SETTINGS_NEWDAYS' => isset($config['settings_newdays']) ? $config['settings_newdays'] : null,
 		'L_TOPNUM' => $lang['Topnum'],
 		'L_TOPNUMINFO' => $lang['Topnuminfo'],
-		'SETTINGS_TOPNUMBER' => $config['settings_topnumber'],
+		'SETTINGS_TOPNUMBER' => isset($config['settings_topnumber']) ? $config['settings_topnumber'] : null,
 
 		'L_COMMENT_SETTINGS' => $lang['Com_settings'],
 		'L_SHOW_VIEWALL' => $lang['Showva'],
@@ -200,15 +200,15 @@ if (empty($settings))
 		'LINKS_DROPMENU' => $clinks,
 		'L_LINKS_MESSAGE' => $lang['Com_messagel'],
 		'L_LINKS_MESSAGE_INFO' => $lang['Com_messagel_info'],
-		'MESSAGE_LINK' => $config['no_comment_link_message'],
+		'MESSAGE_LINK' => isset($config['no_comment_link_message']) ? $config['no_comment_link_message'] : '',
 		'L_ALLOW_IMAGE' => $lang['Com_allowi'],
 		'IMAGE_DROPMENU' => $cimage,
 		'L_IMAGE_MESSAGE' => $lang['Com_messagei'],
 		'L_MAX_CHAR' => $lang['Max_char'],
 		'L_MAX_CHAR_INFO' => $lang['Max_char_info'],
-		'MAX_CHAR' => $config['max_comment_chars'],
+		'MAX_CHAR' => isset($config['max_comment_chars']) ? $config['max_comment_chars'] : null,
 		'L_IMAGE_MESSAGE_INFO' => $lang['Com_messagei_info'],
-		'MESSAGE_IMAGE' => $config['no_comment_image_message'],
+		'MESSAGE_IMAGE' => isset($config['no_comment_image_message']) ? $config['no_comment_image_message'] : null,
 		'L_SUBMIT' => $lang['Submit'])
 	);                 
 }
