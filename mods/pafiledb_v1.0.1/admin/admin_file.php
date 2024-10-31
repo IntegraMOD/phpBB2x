@@ -293,11 +293,11 @@ if( isset($HTTP_GET_VARS['file']) || isset($HTTP_POST_VARS['file']) )
 
 				while ($field = $db->sql_fetchrow($result)) 
 				{
-					$template->assign_block_vars("custom_field", array(
-						"CUSTOM_NAME" => $field[custom_name],
-						"CUSTOM_ID" => $field[custom_id],    
-						"CUSTOM_DESCRIPTION" => $field[custom_description]) 
-					);
+	                $template->assign_block_vars("custom_field", array(
+                        "CUSTOM_NAME" => $field['custom_name'],
+                        "CUSTOM_ID" => $field['custom_id'],    
+                        "CUSTOM_DESCRIPTION" => $field['custom_description']) 
+                    );
 				}
 			}
 

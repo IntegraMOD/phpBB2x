@@ -1,7 +1,7 @@
 <?php
 /*
   paFileDB 3.0
-  ©2001/2002 PHP Arena
+  Â©2001/2002 PHP Arena
   Written by Todd
   todd@phparena.net
   http://www.phparena.net
@@ -45,7 +45,7 @@ $category = $db->sql_fetchrow($result);
 
 if ($category['cat_parent'] == 0)
 {
-	$locbar = '<span class="nav"><a href="' . append_sid($config['settings_homeurl']) . '" class="nav">' . $config['settings_sitename'] . '</a> -> <a href="' . append_sid("dload.php") . '" class="nav">' . $config['settings_dbname'] . '</a> -> <a href="' . append_sid("dload.php?action=category&id=" . $file['file_catid']) . '" class="nav">' . $category['cat_name'] . '</a> -> ' . $file['file_name'] . '</span>';
+    $locbar = '<span class="nav"><a href="' . append_sid($config['settings_homeurl'] ?? '') . '" class="nav">' . ($config['settings_sitename'] ?? '') . '</a> -> <a href="' . append_sid("dload.php") . '" class="nav">' . ($config['settings_dbname'] ?? '') . '</a> -> <a href="' . append_sid("dload.php?action=category&id=" . ($file['file_catid'] ?? '')) . '" class="nav">' . ($category['cat_name'] ?? '') . '</a> -> ' . ($file['file_name'] ?? '') . '</span>';
 }
 
 if ($category['cat_parent'] > 0) 
@@ -217,5 +217,3 @@ else
 {
 	include($phpbb_root_path . 'pafiledb/includes/post_comment.'.$phpEx);      
 }
-
-?>

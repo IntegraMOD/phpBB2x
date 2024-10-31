@@ -116,7 +116,7 @@ CREATE TABLE phpbb_pa_settings (
   settings_id int(1) NOT NULL default '1',
   settings_dbname text NOT NULL,
   settings_sitename text NOT NULL,
-  settings_dbdescription text NOT NULL,
+  settings_dbdescription text NOT NULL default '',
   settings_dburl text NOT NULL,
   settings_topnumber int(5) NOT NULL default '0',
   settings_homeurl text NOT NULL,
