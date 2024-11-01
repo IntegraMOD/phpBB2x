@@ -1,4 +1,4 @@
-<h2>This version of phpBB is the official release of pbpBB 2.0.23 with some un-official updates</h2> 
+<h2>This version of phpBB is the official release of phpBB2.0.23 with some un-official updates</h2> 
 <br />
 <ol>
 	<li>added the unreleased phpBB 2.0.24 update by the <b>phpBB</b> developers</b></li>
