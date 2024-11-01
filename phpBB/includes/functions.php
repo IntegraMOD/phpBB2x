@@ -248,7 +248,7 @@ function make_jumpbox($action, $match_forum_id = 0)
 
         $boxstring .= '</select>';
     } else {
-        $boxstring ??= '';
+        $boxstring = isset($boxstring) ? $boxstring : '';
         $boxstring .= '<select name="' . POST_FORUM_URL . '" onchange="if(this.options[this.selectedIndex].value != -1){ forms[\'jumpbox\'].submit() }"></select>';
     }
 
@@ -304,7 +304,7 @@ function init_userprefs($userdata)
 
     if (!file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $default_lang . '/lang_main.'.$phpEx))) {
         if ($userdata['user_id'] != ANONYMOUS) {
-            $board_config['default_lang'] ??= 'english';
+            $board_config['default_lang'] = isset($board_config['default_lang']) ? $board_config['default_lang'] : 'english';
             // For logged in users, try the board default language next
             $default_lang = phpbb_ltrim(basename((string) phpbb_rtrim($board_config['default_lang'])), "'");
         } else {
@@ -594,7 +594,13 @@ function create_date($format, $gmepoch, $tz)
         }
     }
  
-    return (!empty($translate)) ? strtr(@gmdate($format, $gmepoch + (3600 * $tz)), $translate) : @gmdate($format, $gmepoch + (3600 * $tz));
+	    // Convert $gmepoch and $tz to float to ensure proper calculation
+	    $gmepoch = (float)$gmepoch;
+	    $tz = (float)$tz;
+	 
+	    $timestamp = $gmepoch + (3600 * $tz);
+	 
+	    return (!empty($translate)) ? strtr(gmdate($format, $timestamp), $translate) : gmdate($format, $timestamp);
 }
 
 //

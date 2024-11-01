@@ -143,8 +143,8 @@ if (
 	$notifyreply = ( isset($_POST['notifyreply']) ) ? ( ($_POST['notifyreply']) ? TRUE : 0 ) : 0;
 	$notifypm = ( isset($_POST['notifypm']) ) ? ( ($_POST['notifypm']) ? TRUE : 0 ) : TRUE;
 	$popup_pm = ( isset($_POST['popup_pm']) ) ? ( ($_POST['popup_pm']) ? TRUE : 0 ) : TRUE;
-    $sid = $_POST['sid'] ?? 0;
-	$p_sid = $_POST['p_sid'] ?? 0;
+    $sid = isset($_POST['sid']) ? $_POST['sid'] : 0;
+	$p_sid = isset($_POST['p_sid']) ? $_POST['p_sid'] : 0;
 
     if ($mode == 'register') 
     {
@@ -198,8 +198,8 @@ if (
     $user_avatar_local = (isset($_POST['avatarselect']) && !empty($_POST['submitavatar']) && $board_config['allow_avatar_local']) ? htmlspecialchars((string) $_POST['avatarselect'], ENT_COMPAT, 'UTF-8') : ((isset($_POST['avatarlocal'])) ? htmlspecialchars((string) $_POST['avatarlocal'], ENT_COMPAT, 'UTF-8') : '');
     $user_avatar_category = (isset($_POST['avatarcatname']) && $board_config['allow_avatar_local']) ? htmlspecialchars((string) $_POST['avatarcatname'], ENT_COMPAT, 'UTF-8') : '' ;
 
-    $_POST['avatarremoteurl'] ??= '';
-    $_FILES['avatar']['tmp_name'] ??= '';
+    $_POST['avatarremoteurl'] = isset($_POST['avatarremoteurl']) ? $_POST['avatarremoteurl'] : '';
+    $_FILES['avatar']['tmp_name'] = isset($_FILES['avatar']['tmp_name']) ? $_FILES['avatar']['tmp_name'] : '';
 
     $user_avatar_remoteurl = (!empty($_POST['avatarremoteurl'])) ? trim(htmlspecialchars((string) $_POST['avatarremoteurl'], ENT_COMPAT, 'UTF-8')) : '';
     $user_avatar_upload = (!empty($_POST['avatarurl'])) ? trim((string) $_POST['avatarurl']) : (($_FILES['avatar']['tmp_name'] != "none") ? $_FILES['avatar']['tmp_name'] : '');
@@ -734,7 +734,7 @@ if (isset($_POST['submit']))
 			}
 			else
 			{
-                $user_actkey ??= '';
+                $user_actkey = isset($user_actkey) ? $user_actkey : '';
 				$emailer->assign_vars(array(
                     'SITENAME' => $board_config['sitename'],
                     'WELCOME_MSG' => sprintf($lang['Welcome_subject'], $board_config['sitename']),
@@ -1057,11 +1057,11 @@ else
     $form_enctype = (@$ini_val('file_uploads') == '0' || strtolower(@$ini_val('file_uploads') == 'off') || phpversion() == '4.0.4pl1' || !$board_config['allow_avatar_upload'] || (phpversion() < '4.0.3' && @$ini_val('open_basedir') != '')) ? '' : 'enctype="multipart/form-data"';
 
     $template->assign_vars(array(
-        'USERNAME' => $username ?? '',
-        'CUR_PASSWORD' => $cur_password ?? '',
-        'NEW_PASSWORD' => $new_password ?? '',
-        'PASSWORD_CONFIRM' => $password_confirm ?? '',
-        'EMAIL' => $email ?? '',
+	    'USERNAME' => isset($username) ? $username : '',
+	    'CUR_PASSWORD' => isset($cur_password) ? $cur_password : '',
+	    'NEW_PASSWORD' => isset($new_password) ? $new_password : '',
+	    'PASSWORD_CONFIRM' => isset($password_confirm) ? $password_confirm : '',
+	    'EMAIL' => isset($email) ? $email : '',
         'CONFIRM_IMG' => $confirm_image,
         'ICQ' => $icq,
         'FB' => $fb,

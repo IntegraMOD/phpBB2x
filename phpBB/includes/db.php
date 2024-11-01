@@ -34,7 +34,11 @@ switch($dbms)
 	case 'mysql4':
 		include($phpbb_root_path . 'db/mysql4.'.$phpEx);
 		break;
-
+		
+	case 'pdo':
+		include($phpbb_root_path . 'db/pdo.'.$phpEx);
+		break;
+		
 	case 'postgres':
 		include($phpbb_root_path . 'db/postgres7.'.$phpEx);
 		break;

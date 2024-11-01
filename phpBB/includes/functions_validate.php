@@ -172,7 +172,7 @@ function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &
 
 	for($i = 0; $i < count($check_var_length); $i++)
 	{
-		if (strlen($check_var_length[$i]) < 2 ?? false)
+        if (isset($check_var_length[$i]) && strlen($check_var_length[$i]) < 2)
 		{
 			$check_var_length[$i] = '';
 		}
@@ -194,12 +194,12 @@ function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &
 	// contains at least one dot.
 	if ($website != "")
 	{
-		if (!preg_match('#^http[s]?:\/\/#i', $website ?? ''))
+		if (!preg_match('#^http[s]?:\/\/#i', isset($website) ? $website : ''))
 		{
 			$website = 'http://' . $website;
 		}
 
-		if (!preg_match('#^http[s]?\\:\\/\\/[a-z0-9\-]+\.([a-z0-9\-]+\.)?[a-z]+#i', $website ?? ''))
+		if (!preg_match('#^http[s]?\\:\\/\\/[a-z0-9\-]+\.([a-z0-9\-]+\.)?[a-z]+#i', isset($website) ? $website : ''))
 		{
 			$website = '';
 		}

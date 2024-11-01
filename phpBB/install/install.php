@@ -309,8 +309,22 @@ include($phpbb_root_path.'includes/sessions.'.$phpEx);
 
 // Define schema info
 $available_dbms = array(
+	'mysql4' => array(
+		'LABEL'			=> 'MySQL 4.x/5.x',
+		'SCHEMA'		=> 'mysql', 
+		'DELIM'			=> ';', 
+		'DELIM_BASIC'	=> ';',
+		'COMMENTS'		=> 'remove_remarks'
+	), 
    'mysqli' => array(
       'LABEL'         => 'MySQLi',
+      'SCHEMA'      => 'mysql',
+      'DELIM'         => ';',
+      'DELIM_BASIC'   => ';',
+      'COMMENTS'      => 'remove_remarks'
+   ),
+   'pdo' => array(
+      'LABEL'         => 'PDO',
       'SCHEMA'      => 'mysql',
       'DELIM'         => ';',
       'DELIM_BASIC'   => ';',
@@ -761,19 +775,29 @@ else
             $check_other = 'sybase';
             break;
 
+         case 'mysql4':
+            $check_exts = 'mysql';
+            $check_other = 'mysql';
+            break;
+			
          case 'mysqli':
             $check_exts = 'mysqli';
             $check_other = 'mysqli';
             break;
-
+			
+         case 'pdo':
+            $check_exts = 'mysqli';
+            $check_other = 'mysqli';
+            break;
+			
          case 'postgres':
             $check_exts = 'pgsql';
             $check_other = 'pgsql';
             break;
       }
 
-      if (!extension_loaded($check_exts) && !extension_loaded($check_other))
-      {   
+    if (!extension_loaded($check_exts ?? '') && !extension_loaded($check_other ?? ''))
+	{   
          page_header($lang['Install'], '');
          page_error($lang['Installer_Error'], $lang['Install_No_Ext']);
          page_footer();

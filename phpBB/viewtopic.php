@@ -403,7 +403,7 @@ if ( !($result = $db->sql_query($sql)) )
 	message_die(GENERAL_ERROR, "Could not obtain post/user information.", '', __LINE__, __FILE__, $sql);
 }
 
-$postrow = [];
+$postrow = array();
 if ($row = $db->sql_fetchrow($result))
 {
 	do
@@ -451,6 +451,7 @@ if ($resync)
    $total_replies = $row['total']; 
 }
 
+//$sql = "SELECT *
 $sql = "SELECT rank_id, rank_title, rank_min, rank_special, rank_image
 	FROM " . RANKS_TABLE . "
 	ORDER BY rank_special, rank_min";
@@ -537,42 +538,34 @@ $post_alt = ( $forum_topic_data['forum_status'] == FORUM_LOCKED ) ? $lang['Forum
 //
 // Set a cookie for this topic
 //
-	if ( $userdata['session_logged_in'] )
+if ( $userdata['session_logged_in'] )
+{
+	$tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
+	$tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
+
+	if ( !empty($tracking_topics[$topic_id]) && !empty($tracking_forums[$forum_id]) )
 	{
-	    $tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : [];
-	    $tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : [];
-	 
-	    if ( !empty($tracking_topics[$topic_id]) && !empty($tracking_forums[$forum_id]) )
-	    {
-	        $topic_last_read = ( $tracking_topics[$topic_id] > $tracking_forums[$forum_id] ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
-	    }
-	    else if ( !empty($tracking_topics[$topic_id]) || !empty($tracking_forums[$forum_id]) )
-	    {
-	        $topic_last_read = ( !empty($tracking_topics[$topic_id]) ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
-	    }
-	    else
-	    {
-	        $topic_last_read = $userdata['user_lastvisit'];
-	    }
-	 
-	    if ( count($tracking_topics) >= 150 && empty($tracking_topics[$topic_id]) )
-	    {
-	        asort($tracking_topics);
-	        unset($tracking_topics[key($tracking_topics)]);
-	    }
-	 
-	    $tracking_topics[$topic_id] = time();
-	 
-	    setcookie($board_config['cookie_name'] . '_t', serialize($tracking_topics), [
-	        'expires' => 0,
-	        'path' => $board_config['cookie_path'],
-	        'domain' => $board_config['cookie_domain'],
-	        'secure' => $board_config['cookie_secure'],
-	        'httponly' => true,
-	        'samesite' => 'Lax'
-	    ]);
+		$topic_last_read = ( $tracking_topics[$topic_id] > $tracking_forums[$forum_id] ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
+	}
+	else if ( !empty($tracking_topics[$topic_id]) || !empty($tracking_forums[$forum_id]) )
+	{
+		$topic_last_read = ( !empty($tracking_topics[$topic_id]) ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
+	}
+	else
+	{
+		$topic_last_read = $userdata['user_lastvisit'];
 	}
 
+	if ( count($tracking_topics) >= 150 && empty($tracking_topics[$topic_id]) )
+	{
+		asort($tracking_topics);
+		unset($tracking_topics[key($tracking_topics)]);
+	}
+
+	$tracking_topics[$topic_id] = time();
+
+	setcookie($board_config['cookie_name'] . '_t', serialize($tracking_topics), 0, $board_config['cookie_path'], $board_config['cookie_domain'], $board_config['cookie_secure']);
+}
 
 //
 // Load templates
@@ -960,7 +953,7 @@ for($i = 0; $i < $total_posts; $i++)
 
 		if ( !empty($postrow[$i]['user_icq']) )
 		{
-			$icq_status_img = '<a href="http://wwp.icq.com/' . $postrow[$i]['user_icq'] . '#pager"><img src="http://web.icq.com/whitepages/online?icq=' . $postrow[$i]['user_icq'] . '&img=5" width="18" height="18" border="0" /></a>';
+            $icq_status_img = isset($postrow[$i]['user_icq']) ? '<a href="http://wwp.icq.com/' . $postrow[$i]['user_icq'] . '#pager"><img src="http://web.icq.com/whitepages/online?icq=' . $postrow[$i]['user_icq'] . '&img=5" width="18" height="18" border="0" /></a>' : '';
 			$icq_img = '<a href="http://wwp.icq.com/scripts/search.dll?to=' . $postrow[$i]['user_icq'] . '"><img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ'] . '" title="' . $lang['ICQ'] . '" border="0" /></a>';
 			$icq =  '<a href="http://wwp.icq.com/scripts/search.dll?to=' . $postrow[$i]['user_icq'] . '">' . $lang['ICQ'] . '</a>';
 		}
@@ -995,7 +988,7 @@ for($i = 0; $i < $total_posts; $i++)
 		$tt_img = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '" target="blank" title="' . $lang['TT'] . '"><img src="' . $images['icon_tt'] . '" alt="' . $lang['TT'] . '" title="' . $lang['TT'] . '" border="0" /></a>' : '';
 		$tt = ( $postrow[$i]['user_tt'] ) ? '<a href="https://www.tiktok.com/@' . $postrow[$i]['user_tt'] . '" target="blank">' . $lang['TT'] . '</a>' : '';
 
-		$dc_img = ( $postrow[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $postrow[$i]['user_dc'] . '" target="blank" title="' . $lang['DC'] . '"><img src="' . $images['icon_dc'] . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
+        $dc_img = ( $postrow[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $postrow[$i]['user_dc'] . '" target="blank" title="' . $lang['DC'] . '"><img src="' . (isset($images['icon_dc']) ? $images['icon_dc'] : '') . '" alt="' . $lang['DC'] . '" title="' . $lang['DC'] . '" border="0" /></a>' : '';
 		$dc = ( $postrow[$i]['user_dc'] ) ? '<a href="https://www.discordapp.com/users/' . $postrow[$i]['user_dc'] . '" target="blank">' . $lang['DC'] . '</a>' : '';
 	}
 	else
@@ -1205,6 +1198,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
 	$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
 
+    global $icq_img;
 	$template->assign_block_vars('postrow', array(
 		'ROW_COLOR' => '#' . $row_color,
 		'ROW_CLASS' => $row_class,

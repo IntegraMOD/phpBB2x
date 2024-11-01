@@ -61,8 +61,7 @@ if ( $board_config['gzip_compress'] )
 }
 
 $userdata['user_level'] = (isset($userdata['user_level'])) ? $userdata['user_level'] : '';
-$admin_short_link = ( $userdata['user_level'] == ADMIN ) ? '<a class="adm" href="admin/index.' . $phpEx . '?sid=' . $userdata['session_id'] . '&amp;p_sid=' . $userdata['priv_session_id'] . '"><span><i class="fa-solid fa-gears"></i>&nbsp;' . ($lang['Admin_short'] ?? null) . '</span></a>' : '';
-
+$admin_short_link = ( $userdata['user_level'] == ADMIN ) ? '<a class="adm" href="admin/index.' . $phpEx . '?sid=' . $userdata['session_id'] . '&amp;p_sid=' . $userdata['priv_session_id'] . '"><span><i class="fa-solid fa-gears"></i>&nbsp;' . (isset($lang['Admin_short']) ? $lang['Admin_short'] : '') . '</span></a>' : '';
 //
 // Parse and show the overall header.
 //
@@ -376,7 +375,7 @@ $template->assign_vars(array(
 	'L_LOG_ME_IN' => $lang['Log_me_in'],
 	'L_AUTO_LOGIN' => $lang['Log_me_in'],
 	'L_FORUM' => $lang['Forum'],
-	'L_HOME' => ($lang['Home'] ?? null),
+    'L_HOME' => (isset($lang['Home']) ? $lang['Home'] : null),
 	'L_INDEX' => sprintf($lang['Forum_Index'], $board_config['sitename']),
 	'L_REGISTER' => $lang['Register'],
 	'L_PROFILE' => $lang['Profile'],
@@ -419,7 +418,7 @@ $template->assign_vars(array(
 // Language Anywhere
 	'S_LANG' => 'lang_'.$board_config['default_lang'],
 // Language Anywhere
-	'THISUSER' => ($userdata['username'] ?? null),	
+	'THISUSER' => (isset($userdata['username']) ? $userdata['username'] : null),	
 	'T_HEAD_STYLESHEET' => $theme['head_stylesheet'],
 	'T_BODY_BACKGROUND' => $theme['body_background'],
 	'T_BODY_BGCOLOR' => '#'.$theme['body_bgcolor'],

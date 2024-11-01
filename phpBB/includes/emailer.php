@@ -176,7 +176,7 @@ class emailer
             $this->msg = trim(preg_replace('#' . $drop_header . '#s', '', $this->msg));
         }
 
-        $to = $this->addresses['to'] ?? '';
+        $to = isset($this->addresses['to']) ? $this->addresses['to'] : '';
 
         $cc = (isset($this->addresses['cc']) && count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
         $bcc = (isset($this->addresses['bcc']) && count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';

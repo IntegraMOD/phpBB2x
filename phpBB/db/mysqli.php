@@ -29,15 +29,14 @@ if(!defined("SQL_LAYER"))
 		public $query_result;
 		public $num_queries = 0;
 		public $in_transaction = 0;
-		public $row = [];
-		public $rowset = [];		
+		public $row = array();
+		public $rowset = array();		
 		public $queries;
 		public $sql_time;
 		public $cache, $cached, $caching;
-		public $count = 0;
+        public $count = 0;
 		private $user, $password, $persistency, $server, $dbname;
 
-		
 		//
 		// Constructor
 		//
@@ -117,7 +116,7 @@ if(!defined("SQL_LAYER"))
 			//
 			// Remove any pre-existing queries
 			//
-			$this->count++;
+            $this->count++;
 			unset($this->query_result);
 			if( $query != "" )
 			{
@@ -134,11 +133,13 @@ if(!defined("SQL_LAYER"))
 			
 				$qstart = microtime(true);
 				try {
-					$this->count++;
-					$this->query_result = mysqli_query($this->db_connect_id, $query);
-				} catch (\Throwable $th) {
-					exit;
-				}
+						$this->count++;
+						$this->query_result = mysqli_query($this->db_connect_id, $query);
+					} 
+					catch (\Throwable $th) 
+					{
+						exit;
+					}
 				$qend = microtime(true);
 				$this->sql_time += $qend - $qstart;
  

@@ -2100,7 +2100,7 @@ $post_pm = '<a href="' . $post_pm . '">' . $lang['Post_new_pm'] . '</a>';
 if ( $folder != 'outbox' )
 {
 	$inbox_limit_pct = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? round(( $pm_all_total / $board_config['max_' . $folder . '_privmsgs'] ) * 100) : 100;
-	$inbox_limit_img_length = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? round(( $pm_all_total / $board_config['max_' . $folder . '_privmsgs'] ) * $board_config['privmsg_graphic_length'] ?? null) : $board_config['privmsg_graphic_length'] ?? null;
+    $inbox_limit_img_length = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? round(( $pm_all_total / $board_config['max_' . $folder . '_privmsgs'] ) * (isset($board_config['privmsg_graphic_length']) ? $board_config['privmsg_graphic_length'] : null)) : (isset($board_config['privmsg_graphic_length']) ? $board_config['privmsg_graphic_length'] : null);
 	$inbox_limit_remain = ( $board_config['max_' . $folder . '_privmsgs'] > 0 ) ? $board_config['max_' . $folder . '_privmsgs'] - $pm_all_total : 0;
 
 	$template->assign_block_vars('switch_box_size_notice', array());

@@ -275,8 +275,10 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 //					}
 //				}
 
-                foreach ((array) $_POST['private'] ?? null as $forum_id => $value) {
-                    foreach ((array) $forum_auth_level_fields[$forum_id] as $auth_field => $exists) {
+                foreach ((array) (isset($_POST['private']) ? $_POST['private'] : array()) as $forum_id => $value)
+				{
+                    foreach ((array) $forum_auth_level_fields[$forum_id] as $auth_field => $exists) 
+					{
 						if ($exists)
 						{
 							$change_acl_list[$forum_id][$auth_field] = $value;
@@ -856,7 +858,7 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 		{
 			for($j = 0; $j < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $j++)
 			{
-				$optionlist_acl_adv[$forum_id][$j] ??= '';
+				$optionlist_acl_adv[$forum_id][$j] = isset($optionlist_acl_adv[$forum_id][$j]) ? $optionlist_acl_adv[$forum_id][$j] : '';
 				$template->assign_block_vars('forums.aclvalues', array(
 					'S_ACL_SELECT' => $optionlist_acl_adv[$forum_id][$j])
 				);
@@ -894,8 +896,8 @@ else if ( ( $mode == 'user' && ( isset($HTTP_POST_VARS['username']) || $user_id 
 		for($i = 0; $i < (is_countable($ug_info) ? count($ug_info) : 0); $i++)
 		{
 			$ug = ( $mode == 'user' ) ? 'group&amp;' . POST_GROUPS_URL : 'user&amp;' . POST_USERS_URL;
-			$id[$i] ??= '';
-			$name[$i] ??= '';
+	        $id[$i] = isset($id[$i]) ? $id[$i] : '';
+	        $name[$i] = isset($name[$i]) ? $name[$i] : '';
 			if (!$ug_info[$i]['user_pending'])
 			{
 				$t_usergroup_list .= ( ( $t_usergroup_list != '' ) ? ', ' : '' ) . '<a href="' . append_sid("admin_ug_auth.$phpEx?mode=$ug=" . $id[$i]) . '">' . $name[$i] . '</a>';

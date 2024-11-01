@@ -98,16 +98,17 @@ if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals
 	unset($input['not_unset']);
 
 //	while (list($var,) = @each($input))
-	foreach($input as [$var])
+	foreach($input as $item)
 	{
-		if (in_array($var, $not_unset))
-		{
-			die('Hacking attempt!');
-		}
-		unset(${$var});
-	}
+        $var = $item;
+        if (in_array($var, $not_unset))
+        {
+            die('Hacking attempt!');
+        }
+        unset(${$var});
+    }
 
-	unset($input);
+unset($input);
 }
 
 //

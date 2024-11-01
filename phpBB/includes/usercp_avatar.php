@@ -151,7 +151,6 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 		unset($avatar_data);
 		while( !@feof($fsock) )
 		{
-//			$avatar_data ??= '';
 			$avatar_data = (isset($avatar_data)) ? $avatar_data : '';
 			$avatar_data .= @fread($fsock, $board_config['avatar_filesize']);
 		}
@@ -184,7 +183,7 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 				message_die(GENERAL_ERROR, 'Could not write avatar file to local storage. Please contact the board administrator with this message', '', __LINE__, __FILE__);
 			}
 
-			[$width, $height, $type] = @getimagesize($tmp_filename);
+			list($width, $height, $type) = @getimagesize($tmp_filename);
 		}
 		else
 		{
@@ -210,7 +209,7 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 			return;
 		}
 
-		[$width, $height, $type] = @getimagesize($avatar_filename);
+		list($width, $height, $type) = @getimagesize($avatar_filename);
 	}
 
 	if ( !($imgtype = check_image_type($avatar_filetype, $error, $error_msg)) )
@@ -354,13 +353,22 @@ function display_avatar_gallery($mode, &$category, &$user_id, &$email, &$current
 	@reset($avatar_images);
 
 	$s_categories = '<select name="avatarcategory">';
-	foreach (array_keys($avatar_images) as $key) {
-	$selected = ( $key == $category ) ? ' selected="selected"' : '';
-	if( is_countable($avatar_images[$key]) ? count($avatar_images[$key]) : 0 )
+	foreach (array_keys($avatar_images) as $key) 
+	{
+	    $selected = ( $key == $category ) ? ' selected="selected"' : '';
+		if (!function_exists('is_countable')) 
 		{
-			$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
+			function is_countable($var) 
+			{
+				return (is_array($var) || $var instanceof Countable);
+			}
 		}
-    }
+		 
+		if( is_countable($avatar_images[$key]) ? count($avatar_images[$key]) : 0 )
+			{
+				$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
+			}
+	}
 	$s_categories .= '</select>';
 
 	$s_colspan = 0;

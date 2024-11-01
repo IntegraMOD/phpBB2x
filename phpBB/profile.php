@@ -76,7 +76,7 @@ function gen_rand_string($hash)
 //
 if ( isset($_GET['mode']) || isset($_POST['mode']) )
 {
-	$mode = $_GET['mode'] ?? $_POST['mode'];
+	$mode = isset($_GET['mode']) ? $_GET['mode'] : (isset($_POST['mode']) ? $_POST['mode'] : null);
 	$mode = htmlspecialchars((string) $mode, ENT_COMPAT, 'utf-8');
 
 	if ( $mode == 'viewprofile' )
