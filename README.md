@@ -3,7 +3,7 @@
 <ol>
 	<li>added the unreleased phpBB 2.0.24 update by the <b>phpBB</b> developers</b></li>
 	<li>added phpBB 2 fixes by <b>achaab & BoBmArLeY</b></li>
-	<li>updated to run on php versions 5.4 to 8.3x by the <b>IntegraMOD</b> developers</li>
+	<li>updated to run on php versions 5.6 to 8.3x by the <b>IntegraMOD</b> developers</li>
 	<li>added mysqli and PDO database options:
 	    <ul>
                 <li><b>mysql 4 & 5</b> for <b>php5.6</b></li>
