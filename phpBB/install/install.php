@@ -310,21 +310,21 @@ include($phpbb_root_path.'includes/sessions.'.$phpEx);
 // Define schema info
 $available_dbms = array(
 	'mysql4' => array(
-		'LABEL'			=> 'MySQL 4.x/5.x',
+		'LABEL'			=> 'MySQL 4 & 5   php5.6',
 		'SCHEMA'		=> 'mysql', 
 		'DELIM'			=> ';', 
 		'DELIM_BASIC'	=> ';',
 		'COMMENTS'		=> 'remove_remarks'
 	), 
    'mysqli' => array(
-      'LABEL'         => 'MySQLi',
+      'LABEL'         => 'MySQLi   php5.6 to 8.x',
       'SCHEMA'      => 'mysql',
       'DELIM'         => ';',
       'DELIM_BASIC'   => ';',
       'COMMENTS'      => 'remove_remarks'
    ),
    'pdo' => array(
-      'LABEL'         => 'PDO',
+      'LABEL'         => 'PDO   php8.x',
       'SCHEMA'      => 'mysql',
       'DELIM'         => ';',
       'DELIM_BASIC'   => ';',
