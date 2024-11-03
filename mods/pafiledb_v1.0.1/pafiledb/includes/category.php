@@ -90,8 +90,11 @@ if ($row_number > 0)
 
 		$filesincat = $db->sql_numrows($result2);
 
+//		$file_new = $db->sql_fetchrow($filcat);
+		$filcat = $db->sql_query("SELECT * FROM " . PA_FILES_TABLE . ""); 
+		 
 		$file_new = $db->sql_fetchrow($filcat);
-
+	
 		$new_cat = '<img src="' . $images['folder'] . '" border="0" alt="No New file">';
 
 		if (time() - ($config['settings_newdays'] * 24 * 60 * 60) < $file_new['file_time'])
