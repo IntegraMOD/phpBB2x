@@ -1,11 +1,10 @@
-      </div>
     </section>
 	<!-- /forum Section -->
 	
     <!-- Home Section -->
-    <section id="home" class="hero section">
+    <section id="home" class="home section">
       <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
-        <h1>Welcome to <span>{SITENAME}</span></h1>
+        <h1>Welcome to <a href="#about"><span>{SITENAME}</span></a></h1>
         <p>{SITE_DESCRIPTION}</p>
         <img src="templates/Hero/images/logo/phpbb-img.png" class="img-fluid animated" alt="">
         <div class="d-flex">
@@ -39,19 +38,19 @@
           </div>
 
           <div class="col-lg-7">
-            <h3 class="pt-0 pt-lg-5">This is just a sample "About Us" page, editable in templates/Hero/overall_footer.tpl</h3>
-
+            <h3 class="pt-0 pt-lg-5">This is just a sample "About Us" page.</h3>
+            <p>you can edit this in root/templates/Hero/overall_footer.tpl</p>
             <!-- Tabs -->
             <ul class="nav nav-pills mb-3">
-              <li><a class="nav-link active" data-bs-toggle="pill" href="#about-tab1">What is phpBB2?</a></li>
-              <li><a class="nav-link" data-bs-toggle="pill" href="#about-tab2">What is phpBB2x?</a></li>
+              <li><a class="nav-link active" data-bs-toggle="pill" href="#about-tab1">What is phpBB2x?</a></li>
+              <li><a class="nav-link" data-bs-toggle="pill" href="#about-tab2">What is phpBB2?</a></li>
               <li><a class="nav-link" data-bs-toggle="pill" href="#about-tab3">What is this style?</a></li>
             </ul><!-- End Tabs -->
 
             <!-- Tab Content -->
             <div class="tab-content">
 
-              <div class="tab-pane fade show active" id="about-tab1">
+              <div class="tab-pane fade" id="about-tab2">
 
                 <div class="d-flex align-items-center mt-4">
                   <i class="bi bi-check2"></i>
@@ -61,7 +60,7 @@
 
               </div><!-- End Tab 1 Content -->
 
-              <div class="tab-pane fade" id="about-tab2">
+              <div class="tab-pane fade show active" id="about-tab1">
 
                 <div class="d-flex align-items-center mt-4">
                   <h5>phpBB2x is the official release of pbpBB 2.0.23 with some un-official updates.</h5>
@@ -156,24 +155,24 @@ HeroBiz is built with Bootstrap version 5 and doesn't require jQuery.</p>
                   <h4>Some of the key features include:</h4>
                 </div>
                 <p>
-<ul>				
-<li>Lightweight and clean design</li>
-<li>variables.css file for easy colors and fonts customizations</li>
-<li>No jQuery dependency</li>
-<li>Fully responsive</li>
-<li>Latest Bootstrap 5 version</li>
-<li>Sass/SCSS source files included (pro and membership users only)</li>
-<li>Animation on scroll</li>
-<li>One pager design</li>
-<li>Clean code and easy to customize</li>
-<li>Portfolio with lightbox support</li>
-<li>Google fonts</li>
-<li>Responsive Layout</li>
-<li>Off-canvas mobile menu</li>
-<li>Testimonials carousel</li>
-<li>SEO optimized</li>
-<li>Optimized for performance</li>
-</ul>
+				  <ul>				
+				    <li>Lightweight and clean design</li>
+				    <li>variables.css file for easy colors and fonts customizations</li>
+				    <li>No jQuery dependency</li>
+				    <li>Fully responsive</li>
+				    <li>Latest Bootstrap 5 version</li>
+				    <li>Sass/SCSS source files included (pro and membership users only)</li>
+				    <li>Animation on scroll</li>
+				    <li>One pager design</li>
+				    <li>Clean code and easy to customize</li>
+				    <li>Portfolio with lightbox support</li>
+				    <li>Google fonts</li>
+				    <li>Responsive Layout</li>
+				    <li>Off-canvas mobile menu</li>
+				    <li>Testimonials carousel</li>
+				    <li>SEO optimized</li>
+				    <li>Optimized for performance</li>
+				  </ul>
 				</p>
 
                 <div class="d-flex align-items-center mt-4">
@@ -388,15 +387,15 @@ HeroBiz is built with Bootstrap version 5 and doesn't require jQuery.</p>
     </div>
   </footer>
   
-<!-- fontawesome 6.5.2 CSS-->  
-<script src="templates/assets/js/all.min.js"></script>
-<script src="templates/assets/js/jquery-3.7.0.min.js"></script>
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Preloader -->
 <div id="preloader"></div>
 
+<script src="templates/assets/js/jquery-3.7.0.min.js"></script> 
+<!-- fontawesome 6.5.2 CSS-->  
+<script src="templates/assets/js/all.min.js"></script>
 <!-- Vendor JS Files -->
 <script src="templates/Hero/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="templates/Hero/vendor/php-email-form/validate.js"></script>
@@ -405,8 +404,9 @@ HeroBiz is built with Bootstrap version 5 and doesn't require jQuery.</p>
 <script src="templates/Hero/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="templates/Hero/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="templates/Hero/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
+<script src="templates/Hero/js/jquery.backstretch.min.js"></script>
 <!-- Main JS File -->
 <script src="templates/Hero/js/main.js"></script>
+
 </body>
 </html>
