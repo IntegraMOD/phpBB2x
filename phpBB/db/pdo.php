@@ -33,7 +33,6 @@ if(!defined("SQL_LAYER"))
         public $rowset = array();      
         public $queries;
         public $sql_time;
-        public $cache, $cached, $caching;
         public $count = 0;
         private $user, $password, $persistency, $server, $dbname;
  

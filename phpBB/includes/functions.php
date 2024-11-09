@@ -938,4 +938,3 @@ function redirect($url)
     header('Location: ' . $server_protocol . $server_name . $server_port . $script_name . $url);
     exit;
 }
-  
