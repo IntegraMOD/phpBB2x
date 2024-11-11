@@ -1,0 +1,212 @@
+/***************************************************************************
+                             batch_scheduling.txt
+                             --------------------
+    begin                : Sun Aug 6 2006
+    copyright            : (c) Mark D. Hamill
+    email                : mhamill@computer.org
+
+    $Id: $
+
+ ***************************************************************************/
+
+/***************************************************************************
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ ***************************************************************************/
+
+This digest software depends on your server operating system having a batch scheduling system that you can use. 
+A batch scheduling system is an operating system utility that can cause a program to be run at a certain time
+of the day. The best known batch scheduling system in cron used in Unix and Linux operating systems. You will need 
+to figure out a way to program the batch scheduling system to call the mail_digests.php program once an hour every 
+hour of the day, every day of the week. If you can't do that then there is no point installing this mod!
+
+*** You will need to know the absolute path to php on your system ***
+
+It may be in your control panel or you may have to initiate a service ticket with your web host to determine it. 
+There is no standard location for its installation. It might be in places like /usr/bin, usr/local/bin, /usr/lib 
+or other locations. The full path will be something like /usr/local/bin/php. If you can access the command line 
+you may be able to find it with the Unix "whereis php" command.
+
+*** Warning about mail_digests.php ***
+
+When run from a batch scheduling utility like cron, some users have been unable to get mail_digests.php to work 
+unless they replace the $phpbb_root_path with an absolute URL. Determining the absolute URL may be challenging, 
+but can often be done from the command line. In UNIX and Linux systems, for example, when in the directory containing 
+mail_digests.php, the "pwd" command will indicate the absolute path name. Consequently you may have to change 
+line 34 of mail_digests.php from:
+
+$phpbb_root_path = './';
+
+to something like this:
+
+$phpbb_root_path = '/home/mydomain/www/phpbb2/';
+
+*** Instructions for setting up a crontab using a cpanel Administrator console ***
+
+cpanel is a rather standard web host supplied control panel that you can use to set lots of things on your server, 
+like email addresses, databases etc. Not all Linux web hosts provide cpanel but most do. If cpanel is not provided, 
+your web host probably provides something similar. They provided this information when you set up your domain.
+
+1. Invoke the control panel for your domain using instructions provided by your web host. Usually it can be accessed 
+at a URL like http://mydomain.com/cpanel. Of course, substitute your real domain name for mydomain.com. You will normally 
+have to provide your web host ID and password. Specifics will vary depending on your web host.
+
+2. In your control panel, there is usally a cron tool that allows you to program crons using a web interface. If not try 
+some of the other options below.
+
+3. Using the cron tool, tell the server to call mail_digests.php once an hour every hour for every day of the week 
+with no ending date. Use the information on the path to php and mail_digests.php you figured out above. The actual 
+command will vary. The syntax for the command is:
+
+<absolute_path_to_php> <absolute_path_to_mail_digests.php>
+
+On my web host it would be something like:
+
+/usr/local/bin/php /home/potomact/www/mail_digests.php
+
+When programmed the cron will look something like this:
+
+0 * * * * /usr/local/bin/php /home/potomact/www/mail_digests.php
+
+If you want to append summary output to a file so you can monitor digests sent, a cron command like this should work:
+
+/usr/local/bin/php /home/potomact/www/mail_digests.php >> /home/potomact/www/mail_digests.log
+
+Using Unix or Linux, you could see the latest entries in the log from the command line like this:
+
+tail home/potomact/www/mail_digests.log
+
+Once programmed you will have to test it out. Use guidance in install.txt to test the cron interface before 
+advertising digests for general use.
+
+*** Instructions for setting up a crontab from the command line (for Linux/Unix systems) ***
+
+How easy it is to do this step depends on whether you own your web server or it is hosted externally for you 
+and how easily you can access the web server. If you own the server then presumably you are already familiar 
+with the server operating system and the commands needed.
+
+If you contract with a web host, access it remotely and you've never ventured beyond FTP to transmit files 
+then you'll have to connect via a terminal mode to issue the operating system commands to interact with your 
+batch scheduling system.
+
+1. If your web host allows straight telnet access, great. Log in. Skip to step 3.
+
+2. Most web hosts they require that if you want a telnet access you have to use a secure telnet program, 
+such as Secure Shell (SSH). Find out from your web host what you need to do to use SSH. This may not be a 
+trivial process. Elapsed time may take a day or two if you haven't done it before. Often your web host's 
+control panel will contain instructions on how to use SSH. Not all web hosts allow SSH.
+
+3. You will need a passing ability to use the Unix "vi" text editor to program your crontab job. Here is how 
+I did it (do not send the quotes as part of the commands). Note that you need to first figure out the path 
+to the PHP interpreter. I found it in /usr/local/bin but it may be somewhere else. You may have to ask your 
+host's technical support department for the information. You also need the absolute path to the location 
+where the mail_digests.php program is stored.
+
+a. From the command prompt, I entered the command "crontab -e" then Enter, which took me into a "vi" environment
+b. Typing "i" put me in the vi insert mode
+c. Very carefully I typed the following: 
+0 * * * * /usr/local/bin/php /home/potomact/www/mail_digests.php
+d. I pressed the Escape key to get out of vi insert mode
+e. Typed ":wq" then Enter to get out of vi.
+f. To verify the job was scheduled I entered the command "crontab -l" then Enter.
+g. Logged out.
+
+For this mod to work a crontab must be programmed to run mail_digests.php once an hour for every hour of the 
+day for every day of the week. The way I programmed this crontab, it will start every hour on the hour 
+(the 00 above is the minute). It is probably a good idea not to put this program in your WWW or HTML directory, 
+since it can then be invoked from the internet. But it facilitated my testing.
+
+*** Guidance on setting up scheduled tasks for Windows 2000 and XP Servers ***
+
+I don't have a Windows server, but it looks like if you download the phpAdsNew software at http://phpadsnew.com 
+and read the Administrator's manual, pages 24-27 you should be able to figure it out. You will need to download 
+wget for Windows, free software provided by GNU (http://www.gnu.org/software/wget/wget.html), and create a batch 
+file, and learn about how to tweak the Windows Task Manager. One user wrote me and said that after wget was 
+installed they created a batch file that looked like this:
+
+wget -q -O - http://full.url.to/mail_digests.php
+exit
+
+--------------------
+
+Security Issues
+
+Users have pointed out that there is a security issue involved since mail_digests.php can be invoked from a URL 
+by anyone, potentially sending digests over and over again by anyone who knows the URL. There are a number of 
+possible solutions to this. I'll discuss two. The first is to not allow it to be run by URL at all. The second 
+uses HTTP authentication to run it via URL. 
+
+The URL-less approach:
+
+This approach is both good and  bad. It doesn't facilitate your running mail_digest.php remotely except via 
+Telnet, SSH or a crontab-like mechanism. But it should keep malicious people from running the program unless 
+they can get to your server operating system. Assuming you move it to the parent folder of your HTML content, 
+you would then do three things:
+
+1. Save mail_digests.php to the parent folder of your HTML content.
+
+2. Change mail_digest.php to point to your phpBB root folder, something like this (exact name will depend on 
+your server):
+
+$phpbb_root_path = './www/phpbb2/'; // this depends on the name of your public html folder
+
+3. Modify the crontab accordingly, such as:
+
+00 * * * * /usr/local/bin/php /home/potomact/mail_digests.php
+
+or if you want to redirect summaries of email digests sent to a file (providing DIGEST_SHOW_SUMMARY in 
+digest_constants.php is set to true), do something like (over time this file may get very big!):
+
+00 * * * * /usr/local/bin/php /home/potomact/mail_digests.php >> /home/potomact/mail_digests_log.txt
+
+4. Don't forget to remove the old version of mail_digest.php in your phpBB root folder!
+
+The HTTP authentication approach:
+
+Here's how I did it using Linux/Unix and Apache environment:
+
+1. I created a directory called protected_scripts off my phpBB root folder using my FTP tool.
+
+2. Inside this directory I placed a .htaccess and a .htpasswd file. I found a nice tool to generate 
+these files at: http://www.clockwatchers.com/htaccess_tool.html.
+
+a. First I clicked on the Password Protection checkbox, then entered the full pathname to my new 
+protected_scripts folder, which in my case was /home/potomact/www/protected_scripts/.htpasswd. 
+The "Create It!" button generated a script that I copied and pasted into my text editor. Be careful 
+to save it as ".htaccess". I then FTPed in in ASCII mode to my protected_scripts folder.
+
+b. Next I used the same utility to create the .htpasswd file (scroll down to see it). Note the file 
+name has to be .htpasswd NOT .htpassword. I then FTPed in in ASCII mode to my protected scripts folder.
+
+(Note: Most FTP tools won't display hidden files, so you may not see it. From the Linux command prompt, 
+when in this directory, you can see hidden files with the "ls -la" command, and you can delete these 
+files with the "rm" command.)
+
+3. I edited one line in mail_digests.php to basically say "The phpBB root folder is in the parent folder":
+
+$phpbb_root_path = '../'; // was $phpbb_root_path = './';
+
+4. I copied my slightly modified mail_digest.php file in ASCII mode to my protected_scripts folder.
+
+5. To test I invoked my URL manually: http://www.potomactavern.org/protected_scripts/mail_digests.php. 
+I was asked to provide my username and password. With the proper authentication the script ran. 
+Without proper authentication, the script would not run and the web server returned an error.
+
+6. To test whether it would work when scheduled from a crontab, I simply edited my crontab using the 
+instructions above. The pertinent line became:
+
+00 * * * * /usr/local/bin/php /home/potomact/www/protected_scripts/mail_digests.php
+
+I then set my digest to arrive for the next hour and waited until the crontab kicked off at that hour. 
+My digest happily arrived in my email.
+
+7. Don't forget to remove the old version of mail_digest.php in your phpBB root folder!
+
+--------------------
+
+That was it. If your server is brought down you may have to go in manually and reprogram the crontab, 
+so make a note of what you did, or store the commands in a file.

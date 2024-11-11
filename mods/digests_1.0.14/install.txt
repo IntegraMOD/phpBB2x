@@ -1,0 +1,414 @@
+##############################################################
+## MOD Title: Digests
+## MOD Author: MarkDHamill < mhamill@computer.org > (Mark D. Hamill) http://www.potomactavern.org
+## MOD Description: Sends customized email digests of forum messages to subscribers
+## MOD Version: 1.0.13 
+##
+## Installation Level: Advanced
+## Installation Time: 60 Minutes to several days, depending on whether you need to set up SSH and
+##                    your skills at the server operating system command line.
+## Files To Edit: 
+##		admin/admin_users.php, 
+##		includes/page_header.php, 
+##		language/lang_english/lang_faq.php,
+## 		templates/subSilver/overall_header.tpl
+## Included Files: digests.php, digest_emailer.php, mail_digests.php, mail_digests_html.tpl, digest_constants.php,
+##  mail_digests_text.tpl, digests.tpl, digests_posts.tpl, digest_tables.php, icon_mini_digest.gif,
+##  batch_scheduling.txt, lang_digests.php, admin_users.php
+## License: http://opensource.org/licenses/gpl-license.php GNU General Public License v2
+############################################################## 
+## For security purposes, please check: http://www.phpbb.com/mods/
+## for the latest version of this MOD. Although MODs are checked
+## before being allowed in the MODs Database there is no guarantee
+## that there are no security problems within the MOD. No support
+## will be given for MODs not found within the MODs Database which
+## can be found at http://www.phpbb.com/mods/
+##############################################################
+## Author Notes:
+##
+## Due to the complexity of installing this mod, I may agree to install this for you for a fee. If interested, see 
+## this web page: http://members.cox.net/mhamill1/resume/phpbb.htm#Digest.
+##
+## The official and supported version of this mod is available only on the phpBB web site. However, I do maintain an 
+## offsite version that may include new "beta" features and bug fixes that are not official. These unofficial versions 
+## should be used with caution. The latest unofficial version can be downloaded from: 
+## http://www.potomactavern.org/tavern/digests.zip.
+##
+## PLEASE FOLLOW THESE STEPS TO INSTALL. Do not rely solely on the instructions at the end.
+##
+## 1. First READ but DON'T IMPLEMENT the instructions in batch_scheduling.txt. If this is something beyond what you can do 
+## don't bother to install the mod, or seek help from someone comfortable with installing and tweaking phpBB.
+##
+## 2. Please edit the DIGEST_SITE_URL constant in /includes/digest_constants.php with a text editor like Notepad. Simply 
+## give it the full URL to your phpBB forums, leaving ON the / at the end. By default the script will try to create the URL,
+## but for most people it will not work. Example:
+##
+##   define('DIGEST_SITE_URL', 'http://www.mysite.com/phpBB2/');
+##
+## 3. You may wish to edit lang_digests.php and other constants in digest_constants.php before copying it to your server.
+## It may be simpler to leave everything with the defaults and customize these after installation if the defaults do not satisfy.
+##
+## 4. Copy the files into the directories as shown below. Be mindful that when you copy down the install directory you are also
+## disabling your board.
+##
+## 5. Create the two tables needed: mod_subscriptions and mod_subscribed_tables by running digest_tables.php 
+## from your phpBB install directory. MySQL, Postgres and MS SQL Server are supported. If you are using any other
+## database, you will have to figure out the SQL to use. Delete the file and the folder when the tables are successfully
+## created, since your board will otherwise be disabled.
+##
+## 6. Make the file modifications. NOTE: If your default template is something other than subSilver, you will have to modify
+## the overall_header.tpl code to match your template. Consequently the instructions below for modifying overall_header.tpl
+## will probably NOT work. The idea is that the digests icon should appear for registered users and disappear for 
+## unregistered users and guests. If necessary you can save this tweaking until the end, since you can invoke the digest
+## settings and mail digests via URL.
+##
+## 7. Test to see if the digest user interface is working correctly. While logged in, via URL invoke digests.php in your 
+## phpBB root folder. Set it up so you receive a daily digest for the current hour. To increase the odds that you will get 
+## a digest:
+##		- Make sure the timezone in your profile accurately reflects your local time. Be careful if in daylight savings 
+##			time, since you want one hour earlier. For example, EST is -5:00 GMT, so for daylight savings time your profile
+##			needs to be set to -4:00 GMT.
+##		- Make sure some messages were posted in the last 24 hours in the forums you selected. Post a message if necessary.
+##		- Select a daily digest
+##		- Make sure "Show new messages only" is set to NO
+##		- Make sure "Send a digest if no new messages were posted" is set to YES
+##		- Set to receive a digest for the current hour in your timezone
+##
+## 8. Next, test to see if you can receive an email digest. Via URL invoke the mail_digests.php program in your phpBB root 
+## folder. (Mail will be sent to you at the address in your phpBB profile.) By default, you should see simple text output
+## indicating who received a digest and how many messages were sent along with a total count of the digests sent, and some 
+## server date and time information. This will help in testing and resolving potential time zone issues. Since this program is 
+## normally run automatically this information is neither seen seen nor captured, but you can redirect output to a file if 
+## you wish, or even turn it off (see digest_constant.php). If the digest was successfully sent it should appear in your 
+## email. To turn off the printing of summary messages, set the constant DIGEST_SHOW_SUMMARY to false in digest_constants.php. 
+##
+## 9. Next enable the batch scheduling feature. Follow in instructions in batch_scheduling.txt and test it. Schedule yourself 
+## to receive a digest for the next hour. Hopefully it will pop into your mailbox shortly after the start of the hour. If 
+## this works, you are done and can advertise the availability of digests on your forums.
+##
+## Usage notes:
+##
+## A clone of the 2.0.20 emailer class is used (digest_emailer.php) for the mail_digests.php program. The class was apparently 
+## written with no thought that it would be used for sending HTML formatted email. Hopefully this problem will be fixed and 
+## a future version will go back to using the emailer class.
+##
+## Most users who receive HTML digests using web based email programs like Yahoo! Mail will likely not see cascading style 
+## sheets applied to the HTML email unless frames are enabled, with a frame for the content of the email message. In the 
+## case of Yahoo! Mail, the message is displayed inside of a table <td> tag. Yahoo! Mail strips out <link> and related tags 
+## and appears to shove whatever content is between the <body> and the </body> tags of the email into the cell where the 
+## message appears. Email clients can be tricky. Some will add HTML whether you like it or not, giving results you may not
+## expect. If it looks fine for you but not someone else (or visa versa) it is probably due to different email clients or
+## different email client versions.
+##
+## You can use a customized style sheet for sending HTML formatted email. Set the variable DIGEST_CUSTOM_STYLESHEET_PATH 
+## appropriately, and turn DIGEST_USE_CUSTOM_STYLESHEET to true in digest_constants.php. In this case responsibility is 
+## up to you to create the stylesheet. Otherwise the default stylesheet for your board will be used. This can also be 
+## turned off, in which case no style sheet is applied to HTML formatted email, but it still looks great!
+##
+## I'd like to thank gregentin, dkklein, rabecasis, pengrus, m_longland, PeteBest and many others for Beta 
+## testing, their suggestions and improving the code. Without them this software would be much less useful 
+## AND professional.
+##
+############################################################## 
+## MOD History: 
+## 
+##   2003-09-28 - Version 1.0.0 
+##      - Initial Release  
+##   2003-10-03 - Version 1.0.1
+##      - Cleaned up bug in mail_digests.php that incorrectly reported last access time if user
+##        wants to filter out messages since they last touched the board.
+##      - Added code provided by M Longland that allows users to set the maximum size of each message
+##        to be included in the digest. WAS the value set in digest_constants.php. Now the user can 
+##        select 50, 100, 150, 300, 600 or Maximum (32,000) characters.
+##      - Enhanced message in digests.php so if someone is not logged in and wants a digest they are
+##        reminded they have to register with the board first before they can enroll to receive 
+##        a digest.
+##      - batch_scheduling.txt provides good guidance for running scheduled tasks on a Windows 2000/XP
+##        server.
+##      - digest_tables.php adds a new column, text_length int(11) NOT NULL default '0' to the 
+##        subscriptions table. If using a previous version you will need to manually add this
+##        column to the subscriptions table. In addition you should update all rows in your 
+##        subscriptions table so that existing users have a text_length value of 150, so as not 
+##        to confuse them. Assuming the table is named phpbb_mod_subscriptions this SQL should work:
+##          update phpbb_mod_subscriptions set text_length=150
+##   2003-10-04 - Version 1.0.2
+##      - Should now meet phpBB coding guidelines. No logic changes.
+##   2003-10-15 - Version 1.0.3
+##      - Minor changes to mail_digests.php to improve presentation of message text. BBcode is 
+##        removed and in the HTML version any \n is converted to a <br /> tag. No other changes.
+##   2003-10-31 - Version 1.0.4
+##      - Now handles time zones correctly. User asks for digests to arrive based on their local time
+##        (assumed to be the time zone set in their profile). If this is different from the server 
+##        time zone, the server takes this into account. Note that the subscriptions table will
+##        store the time zone based on server time. So 7 PM PST (hour 19) is stored as 22 if the 
+##        server is hosted in EST. Changed: digests.php and two lines of code in digest_constants.php.
+##        Note: if user changes their time zone in their profile, the hour to send the digest does NOT
+##        change. To correct this would involve a hack to profile.php, that I considered unwise.
+##   2003-11-06 - Version 1.0.5
+##      - Time zone logic improved to use actual server time zone instead of board time zone, since 
+##        board time zone may be set to a time different than the server time zone. This logic affects
+##        digests.php. Also added helpful information to mail_digests.php that shows who received digests
+##        for a given hour and how many digests were sent. This will only be seen if run manually such
+##        as by URL, but if run from command line or batch output can be captured to a file in Unix or
+##        Linux systems by piping.
+##   2003-11-08 - Version 1.0.6
+##      - Responding to MOD Team requests:
+##        -- digests.php uses append_sid for the form URL
+##        -- digests.tpl form action template variable name changed to {S_POST_ACTION}
+##        -- These instructions changed to use a template variable for the digests URL in overall_header.tpl
+##           and to indicate how page_header.php needs to be modified to pass the digests.php URL to  
+##           overall_header.tpl
+##        -- Cleaned up a few minor coding problems at variance with the coding standards
+##      - Modified digest_constants.php to have two disclaimer messages, one for HTML formatted email and
+##        one for text formatted email. This will keep the URLs from appearing in the disclaimer by 
+##        default for text digests. Also fixed bug that was not displaying page title by adding the
+##        language variable.
+##      - Modified mail_digests.php to show toggle the disclaimer message depending on whether the digest
+##        is html or text.
+##      - Modified mail_digests_html.tpl so digest options and disclaimer show inside <p> tags, so styles
+##        are applied.
+##      - Added suggested_faq_text.txt file. Copy and paste into your lang_faq.php file if you want to 
+##        provide answers to basic questions about the digest. Location in the FAQ is up to you depending
+##        on how important you think it is.
+##   2003-11-20 - Version 1.0.7
+##      - digests.tpl modified to apply styles (work done by zocalo, thanks!) so interface presents
+##        better. I also added a cell spacing of five pixels to make it easier to read.
+##      - digest_constants.php changed to add digest explanation variable so it will be XHMTL 
+##        compatible with modified digests.tpl. Removed digest_not_logged_in message.
+##      - digests.php redirects users not logged in to login in page. Thanks to zocalo again for this
+##        suggestion. There was a redundant call to use the template digests.tpl. The first call was 
+##        removed.
+##      - Slight changes in wording to suggested_faq_text.txt.
+##      - These instructions to make changes to page_header.php have been changed. Now includes a 
+##        line of code referencing digest_constants.php and uses a label variable I neglected to 
+##        include in the last version
+##   2003-12-30 - Version 1.0.8
+##      - batch_scheduling.txt instructions changed to correct $phpbb_root_path for the URL-less approach
+##      - digest_constants.php corrects problem many are experiencing with $siteURL, to add a / after the site
+##        name if it is not there. This should reduce many installation problems.
+##      - digest_tables.php modified to fix a tab problem in source code
+##      - digests.php. Fixed some serious problems noted by the MOD team. POST variables are now wrapped with
+##        function to eliminate potential SQL injection hacks. In addition incorporated their suggestions for
+##        using variables to set $user_timezone, changed all occurrences of $userdata['session_user_id'] to
+##        $userdata['$user_id'], and fixed some tab problems in the source code
+##      - digests.tpl now has <span> tags to fix the "big print" problem many were complaining about
+##      - mail_digests.php has time zone logic in it that was missing from the last release and fixed some tab 
+##        problems in the source code
+##      - suggested_faq_text.txt file removed from archive since it is now included in these installation 
+##        instructions below
+##   2004-04-06 - Version 1.0.9
+##      - SQL commands are upper cased at the request of the mod team. Affects digests.php and mail_digests.php.
+##        Please note that the programs are functionally identical so if it works in 1.0.8 you really don't need
+##        to upgrade to 1.0.9.
+##      - Installation instructions below modified to use IN LINE AFTER, ADD per request from mod team.
+##      - Updated comments in each program to say it is designed to work with phpBB 2.0.8 (works for me). However
+##        it should work fine in versions 2.0.6 and 2.0.7 too since they were used otherwise unmodified in these
+##        environments.
+##   2005-07-07 - Version 1.0.9c
+##      - Corrected $siteURL in digest_constants.php
+##   2006-04-20 - Version 1.0.9d
+##      - Created a language file called lang_digests.php, removing language information from digest_constants.php
+##        This will allow language modularization and could allow multiple language support for digests on the same 
+##        board. Also, this has been tested with phpBB 2.0.20.
+##      - digest_emailer.php updated to include relevant changes found in emailer.php since 2.0.6.
+##	 2006-05-16 - Version 1.0.9e
+##		- Updated this file to comply with latest phpBB mod standards, per request from phpBB mod team.
+##   2006-05-21 - Version 1.0.10
+##		- SQL should now be database independent. MySQL specific functions moved out of SQL and implemented with
+##		  equivalent PHP code.
+##		- If the user is not logged in, the digest link no longer appears. This should solve many problems with 
+##		  headers already being sent.
+##		- Summary message at the end of mail_digests.php can be turned on and off with the DIGEST_SHOW_SUMMARY constant
+##		- If the summaries are desired to be shown in mail_digests.php, the summary can be either in HTML or plain 
+##		  text. Switch with the constant DIGEST_SHOW_SUMMARY_TYPE.
+##		- If a user is delete through the administrator control panel and the user has digest subscriptions, his 
+##		  subscriptions are removed.
+##		- Formats for dates shown in digests can now be changed by changing constants such as DIGEST_DATE_FORMAT
+##		- Fixed bug in Version 1.0.9d & 1.0.9e that did not show labels for text sizes 50, 100, 150, 300 and 600
+##		- Version of digest software is shown in both digest pages and in the digests themselves. This will help 
+##		  in future portability and debugging.
+##		- Replaced most variables used across modules with constants, including the big one, $siteURL which is now 
+##		  the constant DIGEST_SITE_URL.
+##		- All constants start with the DIGEST_ literal for consistency.
+##		- Now supports sites running https.
+##	 2006-05-29 - Version 1.0.11
+##		- Fixed bug in digest_tables.php. user_id should use mediumint data type for phpbb_mod_subscriptions table.
+##		  This problem will manifest itself if the greatest_user_id in your database exceeds 32,767.
+##		- Fixed bug in mail_digests.php. In some cases it may not work correctly when installed on a virgin board
+##		  because init_userprefs was not called. Also added missing $board_timezone statement.
+##		- Character encoding for HTML and text digests can be set in digest_constants.php. No longer limited to
+##		  iso-8859-1 and us-ascii. This allows better support for internationalization.
+##	 2006-07-01 - Version 1.0.12
+##		- DIGEST_SITE_URL constant takes into account the phpBB port (thanks to drybones)
+##		- Fixed bug in mail_digests.php that wasn't sending weekly digests on the correct day (thanks to drybones)
+##	 2006-08-06 - Version 1.0.13
+##		- digest_tables.php will create appropriate tables for Postgres and MS SQL. In the past it would only create
+##		  tables in MySQL. Column names that were ENUM have been changed to CHAR for portability. If upgrading from
+##		  an earlier version, no changes are needed to your MySQL tables.
+##		- digest_tables.php is now in an install folder, per request from the Mod team.
+##		- copyright statements point to me rather than phpBB. Apparently this is allowed despite the GPL license.
+##		- digests.tpl was modified to remove IE specific code. This is no longer a problem since IE 5+ supports DOM 2.
+##		- 2 copies of digest_constants was accidentally included in 1.0.12.
+##
+## This MOD is now EasyMOD Friendly! 
+##
+############################################################## 
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD
+##############################################################
+
+# 
+#-----[ COPY ]------------------------------------------
+#
+copy root/digests.php to digests.php
+copy root/mail_digests.php to mail_digests.php
+copy root/install/digest_tables.php to install/digest_tables.php
+copy root/includes/digest_constants.php to includes/digest_constants.php 
+copy root/includes/digest_emailer.php to includes/digest_emailer.php
+copy root/language/lang_english/lang_digests.php to language/lang_english/lang_digests.php
+copy root/language/lang_english/email/mail_digests_html.tpl to language/lang_english/email/mail_digests_html.tpl
+copy root/language/lang_english/email/mail_digests_text.tpl to language/lang_english/email/mail_digests_text.tpl
+copy root/templates/subSilver/digests.tpl to templates/subSilver/digests.tpl
+copy root/templates/subSilver/digests_post.tpl to templates/subSilver/digests_post.tpl 
+copy root/templates/subSilver/images/icon_mini_digest.gif to templates/subSilver/images/icon_mini_digest.gif
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/overall_header.tpl
+
+#
+#-----[ FIND ]------------------------------------------
+#
+						<!-- BEGIN switch_user_logged_out -->
+
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+						<!-- BEGIN switch_show_digests -->
+						&nbsp;<a href="{U_DIGESTS}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_digest.gif" width="12" height="13" border="0" alt="{L_DIGESTS}" hspace="3" />{L_DIGESTS}</a>&nbsp;
+						<!-- END switch_show_digests -->
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/page_header.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+define('HEADER_INC', TRUE);
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_digests.' . $phpEx);
+
+#
+#-----[ FIND ]------------------------------------------
+#
+	$l_login_logout = $lang['Logout'] . ' [ ' . $userdata['username'] . ' ]';
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+	$template->assign_block_vars('switch_show_digests', array());
+
+#
+#-----[ FIND ]------------------------------------------
+#
+	'L_MEMBERLIST' => $lang['Memberlist'], 
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+	'L_DIGESTS' => $lang['digest_page_title'], 
+
+#
+#-----[ FIND ]------------------------------------------
+#
+	'U_MEMBERLIST' => append_sid('memberlist.'.$phpEx), 
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+	'U_DIGESTS' => append_sid('digests.'.$phpEx), 
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+language/lang_english/lang_faq.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+//
+// This ends the FAQ entries
+//
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+$faq[] = array("--","Digests");
+$faq[] = array("What are Digests?", "Digests are email messages sent to you periodically with summary of postings made here. Weekly or daily digests are available.");
+$faq[] = array("Why would I want a digest?", "It makes your life easier. You don't have to explicitly visit this site to see what conversations are going on around here. Just read your digest and if there is some topic that seems of interest, click on it in your email program and start participating! Unsubscribe at any time.");
+$faq[] = array("How often are digests sent?", "They can be sent daily or weekly. Weekly digests are sent on Sundays.");
+$faq[] = array("When are digests sent?", "You determine the hour you want to receive the digest. Whatever time you choose, you will always get the latest news so pick a time that suits your lifestyle.");
+$faq[] = array("What time period is covered by the digest?", "Either 24 hours or 7 days, depending on whether you selected a daily or weekly digest. Messages older than this will not be sent. In addition if you want you can elect not to see messages since you last logged in, if you visited recently. You can even filter out your own messages.");
+$faq[] = array("Suppose I don't want summaries of every message here. Can I be selective?", "Yes. You can pick the forum or forums that interest you. By default you will get messages for all forums that you are allowed to access.");
+$faq[] = array("What email message formats are available?", "We can send you HTML or text. Unless your email program can't handle HTML (very unusual these days) we suggest HTML. Frankly, text digests look pretty plain and are harder to use. That's the nature of plain text.");
+$faq[] = array("Do I get the whole message text in the digest?", "By default you get the first 150 characters of the text, or you can elect not to see any of the message text and just see the topic subject instead. You can select message excerpts including the first 50, 100, 150, 300 or 600 characters, or the full text of the message (up to 32,000 characters). Anything beyond the limit you set will be truncated. We recommend keeping the default message length because otherwise your digests may get so big as to be unusable. We have also heard that very large digests may be rejected by your ISP or put you over your server storage quota. An excerpt reduces bandwidth and is usually all that is needed. Why? Because each message has a convenient link that will take you to the topic or message of interest.");
+$faq[] = array("How do I get started?", "Just click on the Digests link near the top right part of any page. Or if you prefer <a href=\"./digests.php\">click here</a>.");
+$faq[] = array("Can I unsubscribe?", "Of course! Just go to the same page and select \"None\" for \"Type of Digest Wanted\". Then submit the form. Your subscription will end immediately.");
+$faq[] = array("Are digests commercial free?", "Of course. There are no annoying ads nor will there ever be any on our site.");
+$faq[] = array("Is my privacy protected?", "Yes, your digest is sent to you and no one else at the email address you gave us in your profile. Think of the digest as a special edition newspaper customized just for you. Someone else is likely getting a completely different digest."); 
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+admin/admin_users.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+require($phpbb_root_path . 'includes/functions_validate.'.$phpEx);
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+include($phpbb_root_path . 'includes/digest_constants.' . $phpEx);
+
+#
+#-----[ FIND ]------------------------------------------
+#
+				if ( !$db->sql_query($delete_text_sql) )
+				{
+					message_die(GENERAL_ERROR, 'Could not delete private message text', '', __LINE__, __FILE__, $delete_text_sql);
+				}
+			}
+			
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+	        // Delete digests subscriptions, if any. 
+ 
+            // First remove all individual forum subscriptions
+            $sql = 'DELETE FROM ' . DIGEST_SUBSCRIBED_FORUMS_TABLE . ' WHERE user_id = ' . (int)$user_id;
+ 
+            if (!$db->sql_query($sql))
+            {
+                trigger_error('Could not delete from ' . DIGEST_SUBSCRIBED_FORUMS_TABLE . ' table', E_USER_ERROR);
+            }
+ 
+            // remove subscription itself
+            $sql = 'DELETE FROM ' . DIGEST_SUBSCRIPTIONS_TABLE . ' WHERE user_id = ' . (int)$user_id;
+ 
+            if (!$db->sql_query($sql))
+            {
+                trigger_error('Could not delete from ' . DIGEST_SUBSCRIPTIONS_TABLE . ' table', E_USER_ERROR);
+            }
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
+#
+# EoM  
