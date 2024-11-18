@@ -643,37 +643,37 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 					$topic_title = (count($orig_word)) ? preg_replace($orig_word, $replacement_word, unprepare_message($topic_title)) : unprepare_message($topic_title);
 
-					@reset($bcc_list_ary);
-					while (list($user_lang, $bcc_list) = each($bcc_list_ary))
-					{
-						$emailer->use_template('topic_notify', $user_lang);
-		
-						for ($i = 0; $i < count($bcc_list); $i++)
-						{
-							$emailer->bcc($bcc_list[$i]);
-						}
-
-						// The Topic_reply_notification lang string below will be used
-						// if for some reason the mail template subject cannot be read 
-						// ... note it will not necessarily be in the posters own language!
-						$emailer->set_subject($lang['Topic_reply_notification']); 
-						
-						// This is a nasty kludge to remove the username var ... till (if?)
-						// translators update their templates
-						$emailer->msg = preg_replace('#[ ]?{USERNAME}#', '', $emailer->msg);
-
-						$emailer->assign_vars(array(
-							'EMAIL_SIG' => (!empty($board_config['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $board_config['board_email_sig']) : '',
-							'SITENAME' => $board_config['sitename'],
-							'TOPIC_TITLE' => $topic_title, 
-
-							'U_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_POST_URL . "=$post_id#$post_id",
-							'U_STOP_WATCHING_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_TOPIC_URL . "=$topic_id&unwatch=topic")
-						);
-
-						$emailer->send();
-						$emailer->reset();
-					}
+	                @reset($bcc_list_ary);
+	                    foreach ($bcc_list_ary as $user_lang => $bcc_list)
+	                    {
+	                        $emailer->use_template('topic_notify', $user_lang);
+	 
+	                        foreach ($bcc_list as $bcc)
+	                        {
+	                            $emailer->bcc($bcc);
+	                        }
+	 
+	                        // The Topic_reply_notification lang string below will be used
+	                        // if for some reason the mail template subject cannot be read 
+	                        // ... note it will not necessarily be in the posters own language!
+	                        $emailer->set_subject($lang['Topic_reply_notification']); 
+	 
+	                        // This is a nasty kludge to remove the username var ... till (if?)
+	                        // translators update their templates
+	                        $emailer->msg = preg_replace('#[ ]?{USERNAME}#', '', $emailer->msg);
+	 
+	                        $emailer->assign_vars(array(
+	                            'EMAIL_SIG' => (!empty($board_config['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $board_config['board_email_sig']) : '',
+	                            'SITENAME' => $board_config['sitename'],
+	                            'TOPIC_TITLE' => $topic_title, 
+	 
+	                            'U_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_POST_URL . "=$post_id#$post_id",
+	                            'U_STOP_WATCHING_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_TOPIC_URL . "=$topic_id&unwatch=topic")
+	                        );
+	 
+	                        $emailer->send();
+	                        $emailer->reset();
+	                    }
 				}
 			}
 			$db->sql_freeresult($result);
