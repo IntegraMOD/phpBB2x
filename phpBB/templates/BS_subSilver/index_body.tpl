@@ -101,7 +101,7 @@
 <br clear="all" />
 <div class="text-center">
   <div class="row mx-0">
-	<div class="col gensmall text-nowrap px-2"><button class="btn" alt="{L_NEW_POSTS}"><i class="fa-regular fa-file-lines"></i></button>&nbsp;{L_NEW_POSTS}</div>
+	<div class="col gensmall text-nowrap px-2"><button class="btn" alt="{L_NEW_POSTS}"><i class="fa-regular fa-file-lines" style="color: #ff8000;"></i></button>&nbsp;{L_NEW_POSTS}</div>
 	<div class="col gensmall text-nowrap px-2"><button class="btn" alt="{L_NO_NEW_POSTS}"><i class="fa-regular fa-file"></i></button>&nbsp;{L_NO_NEW_POSTS}</div>
 	<div class="col gensmall text-nowrap px-2"><button class="btn" alt="{L_FORUM_LOCKED}"><i class="fa-regular fa-file-zipper"></i></button>&nbsp;{L_FORUM_LOCKED}</div>	    
   </div>

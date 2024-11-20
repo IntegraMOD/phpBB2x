@@ -145,16 +145,16 @@ else
 //
 if ( isset($_GET['alphanum']) || isset($_POST['alphanum']) ) 
 { 
-	$alphanum = ( isset($_POST['alphanum']) ) ? htmlspecialchars((string) $_POST['alphanum']) : htmlspecialchars((string) $_GET['alphanum']);
-	$alphanum = str_replace("\'", "''", $alphanum);
-	if ($dbms == 'postgres') 
-	{
-	    $alpha_where = ( $alphanum == 'num' ) ? "AND username !~ '^[A-Z]+'" : "AND username ILIKE '$alphanum%'";
-	} 
-	else
-	{
-	    $alpha_where = ( $alphanum == 'num' ) ? "AND username NOT RLIKE '^[A-Z]'" : "AND username LIKE '$alphanum%'";
-	}
+    $alphanum = ( isset($_POST['alphanum']) ) ? htmlspecialchars((string) $_POST['alphanum'], ENT_QUOTES, 'UTF-8') : htmlspecialchars((string) $_GET['alphanum'], ENT_QUOTES, 'UTF-8');
+    $alphanum = str_replace("\'", "''", $alphanum);
+    if ($dbms == 'postgres') 
+    {
+        $alpha_where = ( $alphanum == 'num' ) ? "AND username !~ '^[A-Z]+'" : "AND username ILIKE " . pg_escape_literal($alphanum . '%');
+    } 
+    else
+    {
+        $alpha_where = ( $alphanum == 'num' ) ? "AND username NOT REGEXP '^[A-Z]'" : "AND username LIKE " . $pdo->quote($alphanum . '%');
+    }
 }
 else
 {
