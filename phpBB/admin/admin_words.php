@@ -38,7 +38,7 @@ if (!defined('IN_PHPBB'))
 $phpbb_root_path = "./../";
 require($phpbb_root_path . 'extension.inc');
 
-$cancel = (isset($HTTP_POST_VARS['cancel']) || isset($_POST['cancel'])) ? true : false;
+$cancel = (isset($_POST['cancel']) || isset($_POST['cancel'])) ? true : false;
 $no_page_header = $cancel;
 
 require('./pagestart.' . $phpEx);
@@ -48,9 +48,9 @@ if ($cancel)
 	redirect('admin/' . append_sid("admin_words.$phpEx", true));
 }
 
-if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
+if( isset($_GET['mode']) || isset($_POST['mode']) )
 {
-	$mode = (isset($HTTP_GET_VARS['mode'])) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
+	$mode = (isset($_GET['mode'])) ? $_GET['mode'] : $_POST['mode'];
 	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 }
 else 
@@ -58,11 +58,11 @@ else
 	//
 	// These could be entered via a form button
 	//
-	if( isset($HTTP_POST_VARS['add']) )
+	if( isset($_POST['add']) )
 	{
 		$mode = "add";
 	}
-	else if( isset($HTTP_POST_VARS['save']) )
+	else if( isset($_POST['save']) )
 	{
 		$mode = "save";
 	}
@@ -79,7 +79,7 @@ if( $mode != "" )
 {
 	if( $mode == "edit" || $mode == "add" )
 	{
-		$word_id = ( isset($HTTP_GET_VARS['id']) ) ? intval($HTTP_GET_VARS['id']) : 0;
+		$word_id = ( isset($_GET['id']) ) ? intval($_GET['id']) : 0;
 
 		$template->set_filenames(array(
 			"body" => "admin/words_edit_body.tpl")
@@ -130,9 +130,9 @@ if( $mode != "" )
 	}
 	else if( $mode == "save" )
 	{
-		$word_id = ( isset($HTTP_POST_VARS['id']) ) ? intval($HTTP_POST_VARS['id']) : 0;
-		$word = ( isset($HTTP_POST_VARS['word']) ) ? trim($HTTP_POST_VARS['word']) : "";
-		$replacement = ( isset($HTTP_POST_VARS['replacement']) ) ? trim($HTTP_POST_VARS['replacement']) : "";
+		$word_id = ( isset($_POST['id']) ) ? intval($_POST['id']) : 0;
+		$word = ( isset($_POST['word']) ) ? trim($_POST['word']) : "";
+		$replacement = ( isset($_POST['replacement']) ) ? trim($_POST['replacement']) : "";
 
 		if($word == "" || $replacement == "")
 		{
@@ -164,9 +164,9 @@ if( $mode != "" )
 	}
 	else if( $mode == "delete" )
 	{
-		if( isset($HTTP_POST_VARS['id']) ||  isset($HTTP_GET_VARS['id']) )
+		if( isset($_POST['id']) ||  isset($_GET['id']) )
 		{
-			$word_id = ( isset($HTTP_POST_VARS['id']) ) ? $HTTP_POST_VARS['id'] : $HTTP_GET_VARS['id'];
+			$word_id = ( isset($_POST['id']) ) ? $_POST['id'] : $_GET['id'];
 			$word_id = intval($word_id);
 		}
 		else
@@ -174,7 +174,7 @@ if( $mode != "" )
 			$word_id = 0;
 		}
 
-		$confirm = isset($HTTP_POST_VARS['confirm']);
+		$confirm = isset($_POST['confirm']);
 
 		if( $word_id && $confirm )
 		{
@@ -232,7 +232,8 @@ else
 
 	$word_rows = $db->sql_fetchrowset($result);
 	$db->sql_freeresult($result);
-	$word_count = is_countable($word_rows) ? count($word_rows) : 0;
+	$word_count = 0;
+    foreach ($word_rows as $word) $word_count++;
 
 	$template->assign_vars(array(
 		"L_WORDS_TITLE" => $lang['Words_title'],
@@ -276,5 +277,3 @@ else
 $template->pparse("body");
 
 include('./page_footer_admin.'.$phpEx);
-
-?>

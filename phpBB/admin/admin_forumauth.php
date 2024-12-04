@@ -74,9 +74,9 @@ $field_names = array(
 $forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
 $forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
 
-if(isset($HTTP_GET_VARS[POST_FORUM_URL]) || isset($HTTP_POST_VARS[POST_FORUM_URL]))
+if(isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL]))
 {
-	$forum_id = (isset($HTTP_POST_VARS[POST_FORUM_URL])) ? intval($HTTP_POST_VARS[POST_FORUM_URL]) : intval($HTTP_GET_VARS[POST_FORUM_URL]);
+	$forum_id = (isset($_POST[POST_FORUM_URL])) ? intval($_POST[POST_FORUM_URL]) : intval($_GET[POST_FORUM_URL]);
 	$forum_sql = "AND forum_id = $forum_id";
 }
 else
@@ -85,9 +85,9 @@ else
 	$forum_sql = '';
 }
 
-if( isset($HTTP_GET_VARS['adv']) )
+if( isset($_GET['adv']) )
 {
-	$adv = intval($HTTP_GET_VARS['adv']);
+	$adv = intval($_GET['adv']);
 }
 else
 {
@@ -97,20 +97,20 @@ else
 //
 // Start program proper
 //
-if( isset($HTTP_POST_VARS['submit']) )
+if( isset($_POST['submit']) )
 {
 	$sql = '';
 
 	if(!empty($forum_id))
 	{
-		if(isset($HTTP_POST_VARS['simpleauth']))
+		if(isset($_POST['simpleauth']))
 		{
-			$simple_ary = $simple_auth_ary[intval($HTTP_POST_VARS['simpleauth'])];
+			$simple_ary = $simple_auth_ary[intval($_POST['simpleauth'])];
 
-			for($i = 0; $i < (is_countable($simple_ary) ? count($simple_ary) : 0); $i++)
-			{
-				$sql .= ( ( $sql != '' ) ? ', ' : '' ) . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
-			}
+            foreach ($simple_ary as $i => $value)
+            {
+                $sql .= (($sql !== '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $value;
+            }
 
 			if (is_array($simple_ary))
 			{
@@ -118,24 +118,25 @@ if( isset($HTTP_POST_VARS['submit']) )
 			}
 		}
 		else
-		{
-			for($i = 0; $i < (is_countable($forum_auth_fields) ? count($forum_auth_fields) : 0); $i++)
-			{
-				$value = intval($HTTP_POST_VARS[$forum_auth_fields[$i]]);
-
-				if ( $forum_auth_fields[$i] == 'auth_vote' )
-				{
-					if ( $HTTP_POST_VARS['auth_vote'] == AUTH_ALL )
-					{
-						$value = AUTH_REG;
-					}
-				}
-
-				$sql .= ( ( $sql != '' ) ? ', ' : '' ) .$forum_auth_fields[$i] . ' = ' . $value;
-			}
-
-			$sql = "UPDATE " . FORUMS_TABLE . " SET $sql WHERE forum_id = $forum_id";
-		}
+	    {
+            $forum_auth_fields_count = count($forum_auth_fields);
+            for($i = 0; $i < $forum_auth_fields_count; $i++)
+            {
+                $value = intval($_POST[$forum_auth_fields[$i]]);
+ 
+                if ( $forum_auth_fields[$i] === 'auth_vote' )
+                {
+                    if ( $_POST['auth_vote'] === AUTH_ALL )
+                    {
+                        $value = AUTH_REG;
+                    }
+                }
+ 
+                $sql .= ( ( $sql !== '' ) ? ', ' : '' ) . $forum_auth_fields[$i] . ' = ' . $value;
+            }
+ 
+            $sql = "UPDATE " . FORUMS_TABLE . " SET $sql WHERE forum_id = " . intval($forum_id);
+        }
 
 		if ( $sql != '' )
 		{
@@ -186,9 +187,10 @@ if( empty($forum_id) )
 	);
 
 	$select_list = '<select name="' . POST_FORUM_URL . '">';
-	for($i = 0; $i < (is_countable($forum_rows) ? count($forum_rows) : 0); $i++)
+	$forum_count = count($forum_rows);
+	for ($i = 0; $i < $forum_count; $i++)
 	{
-		$select_list .= '<option value="' . $forum_rows[$i]['forum_id'] . '">' . $forum_rows[$i]['forum_name'] . '</option>';
+		$select_list .= '<option value="' . $forum_rows[$i]['forum_id'] . '">' . htmlspecialchars($forum_rows[$i]['forum_name'], ENT_QUOTES, 'UTF-8') . '</option>';
 	}
 	$select_list .= '</select>';
 
@@ -216,21 +218,19 @@ else
 	$forum_name = $forum_rows[0]['forum_name'];
 
 	@reset($simple_auth_ary);
-	
-//	while( list($key, $auth_levels) = each($simple_auth_ary))
 	foreach ($simple_auth_ary as $key => $auth_levels)
 	{
 		$matched = 1;
-		for($k = 0; $k < (is_countable($auth_levels) ? count($auth_levels) : 0); $k++)
+		for($k = 0; $k < count($auth_levels); $k++)
 		{
 			$matched_type = $key;
-
+	 
 			if ( $forum_rows[0][$forum_auth_fields[$k]] != $auth_levels[$k] )
 			{
 				$matched = 0;
 			}
 		}
-
+	 
 		if ( $matched )
 		{
 			break;
@@ -260,10 +260,10 @@ else
 	{
 		$simple_auth = '<select name="simpleauth">';
 	 
-		for($j = 0; $j < (is_countable($simple_auth_types) ? count($simple_auth_types) : 0); $j++) 
+		foreach ($simple_auth_types as $j => $auth_type)
 		{
-			$selected = ( $matched_type == $j ) ? ' selected="selected"' : '';
-			$simple_auth .= '<option value="' . $j . '"' . $selected . '>' . $simple_auth_types[$j] . '</option>';
+			$selected = ($matched_type == $j) ? ' selected="selected"' : '';
+			$simple_auth .= '<option value="' . $j . '"' . $selected . '>' . htmlspecialchars($auth_type, ENT_QUOTES, 'UTF-8') . '</option>';
 		}
 	 
 		$simple_auth .= '</select>';
@@ -286,23 +286,23 @@ else
 		for($j = 0; $j < count($forum_auth_fields); $j++)
 		{
 			$custom_auth[$j] = '&nbsp;<select name="' . $forum_auth_fields[$j] . '">';
-
-			for($k = 0; $k < (is_countable($forum_auth_levels) ? count($forum_auth_levels) : 0); $k++)
+		 
+			for($k = 0; $k < count($forum_auth_levels); $k++)
 			{
 				$selected = ( $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k] ) ? ' selected="selected"' : '';
 				$custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['Forum_' . $forum_auth_levels[$k]] . '</option>';
 			}
 			$custom_auth[$j] .= '</select>&nbsp;';
-
+		 
 			$cell_title = $field_names[$forum_auth_fields[$j]];
-
+		 
 			$template->assign_block_vars('forum_auth_titles', array(
-				'CELL_TITLE' => $cell_title)
-			);
+				'CELL_TITLE' => $cell_title
+			));
 			$template->assign_block_vars('forum_auth_data', array(
-				'S_AUTH_LEVELS_SELECT' => $custom_auth[$j])
-			);
-
+				'S_AUTH_LEVELS_SELECT' => $custom_auth[$j]
+			));
+		 
 			$s_column_span++;
 		}
 	}

@@ -294,8 +294,8 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 					$auth_field = $forum_auth_fields[$j];
 
 //					while( [$forum_id, $value] = @each($HTTP_POST_VARS['private_' . $auth_field]) )	{
-                    foreach ((array) $HTTP_POST_VARS['private_' . $auth_field] as $forum_id => $value) {
-
+                    foreach ((array) (isset($_POST['private_' . $auth_field]) ? $_POST['private_' . $auth_field] : array()) as $forum_id => $value) 
+					{
 						$change_acl_list[$forum_id][$auth_field] = $value;
 					}
 				}
@@ -414,8 +414,8 @@ if ( isset($HTTP_POST_VARS['submit']) && ( ( $mode == 'user' && $user_id ) || ( 
 						$sql_field = '';
 						$sql_value = '';
 //						while ( list($auth_type, $value) = @each($update_acl_status[$forum_id]) ) {
-                        foreach ((array) $update_acl_status[$forum_id] as $auth_type => $value) {
-
+					    foreach ((array) (array_key_exists($forum_id, $update_acl_status) ? $update_acl_status[$forum_id] : array()) as $auth_type => $value)
+					    {
 							$sql_field .= ( ( $sql_field != '' ) ? ', ' : '' ) . $auth_type;
 							$sql_value .= ( ( $sql_value != '' ) ? ', ' : '' ) . $value;
 						}

@@ -216,10 +216,16 @@ if(!defined("SQL_LAYER"))
 			{
 				$query_id = $this->query_result;
 			}
- 
-			return ( $query_id ) ? mysqli_field_count($query_id) : false;
+		 
+			if ($query_id instanceof mysqli_result) {
+				return $query_id->field_count;
+			} elseif ($query_id instanceof mysqli) {
+				return mysqli_field_count($query_id);
+			}
+		 
+			return false;
 		}
- 
+		 
 		public function sql_fieldname($offset, $query_id = 0)
 		{
 			if ($query_id === false)

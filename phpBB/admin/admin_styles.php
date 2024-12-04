@@ -44,24 +44,24 @@ if( !empty($setmodules) )
 $phpbb_root_path = "./../";
 require($phpbb_root_path . 'extension.inc');
 
-$confirm = (isset($HTTP_POST_VARS['confirm']) || isset($_POST['confirm'])) ? TRUE : FALSE;
-$cancel = (isset($HTTP_POST_VARS['cancel']) || isset($_POST['cancel'])) ? TRUE : FALSE;
+$confirm = (isset($_POST['confirm']) || isset($_POST['confirm'])) ? TRUE : FALSE;
+$cancel = (isset($_POST['cancel']) || isset($_POST['cancel'])) ? TRUE : FALSE;
 
-$no_page_header = (!empty($HTTP_POST_VARS['send_file']) || !empty($_POST['send_file']) || $cancel) ? TRUE : FALSE;
+$no_page_header = (!empty($_POST['send_file']) || !empty($_POST['send_file']) || $cancel) ? TRUE : FALSE;
 
 require('./pagestart.' . $phpEx);
 
-$confirm = ( isset($HTTP_POST_VARS['confirm']) ) ? TRUE : FALSE;
-$cancel = ( isset($HTTP_POST_VARS['cancel']) ) ? TRUE : FALSE;
+$confirm = ( isset($_POST['confirm']) ) ? TRUE : FALSE;
+$cancel = ( isset($_POST['cancel']) ) ? TRUE : FALSE;
 
 if ($cancel)
 {
 	redirect('admin/' . append_sid("admin_styles.$phpEx", true));
 }
 
-if( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
+if( isset($_GET['mode']) || isset($_POST['mode']) )
 {
-	$mode = ( isset($HTTP_GET_VARS['mode']) ) ? $HTTP_GET_VARS['mode'] : $HTTP_POST_VARS['mode'];
+	$mode = ( isset($_GET['mode']) ) ? $_GET['mode'] : $_POST['mode'];
 	$mode = htmlspecialchars($mode, ENT_COMPAT, 'utf-8');
 }
 else 
@@ -73,22 +73,22 @@ switch( $mode )
 {
 	case "addnew":
 	
-		if ( isset($HTTP_GET_VARS['install_to']) )
+		if ( isset($_GET['install_to']) )
 		{
-			$install_to = urldecode($HTTP_GET_VARS['install_to']);
+			$install_to = urldecode($_GET['install_to']);
 		}
-		else if ( isset($HTTP_POST_VARS['install_to']) )
+		else if ( isset($_POST['install_to']) )
 		{
-			$install_to = $HTTP_POST_VARS['install_to'];
+			$install_to = $_POST['install_to'];
 		}
 			
-		if ( isset($HTTP_GET_VARS['style']) )
+		if ( isset($_GET['style']) )
 		{
-			$style_name = urldecode($HTTP_GET_VARS['style']);
+			$style_name = urldecode($_GET['style']);
 		}
-		else if ( isset($HTTP_POST_VARS['style']) )
+		else if ( isset($_POST['style']) )
 		{
-			$style_name = $HTTP_POST_VARS['style'];
+			$style_name = $_POST['style'];
 		}	
 		if( isset($install_to) )
 		{
@@ -97,40 +97,41 @@ switch( $mode )
 			$template_name = $$install_to;
 			$found = FALSE; 
 			
-			for($i = 0; $i < (is_countable($template_name) ? count($template_name) : 0) && !$found; $i++)
-			{
-				if( $template_name[$i]['style_name'] == $style_name )
-				{
-					foreach ($template_name[$i] as $key => $val) {
-						$db_fields[] = $key;
-						$db_values[] = str_replace("\'", "''" , $val);
-					}
-				}
-			}
+	        for($i = 0; $i < (is_array($template_name) || $template_name instanceof Countable ? count($template_name) : 0) && !$found; $i++)
+            {
+                if( $template_name[$i]['style_name'] == $style_name )
+                {
+                    foreach ($template_name[$i] as $key => $val) 
+					{
+                        $db_fields[] = $key;
+                        $db_values[] = str_replace("\'", "''" , $val);
+                    }
+                }
+            }
 					
-			$sql = "INSERT INTO " . THEMES_TABLE . " (";
-
-			for($i = 0; $i < (is_countable($db_fields) ? count($db_fields) : 0); $i++)
-			{
-				$sql .= $db_fields[$i];
-				if($i != ((is_countable($db_fields) ? count($db_fields) : 0) - 1))
-				{
-					$sql .= ", ";
-				}
-				
-			}
-
-			$sql .= ") VALUES (";
-
-			for($i = 0; $i < (is_countable($db_values) ? count($db_values) : 0); $i++)
-			{
-				$sql .= "'" . $db_values[$i] . "'";
-				if($i != ((is_countable($db_values) ? count($db_values) : 0) - 1))
-				{
-					$sql .= ", ";
-				}
-			}
-			$sql .= ")";
+            $sql = "INSERT INTO " . THEMES_TABLE . " (";
+ 
+            for($i = 0; $i < (is_array($db_fields) ? count($db_fields) : 0); $i++)
+            {
+                $sql .= $db_fields[$i];
+                if($i != ((is_array($db_fields) ? count($db_fields) : 0) - 1))
+                {
+                    $sql .= ", ";
+                }
+ 
+            }
+ 
+            $sql .= ") VALUES (";
+ 
+            for($i = 0; $i < (is_array($db_values) ? count($db_values) : 0); $i++)
+            {
+                $sql .= "'" . $db_values[$i] . "'";
+                if($i != ((is_array($db_values) ? count($db_values) : 0) - 1))
+                {
+                    $sql .= ", ";
+                }
+            }
+            $sql .= ")";
 			
 			if( !$result = $db->sql_query($sql) )
 			{
@@ -156,25 +157,25 @@ switch( $mode )
 						{
 							include($phpbb_root_path. "templates/" . $sub_dir . "/theme_info.cfg");
 							
-							for($i = 0; $i < (is_countable(${$sub_dir}) ? count($$sub_dir) : 0); $i++)
-							{
-								$working_data = ${$sub_dir};
-								
-								$style_name = $working_data[$i]['style_name'];
-														
-								$sql = "SELECT themes_id 
-									FROM " . THEMES_TABLE . " 
-									WHERE style_name = '" . str_replace("\'", "''", $style_name) . "'";
-								if(!$result = $db->sql_query($sql))
-								{
-									message_die(GENERAL_ERROR, "Could not query themes table!", "", __LINE__, __FILE__, $sql);
-								}
-
-								if(!$db->sql_numrows($result))
-								{
-									$installable_themes[] = $working_data[$i];
-								}
-							}
+	                        for($i = 0; $i < (isset(${$sub_dir}) && is_array(${$sub_dir}) ? count(${$sub_dir}) : 0); $i++)
+                            {
+                                $working_data = ${$sub_dir};
+ 
+                                $style_name = $working_data[$i]['style_name'];
+ 
+                                $sql = "SELECT themes_id 
+                                    FROM " . THEMES_TABLE . " 
+                                    WHERE style_name = '" . str_replace("\'", "''", $style_name) . "'";
+                                if(!$result = $db->sql_query($sql))
+                                {
+                                    message_die(GENERAL_ERROR, "Could not query themes table!", "", __LINE__, __FILE__, $sql);
+                                }
+ 
+                                if(!$db->sql_numrows($result))
+                                {
+                                    $installable_themes[] = $working_data[$i];
+                                }
+                            }
 						}
 					}
 				}
@@ -216,84 +217,84 @@ switch( $mode )
 	
 	case "create":
 	case "edit":
-		$submit = ( isset($HTTP_POST_VARS['submit']) ) ? TRUE : 0;
+		$submit = ( isset($_POST['submit']) ) ? TRUE : 0;
 		
 		if( $submit )
 		{
 			//	
 			// DAMN! Thats alot of data to validate...
 			//
-			$updated['style_name'] = $HTTP_POST_VARS['style_name'];
-			$updated['template_name'] = $HTTP_POST_VARS['template_name'];
-			$updated['head_stylesheet'] = $HTTP_POST_VARS['head_stylesheet'];
-			$updated['body_background'] = $HTTP_POST_VARS['body_background'];
-			$updated['body_bgcolor'] = $HTTP_POST_VARS['body_bgcolor'];
-			$updated['body_text'] = $HTTP_POST_VARS['body_text'];
-			$updated['body_link'] = $HTTP_POST_VARS['body_link'];
-			$updated['body_vlink'] = $HTTP_POST_VARS['body_vlink'];
-			$updated['body_alink'] = $HTTP_POST_VARS['body_alink'];
-			$updated['body_hlink'] = $HTTP_POST_VARS['body_hlink'];
-			$updated['tr_color1'] = $HTTP_POST_VARS['tr_color1'];
-			$updated_name['tr_color1_name'] =  $HTTP_POST_VARS['tr_color1_name'];
-			$updated['tr_color2'] = $HTTP_POST_VARS['tr_color2'];
-			$updated_name['tr_color2_name'] = $HTTP_POST_VARS['tr_color2_name'];
-			$updated['tr_color3'] = $HTTP_POST_VARS['tr_color3'];
-			$updated_name['tr_color3_name'] = $HTTP_POST_VARS['tr_color3_name'];
-			$updated['tr_class1'] = $HTTP_POST_VARS['tr_class1'];
-			$updated_name['tr_class1_name'] = $HTTP_POST_VARS['tr_class1_name'];
-			$updated['tr_class2'] = $HTTP_POST_VARS['tr_class2'];
-			$updated_name['tr_class2_name'] = $HTTP_POST_VARS['tr_class2_name'];
-			$updated['tr_class3'] = $HTTP_POST_VARS['tr_class3'];
-			$updated_name['tr_class3_name'] = $HTTP_POST_VARS['tr_class3_name'];
-			$updated['th_color1'] = $HTTP_POST_VARS['th_color1'];
-			$updated_name['th_color1_name'] = $HTTP_POST_VARS['th_color1_name'];
-			$updated['th_color2'] = $HTTP_POST_VARS['th_color2'];
-			$updated_name['th_color2_name'] = $HTTP_POST_VARS['th_color2_name'];
-			$updated['th_color3'] = $HTTP_POST_VARS['th_color3'];
-			$updated_name['th_color3_name'] = $HTTP_POST_VARS['th_color3_name'];
-			$updated['th_class1'] = $HTTP_POST_VARS['th_class1'];
-			$updated_name['th_class1_name'] = $HTTP_POST_VARS['th_class1_name'];
-			$updated['th_class2'] = $HTTP_POST_VARS['th_class2'];
-			$updated_name['th_class2_name'] = $HTTP_POST_VARS['th_class2_name'];
-			$updated['th_class3'] = $HTTP_POST_VARS['th_class3'];
-			$updated_name['th_class3_name'] = $HTTP_POST_VARS['th_class3_name'];
-			$updated['td_color1'] = $HTTP_POST_VARS['td_color1'];
-			$updated_name['td_color1_name'] = $HTTP_POST_VARS['td_color1_name'];
-			$updated['td_color2'] = $HTTP_POST_VARS['td_color2'];
-			$updated_name['td_color2_name'] = $HTTP_POST_VARS['td_color2_name'];
-			$updated['td_color3'] = $HTTP_POST_VARS['td_color3'];
-			$updated_name['td_color3_name'] = $HTTP_POST_VARS['td_color3_name'];
-			$updated['td_class1'] = $HTTP_POST_VARS['td_class1'];
-			$updated_name['td_class1_name'] = $HTTP_POST_VARS['td_class1_name'];
-			$updated['td_class2'] = $HTTP_POST_VARS['td_class2'];
-			$updated_name['td_class2_name'] = $HTTP_POST_VARS['td_class2_name'];
-			$updated['td_class3'] = $HTTP_POST_VARS['td_class3'];
-			$updated_name['td_class3_name'] = $HTTP_POST_VARS['td_class3_name'];
-			$updated['fontface1'] = $HTTP_POST_VARS['fontface1'];
-			$updated_name['fontface1_name'] = $HTTP_POST_VARS['fontface1_name'];
-			$updated['fontface2'] = $HTTP_POST_VARS['fontface2'];
-			$updated_name['fontface2_name'] = $HTTP_POST_VARS['fontface2_name'];
-			$updated['fontface3'] = $HTTP_POST_VARS['fontface3'];
-			$updated_name['fontface3_name'] = $HTTP_POST_VARS['fontface3_name'];
-			$updated['fontsize1'] = intval($HTTP_POST_VARS['fontsize1']);
-			$updated_name['fontsize1_name'] = $HTTP_POST_VARS['fontsize1_name'];
-			$updated['fontsize2'] = intval($HTTP_POST_VARS['fontsize2']);
-			$updated_name['fontsize2_name'] = $HTTP_POST_VARS['fontsize2_name'];
-			$updated['fontsize3'] = intval($HTTP_POST_VARS['fontsize3']);
-			$updated_name['fontsize3_name'] = $HTTP_POST_VARS['fontsize3_name'];
-			$updated['fontcolor1'] = $HTTP_POST_VARS['fontcolor1'];
-			$updated_name['fontcolor1_name'] = $HTTP_POST_VARS['fontcolor1_name'];
-			$updated['fontcolor2'] = $HTTP_POST_VARS['fontcolor2'];
-			$updated_name['fontcolor2_name'] = $HTTP_POST_VARS['fontcolor2_name'];
-			$updated['fontcolor3'] = $HTTP_POST_VARS['fontcolor3'];
-			$updated_name['fontcolor3_name'] = $HTTP_POST_VARS['fontcolor3_name'];
-			$updated['span_class1'] = $HTTP_POST_VARS['span_class1'];
-			$updated_name['span_class1_name'] = $HTTP_POST_VARS['span_class1_name'];
-			$updated['span_class2'] = $HTTP_POST_VARS['span_class2'];
-			$updated_name['span_class2_name'] = $HTTP_POST_VARS['span_class2_name'];
-			$updated['span_class3'] = $HTTP_POST_VARS['span_class3'];
-			$updated_name['span_class3_name'] = $HTTP_POST_VARS['span_class3_name'];
-			$style_id = (isset($HTTP_POST_VARS['style_id'])) ? intval($HTTP_POST_VARS['style_id']) : '';
+			$updated['style_name'] = $_POST['style_name'];
+			$updated['template_name'] = $_POST['template_name'];
+			$updated['head_stylesheet'] = $_POST['head_stylesheet'];
+			$updated['body_background'] = $_POST['body_background'];
+			$updated['body_bgcolor'] = $_POST['body_bgcolor'];
+			$updated['body_text'] = $_POST['body_text'];
+			$updated['body_link'] = $_POST['body_link'];
+			$updated['body_vlink'] = $_POST['body_vlink'];
+			$updated['body_alink'] = $_POST['body_alink'];
+			$updated['body_hlink'] = $_POST['body_hlink'];
+			$updated['tr_color1'] = $_POST['tr_color1'];
+			$updated_name['tr_color1_name'] =  $_POST['tr_color1_name'];
+			$updated['tr_color2'] = $_POST['tr_color2'];
+			$updated_name['tr_color2_name'] = $_POST['tr_color2_name'];
+			$updated['tr_color3'] = $_POST['tr_color3'];
+			$updated_name['tr_color3_name'] = $_POST['tr_color3_name'];
+			$updated['tr_class1'] = $_POST['tr_class1'];
+			$updated_name['tr_class1_name'] = $_POST['tr_class1_name'];
+			$updated['tr_class2'] = $_POST['tr_class2'];
+			$updated_name['tr_class2_name'] = $_POST['tr_class2_name'];
+			$updated['tr_class3'] = $_POST['tr_class3'];
+			$updated_name['tr_class3_name'] = $_POST['tr_class3_name'];
+			$updated['th_color1'] = $_POST['th_color1'];
+			$updated_name['th_color1_name'] = $_POST['th_color1_name'];
+			$updated['th_color2'] = $_POST['th_color2'];
+			$updated_name['th_color2_name'] = $_POST['th_color2_name'];
+			$updated['th_color3'] = $_POST['th_color3'];
+			$updated_name['th_color3_name'] = $_POST['th_color3_name'];
+			$updated['th_class1'] = $_POST['th_class1'];
+			$updated_name['th_class1_name'] = $_POST['th_class1_name'];
+			$updated['th_class2'] = $_POST['th_class2'];
+			$updated_name['th_class2_name'] = $_POST['th_class2_name'];
+			$updated['th_class3'] = $_POST['th_class3'];
+			$updated_name['th_class3_name'] = $_POST['th_class3_name'];
+			$updated['td_color1'] = $_POST['td_color1'];
+			$updated_name['td_color1_name'] = $_POST['td_color1_name'];
+			$updated['td_color2'] = $_POST['td_color2'];
+			$updated_name['td_color2_name'] = $_POST['td_color2_name'];
+			$updated['td_color3'] = $_POST['td_color3'];
+			$updated_name['td_color3_name'] = $_POST['td_color3_name'];
+			$updated['td_class1'] = $_POST['td_class1'];
+			$updated_name['td_class1_name'] = $_POST['td_class1_name'];
+			$updated['td_class2'] = $_POST['td_class2'];
+			$updated_name['td_class2_name'] = $_POST['td_class2_name'];
+			$updated['td_class3'] = $_POST['td_class3'];
+			$updated_name['td_class3_name'] = $_POST['td_class3_name'];
+			$updated['fontface1'] = $_POST['fontface1'];
+			$updated_name['fontface1_name'] = $_POST['fontface1_name'];
+			$updated['fontface2'] = $_POST['fontface2'];
+			$updated_name['fontface2_name'] = $_POST['fontface2_name'];
+			$updated['fontface3'] = $_POST['fontface3'];
+			$updated_name['fontface3_name'] = $_POST['fontface3_name'];
+			$updated['fontsize1'] = intval($_POST['fontsize1']);
+			$updated_name['fontsize1_name'] = $_POST['fontsize1_name'];
+			$updated['fontsize2'] = intval($_POST['fontsize2']);
+			$updated_name['fontsize2_name'] = $_POST['fontsize2_name'];
+			$updated['fontsize3'] = intval($_POST['fontsize3']);
+			$updated_name['fontsize3_name'] = $_POST['fontsize3_name'];
+			$updated['fontcolor1'] = $_POST['fontcolor1'];
+			$updated_name['fontcolor1_name'] = $_POST['fontcolor1_name'];
+			$updated['fontcolor2'] = $_POST['fontcolor2'];
+			$updated_name['fontcolor2_name'] = $_POST['fontcolor2_name'];
+			$updated['fontcolor3'] = $_POST['fontcolor3'];
+			$updated_name['fontcolor3_name'] = $_POST['fontcolor3_name'];
+			$updated['span_class1'] = $_POST['span_class1'];
+			$updated_name['span_class1_name'] = $_POST['span_class1_name'];
+			$updated['span_class2'] = $_POST['span_class2'];
+			$updated_name['span_class2_name'] = $_POST['span_class2_name'];
+			$updated['span_class3'] = $_POST['span_class3'];
+			$updated_name['span_class3_name'] = $_POST['span_class3_name'];
+			$style_id = (isset($_POST['style_id'])) ? intval($_POST['style_id']) : '';
 			//
 			// Wheeeew! Thank heavens for copy and paste and search and replace :D
 			//
@@ -303,18 +304,19 @@ switch( $mode )
 				$sql = "UPDATE " . THEMES_TABLE . " SET ";
 				$count = 0;
 
-				foreach ($updated as $key => $val) {
-	if($count != 0)
+				foreach ($updated as $key => $val) 
+				{
+					if($count != 0)
 					{
 						$sql .= ", ";
 					}
-	//
-	// I don't like this but it'll keep MSSQL from throwing
-	// an error and save me alot of typing
-	//
-	$sql .= ( stristr($key, "fontsize") ) ? "$key = $val" : "$key = '" . str_replace("\'", "''", $val) . "'";
-	$count++;
-}
+					//
+					// I don't like this but it'll keep MSSQL from throwing
+					// an error and save me alot of typing
+					//
+					$sql .= ( stristr($key, "fontsize") ) ? "$key = $val" : "$key = '" . str_replace("\'", "''", $val) . "'";
+					$count++;
+				}
 				
 				$sql .= " WHERE themes_id = $style_id";
 				
@@ -339,7 +341,8 @@ switch( $mode )
 					$sql = "UPDATE " . THEMES_NAME_TABLE . " 
 						SET ";
 					$count = 0;
-					foreach ($updated_name as $key => $val) {
+					foreach ($updated_name as $key => $val) 
+					{
 						if($count != 0)
 						{
 							$sql .= ", ";
@@ -356,31 +359,33 @@ switch( $mode )
 					// Nope, no names entry so we create a new one.
 					//
 					$sql = "INSERT INTO " . THEMES_NAME_TABLE . " (themes_id, ";
-					while(list($key, $val) = each($updated_name))
+ 
+					$fields = [];
+					$vals = [];
+					foreach ($updated_name as $key => $val) 
 					{
 						$fields[] = $key;
 						$vals[] = str_replace("\'", "''", $val);
 					}
-
-					for($i = 0; $i < (is_countable($fields) ? count($fields) : 0); $i++)
+					 
+					for ($i = 0; $i < count($fields); $i++) 
 					{
-						if($i > 0)
-						{
+						if ($i > 0) {
 							$sql .= ", ";
 						}
 						$sql .= $fields[$i];
 					}
-					
+					 
 					$sql .= ") VALUES ($style_id, ";
-					for($i = 0; $i < (is_countable($vals) ? count($vals) : 0); $i++)
+					for ($i = 0; $i < count($vals); $i++) 
 					{
-						if($i > 0)
+						if ($i > 0) 
 						{
 							$sql .= ", ";
 						}
 						$sql .= "'" . $vals[$i] . "'";
 					}
-					
+					 
 					$sql .= ")";
 				}
 										
@@ -411,10 +416,10 @@ switch( $mode )
 					message_die(GENERAL_ERROR, $lang['Style_exists'], $lang['Error']);
 				}				
 				
-				while(list($key, $val) = each($updated))
+	            foreach ($updated as $key => $val)
 				{
 					$field_names[] = $key;
-
+				 
 					if(stristr($key, "fontsize"))
 					{
 						$values[] = "$val";
@@ -424,10 +429,10 @@ switch( $mode )
 						$values[] = "'" . str_replace("\'", "''", $val) . "'";
 					}
 				}
-				
+				 
 				$sql = "INSERT 
 					INTO " . THEMES_TABLE . " (";
-				for($i = 0; $i < (is_countable($field_names) ? count($field_names) : 0); $i++)
+				for($i = 0; $i < count($field_names); $i++)
 				{
 					if($i != 0)
 					{
@@ -435,9 +440,9 @@ switch( $mode )
 					}
 					$sql .= $field_names[$i];
 				}
-				
+				 
 				$sql .= ") VALUES (";
-				for($i = 0; $i < (is_countable($values) ? count($values) : 0); $i++)
+				for($i = 0; $i < count($values); $i++)
 				{
 					if($i != 0)
 					{
@@ -458,13 +463,16 @@ switch( $mode )
 				// Insert names data
 				//
 				$sql = "INSERT INTO " . THEMES_NAME_TABLE . " (themes_id, ";
-				while(list($key, $val) = each($updated_name))
+				$fields = [];
+				$vals = [];
+				 
+				foreach ($updated_name as $key => $val)
 				{
 					$fields[] = $key;
 					$vals[] = $val;
 				}
-
-				for($i = 0; $i < (is_countable($fields) ? count($fields) : 0); $i++)
+				 
+				for($i = 0; $i < count($fields); $i++)
 				{
 					if($i > 0)
 					{
@@ -472,17 +480,17 @@ switch( $mode )
 					}
 					$sql .= $fields[$i];
 				}
-				
+				 
 				$sql .= ") VALUES ($style_id, ";
-				for($i = 0; $i < (is_countable($vals) ? count($vals) : 0); $i++)
+				for($i = 0; $i < count($vals); $i++)
 				{
 					if($i > 0)
 					{
-					$sql .= ", ";
+						$sql .= ", ";
 					}
-				$sql .= "'" . $vals[$i] . "'";
+					$sql .= "'" . $vals[$i] . "'";
 				}
-				
+				 
 				$sql .= ")";
 										
 				if(!$result = $db->sql_query($sql))
@@ -502,7 +510,7 @@ switch( $mode )
 				$themes_title = $lang['Edit_theme'];
 				$themes_explain = $lang['Edit_theme_explain'];
 				
-				$style_id = intval($HTTP_GET_VARS['style_id']);
+				$style_id = intval($_GET['style_id']);
 				
 				$selected_names = array();
 				$selected_values = array();
@@ -739,13 +747,13 @@ switch( $mode )
 		break;
 
 	case "export":
-		$HTTP_POST_VARS['export_template'] = (isset($HTTP_POST_VARS['export_template'])) ? $HTTP_POST_VARS['export_template'] : '';
-		$HTTP_POST_VARS['send_file'] = (isset($HTTP_POST_VARS['send_file'])) ? $HTTP_POST_VARS['send_file'] : '';
+		$_POST['export_template'] = (isset($_POST['export_template'])) ? $_POST['export_template'] : '';
+		$_POST['send_file'] = (isset($_POST['send_file'])) ? $_POST['send_file'] : '';
 
-		if(isset($HTTP_POST_VARS['export_template']) && $HTTP_POST_VARS['export_template'])
+		if(isset($_POST['export_template']) && $_POST['export_template'])
 
 		{
-			$template_name = $HTTP_POST_VARS['export_template'];
+			$template_name = $_POST['export_template'];
 
 			$sql = "SELECT * 
 				FROM " . THEMES_TABLE . " 
@@ -755,26 +763,27 @@ switch( $mode )
 				message_die(GENERAL_ERROR, "Could not get theme data for selected template", "", __LINE__, __FILE__, $sql);
 			}
 			
-			$theme_rowset = $db->sql_fetchrowset($result);
-			
-			if( (is_countable($theme_rowset) ? count($theme_rowset) : 0) == 0 )
-			{
-				message_die(GENERAL_MESSAGE, $lang['No_themes']);
-			}
+	        $theme_rowset = $db->sql_fetchrowset($result);
+ 
+            if( empty($theme_rowset) )
+            {
+                message_die(GENERAL_MESSAGE, $lang['No_themes']);
+            }
 			
 			$theme_data = '<?php'."\n\n";
 			$theme_data .= "//\n// phpBB 2.x auto-generated theme config file for $template_name\n// Do not change anything in this file!\n//\n\n";
 
-			for($i = 0; $i < (is_countable($theme_rowset) ? count($theme_rowset) : 0); $i++)
-			{
-				foreach ($theme_rowset[$i] as $key => $val) {
-					if(!intval($key) && $key != "0" && $key != "themes_id")
-					{
-						$theme_data .= '$' . $template_name . "[$i]['$key'] = \"" . addslashes($val) . "\";\n";
-					}
-				}
-				$theme_data .= "\n";
-			}
+		   if (is_array($theme_rowset) && isset($theme_rowset[$i]) && is_array($theme_rowset[$i])) 
+		   {
+			   foreach ($theme_rowset[$i] as $key => $val) 
+			   {
+                    if(!intval($key) && $key != "0" && $key != "themes_id")
+                    {
+                        $theme_data .= '$' . $template_name . "[$i]['$key'] = \"" . addslashes($val) . "\";\n";
+                    }
+                }
+                $theme_data .= "\n";
+            }
 			
 			$theme_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
 			
@@ -814,13 +823,13 @@ switch( $mode )
 			message_die(GENERAL_MESSAGE, $message);
 
 		}
-		else if(isset($HTTP_POST_VARS['send_file']) && $HTTP_POST_VARS['send_file'])
+		else if(isset($_POST['send_file']) && $_POST['send_file'])
 		{
 			
 			header("Content-Type: text/x-delimtext; name=\"theme_info.cfg\"");
 			header("Content-disposition: attachment; filename=theme_info.cfg");
 
-			echo stripslashes($HTTP_POST_VARS['theme_info']);
+			echo stripslashes($_POST['theme_info']);
 		}
 		else
 		{
@@ -861,7 +870,7 @@ switch( $mode )
 		break;
 
 	case "delete":
-		$style_id = ( isset($HTTP_GET_VARS['style_id']) ) ? intval($HTTP_GET_VARS['style_id']) : intval($HTTP_POST_VARS['style_id']);
+		$style_id = ( isset($_GET['style_id']) ) ? intval($_GET['style_id']) : intval($_POST['style_id']);
 		
 		if( !$confirm )
 		{
@@ -953,27 +962,27 @@ switch( $mode )
 			"L_DELETE" => $lang['Delete'])
 		);
 					
-		for($i = 0; $i < (is_countable($style_rowset) ? count($style_rowset) : 0); $i++)
-		{
-			$row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
-			$row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
-
-			$template->assign_block_vars("styles", array(
-				"ROW_CLASS" => $row_class,
-				"ROW_COLOR" => $row_color,
-				"STYLE_NAME" => $style_rowset[$i]['style_name'],
-				"TEMPLATE_NAME" => $style_rowset[$i]['template_name'],
-
-				"U_STYLES_EDIT" => append_sid("admin_styles.$phpEx?mode=edit&amp;style_id=" . $style_rowset[$i]['themes_id']),
-				"U_STYLES_DELETE" => append_sid("admin_styles.$phpEx?mode=delete&amp;style_id=" . $style_rowset[$i]['themes_id']))
-			);
-		}
+        for($i = 0; $i < (is_array($style_rowset) ? count($style_rowset) : 0); $i++)
+        {
+            $row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
+            $row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
+ 
+            $template->assign_block_vars("styles", array(
+                "ROW_CLASS" => $row_class,
+                "ROW_COLOR" => $row_color,
+                "STYLE_NAME" => $style_rowset[$i]['style_name'],
+                "TEMPLATE_NAME" => $style_rowset[$i]['template_name'],
+ 
+                "U_STYLES_EDIT" => append_sid("admin_styles.$phpEx?mode=edit&amp;style_id=" . $style_rowset[$i]['themes_id']),
+                "U_STYLES_DELETE" => append_sid("admin_styles.$phpEx?mode=delete&amp;style_id=" . $style_rowset[$i]['themes_id']))
+            );
+        }
 		
 		$template->pparse("body");	
 		break;
 }
 
-if (empty($HTTP_POST_VARS['send_file']))
+if (empty($_POST['send_file']))
 {
 	include('./page_footer_admin.'.$phpEx);
 }

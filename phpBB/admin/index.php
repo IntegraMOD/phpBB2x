@@ -94,32 +94,31 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 	ksort($module);
 	$menu_cat_id = 0;
 
-//	while( list($cat, $action_array) = each($module) ) {
-    foreach ((Array) $module as $cat => $action_array) {
-		$cat = ( !empty($lang[$cat]) ) ? $lang[$cat] : preg_replace("/_/", " ", $cat);
-
+	foreach ($module as $cat => $action_array) 
+	{
+		$cat = (!empty($lang[$cat])) ? $lang[$cat] : preg_replace("/_/", " ", $cat);
+	 
 		$template->assign_block_vars("catrow", array(
 			"ADMIN_CATEGORY" => $cat,
 			"MENU_CAT_ID" => $menu_cat_id,
-			"MENU_CAT_ROWS" => is_countable($action_array) ? count($action_array) : 0)
+			"MENU_CAT_ROWS" => (is_array($action_array) && !empty($action_array)) ? count($action_array) : 0)
 		);
-
+	 
 		ksort($action_array);
-
+	 
 		$row_count = 0;
-//		while( list($action, $file)	= each($action_array) )	{
-        foreach ((Array) $action_array as $action => $file) {
-
-			$row_color = ( !($row_count%2) ) ? $theme['td_color1'] : $theme['td_color2'];
-			$row_class = ( !($row_count%2) ) ? $theme['td_class1'] : $theme['td_class2'];
-
-			$action = ( !empty($lang[$action]) ) ? $lang[$action] : preg_replace("/_/", " ", $action);
-
+		foreach ($action_array as $action => $file)    
+		{
+			$row_color = (!($row_count%2)) ? $theme['td_color1'] : $theme['td_color2'];
+			$row_class = (!($row_count%2)) ? $theme['td_class1'] : $theme['td_class2'];
+	 
+			$action = (!empty($lang[$action])) ? $lang[$action] : preg_replace("/_/", " ", $action);
+	 
 			$template->assign_block_vars("catrow.modulerow", array(
 				"ROW_COLOR" => "#" . $row_color,
 				"ROW_CLASS" => $row_class, 
 				'ROW_COUNT' => $row_count,
-
+	 
 				"ADMIN_MODULE" => $action,
 				"U_ADMIN_MODULE" => append_sid($file))
 			);
@@ -257,27 +256,26 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					FROM " . $db_name;
 				if($result = $db->sql_query($sql))
 				{
-					$tabledata_ary = $db->sql_fetchrowset($result);
-
-					$dbsize = 0;
-					for($i = 0; $i < (is_countable($tabledata_ary) ? count($tabledata_ary) : 0); $i++)
-					{
-						$tabledata_ary[$i]['Type'] = isset($tabledata_ary[$i]['Type']) ? $tabledata_ary[$i]['Type'] : '';
-						if( $tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
-						{
-							if( $table_prefix != "" )
-							{
-								if( strstr($tabledata_ary[$i]['Name'], (string) $table_prefix) )
-								{
-									$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
-								}
-							}
-							else
-							{
-								$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
-							}
-						}
-					}
+	                $tabledata_ary = $db->sql_fetchrowset($result);
+                    $dbsize = 0;
+                    for($i = 0; $i < (is_array($tabledata_ary) ? count($tabledata_ary) : 0); $i++)
+                    {
+                        $tabledata_ary[$i]['Type'] = isset($tabledata_ary[$i]['Type']) ? $tabledata_ary[$i]['Type'] : '';
+                        if( $tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
+                        {
+                            if( $table_prefix != "" )
+                            {
+                                if( strstr($tabledata_ary[$i]['Name'], (string) $table_prefix) )
+                                {
+                                    $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
+                                }
+                            }
+                            else
+                            {
+                                $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
+                            }
+                        }
+                    }
 				} // Else we couldn't get the table status.
 			}
 			else
@@ -396,18 +394,18 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 	$reg_userid_ary = array();
 
-	if( is_countable($onlinerow_reg) ? count($onlinerow_reg) : 0 )
+	if( !empty($onlinerow_reg) && is_array($onlinerow_reg) )
 	{
 		$registered_users = 0;
-
-		for($i = 0; $i < (is_countable($onlinerow_reg) ? count($onlinerow_reg) : 0); $i++)
+	 
+		for($i = 0; $i < (!empty($onlinerow_reg) && is_array($onlinerow_reg) ? count($onlinerow_reg) : 0); $i++)
 		{
-			if( !inarray($onlinerow_reg[$i]['user_id'], $reg_userid_ary) )
+			if( !in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary) )
 			{
 				$reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
-
+	 
 				$username = $onlinerow_reg[$i]['username'];
-				
+	 
 				$onlinerow_reg[$i]['user_allow_viewonline'] = isset($onlinerow_reg[$i]['user_allow_viewonline']) ? $onlinerow_reg[$i]['user_allow_viewonline'] : '';
 				if( $onlinerow_reg[$i]['user_allow_viewonline'] || $userdata['user_level'] == ADMIN )
 				{
@@ -419,7 +417,7 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$hidden_users++;
 					$hidden = TRUE;
 				}
-
+	 
 				if( $onlinerow_reg[$i]['user_session_page'] < 1 )
 				{
 					switch($onlinerow_reg[$i]['user_session_page'])
@@ -470,12 +468,12 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$location_url = append_sid("admin_forums.$phpEx?mode=editforum&amp;" . POST_FORUM_URL . "=" . $onlinerow_reg[$i]['user_session_page']);
 					$location = $forum_data[$onlinerow_reg[$i]['user_session_page']];
 				}
-
+	 
 				$row_color = ( $registered_users % 2 ) ? $theme['td_color1'] : $theme['td_color2'];
 				$row_class = ( $registered_users % 2 ) ? $theme['td_class1'] : $theme['td_class2'];
-
+	 
 				$reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
-
+	 
 				$template->assign_block_vars("reg_user_row", array(
 					"ROW_COLOR" => "#" . $row_color,
 					"ROW_CLASS" => $row_class,
@@ -484,14 +482,13 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					"LASTUPDATE" => create_date($board_config['default_dateformat'], $onlinerow_reg[$i]['user_session_time'], $board_config['board_timezone']),
 					"FORUM_LOCATION" => $location,
 					"IP_ADDRESS" => $reg_ip, 
-
+	 
 					"U_WHOIS_IP" => "http://network-tools.com/default.asp?host=$reg_ip", 
 					"U_USER_PROFILE" => append_sid("admin_users.$phpEx?mode=edit&amp;" . POST_USERS_URL . "=" . $onlinerow_reg[$i]['user_id']),
 					"U_FORUM_LOCATION" => append_sid($location_url))
 				);
 			}
 		}
-
 	}
 	else
 	{
@@ -503,86 +500,85 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	//
 	// Guest users
 	//
-    if( is_countable($onlinerow_guest) ? count($onlinerow_guest) : 0 ) 
-	{
-		$guest_users = 0;
-
-		for($i = 0; $i < (is_countable($onlinerow_guest) ? count($onlinerow_guest) : 0); $i++)
-		{
-			$guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
-			$guest_users++;
-
-			if( $onlinerow_guest[$i]['session_page'] < 1 )
-			{
-				switch( $onlinerow_guest[$i]['session_page'] )
-				{
-					case PAGE_INDEX:
-						$location = $lang['Forum_index'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_POSTING:
-						$location = $lang['Posting_message'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_LOGIN:
-						$location = $lang['Logging_on'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_SEARCH:
-						$location = $lang['Searching_forums'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_PROFILE:
-						$location = $lang['Viewing_profile'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_VIEWONLINE:
-						$location = $lang['Viewing_online'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_VIEWMEMBERS:
-						$location = $lang['Viewing_member_list'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_PRIVMSGS:
-						$location = $lang['Viewing_priv_msgs'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					case PAGE_FAQ:
-						$location = $lang['Viewing_FAQ'];
-						$location_url = "index.$phpEx?pane=right";
-						break;
-					default:
-						$location = $lang['Forum_index'];
-						$location_url = "index.$phpEx?pane=right";
-				}
-			}
-			else
-			{
-				$location_url = append_sid("admin_forums.$phpEx?mode=editforum&amp;" . POST_FORUM_URL . "=" . $onlinerow_guest[$i]['session_page']);
-				$location = $forum_data[$onlinerow_guest[$i]['session_page']];
-			}
-
-			$row_color = ( $guest_users % 2 ) ? $theme['td_color1'] : $theme['td_color2'];
-			$row_class = ( $guest_users % 2 ) ? $theme['td_class1'] : $theme['td_class2'];
-
-			$guest_ip = decode_ip($onlinerow_guest[$i]['session_ip']);
-
-			$template->assign_block_vars("guest_user_row", array(
-				"ROW_COLOR" => "#" . $row_color,
-				"ROW_CLASS" => $row_class,
-				"USERNAME" => $lang['Guest'],
-				"STARTED" => create_date($board_config['default_dateformat'], $onlinerow_guest[$i]['session_start'], $board_config['board_timezone']), 
-				"LASTUPDATE" => create_date($board_config['default_dateformat'], $onlinerow_guest[$i]['session_time'], $board_config['board_timezone']),
-				"FORUM_LOCATION" => $location,
-				"IP_ADDRESS" => $guest_ip, 
-
-				"U_WHOIS_IP" => "http://network-tools.com/default.asp?host=$guest_ip", 
-				"U_FORUM_LOCATION" => append_sid($location_url))
-			);
-		}
-
-	}
+	if( count($onlinerow_guest) ) 
+    {
+        $guest_users = 0;
+ 
+        for($i = 0; $i < count($onlinerow_guest); $i++)
+        {
+            $guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
+            $guest_users++;
+ 
+            if( $onlinerow_guest[$i]['session_page'] < 1 )
+            {
+                switch( $onlinerow_guest[$i]['session_page'] )
+                {
+                    case PAGE_INDEX:
+                        $location = $lang['Forum_index'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_POSTING:
+                        $location = $lang['Posting_message'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_LOGIN:
+                        $location = $lang['Logging_on'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_SEARCH:
+                        $location = $lang['Searching_forums'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_PROFILE:
+                        $location = $lang['Viewing_profile'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_VIEWONLINE:
+                        $location = $lang['Viewing_online'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_VIEWMEMBERS:
+                        $location = $lang['Viewing_member_list'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_PRIVMSGS:
+                        $location = $lang['Viewing_priv_msgs'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    case PAGE_FAQ:
+                        $location = $lang['Viewing_FAQ'];
+                        $location_url = "index.$phpEx?pane=right";
+                        break;
+                    default:
+                        $location = $lang['Forum_index'];
+                        $location_url = "index.$phpEx?pane=right";
+                }
+            }
+            else
+            {
+                $location_url = append_sid("admin_forums.$phpEx?mode=editforum&amp;" . POST_FORUM_URL . "=" . $onlinerow_guest[$i]['session_page']);
+                $location = $forum_data[$onlinerow_guest[$i]['session_page']];
+            }
+ 
+            $row_color = ( $guest_users % 2 ) ? $theme['td_color1'] : $theme['td_color2'];
+            $row_class = ( $guest_users % 2 ) ? $theme['td_class1'] : $theme['td_class2'];
+ 
+            $guest_ip = decode_ip($onlinerow_guest[$i]['session_ip']);
+ 
+            $template->assign_block_vars("guest_user_row", array(
+                "ROW_COLOR" => "#" . $row_color,
+                "ROW_CLASS" => $row_class,
+                "USERNAME" => $lang['Guest'],
+                "STARTED" => create_date($board_config['default_dateformat'], $onlinerow_guest[$i]['session_start'], $board_config['board_timezone']), 
+                "LASTUPDATE" => create_date($board_config['default_dateformat'], $onlinerow_guest[$i]['session_time'], $board_config['board_timezone']),
+                "FORUM_LOCATION" => $location,
+                "IP_ADDRESS" => $guest_ip, 
+ 
+                "U_WHOIS_IP" => "http://network-tools.com/default.asp?host=$guest_ip", 
+                "U_FORUM_LOCATION" => append_sid($location_url))
+            );
+        }
+    }
 	else
 	{
 		$template->assign_vars(array(

@@ -353,32 +353,25 @@ function display_avatar_gallery($mode, &$category, &$user_id, &$email, &$current
 	@reset($avatar_images);
 
 	$s_categories = '<select name="avatarcategory">';
-	foreach (array_keys($avatar_images) as $key) 
+	reset($avatar_images);
+	foreach ($avatar_images as $key => $value) 
 	{
-	    $selected = ( $key == $category ) ? ' selected="selected"' : '';
-		if (!function_exists('is_countable')) 
+		$selected = ($key == $category) ? ' selected="selected"' : '';
+		if (count($avatar_images[$key])) 
 		{
-			function is_countable($var) 
-			{
-				return (is_array($var) || $var instanceof Countable);
-			}
+			$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
 		}
-		 
-		if( is_countable($avatar_images[$key]) ? count($avatar_images[$key]) : 0 )
-			{
-				$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
-			}
 	}
 	$s_categories .= '</select>';
 
 	$s_colspan = 0;
-	for($i = 0; $i < (is_countable($avatar_images[$category]) ? count($avatar_images[$category]) : 0); $i++)
+	for($i = 0; $i < count($avatar_images[$category]); $i++)
 	{
 		$template->assign_block_vars("avatar_row", array());
 
-		$s_colspan = max($s_colspan, is_countable($avatar_images[$category][$i]) ? count($avatar_images[$category][$i]) : 0);
+		$s_colspan = max($s_colspan, count($avatar_images[$category][$i]));
 
-		for($j = 0; $j < (is_countable($avatar_images[$category][$i]) ? count($avatar_images[$category][$i]) : 0); $j++)
+		for($j = 0; $j < count($avatar_images[$category][$i]); $j++)
 		{
 			$template->assign_block_vars('avatar_row.avatar_column', array(
 				"AVATAR_IMAGE" => $board_config['avatar_gallery_path'] . '/' . $category . '/' . $avatar_images[$category][$i][$j], 
