@@ -8,26 +8,26 @@
       </div>
 
       <div class="row mb-1 py-1 mx-0"> 
-        <div class="col-4 mt-2"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
-        <div class="col text-end navbr"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></div>
+        <div class="col mt-2"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
+        <div class="col-6 text-end navbr"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></div>
       </div>    	
       <div class="forumline px-0 m-2">
         <div class="bdrw">
           <div class="row d-flex th align-items-center hr1 mx-0"> 
     	    <div class="col-6 px-0 text-center">&nbsp;{L_TOPICS}&nbsp;</div>
-    	    <div class="col-1 px-0 text-center">&nbsp;{L_REPLIES}&nbsp;</div>
+    	    <div class="col-1 px-0 text-center replies">&nbsp;{L_REPLIES}&nbsp;</div>
     	    <div class="col-2 px-0 text-center">&nbsp;{L_AUTHOR}&nbsp;</div>
-    	    <div class="col-1 px-0 text-center">&nbsp;{L_VIEWS}&nbsp;</div>
-    	    <div class="col-2 px-0 text-center">&nbsp;{L_LASTPOST}&nbsp;</div>
+    	    <div class="col-1 px-0 text-center views">&nbsp;{L_VIEWS}&nbsp;</div>
+    	    <div class="col px-0 text-center lastpost">&nbsp;{L_LASTPOST}&nbsp;</div>
     	  </div>
     	  <!-- BEGIN topicrow -->
     	  <div class="row mx-0 hr1"> 
     	    <div class="col-1 d-flex align-items-center row1 hr3"><img src="{topicrow.TOPIC_FOLDER_IMG}" alt="{topicrow.L_TOPIC_FOLDER_ALT}" title="{topicrow.L_TOPIC_FOLDER_ALT}" /></div>
     	    <div class="col-5 pl-2 pt-3 pb-1 text-start row1 hr3"><span class="topictitle">{topicrow.NEWEST_POST_IMG}{topicrow.TOPIC_TYPE}<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a></span><span class="gensmall"><br />{topicrow.GOTO_PAGE}</span></div>
-    	    <div class="col-1 px-0 pt-3 pb-1 text-center row2 hr3"><span class="postdetails">{topicrow.REPLIES}</span></div>
+    	    <div class="col-1 px-0 pt-3 pb-1 text-center row2 hr3 replies"><span class="postdetails">{topicrow.REPLIES}</span></div>
     	    <div class="col-2 px-0 pt-3 pb-1 text-center row3 hr3"><span class="name">{topicrow.TOPIC_AUTHOR}</span></div>
-    	    <div class="col-1 px-0 pt-3 pb-1 text-center row2 hr3"><span class="postdetails">{topicrow.VIEWS}</span></div>
-    	    <div class="col-2 px-0 pt-3 pb-1 text-center row3"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></div>
+    	    <div class="col-1 px-0 pt-3 pb-1 text-center row2 hr3 views"><span class="postdetails">{topicrow.VIEWS}</span></div>
+    	    <div class="col px-0 pt-3 pb-1 text-center row3 lastpost"><span class="postdetails">{topicrow.LAST_POST_TIME}<br />{topicrow.LAST_POST_AUTHOR} {topicrow.LAST_POST_IMG}</span></div>
     	  </div>
     	  <!-- END topicrow -->
     	  <!-- BEGIN switch_no_topics -->
@@ -41,8 +41,8 @@
         </div>
       </div>
       <div class="row mb-1 py-1 mx-0"> 
-        <div class="col-4 mt-1"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
-        <div class="col navbr text-end gensmall">{S_TIMEZONE}<br />{PAGINATION}</div>
+        <div class="col mt-1"><a href="{U_POST_NEW_TOPIC}" title="{L_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a></div>
+        <div class="col-6 navbr text-end gensmall">{S_TIMEZONE}<br />{PAGINATION}</div>
       </div>   
       </form>
       <div>
