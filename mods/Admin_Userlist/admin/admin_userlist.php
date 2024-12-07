@@ -795,15 +795,15 @@ global $alphanum, $temp, $banned;
 		//
 		$alpha_range = array();
 		$alpha_letters = array();
-		$alpha_letters = range('A','Z');
-		$alpha_start = array($lang['All'], '#');
+		$alpha_letters = range('A', 'Z');
+		$alpha_start = array(isset($lang['All']) ? $lang['All'] : 'All', '#');
 		$alpha_range = array_merge($alpha_start, $alpha_letters);
 
 		$i = 0;
 		while( $i < count($alpha_range) )
 		{
 			
-			if ( $alpha_range[$i] != $lang['All'] )
+			if ( isset($lang['All']) && $alpha_range[$i] != $lang['All'] )
 			{
 				if ( $alpha_range[$i] != '#' )
 				{
@@ -820,7 +820,7 @@ global $alphanum, $temp, $banned;
 				$alphanum_search_url = append_sid($phpbb_root_path . "admin/admin_userlist.$phpEx?sort=$sort&amp;order=$sort_order&amp;show=$show");
 			}
 
-			if ( ( $alphanum == $temp ) || ( $alpha_range[$i] == $lang['All'] && empty($alphanum) ) )
+			if ( ( $alphanum == $temp ) || ( isset($alpha_range[$i]) && isset($lang['All']) && $alpha_range[$i] == $lang['All'] && empty($alphanum) ) )
 			{
 				$alpha_range[$i] = '<b>' . $alpha_range[$i] . '</b>';
 			}
@@ -835,14 +835,25 @@ global $alphanum, $temp, $banned;
 		}
 
 		$hidden_fields = '<input type="hidden" name="start" value="' . $start . '" />';
-		      $select_sort_by = array('user_id', 'user_active', 'username', 'user_regdate', 'user_session_time', 'user_level', 'user_posts', 'user_rank', 'user_email', 'user_website'); 
-		$select_sort_by_text = array($lang['User_id'], $lang['Active'], $lang['Username'], $lang['Joined'], $lang['Last_activity'], $lang['User_level'], $lang['Posts'], $lang['Rank'], $lang['Email'], $lang['Website']); 
+		$select_sort_by = array('user_id', 'user_active', 'username', 'user_regdate', 'user_session_time', 'user_level', 'user_posts', 'user_rank', 'user_email', 'user_website'); 
+		$select_sort_by_text = array(
+			'User_id' => isset($lang['User_id']) ? $lang['User_id'] : 'User ID',
+			'Active' => isset($lang['Active']) ? $lang['Active'] : 'Active',
+			'Username' => isset($lang['Username']) ? $lang['Username'] : 'Username',
+			'Joined' => isset($lang['Joined']) ? $lang['Joined'] : 'Joined',
+			'Last_activity' => isset($lang['Last_activity']) ? $lang['Last_activity'] : 'Last Activity',
+			'User_level' => isset($lang['User_level']) ? $lang['User_level'] : 'User Level',
+			'Posts' => isset($lang['Posts']) ? $lang['Posts'] : 'Posts',
+			'Rank' => isset($lang['Rank']) ? $lang['Rank'] : 'Rank',
+			'Email' => isset($lang['Email']) ? $lang['Email'] : 'Email',
+			'Website' => isset($lang['Website']) ? $lang['Website'] : 'Website'
+		);
 
 		$select_sort = '<select name="sort" class="post">'; 
 		for($i = 0; $i < count($select_sort_by); $i++) 
 		{ 
 			$selected = ($sort == $select_sort_by[$i]) ? ' selected="selected"' : ''; 
-			$select_sort .= '<option value="' . $select_sort_by[$i] . '"' . $selected . '>' . $select_sort_by_text[$i] . '</option>'; 
+            $select_sort .= '<option value="' . (isset($select_sort_by[$i]) ? $select_sort_by[$i] : '') . '"' . (isset($selected) ? $selected : '') . '>' . (isset($select_sort_by_text[$i]) ? $select_sort_by_text[$i] : '') . '</option>';
 		} 
 		$select_sort .= '</select>'; 
 
@@ -853,7 +864,7 @@ global $alphanum, $temp, $banned;
 		} 
 		else 
 		{ 
-			$select_sort_order .= '<option value="ASC">' . $lang['Ascending'] . '</option><option value="DESC" selected="selected">' . $lang['Descending'] . '</option>'; 
+             $select_sort_order .= '<option value="ASC">' . (isset($lang['Ascending']) ? $lang['Ascending'] : 'Ascending') . '</option><option value="DESC" selected="selected">' . (isset($lang['Descending']) ? $lang['Descending'] : 'Descending') . '</option>';
 		} 
 		$select_sort_order .= '</select>';
 		$hidden_fields .= '<input type="hidden" name="alphanum" value="' . $alphanum . '" />';
@@ -861,270 +872,269 @@ global $alphanum, $temp, $banned;
 		//
 		// set up template varibles
 		//
-		$template->assign_vars(array(
-			'L_TITLE' => $lang['Userlist'],
-			'L_DESCRIPTION' => $lang['Userlist_description'],
-
-			'ARROWDOWN_IMG' => "<img src='$phpbb_root_path" . ($images['arrowdown'] ?? null) . "' />", 
-			'ARROWRIGHT_IMG' => "<img src='$phpbb_root_path" . ($images['arrowright'] ?? null) . "' />",
-
-			'L_OPEN_CLOSE' => $lang['Open_close'],
-			'L_ACTIVE' => $lang['Active'],
-			'L_USERNAME' => $lang['Username'],
-			'L_GROUP' => $lang['Group'],
-			'L_RANK' => $lang['Rank'],
-			'L_POSTS' => $lang['Posts'],
-			'L_FIND_ALL_POSTS' => $lang['Find_all_posts'],
-			'L_JOINED' => $lang['Joined'],
-			'L_ACTIVITY' => $lang['Last_activity'],
-			'L_MANAGE' => $lang['User_manage'],
-			'L_PERMISSIONS' => $lang['Permissions'],
-			'L_EMAIL' => $lang['Email'],
-			'L_PM' => $lang['Private_Message'],
-			'L_WEBSITE' => $lang['Website'],
-					
+        $template->assign_vars(array(
+	        'L_TITLE' => isset($lang['Userlist']) ? $lang['Userlist'] : 'Userlist',
+	        'L_DESCRIPTION' => isset($lang['Userlist_description']) ? $lang['Userlist_description'] : '',
+	 
+	        'ARROWDOWN_IMG' => "<img src='" . $phpbb_root_path . (isset($images['arrowdown']) ? $images['arrowdown'] : '') . "' />", 
+	        'ARROWRIGHT_IMG' => "<img src='" . $phpbb_root_path . (isset($images['arrowright']) ? $images['arrowright'] : '') . "' />",
+	 
+	        'L_OPEN_CLOSE' => isset($lang['Open_close']) ? $lang['Open_close'] : '',
+	        'L_ACTIVE' => isset($lang['Active']) ? $lang['Active'] : '',
+	        'L_USERNAME' => isset($lang['Username']) ? $lang['Username'] : '',
+	        'L_GROUP' => isset($lang['Group']) ? $lang['Group'] : '',
+	        'L_RANK' => isset($lang['Rank']) ? $lang['Rank'] : '',
+	        'L_POSTS' => isset($lang['Posts']) ? $lang['Posts'] : '',
+	        'L_FIND_ALL_POSTS' => isset($lang['Find_all_posts']) ? $lang['Find_all_posts'] : '',
+	        'L_JOINED' => isset($lang['Joined']) ? $lang['Joined'] : '',
+	        'L_ACTIVITY' => isset($lang['Last_activity']) ? $lang['Last_activity'] : '',
+	        'L_MANAGE' => isset($lang['User_manage']) ? $lang['User_manage'] : '',
+	        'L_PERMISSIONS' => isset($lang['Permissions']) ? $lang['Permissions'] : '',
+	        'L_EMAIL' => isset($lang['Email']) ? $lang['Email'] : '',
+	        'L_PM' => isset($lang['Private_Message']) ? $lang['Private_Message'] : '',
+	        'L_WEBSITE' => isset($lang['Website']) ? $lang['Website'] : '',
+	 
 			'S_USER_VARIABLE' => POST_USERS_URL,
-			'S_ACTION' => append_sid($phpbb_root_path . 'admin/admin_userlist.'.$phpEx),
-			'L_SELECT_ALL' => $lang['Select_All'], 
-			'L_DESELECT_ALL' => $lang['Deselect_All'], 
-			'L_GO' => $lang['Go'],
-			'L_SELECT' => $lang['Select_one'],
-			'L_DELETE' => $lang['Delete'],
-			'L_BAN' => $lang['Ban'],
-			'L_UNBAN' => $lang['UnBan'], 
-			'L_ACTIVATE_DEACTIVATE' => $lang['Activate_deactivate'],
-			'L_ADD_GROUP' => $lang['Add_group'],
-					
+			'S_ACTION' => append_sid($phpbb_root_path . 'admin/admin_userlist.' . $phpEx),
+			'L_SELECT_ALL' => isset($lang['Select_All']) ? $lang['Select_All'] : 'Select All',
+			'L_DESELECT_ALL' => isset($lang['Deselect_All']) ? $lang['Deselect_All'] : 'Deselect All',
+			'L_GO' => isset($lang['Go']) ? $lang['Go'] : 'Go',
+			'L_SELECT' => isset($lang['Select_one']) ? $lang['Select_one'] : 'Select One',
+			'L_DELETE' => isset($lang['Delete']) ? $lang['Delete'] : 'Delete',
+			'L_BAN' => isset($lang['Ban']) ? $lang['Ban'] : 'Ban',
+			'L_UNBAN' => isset($lang['UnBan']) ? $lang['UnBan'] : 'Unban',
+			'L_ACTIVATE_DEACTIVATE' => isset($lang['Activate_deactivate']) ? $lang['Activate_deactivate'] : 'Activate/Deactivate',
+			'L_ADD_GROUP' => isset($lang['Add_group']) ? $lang['Add_group'] : 'Add Group',
+			 
 			'S_SHOW' => $show,
-			'L_SORT_BY' => $lang['Sort_by'],
-			'L_USER_ID' => $lang['User_id'],
-			'L_USER_LEVEL' => $lang['User_level'],
-			'L_ASCENDING' => $lang['Ascending'],
-			'L_DESCENDING' => $lang['Descending'],
-			'L_SHOW' => $lang['Show'],
-			'S_SORT' => $lang['Sort'],
-			'S_SELECT_SORT' => $select_sort, 
-	        'S_SELECT_SORT_ORDER' => $select_sort_order,
-            'S_HIDDEN_FIELDS' => $hidden_fields) 
-	); 
-
-	$order_by = "ORDER BY $sort $sort_order "; 
-
-		//
-		// Get ban data 
-	      	// 
-		$sql = 'SELECT ban_userid 
-			FROM ' . BANLIST_TABLE; 
-			if ( !($result = $db->sql_query($sql)) ) 
-		{ 
-			message_die(GENERAL_ERROR, "Couldn't obtain banlist information", "", __LINE__, __FILE__, $sql); 
-		} 
-		while ( $row = $db->sql_fetchrow($result) ) 
-	      	{ 
-			$banned[$row['ban_userid']] = true; 
-	      	} 
-		$db->sql_freeresult($result); 
-
-		// 
-		// users rank 
-		// 
-		$rank_sql = "SELECT * 
-			FROM " . RANKS_TABLE . " 
-	        	ORDER BY rank_special, rank_min"; 
-			if ( !($rank_result = $db->sql_query($rank_sql)) ) 
-			{ 
-				message_die(GENERAL_ERROR, 'Could not obtain ranks information', '', __LINE__, __FILE__, $sql); 
-			} 
-
-			$ranksrow = array();
-			while ( $rank_row = $db->sql_fetchrow($rank_result) ) 
-			{ 
-			$ranksrow[] = $rank_row; 
-			} 
-			$db->sql_freeresult($rank_result); 
-
-			$sql = "SELECT * 
-			FROM " . USERS_TABLE . "
-			WHERE user_id <> " . ANONYMOUS . " 
-				$alpha_where 
-			$order_by
-			LIMIT $start, $show";
-
-		if( !($result = $db->sql_query($sql)) )
-		{
-			message_die(GENERAL_ERROR, 'Could not query users', '', __LINE__, __FILE__, $sql);
-		}
-
-		// loop through users
-		$i = 1;
-		while ( $row = $db->sql_fetchrow($result) )
-		{
-			//
-			// users avatar
-			//
-			$avatar_img = '';
-			if ( $row['user_avatar_type'] && $row['user_allowavatar'] )
-			{
-				switch( $row['user_avatar_type'] )
-				{
-					case USER_AVATAR_UPLOAD:
-						$avatar_img = ( $board_config['allow_avatar_upload'] ) ? '<img src="' . $phpbb_root_path . $board_config['avatar_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
-						break;
-					case USER_AVATAR_REMOTE:
-						$avatar_img = ( $board_config['allow_avatar_remote'] ) ? '<img src="' . $row['user_avatar'] . '" alt="" border="0" />' : '';
-						break;
-					case USER_AVATAR_GALLERY:
-						$avatar_img = ( $board_config['allow_avatar_local'] ) ? '<img src="' . $phpbb_root_path . $board_config['avatar_gallery_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
-						break;
-				}
-			}
-				
-			$poster_rank = '';
-			$rank_image = '';
-			if ( $row['user_rank'] )
-			{
-				for($ji = 0; $ji < count($ranksrow); $ji++)
-				{
-					if ( $row['user_rank'] == $ranksrow[$ji]['rank_id'] && $ranksrow[$ji]['rank_special'] )
-					{
-						$poster_rank = $ranksrow[$ji]['rank_title'];
-						$rank_image = ( $ranksrow[$ji]['rank_image'] ) ? '<img src="' . $phpbb_root_path . $ranksrow[$ji]['rank_image'] . '" alt="' . $poster_rank . '" title="' . $poster_rank . '" border="0" /><br />' : '';
-					}
-				}
-			}
-			else
-			{
-				for($ji = 0; $ji < count($ranksrow); $ji++)
-				{
-					if ( $row['user_posts'] >= $ranksrow[$ji]['rank_min'] && !$ranksrow[$ji]['rank_special'] )
-					{
-						$poster_rank = $ranksrow[$ji]['rank_title'];
-						$rank_image = ( $ranksrow[$ji]['rank_image'] ) ? '<img src="' . $phpbb_root_path . $ranksrow[$ji]['rank_image'] . '" alt="' . $poster_rank . '" title="' . $poster_rank . '" border="0" /><br />' : '';
-					}
-				}
-			}
-				
-			//
-			// user's color depending on their level
-			//
-			$style_color = '';
-			if ( $row['user_level'] == ADMIN )
-			{
-				$row['username'] = '<b>' . $row['username'] . '</b>';
-				$style_color = 'style="color:#' . $theme['fontcolor3'] . '"';
-			}
-			else if ( $row['user_level'] == MOD )
-			{
-				$row['username'] = '<b>' . $row['username'] . '</b>';
-				$style_color = 'style="color:#' . $theme['fontcolor2'] . '"';
-			}
-
-			//
-			// setup user row template varibles
-			//
-			$template->assign_block_vars('user_row', array(
-				'ROW_NUMBER' => $i + ( intval($_GET['start'] ?? null) + 1 ),
-				'ROW_CLASS' => ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'],
-
-				'USER_ID' => $row['user_id'],
-				'ACTIVE' => ( $row['user_active'] == TRUE ) ? $lang['Yes'] : $lang['No'],
-				'STYLE_COLOR' => $style_color,
-//				'USERNAME' => ( ($banned[$row['user_id']]) ? '<b>'. $lang['Is_Banned'] .'</b> ': '' ) . $row['username'],
-                'USERNAME' => ( (is_array($banned) && isset($banned[$row['user_id']])) ? '<b>'. $lang['Is_Banned'] .'</b> ': '' ) . $row['username'],
-				'U_PROFILE' => append_sid($phpbb_root_path . 'profile.'.$phpEx.'?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $row['user_id']),
-
-				'RANK' => $poster_rank,
-				'I_RANK' => $rank_image,
-				'I_AVATAR' => $avatar_img,
-
-				'JOINED' => create_date('d M Y', $row['user_regdate'], $board_config['board_timezone']),
-				'LAST_ACTIVITY' => ( !empty($row['user_session_time']) ) ? create_date('d M Y @ h:ia', $row['user_session_time'], $board_config['board_timezone']) : $lang['Never'], 
-
-				'POSTS' => ( $row['user_posts'] ) ? $row['user_posts'] : 0,
-				'U_SEARCH' => append_sid($phpbb_root_path . 'search.'.$phpEx.'?search_author=' . urlencode(strip_tags((string) $row['username'])) . '&amp;showresults=posts'),
-
-				'U_WEBSITE' => ( $row['user_website'] ) ? $row['user_website'] : '',
-
-				'EMAIL' => $row['user_email'],
-				'U_PM' => append_sid($phpbb_root_path . 'privmsg.' . $phpEx . '?mode=post&amp;' . POST_USERS_URL . '='. $row['user_id']),
-				'U_MANAGE' => append_sid($phpbb_root_path . 'admin/admin_users.'.$phpEx.'?mode=edit&amp;' . POST_USERS_URL . '=' . $row['user_id']),
-				'U_PERMISSIONS' => append_sid($phpbb_root_path . 'admin/admin_ug_auth.'.$phpEx.'?mode=user&amp;' . POST_USERS_URL . '=' . $row['user_id']))
-			);
-
-			//
-			// get the users group information
-			//
-			$group_sql = "SELECT * FROM " . USER_GROUP_TABLE . " ug, " . GROUPS_TABLE . " g
-				WHERE ug.user_id = " . $row['user_id'] . "
-				 AND g.group_single_user <> 1
-				 AND g.group_id = ug.group_id";
-				
-			if( !($group_result = $db->sql_query($group_sql)) )
-			{
-				message_die(GENERAL_ERROR, 'Could not query groups', '', __LINE__, __FILE__, $group_sql);
-			}
-			$g = 0;
-			while ( $group_row = $db->sql_fetchrow($group_result) )
-			{
-				//
-				// assign the group varibles
-				//
-				if ( $group_row['group_moderator'] == $row['user_id'] )
-				{
-					$group_status = $lang['Moderator'];
-				}
-				else if ( $group_row['user_pending'] == true )
-				{
-					$group_status = $lang['Pending'];
-				}
-				else
-				{
-					$group_status = $lang['Member'];
-				}
-
-				$template->assign_block_vars('user_row.group_row', array(
-					'GROUP_NAME' => $group_row['group_name'],
-					'GROUP_STATUS' => $group_status,
-					'U_GROUP' => $phpbb_root_path . 'groupcp.'.$phpEx.'?'.POST_GROUPS_URL.'='.$group_row['group_id'])
-				);
-				$g++;
-			}
-
-			if ( $g == 0 )
-			{
-				$template->assign_block_vars('user_row.no_group_row', array(
-					'L_NONE' => $lang['None'])
-				);
-			}
-				
-			$i++;
-		}
-		$db->sql_freeresult($result);
-
-		$count_sql = "SELECT count(user_id) AS total 
-			FROM " . USERS_TABLE . " 
-			WHERE user_id <> " . ANONYMOUS . " $alpha_where";
-
-		if ( !($count_result = $db->sql_query($count_sql)) )
-		{
-			message_die(GENERAL_ERROR, 'Error getting total users', '', __LINE__, __FILE__, $count_sql);
-		}
-
-		if ( $total = $db->sql_fetchrow($count_result) )
-		{
-			$total_members = $total['total'];
-
-			$pagination = generate_pagination($phpbb_root_path . "admin/admin_userlist.$phpEx?sort=$sort&amp;order=$sort_order&amp;show=$show" . ( ( isset($alphanum) ) ? "&amp;alphanum=$alphanum" : '' ), $total_members, $show, $start);
-		}
-
-		$template->assign_vars(array(
-			'PAGINATION' => $pagination,
-			'PAGE_NUMBER' => sprintf($lang['Page_of'], ( floor( $start / $show ) + 1 ), ceil( $total_members / $show )))
-		);
-
-		break;
-
-} // switch()
+			'L_SORT_BY' => isset($lang['Sort_by']) ? $lang['Sort_by'] : 'Sort by',
+			'L_USER_ID' => isset($lang['User_id']) ? $lang['User_id'] : 'User ID',
+			'L_USER_LEVEL' => isset($lang['User_level']) ? $lang['User_level'] : 'User Level',
+			'L_ASCENDING' => isset($lang['Ascending']) ? $lang['Ascending'] : 'Ascending',
+			'L_DESCENDING' => isset($lang['Descending']) ? $lang['Descending'] : 'Descending',
+			'L_SHOW' => isset($lang['Show']) ? $lang['Show'] : 'Show',
+			'S_SORT' => isset($lang['Sort']) ? $lang['Sort'] : 'Sort',
+			'S_SELECT_SORT' => $select_sort,
+			'S_SELECT_SORT_ORDER' => $select_sort_order,
+	        'S_HIDDEN_FIELDS' => $hidden_fields) 
+	    ); 
+	 
+	    $order_by = "ORDER BY $sort $sort_order "; 
+	 
+	    //
+	    // Get ban data 
+	    // 
+	    $sql = 'SELECT ban_userid 
+	        FROM ' . BANLIST_TABLE; 
+	    if ( !($result = $db->sql_query($sql)) ) 
+	    { 
+	        message_die(GENERAL_ERROR, "Couldn't obtain banlist information", "", __LINE__, __FILE__, $sql); 
+	    } 
+	    while ( $row = $db->sql_fetchrow($result) ) 
+	    { 
+	        $banned[$row['ban_userid']] = true; 
+	    } 
+	    $db->sql_freeresult($result); 
+	 
+	    // 
+	    // users rank 
+	    // 
+	    $rank_sql = "SELECT * 
+	        FROM " . RANKS_TABLE . " 
+	            ORDER BY rank_special, rank_min"; 
+	        if ( !($rank_result = $db->sql_query($rank_sql)) ) 
+	        { 
+	            message_die(GENERAL_ERROR, 'Could not obtain ranks information', '', __LINE__, __FILE__, $sql); 
+	        } 
+	 
+	        $ranksrow = array();
+	        while ( $rank_row = $db->sql_fetchrow($rank_result) ) 
+	        { 
+	            $ranksrow[] = $rank_row; 
+	        } 
+	        $db->sql_freeresult($rank_result); 
+	 
+	        $sql = "SELECT * 
+	        FROM " . USERS_TABLE . "
+	        WHERE user_id <> " . ANONYMOUS . " 
+	            $alpha_where 
+	        $order_by
+	        LIMIT $start, $show";
+	 
+	    if( !($result = $db->sql_query($sql)) )
+	    {
+	        message_die(GENERAL_ERROR, 'Could not query users', '', __LINE__, __FILE__, $sql);
+	    }
+	 
+	    // loop through users
+	    $i = 1;
+	    while ( $row = $db->sql_fetchrow($result) )
+	    {
+	        //
+	        // users avatar
+	        //
+	        $avatar_img = '';
+	        if ( $row['user_avatar_type'] && $row['user_allowavatar'] )
+	        {
+	            switch( $row['user_avatar_type'] )
+	            {
+	                case USER_AVATAR_UPLOAD:
+	                    $avatar_img = ( $board_config['allow_avatar_upload'] ) ? '<img src="' . $phpbb_root_path . $board_config['avatar_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
+	                    break;
+	                case USER_AVATAR_REMOTE:
+	                    $avatar_img = ( $board_config['allow_avatar_remote'] ) ? '<img src="' . $row['user_avatar'] . '" alt="" border="0" />' : '';
+	                    break;
+	                case USER_AVATAR_GALLERY:
+	                    $avatar_img = ( $board_config['allow_avatar_local'] ) ? '<img src="' . $phpbb_root_path . $board_config['avatar_gallery_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
+	                    break;
+	            }
+	        }
+	 
+	        $poster_rank = '';
+	        $rank_image = '';
+	        if ( $row['user_rank'] )
+	        {
+	            for($ji = 0; $ji < count($ranksrow); $ji++)
+	            {
+	                if ( $row['user_rank'] == $ranksrow[$ji]['rank_id'] && $ranksrow[$ji]['rank_special'] )
+	                {
+	                    $poster_rank = $ranksrow[$ji]['rank_title'];
+	                    $rank_image = ( $ranksrow[$ji]['rank_image'] ) ? '<img src="' . $phpbb_root_path . $ranksrow[$ji]['rank_image'] . '" alt="' . $poster_rank . '" title="' . $poster_rank . '" border="0" /><br />' : '';
+	                }
+	            }
+	        }
+	        else
+	        {
+	            for($ji = 0; $ji < count($ranksrow); $ji++)
+	            {
+	                if ( $row['user_posts'] >= $ranksrow[$ji]['rank_min'] && !$ranksrow[$ji]['rank_special'] )
+	                {
+	                    $poster_rank = $ranksrow[$ji]['rank_title'];
+	                    $rank_image = ( $ranksrow[$ji]['rank_image'] ) ? '<img src="' . $phpbb_root_path . $ranksrow[$ji]['rank_image'] . '" alt="' . $poster_rank . '" title="' . $poster_rank . '" border="0" /><br />' : '';
+	                }
+	            }
+	        }
+	 
+	        //
+	        // user's color depending on their level
+	        //
+	        $style_color = '';
+	        if ( $row['user_level'] == ADMIN )
+	        {
+	            $row['username'] = '<b>' . $row['username'] . '</b>';
+	            $style_color = 'style="color:#' . $theme['fontcolor3'] . '"';
+	        }
+	        else if ( $row['user_level'] == MOD )
+	        {
+	            $row['username'] = '<b>' . $row['username'] . '</b>';
+	            $style_color = 'style="color:#' . $theme['fontcolor2'] . '"';
+	        }
+	 
+	        //
+	        // setup user row template varibles
+	        //
+	        $template->assign_block_vars('user_row', array(
+	            'ROW_NUMBER' => $i + ( isset($_GET['start']) ? intval($_GET['start']) : 0 ) + 1,
+	            'ROW_CLASS' => ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'],
+	 
+	            'USER_ID' => $row['user_id'],
+	            'ACTIVE' => ( $row['user_active'] == TRUE ) ? $lang['Yes'] : $lang['No'],
+	            'STYLE_COLOR' => $style_color,
+	            'USERNAME' => ( (is_array($banned) && isset($banned[$row['user_id']])) ? '<b>'. $lang['Is_Banned'] .'</b> ': '' ) . $row['username'],
+	            'U_PROFILE' => append_sid($phpbb_root_path . 'profile.'.$phpEx.'?mode=viewprofile&amp;' . POST_USERS_URL . '=' . $row['user_id']),
+	 
+	            'RANK' => $poster_rank,
+	            'I_RANK' => $rank_image,
+	            'I_AVATAR' => $avatar_img,
+	 
+	            'JOINED' => create_date('d M Y', $row['user_regdate'], $board_config['board_timezone']),
+	            'LAST_ACTIVITY' => ( !empty($row['user_session_time']) ) ? create_date('d M Y @ h:ia', $row['user_session_time'], $board_config['board_timezone']) : $lang['Never'], 
+	 
+	            'POSTS' => ( $row['user_posts'] ) ? $row['user_posts'] : 0,
+	            'U_SEARCH' => append_sid($phpbb_root_path . 'search.'.$phpEx.'?search_author=' . urlencode(strip_tags($row['username'])) . '&amp;showresults=posts'),
+	 
+	            'U_WEBSITE' => ( $row['user_website'] ) ? $row['user_website'] : '',
+	 
+	            'EMAIL' => $row['user_email'],
+	            'U_PM' => append_sid($phpbb_root_path . 'privmsg.' . $phpEx . '?mode=post&amp;' . POST_USERS_URL . '='. $row['user_id']),
+	            'U_MANAGE' => append_sid($phpbb_root_path . 'admin/admin_users.'.$phpEx.'?mode=edit&amp;' . POST_USERS_URL . '=' . $row['user_id']),
+	            'U_PERMISSIONS' => append_sid($phpbb_root_path . 'admin/admin_ug_auth.'.$phpEx.'?mode=user&amp;' . POST_USERS_URL . '=' . $row['user_id']))
+	        );
+	 
+	        //
+	        // get the users group information
+	        //
+	        $group_sql = "SELECT * FROM " . USER_GROUP_TABLE . " ug, " . GROUPS_TABLE . " g
+	            WHERE ug.user_id = " . $row['user_id'] . "
+	             AND g.group_single_user <> 1
+	             AND g.group_id = ug.group_id";
+	 
+	        if( !($group_result = $db->sql_query($group_sql)) )
+	        {
+	            message_die(GENERAL_ERROR, 'Could not query groups', '', __LINE__, __FILE__, $group_sql);
+	        }
+	        $g = 0;
+	        while ( $group_row = $db->sql_fetchrow($group_result) )
+	        {
+	            //
+	            // assign the group varibles
+	            //
+	            if ( $group_row['group_moderator'] == $row['user_id'] )
+	            {
+	                $group_status = $lang['Moderator'];
+	            }
+	            else if ( $group_row['user_pending'] == true )
+	            {
+	                $group_status = $lang['Pending'];
+	            }
+	            else
+	            {
+	                $group_status = $lang['Member'];
+	            }
+	 
+	            $template->assign_block_vars('user_row.group_row', array(
+	                'GROUP_NAME' => $group_row['group_name'],
+	                'GROUP_STATUS' => $group_status,
+	                'U_GROUP' => $phpbb_root_path . 'groupcp.'.$phpEx.'?'.POST_GROUPS_URL.'='.$group_row['group_id'])
+	            );
+	            $g++;
+	        }
+	 
+	        if ( $g == 0 )
+	        {
+	            $template->assign_block_vars('user_row.no_group_row', array(
+	                'L_NONE' => $lang['None'])
+	            );
+	        }
+	 
+	        $i++;
+	    }
+	    $db->sql_freeresult($result);
+	 
+	    $count_sql = "SELECT count(user_id) AS total 
+	        FROM " . USERS_TABLE . " 
+	        WHERE user_id <> " . ANONYMOUS . " $alpha_where";
+	 
+	    if ( !($count_result = $db->sql_query($count_sql)) )
+	    {
+	        message_die(GENERAL_ERROR, 'Error getting total users', '', __LINE__, __FILE__, $count_sql);
+	    }
+	 
+	    if ( $total = $db->sql_fetchrow($count_result) )
+	    {
+	        $total_members = $total['total'];
+	 
+	        $pagination = generate_pagination($phpbb_root_path . "admin/admin_userlist.$phpEx?sort=$sort&amp;order=$sort_order&amp;show=$show" . ( ( isset($alphanum) ) ? "&amp;alphanum=$alphanum" : '' ), $total_members, $show, $start);
+	    }
+	 
+	    $template->assign_vars(array(
+	        'PAGINATION' => $pagination,
+	        'PAGE_NUMBER' => sprintf($lang['Page_of'], ( floor( $start / $show ) + 1 ), ceil( $total_members / $show )))
+	    );
+	 
+	    break;
+	 
+	} // switch()
 
 $template->pparse('body');
 

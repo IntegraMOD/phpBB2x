@@ -321,7 +321,7 @@ include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/
 #
 #-----[ FIND ]------------------------------------------
 #
-	'L_MEMBERLIST' => $lang['Memberlist'], 
+	'L_MEMBERLIST' => $lang['Memberlist'],
 
 #
 #-----[ AFTER, ADD ]------------------------------------------
@@ -385,11 +385,11 @@ include($phpbb_root_path . 'includes/digest_constants.' . $phpEx);
 #
 #-----[ FIND ]------------------------------------------
 #
-				if ( !$db->sql_query($delete_text_sql) )
-				{
-					message_die(GENERAL_ERROR, 'Could not delete private message text', '', __LINE__, __FILE__, $delete_text_sql);
-				}
-			}
+                if ( !$db->sql_query($delete_text_sql) )
+                {
+                    message_die(GENERAL_ERROR, 'Could not delete private message text', '', __LINE__, __FILE__, $delete_text_sql);
+                }
+            }
 			
 #
 #-----[ AFTER, ADD ]------------------------------------------
