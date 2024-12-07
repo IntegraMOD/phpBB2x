@@ -41,10 +41,15 @@ define('DIGEST_USE_DEFAULT_STYLESHEET',true); // true if you want HTML digest to
 define('DIGEST_USE_CUSTOM_STYLESHEET', false); // set to true to enable the stylesheet below
 define('DIGEST_CUSTOM_STYLESHEET_PATH', 'templates/subSilver/digest_stylesheet.css'); // You will need to create this stylesheet, if you enable it
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https://' : 'http://';
-define('DIGEST_SITE_URL', $protocol . trim((string) $board_config['server_name']) . (( $board_config['server_port'] != 80 ) ? ':' . trim((string) $board_config['server_port']) : '') . preg_replace('/^\/?(.*?)\/?$/', "\\1", trim((string) $board_config['script_path'])) . '/'); // if this gives you trouble, simply substitute it for the full URL to your site, leaving on the trailing '/'
-if (substr(DIGEST_SITE_URL,(strlen(DIGEST_SITE_URL)-1),1) != '/')
+// Define DIGEST_SITE_URL only if it's not already defined
+if (!defined('DIGEST_SITE_URL')) 
 {
-    define('DIGEST_SITE_URL', DIGEST_SITE_URL . '/');
+    $digest_site_url = $protocol . trim((string) $board_config['server_name']) . (( $board_config['server_port'] != 80 ) ? ':' . trim((string) $board_config['server_port']) : '') . preg_replace('/^\/?(.*?)\/?$/', "\\1", trim((string) $board_config['script_path'])) . '/'; // if this gives you trouble, simply substitute it for the full URL to your site, leaving on the trailing '/'
+    if (substr($digest_site_url, -1) !== '/') 
+	{
+        $digest_site_url .= '/';
+    }
+    define('DIGEST_SITE_URL', $digest_site_url);
 }
 define('DIGEST_VERSION','1.0.13'); // Don't change this; the mod author changes this.
 define('DIGEST_DATE_FORMAT', 'd M Y h:i A '); // How post date will be displayed as text in the post. Use formats found at http://www.php.net/manual/en/function.date.php
