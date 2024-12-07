@@ -1,7 +1,7 @@
 <?php
 /*
   paFileDB 3.0
-  ©2001/2002 PHP Arena
+  Â©2001/2002 PHP Arena
   Written by Todd
   todd@phparena.net
   http://www.phparena.net
@@ -90,14 +90,12 @@ if ($row_number > 0)
 
 		$filesincat = $db->sql_numrows($result2);
 
-//		$file_new = $db->sql_fetchrow($filcat);
-		$filcat = $db->sql_query("SELECT * FROM " . PA_FILES_TABLE . ""); 
-		 
-		$file_new = $db->sql_fetchrow($filcat);
-	
+		$file_new = $db->sql_fetchrow(isset($filcat) ? $filcat : null);
+
 		$new_cat = '<img src="' . $images['folder'] . '" border="0" alt="No New file">';
 
-		if (time() - ($config['settings_newdays'] * 24 * 60 * 60) < $file_new['file_time'])
+		if (isset($config['settings_newdays']) && isset($file_new['file_time']) && 
+			(time() - ($config['settings_newdays'] * 24 * 60 * 60) < $file_new['file_time']))
 		{
 			$new_cat = '<img src="' . $images['folder_new'] . '" border="0" alt="New file">';
 		}
@@ -122,31 +120,32 @@ if ( !($result = $db->sql_query($sql)) )
 /*PINNED*/
 while ($pin = $db->sql_fetchrow($result)) 
 {
-	$date = create_date($board_config['default_dateformat'], $pin['file_time'], $board_config['board_timezone']);
-
-	$ntv = $pin['file_totalvotes'] - 1;
-
-	if ($pin['file_rating'] == 0 or $ntv == 0) 
-	{ 
-		$rating = 0; 
-	} 
-	else 
-	{
-		$rating = round($pin['file_rating']/$ntv, 2); 
-	}
-
-	if (time() - ($config['settings_newdays'] * 24 * 60 * 60) < $pin['file_time'])
-	{
-		$newind = '<img src="pafiledb/images/new.gif" border="0" alt="New file">';
-	}
-
-	$filelist .= '<tr> 
-			<td class="row1" align="center" valign="middle"><a href="' . append_sid("dload.php?action=file&id=" . $pin['file_id']) . '" class="topictitle"><img src="pafiledb/images/pin.gif" border="0"></a></td>
-			<td class="row1" valign="middle"><span class="gensmall"><a href="' . append_sid("dload.php?action=file&id=" . $pin['file_id']) . '" class="topictitle">' . $pin['file_name'] . '</a></span> ' . $newind . '<br><span class="genmed">' . $pin['file_desc'] . '</span></td>
-			<td class="row2" align="center" valign="middle" nowrap="nowrap"><span class="postdetails">' . $date . '</td>
-			<td class="row3" align="center" valign="middle"><span class="postdetails">' . $pin['file_dls'] . '</td>
-			<td class="row2" align="center" valign="middle"><span class="postdetails">' . $rating . '/10</td>
-			</tr>';
+    $date = create_date($board_config['default_dateformat'], $pin['file_time'], $board_config['board_timezone']);
+ 
+    $ntv = $pin['file_totalvotes'] - 1;
+ 
+    if ($pin['file_rating'] == 0 || $ntv == 0) 
+    { 
+        $rating = 0; 
+    } 
+    else 
+    {
+        $rating = round($pin['file_rating']/$ntv, 2); 
+    }
+ 
+    $newind = ''; // Initialize $newind variable
+    if (time() - ($config['settings_newdays'] * 24 * 60 * 60) < $pin['file_time'])
+    {
+        $newind = '<img src="pafiledb/images/new.gif" border="0" alt="New file">';
+    }
+ 
+    $filelist .= '<tr> 
+            <td class="row1" align="center" valign="middle"><a href="' . append_sid("dload.php?action=file&id=" . $pin['file_id']) . '" class="topictitle"><img src="pafiledb/images/pin.gif" border="0"></a></td>
+            <td class="row1" valign="middle"><span class="gensmall"><a href="' . append_sid("dload.php?action=file&id=" . $pin['file_id']) . '" class="topictitle">' . $pin['file_name'] . '</a></span> ' . $newind . '<br><span class="genmed">' . $pin['file_desc'] . '</span></td>
+            <td class="row2" align="center" valign="middle" nowrap="nowrap"><span class="postdetails">' . $date . '</td>
+            <td class="row3" align="center" valign="middle"><span class="postdetails">' . $pin['file_dls'] . '</td>
+            <td class="row2" align="center" valign="middle"><span class="postdetails">' . $rating . '/10</td>
+            </tr>';
 }
 
 if ( isset($_GET['start']) || isset($_POST['start']) )

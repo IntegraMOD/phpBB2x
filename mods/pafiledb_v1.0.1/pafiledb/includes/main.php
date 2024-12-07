@@ -1,7 +1,7 @@
 <?php
 /*
   paFileDB 3.0
-  ©2001/2002 PHP Arena
+  Â©2001/2002 PHP Arena
   Written by Todd
   todd@phparena.net
   http://www.phparena.net
@@ -15,7 +15,7 @@ if ( !defined('IN_PHPBB') )
 die("Hacking attempt");
 }
  
-$locbar = '<span class="nav"><a href="' . append_sid($config['settings_homeurl']) . '" class="nav">' . $config['settings_sitename'] . '</a> -> <a href="' . append_sid("dload.php") . '" class="nav">' . $config['settings_dbname'] . '</a></span>';
+$locbar = '<span class="nav"><a href="' . (isset($config['settings_homeurl']) ? append_sid($config['settings_homeurl']) : '#') . '" class="nav">' . (isset($config['settings_sitename']) ? $config['settings_sitename'] : 'Home') . '</a> -> <a href="' . append_sid("dload.php") . '" class="nav">' . (isset($config['settings_dbname']) ? $config['settings_dbname'] : 'Downloads') . '</a></span>';
  
 $template->set_filenames(array(
 'main_output' => 'pa_main_body.tpl')
@@ -64,11 +64,11 @@ $file = $db->sql_fetchrow($filcat);
  
 $newind = '<img src="' . $images['folder'] . '" border="0" alt="No New file">';
  
-if ($file && time() - ($config['settings_newdays'] * 24 * 60 * 60) < $file['file_time'])
+if (isset($file) && is_array($file) && isset($config['settings_newdays']) && time() - ($config['settings_newdays'] * 24 * 60 * 60) < $file['file_time'])
 {
-$newind = '<img src="' . $images['folder_new'] . '" border="0" alt="New file">';
+    $newind = '<img src="' . $images['folder_new'] . '" border="0" alt="New file">';
  
-$view_all_image = true;
+    $view_all_image = true;
 }
  
 $sql = "SELECT * FROM " . PA_CATEGORY_TABLE . " WHERE cat_parent = " . $category['cat_id'];
@@ -93,9 +93,9 @@ $file_in_sub = $db->sql_fetchrow($filcat);
  
 if ($file_in_sub && time() - ($config['settings_newdays'] * 24 * 60 * 60) < $file_in_sub['file_time'])
 {
-$newind = '<img src="' . $images['folder_new'] . '" border="0" alt="New file">';
+	$newind = '<img src="' . $images['folder_new'] . '" border="0" alt="New file">';
  
-$view_all_image = true;
+	$view_all_image = true;
 }
 }
 }
@@ -113,24 +113,24 @@ $template->assign_block_vars("no_cat_parent", array(
 }
  
 /*End Sub Cat counting bug fix.*/
-if ($config['settings_viewall'] == 1) 
+if (isset($config['settings_viewall']) && $config['settings_viewall'] == 1) 
 {
-$new_view_all = '<img src="' . $images['folder'] . '" border="0" alt="No New file">';
+    $new_view_all = '<img src="' . (isset($images['folder']) ? $images['folder'] : '') . '" border="0" alt="No New file">';
  
-if ($view_all_image)
-{
-$new_view_all = '<img src="' . $images['folder_new'] . '" border="0" alt="New file">';
-}
+    if (isset($view_all_image) && $view_all_image)
+    {
+        $new_view_all = '<img src="' . (isset($images['folder_new']) ? $images['folder_new'] : '') . '" border="0" alt="New file">';
+    }
  
-$template->assign_block_vars("viewall", array());
+    $template->assign_block_vars("viewall", array());
  
-$template->assign_vars(array(
-'U_VIEW_ALL' => append_sid("dload.php?action=viewall"),
-'L_VIEW_ALL' => $lang['Viewall'],
-'L_VA_INFO' => $lang['Vainfo'],
-'VIEW_ALL_IMAGE' => $new_view_all,
-'FILEDB' => $filesindb)
-); 
+    $template->assign_vars(array(
+    'U_VIEW_ALL' => append_sid("dload.php?action=viewall"),
+    'L_VIEW_ALL' => isset($lang['Viewall']) ? $lang['Viewall'] : '',
+    'L_VA_INFO' => isset($lang['Vainfo']) ? $lang['Vainfo'] : '',
+    'VIEW_ALL_IMAGE' => $new_view_all,
+    'FILEDB' => isset($filesindb) ? $filesindb : '')
+    ); 
 }
  
 $template->assign_var_from_handle("ACTION_INCLUDE", "main_output");

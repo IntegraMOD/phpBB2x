@@ -1,7 +1,7 @@
 <?php
 /*
   paFileDB 3.0
-  ©2001/2002 PHP Arena
+  Â©2001/2002 PHP Arena
   Written by Todd
   todd@phparena.net
   http://www.phparena.net
@@ -36,9 +36,9 @@ $template->set_filenames(array(
     'download_output' => 'pa_download_body.tpl')
 );
  
-    $search_img = $images['pa_search'];
-    $stats_img = $images['pa_stats'];
-    $toplist_img = $images['pa_toplist'];
+$search_img = isset($images['pa_search']) ? $images['pa_search'] : '';
+$stats_img = isset($images['pa_stats']) ? $images['pa_stats'] : '';
+$toplist_img = isset($images['pa_toplist']) ? $images['pa_toplist'] : '';
  
 $template->assign_vars(array(
     'SEARCH_IMG' => $search_img,

@@ -133,9 +133,9 @@ if ($file['file_license'] > 0)
 	$downloadlink = append_sid("dload.php?action=license&id=" . $file['file_license'] . "&file=" . $id);
 }
 
-	$download_img = $images['pa_download'];
-	$email_img = $images['pa_email'];
-	$rate_img = $images['pa_rate'];
+$download_img = isset($images['pa_download']) ? $images['pa_download'] : '';
+$email_img = isset($images['pa_email']) ? $images['pa_email'] : '';
+$rate_img = isset($images['pa_rate']) ? $images['pa_rate'] : '';
 
 $template->assign_vars(array(
 	"L_FILE" => $lang['File'],
