@@ -27,7 +27,7 @@
 function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_autologin = 0, $admin = 0)
 {
 	global $db, $board_config;
-	global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $SID;
+	global $_COOKIE, $_GET, $SID;
 
 	$cookiename = $board_config['cookie_name'];
 	$cookiepath = $board_config['cookie_path'];
@@ -35,16 +35,16 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	$cookiesecure = $board_config['cookie_secure'];
     $SameSite =  'SameSite=lax';
 
-	if ( isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) || isset($HTTP_COOKIE_VARS[$cookiename . '_data']) )
+	if ( isset($_COOKIE[$cookiename . '_sid']) || isset($_COOKIE[$cookiename . '_data']) )
 	{
-		$session_id = isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) ? $HTTP_COOKIE_VARS[$cookiename . '_sid'] : '';
-		$sessiondata = isset($HTTP_COOKIE_VARS[$cookiename . '_data']) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$cookiename . '_data'])) : array();
+		$session_id = isset($_COOKIE[$cookiename . '_sid']) ? $_COOKIE[$cookiename . '_sid'] : '';
+		$sessiondata = isset($_COOKIE[$cookiename . '_data']) ? unserialize(stripslashes($_COOKIE[$cookiename . '_data'])) : array();
 		$sessionmethod = SESSION_METHOD_COOKIE;
 	}
 	else
 	{
 		$sessiondata = array();
-		$session_id = isset($HTTP_GET_VARS['sid']) ? $HTTP_GET_VARS['sid'] : '';
+		$session_id = isset($_GET['sid']) ? $_GET['sid'] : '';
 		$sessionmethod = SESSION_METHOD_GET;
 	}
 
@@ -254,9 +254,30 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	$userdata['session_admin'] = $admin;
 	$userdata['session_key'] = $sessiondata['autologinid'];
 
-    setcookie($cookiename . '_data', serialize($sessiondata), ['expires' => $current_time + 31536000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
-	setcookie($cookiename . '_sid', $session_id, ['expires' => 0, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
-
+	if (PHP_VERSION_ID < 70300) {
+	    // For PHP versions before 7.3
+	    setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath . '; SameSite=' . $SameSite, $cookiedomain, $cookiesecure, true);
+	    setcookie($cookiename . '_sid', $session_id, 0, $cookiepath . '; SameSite=' . $SameSite, $cookiedomain, $cookiesecure, true);
+	} else {
+	    // For PHP 7.3 and later
+	    setcookie($cookiename . '_data', serialize($sessiondata), [
+	        'expires' => $current_time + 31536000,
+	        'path' => $cookiepath,
+	        'domain' => $cookiedomain,
+	        'samesite' => $SameSite,
+	        'secure' => $cookiesecure,
+	        'httponly' => true
+	    ]);
+	    setcookie($cookiename . '_sid', $session_id, [
+	        'expires' => 0,
+	        'path' => $cookiepath,
+	        'domain' => $cookiedomain,
+	        'samesite' => $SameSite,
+	        'secure' => $cookiesecure,
+	        'httponly' => true
+	    ]);
+	}
+	
 	$SID = 'sid=' . $session_id;
 
 	return $userdata;
@@ -269,7 +290,7 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 function session_pagestart($user_ip, $thispage_id)
 {
 	global $db, $lang, $board_config;
-	global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $SID, $P_SID;
+	global $_COOKIE, $_GET, $SID, $P_SID;
 
 	$cookiename = $board_config['cookie_name'];
 	$cookiepath = $board_config['cookie_path'];
@@ -280,16 +301,16 @@ function session_pagestart($user_ip, $thispage_id)
 	$current_time = time();
 	unset($userdata);
 
-	if ( isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) || isset($HTTP_COOKIE_VARS[$cookiename . '_data']) )
+	if ( isset($_COOKIE[$cookiename . '_sid']) || isset($_COOKIE[$cookiename . '_data']) )
 	{
-		$sessiondata = isset( $HTTP_COOKIE_VARS[$cookiename . '_data'] ) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$cookiename . '_data'])) : array();
-        $session_id = isset($HTTP_COOKIE_VARS[$cookiename . '_sid']) ? $HTTP_COOKIE_VARS[$cookiename . '_sid'] : '';
+		$sessiondata = isset( $_COOKIE[$cookiename . '_data'] ) ? unserialize(stripslashes($_COOKIE[$cookiename . '_data'])) : array();
+        $session_id = isset($_COOKIE[$cookiename . '_sid']) ? $_COOKIE[$cookiename . '_sid'] : '';
 		$sessionmethod = SESSION_METHOD_COOKIE;
 	}
 	else
 	{
 		$sessiondata = array();
-        $session_id = isset($HTTP_GET_VARS['sid']) ? $HTTP_GET_VARS['sid'] : '';
+        $session_id = isset($_GET['sid']) ? $_GET['sid'] : '';
 		$sessionmethod = SESSION_METHOD_GET;
 	}
 
@@ -419,70 +440,86 @@ function session_pagestart($user_ip, $thispage_id)
 */
 function session_end($session_id, $user_id)
 {
-	global $db, $lang, $board_config, $userdata;
-	global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $SID;
-
-	$cookiename = $board_config['cookie_name'];
-	$cookiepath = $board_config['cookie_path'];
-	$cookiedomain = $board_config['cookie_domain'];
-	$cookiesecure = $board_config['cookie_secure'];
-    $SameSite =  'SameSite=lax';
-	
-	$current_time = time();
-
-	if (!preg_match('/^[A-Za-z0-9]*$/', $session_id))
-	{
-		return;
-	}
-	
-	//
-	// Delete existing session
-	//
-	$sql = 'DELETE FROM ' . SESSIONS_TABLE . " 
-		WHERE session_id = '$session_id' 
-			AND session_user_id = $user_id";
-	if ( !$db->sql_query($sql) )
-	{
-		message_die(CRITICAL_ERROR, 'Error removing user session', '', __LINE__, __FILE__, $sql);
-	}
-
-	//
-	// Remove this auto-login entry (if applicable)
-	//
-	if ( isset($userdata['session_key']) && $userdata['session_key'] != '' )
-	{
-		$autologin_key = md5($userdata['session_key']);
-		$sql = 'DELETE FROM ' . SESSIONS_KEYS_TABLE . '
-			WHERE user_id = ' . (int) $user_id . "
-				AND key_id = '$autologin_key'";
-		if ( !$db->sql_query($sql) )
-		{
-			message_die(CRITICAL_ERROR, 'Error removing auto-login key', '', __LINE__, __FILE__, $sql);
-		}
-	}
-
-	//
-	// We expect that message_die will be called after this function,
-	// but just in case it isn't, reset $userdata to the details for a guest
-	//
-	$sql = 'SELECT *
-		FROM ' . USERS_TABLE . '
-		WHERE user_id = ' . ANONYMOUS;
-	if ( !($result = $db->sql_query($sql)) )
-	{
-		message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
-	}
-	if ( !($userdata = $db->sql_fetchrow($result)) )
-	{
-		message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
-	}
-	$db->sql_freeresult($result);
-
-
-    setcookie($cookiename . '_data', '', ['expires' => $current_time - 31536000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
-	setcookie($cookiename . '_sid', '', ['expires' => $current_time - 31536000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
-
-	return true;
+    global $db, $lang, $board_config, $userdata;
+    global $_COOKIE, $_GET, $SID;
+ 
+    $cookiename = $board_config['cookie_name'];
+    $cookiepath = $board_config['cookie_path'];
+    $cookiedomain = $board_config['cookie_domain'];
+    $cookiesecure = $board_config['cookie_secure'];
+    $SameSite =  'Lax';
+ 
+    $current_time = time();
+ 
+    if (!preg_match('/^[A-Za-z0-9]*$/', $session_id))
+    {
+        return;
+    }
+ 
+    //
+    // Delete existing session
+    //
+    $sql = 'DELETE FROM ' . SESSIONS_TABLE . " 
+        WHERE session_id = :session_id 
+            AND session_user_id = :user_id";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':session_id', $session_id, PDO::PARAM_STR);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    if (!$stmt->execute())
+    {
+        message_die(CRITICAL_ERROR, 'Error removing user session', '', __LINE__, __FILE__, $sql);
+    }
+ 
+    //
+    // Remove this auto-login entry (if applicable)
+    //
+    if (isset($userdata['session_key']) && $userdata['session_key'] != '')
+    {
+        $autologin_key = md5($userdata['session_key']);
+        $sql = 'DELETE FROM ' . SESSIONS_KEYS_TABLE . '
+            WHERE user_id = :user_id
+                AND key_id = :autologin_key';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':autologin_key', $autologin_key, PDO::PARAM_STR);
+        if (!$stmt->execute())
+        {
+            message_die(CRITICAL_ERROR, 'Error removing auto-login key', '', __LINE__, __FILE__, $sql);
+        }
+    }
+ 
+    //
+    // We expect that message_die will be called after this function,
+    // but just in case it isn't, reset $userdata to the details for a guest
+    //
+    $sql = 'SELECT *
+        FROM ' . USERS_TABLE . '
+        WHERE user_id = :anonymous_id';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':anonymous_id', ANONYMOUS, PDO::PARAM_INT);
+    if (!$stmt->execute())
+    {
+        message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
+    }
+    $userdata = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$userdata)
+    {
+        message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
+    }
+ 
+    $cookie_options = [
+        'expires' => $current_time - 31536000,
+        'path' => $cookiepath,
+        'domain' => $cookiedomain,
+        'secure' => $cookiesecure,
+        'httponly' => true,
+        'samesite' => $SameSite
+    ];
+ 
+    setcookie($cookiename . '_data', '', $cookie_options);
+    setcookie($cookiename . '_sid', '', $cookie_options);
+ 
+    return true;
 }
 
 /**
@@ -524,58 +561,67 @@ function session_clean($session_id)
 */
 function session_reset_keys($user_id, $user_ip)
 {
-	global $db, $userdata, $board_config;
-
-	$key_sql = ($user_id == $userdata['user_id'] && !empty($userdata['session_key'])) ? "AND key_id != '" . md5($userdata['session_key']) . "'" : '';
-
-	$sql = 'DELETE FROM ' . SESSIONS_KEYS_TABLE . '
-		WHERE user_id = ' . (int) $user_id . "
-			$key_sql";
-
-	if ( !$db->sql_query($sql) )
-	{
-		message_die(CRITICAL_ERROR, 'Error removing auto-login keys', '', __LINE__, __FILE__, $sql);
-	}
-
-	$where_sql = 'session_user_id = ' . (int) $user_id;
-	$where_sql .= ($user_id == $userdata['user_id']) ? " AND session_id <> '" . $userdata['session_id'] . "'" : '';
-	$sql = 'DELETE FROM ' . SESSIONS_TABLE . "
-		WHERE $where_sql";
-	if ( !$db->sql_query($sql) )
-	{
-		message_die(CRITICAL_ERROR, 'Error removing user session(s)', '', __LINE__, __FILE__, $sql);
-	}
-
-	if ( !empty($key_sql) )
-	{
-		$auto_login_key = dss_rand() . dss_rand();
-
-		$current_time = time();
-		
-		$sql = 'UPDATE ' . SESSIONS_KEYS_TABLE . "
-			SET last_ip = '$user_ip', key_id = '" . md5($auto_login_key) . "', last_login = $current_time
-			WHERE key_id = '" . md5($userdata['session_key']) . "'";
-		
-		if ( !$db->sql_query($sql) )
-		{
-			message_die(CRITICAL_ERROR, 'Error updating session key', '', __LINE__, __FILE__, $sql);
-		}
-
-		// And now rebuild the cookie
-		$sessiondata['userid'] = $user_id;
-		$sessiondata['autologinid'] = $auto_login_key;
-		$cookiename = $board_config['cookie_name'];
-		$cookiepath = $board_config['cookie_path'];
-		$cookiedomain = $board_config['cookie_domain'];
-		$cookiesecure = $board_config['cookie_secure'];
-        $SameSite =  'SameSite=lax';
-	
-		setcookie($cookiename . '_data', serialize($sessiondata), ['expires' => $current_time + 31536000, 'path' => $cookiepath, 'domain' => $cookiedomain, 'SameSite' => $SameSite, 'secure' => $cookiesecure]);
-		
-		$userdata['session_key'] = $auto_login_key;
-		unset($sessiondata);
-		unset($auto_login_key);
-	}
+    global $db, $userdata, $board_config;
+ 
+    $key_sql = ($user_id == $userdata['user_id'] && !empty($userdata['session_key'])) ? "AND key_id != '" . md5($userdata['session_key']) . "'" : '';
+ 
+    $sql = 'DELETE FROM ' . SESSIONS_KEYS_TABLE . '
+        WHERE user_id = ' . (int) $user_id . "
+            $key_sql";
+ 
+    if ( !$db->sql_query($sql) )
+    {
+        message_die(CRITICAL_ERROR, 'Error removing auto-login keys', '', __LINE__, __FILE__, $sql);
+    }
+ 
+    $where_sql = 'session_user_id = ' . (int) $user_id;
+    $where_sql .= ($user_id == $userdata['user_id']) ? " AND session_id <> '" . $userdata['session_id'] . "'" : '';
+    $sql = 'DELETE FROM ' . SESSIONS_TABLE . "
+        WHERE $where_sql";
+    if ( !$db->sql_query($sql) )
+    {
+        message_die(CRITICAL_ERROR, 'Error removing user session(s)', '', __LINE__, __FILE__, $sql);
+    }
+ 
+    if ( !empty($key_sql) )
+    {
+        $auto_login_key = dss_rand() . dss_rand();
+ 
+        $current_time = time();
+ 
+        $sql = 'UPDATE ' . SESSIONS_KEYS_TABLE . "
+            SET last_ip = '$user_ip', key_id = '" . md5($auto_login_key) . "', last_login = $current_time
+            WHERE key_id = '" . md5($userdata['session_key']) . "'";
+ 
+        if ( !$db->sql_query($sql) )
+        {
+            message_die(CRITICAL_ERROR, 'Error updating session key', '', __LINE__, __FILE__, $sql);
+        }
+ 
+        // And now rebuild the cookie
+        $sessiondata['userid'] = $user_id;
+        $sessiondata['autologinid'] = $auto_login_key;
+        $cookiename = $board_config['cookie_name'];
+        $cookiepath = $board_config['cookie_path'];
+        $cookiedomain = $board_config['cookie_domain'];
+        $cookiesecure = $board_config['cookie_secure'];
+        $SameSite = 'Lax';
+ 
+        $cookie_options = [
+            'expires' => $current_time + 31536000,
+            'path' => $cookiepath,
+            'domain' => $cookiedomain,
+            'secure' => $cookiesecure,
+            'httponly' => true,
+            'samesite' => $SameSite
+        ];
+ 
+        setcookie($cookiename . '_data', serialize($sessiondata), $cookie_options);
+ 
+        $userdata['session_key'] = $auto_login_key;
+        unset($sessiondata);
+        unset($auto_login_key);
+    }
 }
 
 //
