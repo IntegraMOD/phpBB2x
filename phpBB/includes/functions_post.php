@@ -220,20 +220,20 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 	if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
-		$topic_vote = (!empty($poll_title) && count($poll_options) >= 2) ? 1 : 0;
-
-		$post_data['edit_vote'] = (isset($post_data['edit_vote'])) ? $post_data['edit_vote'] : '';
-
-		$sql  = ($mode != "editpost") ? "INSERT INTO " . TOPICS_TABLE . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_vote) VALUES ('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_vote)" : "UPDATE " . TOPICS_TABLE . " SET topic_title = '$post_subject', topic_type = $topic_type " . (($post_data['edit_vote'] || !empty($poll_title)) ? ", topic_vote = " . $topic_vote : "") . " WHERE topic_id = $topic_id";
-		if (!$db->sql_query($sql))
-		{
-			message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
-		}
-
-		if ($mode == 'newtopic')
-		{
-			$topic_id = $db->sql_nextid();
-		}
+	    $topic_vote = (!empty($poll_title) && is_array($poll_options) && count($poll_options) >= 2) ? 1 : 0;
+	 
+	    $post_data['edit_vote'] = (isset($post_data['edit_vote'])) ? $post_data['edit_vote'] : '';
+	 
+	    $sql  = ($mode != "editpost") ? "INSERT INTO " . TOPICS_TABLE . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_vote) VALUES ('$post_subject', " . (int)$userdata['user_id'] . ", " . (int)$current_time . ", " . (int)$forum_id . ", " . TOPIC_UNLOCKED . ", " . (int)$topic_type . ", " . (int)$topic_vote . ")" : "UPDATE " . TOPICS_TABLE . " SET topic_title = '$post_subject', topic_type = " . (int)$topic_type . " " . (($post_data['edit_vote'] || !empty($poll_title)) ? ", topic_vote = " . (int)$topic_vote : "") . " WHERE topic_id = " . (int)$topic_id;
+	    if (!$db->sql_query($sql))
+	    {
+	        message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+	    }
+	 
+	    if ($mode == 'newtopic')
+	    {
+	        $topic_id = $db->sql_nextid();
+	    }
 	}
 
 	$edited_sql = ($mode == 'editpost' && !$post_data['last_post'] && $post_data['poster_post']) ? ", post_edit_time = $current_time, post_edit_count = post_edit_count + 1 " : "";
@@ -259,7 +259,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	//
 	// Add poll
 	// 
-	if (($mode == 'newtopic' || ($mode == 'editpost' && $post_data['edit_poll'])) && !empty($poll_title) && count($poll_options) >= 2)
+    if (($mode == 'newtopic' || ($mode == 'editpost' && $post_data['edit_poll'])) && !empty($poll_title) && is_array($poll_options) && count($poll_options) >= 2)
 	{
 		$sql = (!$post_data['has_poll']) ? "INSERT INTO " . VOTE_DESC_TABLE . " (topic_id, vote_text, vote_start, vote_length) VALUES ($topic_id, '$poll_title', $current_time, " . ($poll_length * 86400) . ")" : "UPDATE " . VOTE_DESC_TABLE . " SET vote_text = '$poll_title', vote_length = " . ($poll_length * 86400) . " WHERE topic_id = $topic_id";
 		if (!$db->sql_query($sql))
