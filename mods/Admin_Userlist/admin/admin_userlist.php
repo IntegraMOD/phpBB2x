@@ -1048,8 +1048,7 @@ global $alphanum, $temp, $banned;
 	            'I_AVATAR' => $avatar_img,
 	 
 	            'JOINED' => create_date('d M Y', $row['user_regdate'], $board_config['board_timezone']),
-	            'LAST_ACTIVITY' => ( !empty($row['user_session_time']) ) ? create_date('d M Y @ h:ia', $row['user_session_time'], $board_config['board_timezone']) : $lang['Never'], 
-	 
+                'LAST_ACTIVITY' => (!empty($row['user_session_time'])) ? create_date('d M Y @ h:ia', $row['user_session_time'], $board_config['board_timezone']) : (isset($lang['Never']) ? $lang['Never'] : 'Never'),	 
 	            'POSTS' => ( $row['user_posts'] ) ? $row['user_posts'] : 0,
 	            'U_SEARCH' => append_sid($phpbb_root_path . 'search.'.$phpEx.'?search_author=' . urlencode(strip_tags($row['username'])) . '&amp;showresults=posts'),
 	 
@@ -1085,11 +1084,11 @@ global $alphanum, $temp, $banned;
 	            }
 	            else if ( $group_row['user_pending'] == true )
 	            {
-	                $group_status = $lang['Pending'];
+	                $group_status = array_key_exists('Pending', $lang) ? $lang['Pending'] : 'Pending';
 	            }
 	            else
 	            {
-	                $group_status = $lang['Member'];
+	                $group_status = isset($lang['Member']) ? $lang['Member'] : 'Member';
 	            }
 	 
 	            $template->assign_block_vars('user_row.group_row', array(
