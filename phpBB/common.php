@@ -24,12 +24,12 @@ if ( !defined('IN_PHPBB') )
 	die("Hacking attempt");
 }
 
-// Uncomment these and comment out "error_reporting" to debug errors
-//ini_set('display_startup_errors',1); 
-//ini_set('display_errors',1);
-//error_reporting(-1);
-
 error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
+
+// Uncomment these and comment out the previous "error_reporting" to debug errors
+// ini_set('display_startup_errors',1); 
+// ini_set('display_errors',1);
+// error_reporting  (E_ALL);
 
 // Page generation time
 $starttime = 0;
