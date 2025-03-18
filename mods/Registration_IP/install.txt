@@ -1,0 +1,139 @@
+#################################################################
+## Mod Title: Log IP's on Registration
+## Mod Version: 1.1.2
+## Author: Woody <scoobler@gmail.com>
+## Description: This will log a users IP when they register.
+##              From the admin panel, you can search for a user
+##              you will be displayed with the username you
+##              searched for, the IP they registered at, their
+##              email address and any other username's that
+##              registered from that IP address.
+##
+## Installation Level: Easy 
+##
+## Installation Time: 2-3 Minutes
+##
+## Files To Edit: includes/usercp_register.php
+##
+## Included Files: templates/subSilver/admin/user_ip_list.tpl
+##                 admin/admin_reg_ip.php
+##
+#################################################################
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD
+#################################################################
+##
+## Change Log:
+## 
+## 30/09/04:
+## Changed the code to work with 2.0.10.
+## Amended the code to try and get round people who use
+## proxy servers, so the IP you get is the users not the
+## proxy box (With thanks to pootergeist from http://board.php-princess.net/).
+##
+#################################################################
+
+#
+#-----[ SQL / RUN ]---------------------------
+#
+
+ALTER TABLE `phpbb2_users`
+ADD `user_reg_ip` TEXT NULL,
+ADD `user_reg_host` TEXT NULL;
+
+#
+#-----[ COPY ]---------------------------
+#
+
+templates/xxxx/admin/user_ip_list.tpl
+
+#
+#-----[ COPY ]---------------------------
+#
+
+admin/admin_reg_ip.php
+
+#
+#-----[ OPEN ]------------------------------
+#
+
+includes/usercp_register.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+			$user_id = $row['total'] + 1;
+
+#
+#-----[ AFTER ADD ]---------
+#
+
+	//
+	// BEGIN - Registration IP Hack
+	//
+	if (isset($_SERVER)) 
+	{
+	    if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) 
+	    {
+	        $realip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+	    }
+	    elseif (isset($_SERVER["HTTP_CLIENT_IP"])) 
+	    {
+	        $realip = $_SERVER["HTTP_CLIENT_IP"];
+	    }
+	    else
+	    {
+	        $realip = $_SERVER["REMOTE_ADDR"];
+	    }
+	} 
+	else
+	{
+	    if (getenv('HTTP_X_FORWARDED_FOR')) 
+	    { 
+	        $realip = getenv('HTTP_X_FORWARDED_FOR');
+	    }
+	    elseif (getenv('HTTP_CLIENT_IP')) 
+	    {
+	        $realip = getenv('HTTP_CLIENT_IP');
+	    } 
+	    else
+	    {
+	        $realip = getenv('REMOTE_ADDR');
+	    }
+	}
+	$user_reg_id = $realip;
+	$user_reg_host = gethostbyaddr($realip);
+	//
+	// END - Registration IP Hack
+	//
+
+     
+
+#
+#-----[ FIND ]--------------------
+#
+
+			$sql = "INSERT INTO " . USERS_TABLE . "	(
+
+#
+#-----[ IN-LINE AFTER ADD ]------------------------------------------
+#
+                                               user_reg_ip, user_reg_host,
+
+#
+#-----[ FIND (next line down) ]------------------------------------
+#
+
+				VALUES (
+
+#
+#-----[ IN-LINE AFTER ADD ]------------------------------
+#
+
+                '" . str_replace("\'", "''", $user_reg_id) . "', '" . str_replace("\'", "''", $user_reg_host) . "',
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
+#
+#
+
