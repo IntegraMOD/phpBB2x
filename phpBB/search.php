@@ -846,6 +846,7 @@ else if ( $search_keywords != '' || $search_author != '' || $search_id )
 
 	    $highlight_active = '';
         $highlight_match = array();
+		$split_search = isset($split_search) ? $split_search : [];
         foreach($split_search as $split_word)
         {
             if ( $split_word != 'and' && $split_word != 'or' && $split_word != 'not' )
