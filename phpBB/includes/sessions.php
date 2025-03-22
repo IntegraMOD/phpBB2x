@@ -459,13 +459,10 @@ function session_end($session_id, $user_id)
     //
     // Delete existing session
     //
-    $sql = 'DELETE FROM ' . SESSIONS_TABLE . " 
-        WHERE session_id = :session_id 
-            AND session_user_id = :user_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':session_id', $session_id, PDO::PARAM_STR);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    if (!$stmt->execute())
+    $sql = "DELETE FROM " . SESSIONS_TABLE . " 
+        WHERE session_id = '$session_id' 
+            AND session_user_id = '$user_id'";
+    if (!$db->sql_query($sql))
     {
         message_die(CRITICAL_ERROR, 'Error removing user session', '', __LINE__, __FILE__, $sql);
     }
@@ -476,36 +473,31 @@ function session_end($session_id, $user_id)
     if (isset($userdata['session_key']) && $userdata['session_key'] != '')
     {
         $autologin_key = md5($userdata['session_key']);
-        $sql = 'DELETE FROM ' . SESSIONS_KEYS_TABLE . '
-            WHERE user_id = :user_id
-                AND key_id = :autologin_key';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->bindParam(':autologin_key', $autologin_key, PDO::PARAM_STR);
-        if (!$stmt->execute())
+        $sql = "DELETE FROM " . SESSIONS_KEYS_TABLE . "
+            WHERE user_id = '$user_id'
+                AND key_id = '$autologin_key'";
+        if (!$db->sql_query($sql))
         {
             message_die(CRITICAL_ERROR, 'Error removing auto-login key', '', __LINE__, __FILE__, $sql);
         }
     }
- 
+
     //
     // We expect that message_die will be called after this function,
     // but just in case it isn't, reset $userdata to the details for a guest
     //
-    $sql = 'SELECT *
-        FROM ' . USERS_TABLE . '
-        WHERE user_id = :anonymous_id';
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':anonymous_id', ANONYMOUS, PDO::PARAM_INT);
-    if (!$stmt->execute())
-    {
-        message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
-    }
-    $userdata = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$userdata)
-    {
-        message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
-    }
+	$sql = 'SELECT *
+		FROM ' . USERS_TABLE . '
+		WHERE user_id = ' . ANONYMOUS;
+	if ( !($result = $db->sql_query($sql)) )
+	{
+		message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
+	}
+	if ( !($userdata = $db->sql_fetchrow($result)) )
+	{
+		message_die(CRITICAL_ERROR, 'Error obtaining user details', '', __LINE__, __FILE__, $sql);
+	}
+	$db->sql_freeresult($result);
  
     $cookie_options = [
         'expires' => $current_time - 31536000,
