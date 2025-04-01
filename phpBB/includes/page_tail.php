@@ -71,7 +71,7 @@ if( ($userdata['session_logged_in']) and ($userdata['user_level'] == ADMIN) )
     $peak_memory = round(memory_get_peak_usage()/1048576, 2);
 }
 
-if( defined('DEBUG') )
+if( DEBUG )
 {
 	$debug_out = '<div class="gensmall" style="text-align:center; padding:10px;">[Page generation time: '. $ptime .'s | (PHP: '. $php_part .'% | SQL: '. $sql_part .'%) | SQL queries: '. $excuted_queries .' | '. $gzip_text .' | '. $debug_text .' | Peak memory usage: '. $peak_memory .' MB]</div>';
 }
@@ -82,7 +82,7 @@ else
 
 echo $debug_out;
 
-if (defined('DEV_MODE') && DEV_MODE && $db && $db->queries)
+if (DEV_MODE && $db && $db->queries)
 {
 	foreach ($db->queries as $query)
 	{
