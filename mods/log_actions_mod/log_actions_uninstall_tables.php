@@ -142,6 +142,7 @@ if ( $submit )
 	{
 		case 'mysql':
 		case 'mysql4':
+		case 'mysqli':
 			$sql[] = "DROP TABLE " . LOGS_TABLE;
 
 			$sql[] = "DROP TABLE " . LOGS_CONFIG_TABLE;
