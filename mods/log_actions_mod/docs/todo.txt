@@ -1,0 +1,6 @@
+Here is a list of what i will try to add to the MOD :
+
+- Download the selected logs in a file										=> TO DO
+- Logged the actions which can be done in the Admin Panel by others Admins					=> TO DO
+- Add a function, in log config, to prune the logs								=> DONE in version 1.1.3
+- Add an auto-pruning function to the logged action : number of days is specify in the admin part of the MOD	=> TO DO

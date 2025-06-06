@@ -1,0 +1,461 @@
+############################################################## 
+## MOD Title:          Log Actions MOD
+## MOD Author:         morpheus2matrix < morpheus@2037.biz > (Morpheus) http://morpheus.2037.biz
+## MOD Description:    This MOD will allow administrators to log
+##                     actions done by moderators and others
+##                     administrators. 
+## MOD Version:        1.1.6
+## Compatibility:      2.0.6 (prior release not tested)
+##
+## Installation Level: Easy
+## Installation Time:  10 Minutes (1mn by EasyMOD of Nuttzy)
+## Files To Edit:      5
+##      modcp.php
+##      posting.php
+##      includes/constants.php
+##      language/lang_english/lang_admin.php
+##      language/lang_english/lang_main.php
+##
+## Included Files:     7
+##      admin/admin_logs.php 
+##      admin/admin_logs_config.php 
+##      includes/functions_log.php
+##      includes/rules.php 
+##      templates/subSilver/rules_body.tpl
+##      templates/subSilver/admin/logs_body.tpl 
+##      templates/subSilver/admin/logs_config_body.tpl 
+##
+############################################################## 
+## For Security Purposes, Please Check: http://www.phpbb.com/mods/ for the 
+## latest version of this MOD. Downloading this MOD from other sites could cause malicious code 
+## to enter into your phpBB Forum. As such, phpBB will not offer support for MOD's not offered 
+## in our MOD-Database, located at: http://www.phpbb.com/mods/ 
+############################################################## 
+## Author Notes: 
+##
+## Thanks to netclectic, Acyd Burn , AbelaJohnB and -=ET=- for the help.
+##
+## This MOD is compatible and can be installed by EasyMOD
+## of Nuttzy (but is not officially EasyMOD Compliant)!
+## http://www.phpbb.com/phpBB/viewtopic.php?t=124436
+##
+## However, on alpha releases of EM SQL commands are not performed!
+## Then, meanwhile beta or final release (with DB alterations
+## capabilities), you must update your database manually by
+## copying the log_actions_db_update.php file in your phpBB
+## root directory, execute it with your navigator and after,
+## delete it.
+##
+## In any case, if you install this MOD manually or using an
+## alpha release of EM, please run this file NOW, before
+## editing phpBB files by EM or manually!!!
+## Otherwise, you may have an error message during your next
+## connection.
+##
+## The following files will need to be ran, in addition to performing the actual modification listed within the MOD file. 
+## Once you have performed the following actions to your forum, please run the following files, via your web browser:
+## 1) log_actions_db_update.php
+## 2) execute log_actions_db_update.php
+## 3) delete log_actions_db_update.php
+##
+## Official Thread at phpBB.com : http://www.phpbb.com/phpBB/viewtopic.php?t=73523
+##
+############################################################## 
+## MOD History:
+##
+##   2003-10-06 - Version 1.1.6
+##	- Added dutch translation (carloclaessen)
+##	- Fixed bugs in MOD Template
+##	- Fixed a bug with the prune part in ACP of the MOD
+##	- Fixed all the spelling mistackes (Plasma)
+##
+##   2003-09-17 - Version 1.1.5
+##	- Adding a User Guide and pre-modified files for phpBB 2.0.6
+##	- Adding the name of admin/mod is now in color in the log part
+##	- Changing order of actions in the How-TO
+##	- Replace http://www.geektools.com by http://network-tools.com for querying infos on the IP address
+##	- Replace 'Choose Log' by 'Select Log' in lang_admin.php
+##	- Replace some language variables
+##	- Fixed some spelling mistakes ;-)
+##
+##   2003-08-19 - Version 1.1.4
+##	- Fixed an error in the How-To
+##	- Fixed a bug with the installer (and uninstaller) of the SQL tables
+##
+##   2003-08-17 - Version 1.1.3
+##      - New zip-file structure
+##      - How-to simplified (-=ET=-)
+##      - Make more EM compatible
+##      - Make works with phpBB 2.0.6
+##	- Adding Enhanced log action mod Add-on (FX)
+##	- Adding an uninstaller for the changes to the database (if you want to remove the MOD)
+##	- Adding a prune function to the MOD
+##	- Adding support for Postgresql DBAL (need testing) (jonesy)
+##
+##   2003-06-19 - Version 1.1.2
+##      - Making working with phpBB 2.0.5
+##      - Fixed a bug in the tables installer
+##      - Fixed the name of the constant LOGS_CONFIG_TABLE in the admin files
+##      - Fixed an error in the translation for the splitting rule
+##
+##   2003-06-14 - Version 1.1.1
+##      - Fixed a bug with the name of a constant
+##      - Corrected the variable $choose_username_del : no errors should appears with implode function (Diskmaster)
+##      - Fixed the file log_config_body.tpl : it was the file of a previous version :-(
+##
+##   2003-06-08 - Version 1.1.0
+##      - Added some features : now, you can specify which admin will be able to see the logs
+##      - Little modifications in the code
+##      - Simplification of the function log_action()
+##      - Fixed a bug with a variable not declared properly in the file admin_logs.php
+##      - Fixed a bug with the page generation when there is no log
+##
+##   2003-05-29 - Version 1.0.6
+##      - Make the MOD EasyMod 0.0.8 compatible
+##      - Fixed a bug with the moderators and Group Moderators (Thanks to Sven)
+##
+##   2003-04-16 - Version 1.0.5
+##      - Fixed a bug in the file functions_log.php with the apostrophize in the username
+##
+##   2003-02-24 - Version 1.0.4
+##      - Version 1.0.3 accepted to the MOD's Database @ phpBB.com
+##      - Improving the Tables Installer
+##      - User Administration is now shown in a new window
+##      - Fixed an error in the install.txt file
+##      - Fixed the display of the image of the Edit Rule
+##
+##   2003-02-01 - Version 1.0.3
+##      - Uploading the MOD to the new MOD Database @ phpBB.com
+##
+##   2003-01-29 - Version 0.2.5
+##      - added the log of the edit action
+##      - added the verification of the file install_tables.php : if file still exist,
+##        you won't be able to use the MOD
+##      - fixed a minor bur in the file install_tables.php
+##
+##   2003-01-26 - Version 0.2.0
+##      - added the possibility to delete an entry (or all the entried) in the log
+##      - added IP are now logged like the names
+##      - fixed a bug with the lof of the split action
+##      - fixed a bug with the centered pop-up of rules with Netscape Navigator
+##
+##   2003-01-23 - Version 0.1.5
+##      - using the correct template for the language variable
+##      - added a file (rules.php) which for explaining actions which could be done
+##      - added the log deleting of one post in posting.php
+##      - fixed a bug in the modcp.php file
+##
+##   2003-01-20 - Version 0.0.5
+##      - first beta release
+##
+############################################################## 
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD 
+############################################################## 
+# 
+#-----[ COPY ]------------------------------------------------ 
+# 
+copy root/admin/admin_logs.php to admin/admin_logs.php 
+copy root/admin/admin_logs_config.php to admin/admin_logs_config.php 
+copy root/includes/functions_log.php to includes/functions_log.php
+copy root/includes/rules.php to includes/rules.php 
+copy root/templates/subSilver/rules_body.tpl to templates/subSilver/rules_body.tpl
+copy root/templates/subSilver/admin/logs_body.tpl to templates/subSilver/admin/logs_body.tpl 
+copy root/templates/subSilver/admin/logs_config_body.tpl to templates/subSilver/admin/logs_config_body.tpl 
+
+#
+#-----[ OPEN ]------------------------------------------------
+#
+modcp.php
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+include($phpbb_root_path . 'includes/functions_admin.'.$phpEx);
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+include($phpbb_root_path . 'includes/functions_log.'.$phpEx);
+// Log actions MOD End
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+message_die(GENERAL_ERROR, 'Could not delete posts', '', __LINE__, __FILE__, $sql);
+}
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+log_action('delete', $topic_id_sql, $userdata['user_id'], $userdata['username']);
+// Log actions MOD End
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+message_die(GENERAL_ERROR, 'Could not insert shadow topic', '', __LINE__, __FILE__, $sql);
+}
+}
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+log_action('move', $topic_id, $userdata['user_id'], $userdata['username']);
+// Log actions MOD End
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+$sql = "UPDATE " . TOPICS_TABLE . " 
+	SET topic_status = " . TOPIC_LOCKED . " 
+	WHERE
+		AND
+		AND
+	if (
+{
+	message_die(
+}
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+log_action('lock', $topic_id_sql, $userdata['user_id'], $userdata['username']);
+// Log actions MOD End
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+$sql = "UPDATE " . TOPICS_TABLE . " 
+	SET topic_status = " . TOPIC_UNLOCKED . " 
+	WHERE
+		AND
+		AND
+if (
+{
+	message_die(
+}
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+log_action('unlock', $topic_id_sql, $userdata['user_id'], $userdata['username']);
+// Log actions MOD End
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+$new_topic_id = $db->sql_nextid();
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+log_action('split', $topic_id, $userdata['user_id'], $userdata['username']);
+// Log actions MOD End
+
+#
+#-----[ OPEN ]------------------------------------------------
+#
+posting.php
+
+#
+#
+#-----[ FIND ]------------------------------------------------
+#
+include($phpbb_root_path . 'includes/functions_post.'.$phpEx);
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+include($phpbb_root_path . 'includes/functions_log.'.$phpEx);
+// Log actions MOD End
+
+#
+#-----[ FIND ]------------------------------------------------
+#
+	switch ( $mode )
+	{
+		case 'editpost':
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+// Log Actions Start
+$username = ( !empty($_POST['username']) ) ? $_POST['username'] : '';
+$subject = ( !empty($_POST['subject']) ) ? trim($_POST['subject']) : '';
+$message = ( !empty($_POST['message']) ) ? $_POST['message'] : '';
+$poll_title = ( isset($_POST['poll_title']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_title'] : '';
+$poll_options = ( isset($_POST['poll_option_text']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_option_text'] : '';
+$poll_length = ( isset($_POST['poll_length']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_length'] : '';
+$bbcode_uid = '';
+
+prepare_post($mode, $post_data, $bbcode_on, $html_on, $smilies_on, $error_msg, $username, $bbcode_uid, $subject, $message, $poll_title, $poll_options, $poll_length);
+
+if ( $error_msg == '' )
+{
+	$topic_type = ( $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce'] ) ? $post_data['topic_type'] : $topic_type;
+
+	submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, $bbcode_on, $html_on, $smilies_on, $attach_sig, $bbcode_uid, str_replace("\'", "''", $username), str_replace("\'", "''", $subject), str_replace("\'", "''", $message), str_replace("\'", "''", $poll_title), $poll_options, $poll_length);
+		
+	// Log actions MOD Start 
+	if ( $is_auth['auth_mod'] )
+	{
+		log_action('edit', $topic_id, $userdata['user_id'], $userdata['username']);
+	}
+	// Log actions MOD End
+}
+break;
+// Log Action End
+
+#
+#-----[ FIND ]-------------------------------------------------
+#
+delete_post(
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start 
+if ( $is_auth['auth_mod'] ) 
+{ 
+	log_action('delete', $topic_id, $userdata['user_id'], $userdata['username']); 
+} 
+// Log actions MOD End
+
+#
+#-----[ OPEN ]-------------------------------------------------
+#
+includes/constants.php
+
+#
+#-----[ FIND ]-------------------------------------------------
+#
+?>
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+define('LOGS_TABLE', $table_prefix.'logs');
+define('LOGS_CONFIG_TABLE', $table_prefix.'logs_config');
+define('LOG_ACTIONS_VERSION', '1.1.6');
+// Log actions MOD End
+
+#
+#-----[ OPEN ]-------------------------------------------------
+#
+language/lang_english/lang_admin.php
+
+#
+#-----[ FIND ]-------------------------------------------------
+#
+?>
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+$lang['File_not_deleted'] = 'You have not yet delete the file install_tables.php : do it before trying to see this page.';
+$lang['Log_action_title'] = 'Logs Actions';
+$lang['Log_action_explain'] = 'Here you can see your moderators/administrators actions';
+$lang['Choose_sort_method'] = 'Choose sorting method';
+$lang['Order'] = 'Order';
+$lang['Go'] = 'Go';
+$lang['Id_log'] = 'Log Id';
+$lang['Choose_log'] = 'Select Log';
+$lang['Delete'] = 'Delete';
+$lang['Action'] = 'Action';
+$lang['Topic'] = 'Topic';
+$lang['Done_by'] = 'Done By';
+$lang['User_ip'] = 'User IP';
+$lang['Select_all'] = 'Select All';
+$lang['Unselect_all'] = 'Unselect All';
+$lang['Date'] = 'Date';
+$lang['See_topic'] = 'See the post';
+$lang['Log_delete'] = 'Log deleted successfully.';
+$lang['Click_return_admin_log'] = 'Click %sHere%s to return to the Log Actions';
+$lang['Log_Config_updated'] = 'Configuration of Log Actions MOD successfull';
+$lang['Click_return_admin_log_config'] = 'Click %sHere%s to return to the Log Actions MOD Configuration';
+$lang['Log_Config'] = 'Configuration of the Log';
+$lang['Log_Config_explain'] = 'Here, you will be able to configure some options of the Log Actions MOD.';
+$lang['General_Config_Log'] = 'General Configuration of Log Actions MOD';
+$lang['Allow_all_admin'] = 'Allow other Admins to see the Log Actions ?';
+$lang['Allow_all_admin_explain'] = 'This option will allow you to choose if only the first admin of the board will be able to see the Log';
+$lang['Admin_not_authorized'] = 'Sorry, you\'re not allowed to view this page. Only the main Admin has permission.';
+$lang['Add_username_admin_explain'] = 'Choose the name of another Admin that you want to allow to see the logged actions';
+$lang['Delete_username_admin_explain'] = 'Choose the name of another Admin that you don\'t want to allow to see the logged actions';
+$lang['No_other_admins'] = 'No other Admins to choose';
+$lang['No_admins_authorized'] = 'No other Admins authorized';
+$lang['Add_Admin_Username'] = 'Choose an username to add';
+$lang['Delete_Admin_Username'] = 'Choose an username to delete';
+$lang['No_admins_allow'] = 'There are no admins to allow to view the logs';
+$lang['No_admins_disallow'] = 'There are no admins to disallow to view the logs';
+$lang['Admins_add_success'] = 'Admin have been added to the list successfully';
+$lang['Admins_del_success'] = 'Admin(s) have been deleted from the list successfully';
+$lang['Prune_success'] = 'Prune of the Logs successfull';
+$lang['Prune_of_logs'] = 'Prune of the Logs';
+$lang['Prune'] = 'Prune Logs';
+$lang['Prune_!'] = 'Prune !';
+$lang['Prune_explain'] = 'Enter the number of days that you want to prune the logs. 0 = all the logs';
+// Log actions MOD End
+
+#
+#-----[ OPEN ]-------------------------------------------------
+#
+language/lang_english/lang_main.php
+
+#
+#-----[ FIND ]-------------------------------------------------
+#
+?>
+
+#
+#-----[ BEFORE, ADD ]------------------------------------------
+#
+
+// Log actions MOD Start
+$lang['Close_window'] = 'Close the window';
+$lang['Rules_title'] = 'Action : %s';
+$lang['Locking_topic'] = 'Locking a topic';
+$lang['Unlocking_topic'] = 'Unlocking a topic';
+$lang['Spliting_topic'] = 'Splitting a topic';
+$lang['Moving_topic'] = 'Moving a topic';
+$lang['Deleting_topic'] = 'Deleting a topic';
+$lang['Editing_topic'] = 'Editing a topic';
+$lang['Lock_Explication'] = 'When a Moderator/Administrator locks a topic, it\'s not possible for a normal user to reply. But Moderators/Administrators can still continue to post.';
+$lang['Unlock_Explication'] = 'A Moderator/Administrator can unlock a topic which has been locked. This will allow all users to continue to post in the thread.';
+$lang['Split_Explication'] = 'Splitting a topic which has a lot of pages gives you the ability to keep your topics more organized.';
+$lang['Move_Explication'] = 'If you choose to move a topic, you will be able to send the topic, which is in a forum A, to a forum B. You can also choose to leave a Shadow Topic in the forum A.';
+$lang['Delete_Explication'] = 'If a Moderator/Administrator deletes a topic, it will no longer be displayed on the forum and nobody will be able to restore it. <br /><b>Be careful with this function</b>';
+$lang['Edit_Explication'] = 'By editing a post, an Administrator and/or a Moderator can change what a user has written in the post.';
+$lang['No_action_specified'] = 'There is no action specified';
+// Log actions MOD End
+
+# 
+#-----[ COPY ]------------------------------------------------- 
+# 
+# You need to upload this file and then execute it throught your browser
+#
+copy log_actions_db_update.php to log_actions_db_update.php
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]---------------------------------
+#
+# EoM

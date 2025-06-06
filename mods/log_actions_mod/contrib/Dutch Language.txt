@@ -1,0 +1,70 @@
+Dutch Language TRansation (carloclaessen) :
+
+lang_main.php
+
+// Log actions MOD Start
+$lang['Close_window'] = 'Sluit dit scherm';
+$lang['Rules_title'] = 'Actie : %s';
+$lang['Locking_topic'] = 'Sluiten van een Bericht';
+$lang['Unlocking_topic'] = 'Openen van een Bericht';
+$lang['Spliting_topic'] = 'Splitsen van een Bericht';
+$lang['Moving_topic'] = 'Verplaatsen van een Bericht';
+$lang['Deleting_topic'] = 'Verwijderen van een Bericht';
+$lang['Editing_topic'] = 'Bewerken van een Bericht';
+$lang['Lock_Explication'] = 'Als een Moderator of Administrator een bericht sluit, is het niet mogelijk voor een normale gebruiker om te Antwoorden. Moderators of Administrators kunnen wel door blijven gaan in dat bericht.';
+$lang['Unlock_Explication'] = 'Een Moderator of Administrator kan een bericht weer openen. Dit geeft de gebruikers weer de mogelijkheid om de gebruikers te laten reageren op dit bericht';
+$lang['Split_Explication'] = 'Door een bericht af te splitsen kun je delen die bijvoorbeeld offtopic gaan ervoor kiezen om daar een nieuw bericht van te maken .';
+$lang['Move_Explication'] = 'Als je ervoor kiest om een bericht te verplaatsen kan je het onderwerp van A naar B verplaatsen, je kunt er ook voor kiezen om een schaduw link achter te laten.';
+$lang['Delete_Explication'] = 'Als een Moderator of Administrator een bericht niet wenselijk vind kan men dit verwijderen. <br /><b>Ben voorzichtig met deze functie want het kan niet worden terug gedraaid</b>';
+$lang['Edit_Explication'] = 'Door het bewerken kan een Moderator of Administrator het bericht bewerken wat een gebruiker heeft geplaatst.';
+$lang['No_action_specified'] = 'Er is geen actie aangegeven';
+
+
+lang_admin.php
+
+// Log Actions Mod
+$lang['File_not_deleted'] = 'Sie haben nicht noch Löschung die Akte install_tables.php:  tun Sie es, bevor Sie versuchen, diese Seite zu sehen.';
+$lang['Log_action_title'] = 'Log Acties';
+$lang['Log_action_explain'] = 'Hier kan je de acties zien die de Moderators en Administrators verrichten';
+$lang['Choose_sort_method'] = 'Kies Sorteer Methode';
+$lang['Order'] = 'Volgorde';
+$lang['Go'] = 'Ga';
+$lang['Id_log'] = 'Log Id';
+$lang['Choose_log'] = 'Selecteer Log';
+$lang['Delete'] = 'Verwijder';
+$lang['Action'] = 'Actie';
+$lang['Topic'] = 'Topic';
+$lang['Done_by'] = 'Gedaan Door';
+$lang['User_ip'] = 'Gebruikers IP';
+$lang['Select_all'] = 'Selecteer Alles';
+$lang['Unselect_all'] = 'Deselecteer Alles';
+$lang['Date'] = 'Datum';
+$lang['See_topic'] = 'Bekijk het Bericht';
+$lang['Log_delete'] = 'Log Succesvol Verwijderd.';
+$lang['Click_return_admin_log'] = 'Klik %shier%s om terug te gaan naar de Log Acties';
+$lang['Log_Config_updated'] = 'Configuratie succesvol bijgewerkt';
+$lang['Click_return_admin_log_config'] = 'Klik %shier%s om terug te keren naar de Log Configuratie';
+$lang['Log_Config'] = 'Configuratie van de Log';
+$lang['Log_Config_explain'] = 'Hierkan je de Configuratie instellen van je Log Acties.';
+$lang['General_Config_Log'] = 'Standaard Instellingen van de Configuratie';
+$lang['Allow_all_admin'] = 'Sta het toe om andere Administrators de Logs te laten zien?';
+$lang['Allow_all_admin_explain'] = 'Hier kun je instellen of andere Administrators buiten de hoofd Administrator de Logs mogen zien';
+$lang['Admin_not_authorized'] = 'Sorry U heft geen toestemming om dit te zien, alleen de Hoofd Admin van de Site mag dit zien.';
+$lang['Add_username_admin_explain'] = 'Kies de naam van een andere Administrator die dit mag zien';
+$lang['Delete_username_admin_explain'] = 'Kies de naam van de Administrator die de Log niet meer mag zien';
+$lang['No_other_admins'] = 'Geen andere Administrators aanwezig';
+$lang['No_admins_authorized'] = 'Geen andere Administrators hebben rechten';
+$lang['Add_Admin_Username'] = 'Kies een Administrator Gebruikersnaam die de Logs mag zien';
+$lang['Delete_Admin_Username'] = 'Kies een Administrator Gebruikersnaam die de Logs niet meer mag zien';
+$lang['No_admins_allow'] = 'Er zijn geen Administrators die de Logs mogen zien';
+$lang['No_admins_disallow'] = 'Er zijn geen Administrators die niks mogen zien';
+$lang['Admins_add_success'] = 'Administrator is succesvol toegevoegd';
+$lang['Admins_del_success'] = 'Administrator(s) zijn succesvol verwijderd';
+$lang['Prune_success'] = 'Prune van de Logs is succesvol gegaan';
+$lang['Prune_of_logs'] = 'Prune van de Logs';
+$lang['Prune'] = 'Prune Logs';
+$lang['Prune_!'] = 'Prune !';
+$lang['Prune_explain'] = 'Voer het aantal dagen in dat je wilt dat de Logs worden gepruned. 0 = alle logs';
+$lang['Error_prune_days'] = 'Fout je moet een aantal dagen invoeren';
+
+

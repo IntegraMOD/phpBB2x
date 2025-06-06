@@ -1,0 +1,66 @@
+######################################################## 
+## Mod Title:    Enhanced log action mod 
+## Mod Author:   FX < FX@2037.biz > (François-Xavier) http://fx.2037.biz 
+## Mod Description:   Log the action for the netclectic mod modcp extension (1.1.2) 
+## Mod Version: 1.1.0 
+## Installation Level:  Easy 
+## Installation Time:   2 Minutes 
+## Files To Edit:       modcp.php 
+## Included Files:      na 
+######################################################## 
+## For Security Purposes, Please Check: http://www.phpbb.com/mods/downloads/ for the 
+## latest version of this MOD. Downloading this MOD from other sites could cause malicious code 
+## to enter into your phpBB Forum. As such, phpBB will not offer support for MOD's not offered 
+## in our MOD-Database, located at: http://www.phpbb.com/mods/downloads/ 
+############################################################## 
+## Author Notes: 
+## This add-on's require the modcp extension 1.1.2 to work 
+## 
+## Revision History: 
+## 
+##      2003-07-03 - Version 1.1.0 
+##         - Update to work with the new version of Log Actions MOD 
+## 
+##      2003-02-24 - First release 1.0 
+## 
+## 
+############################################################## 
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD 
+############################################################## 
+
+# 
+#-----[ OPEN ]------------------------------------------ 
+# 
+modcp.php 
+# 
+#-----[ FIND ]------------------------------------------ 
+# 
+$topic_type = ($mode == 'sticky') ? POST_STICKY : (($mode == 'announce') ? POST_ANNOUNCE : POST_NORMAL); 
+      $sql = "UPDATE " . TOPICS_TABLE . " 
+         SET topic_type = " . $topic_type . " 
+         WHERE topic_id IN ($topic_id_sql) 
+            AND topic_moved_id = 0"; 
+      if ( !($result = $db->sql_query($sql)) ) 
+      { 
+         message_die(GENERAL_ERROR, 'Could not update topics table', '', __LINE__, __FILE__, $sql); 
+      } 
+
+# 
+#-----[ AFTER, ADD ]------------------------------------------ 
+# 
+if ($mode == 'announce') 
+      { 
+         log_action('announce', $topic_id_sql, $userdata['user_id'], $userdata['username']); 
+      } 
+      if ($mode == 'sticky') 
+      { 
+         log_action('sticky', $topic_id_sql, $userdata['user_id'], $userdata['username']); 
+      } 
+      if ($mode == 'normalise') 
+      { 
+         log_action('normal', $topic_id_sql, $userdata['user_id'], $userdata['username']); 
+      } 
+# 
+#-----[ SAVE/CLOSE ALL FILES ]---------------------------------------- 
+# 
+# EoM

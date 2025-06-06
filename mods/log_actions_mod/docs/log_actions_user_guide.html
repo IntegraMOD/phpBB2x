@@ -1,0 +1,713 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Log Actions MOD User Guide</title>
+<style type="text/css">
+<!--
+/*
+  The original subSilver Theme for phpBB version 2+
+  Created by subBlue design
+  http://www.subBlue.com
+*/
+
+td.attachrow		{ font: normal 11px Verdana, Arial, Helvetica, sans-serif; color : #000000; border-color : #000000;}
+table.attachtable	{ font: normal 12px Verdana, Arial, Helvetica, sans-serif; color : #000000; border-color : #000000;	border-collapse : collapse; }
+
+.nav	{ font-weight: bold; font-size: 11px; color : #000000;}
+.postbody { font-size : 12px;}
+
+.sampleurl { font-size : 12px; color: green }
+
+input,textarea, select {
+	color : #000000;
+	font: normal 11px Verdana, Arial, Helvetica, sans-serif;
+	border-color : #000000;
+}
+
+/* The text input fields background colour */
+input.post, textarea.post, select {
+	background-color : #FFFFFF;
+}
+
+input { text-indent : 2px; }
+
+/* The buttons used for bbCode styling in message post */
+input.button {
+	background-color : #EFEFEF;
+	color : #000000;
+	font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* The main submit button option */
+input.mainoption {
+	background-color : #FAFAFA;
+	font-weight : bold;
+}
+
+/* None-bold submit button */
+input.liteoption {
+	background-color : #FAFAFA;
+	font-weight : normal;
+}
+
+.cattitle		{ font-weight: bold; font-size: 12px ; letter-spacing: 1px; color : #006699}
+a.cattitle		{ text-decoration: none; color : #006699; }
+a.cattitle:hover{ text-decoration: underline; }
+
+td.cat,td.catHead,td.catSides,td.catLeft,td.catRight,td.catBottom {
+			background-image: url(images/cellpic1.gif);
+			background-color:#D1D7DC; border: #FFFFFF; border-style: solid; height: 28px;
+}
+
+td.cat,td.catHead,td.catBottom {
+	height: 29px;
+	border-width: 0px 0px 0px 0px;
+}
+
+
+.maintitle,h1,h2	{
+			font-weight: bold; font-size: 22px; font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+			text-decoration: none; line-height : 120%; color : #000000;
+}
+
+body {
+	background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+}
+
+u { color: #006699; text-decoration: none; }
+
+a:link,a:active,a:visited { color : #006699; }
+a:hover		{ text-decoration: underline; color : #DD6900; }
+
+font,th,td,p { font-family: Verdana, Arial, Helvetica, sans-serif }
+
+.bodyline	{ background-color: #FFFFFF; border: 1px #98AAB1 solid; }
+
+.forumline	{ background-color: #FFFFFF; border: 2px #006699 solid; }
+
+.code {
+	font-family: Courier, 'Courier New', sans-serif; font-size: 11px; color: #006600;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+.quote {
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #444444; line-height: 125%;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+th	{
+	color: #FFA34F; font-size: 11px; font-weight : bold;
+	background-color: #006699; height: 25px;
+	background-image: url(images/cellpic3.gif);
+}
+th.thHead,th.thSides,th.thTop,th.thLeft,th.thRight,th.thBottom,th.thCornerL,th.thCornerR {
+	font-weight: bold; border: #FFFFFF; border-style: solid; height: 28px; }
+td.row3Right,td.spaceRow {
+	background-color: #D1D7DC; border: #FFFFFF; border-style: solid; }
+
+th.thHead,td.catHead { font-size: 12px; border-width: 1px 1px 0px 1px; }
+th.thSides,td.catSides,td.spaceRow	 { border-width: 0px 1px 0px 1px; }
+th.thRight,td.catRight,td.row3Right	 { border-width: 0px 1px 0px 0px; }
+th.thLeft,td.catLeft	  { border-width: 0px 0px 0px 1px; }
+th.thBottom,td.catBottom  { border-width: 0px 1px 1px 1px; }
+th.thTop	 { border-width: 1px 0px 0px 0px; }
+th.thCornerL { border-width: 1px 0px 0px 1px; }
+th.thCornerR { border-width: 1px 1px 0px 0px; }
+
+td.row1	{ background-color: #EFEFEF; }
+td.row2	{ background-color: #DEE3E7; }
+
+.gen { font-size : 12px; }
+.genmed { font-size : 11px; }
+.gensmall { font-size : 10px; }
+.gen,.genmed,.gensmall { color : #000000; }
+a.gen,a.genmed,a.gensmall { color: #006699; text-decoration: none; }
+a.gen:hover,a.genmed:hover,a.gensmall:hover	{ color: #DD6900; text-decoration: underline; }
+
+p,ul,li,td {font-size:10pt;}
+h2 {font-size:15pt; font-weight:bold; color:red}
+h3 {font-size:12pt;color:blue}
+
+input, textarea, select {
+border-top-width : 1px; 
+border-right-width : 1px; 
+border-bottom-width : 1px; 
+border-left-width : 1px;  
+}
+
+input { text-indent : 2px; }
+
+input.button {
+border-top-width : 1px; 
+border-right-width : 1px; 
+border-bottom-width : 1px; 
+border-left-width : 1px;  
+}
+
+//-->
+</style>
+</head>
+
+<body bgcolor="#E5E5E5" text="#000000" link="#006699" vlink="#006699">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="10" align="center"> 
+	<tr> 
+		<td class="bodyline"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+				
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td><a href="http://morpheus.2037.biz"><img src="images/logo_phpbb.gif" border="0" alt="Log Actions MOD Guide" vspace="1" /></a></td>
+		<td align="center" width="100%" valign="middle"><span class="maintitle">Log Actions MOD User Guide</span><br />written by <a href="mailto:morpheus@2037.biz">Morpheus</a> (2003/09/16)</td>
+	</tr>
+</table>
+
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#features">Features List</a></li>
+<li><a href="#installation">Installation</a></li>
+<ol type=i>
+<li><a href="#installeasymod">Installed the MOD with EasyMOD</a></li>
+<li><a href="#installyourself">Installed the MOD yourself</a></li>
+<li><a href="#installfiles">Installed the MOD using the pre-modified files</a></li>
+</ol>
+<li><a href="#uninstallation">Uninstallation</a></li>
+<li><a href="#logaction">The Log Actions MOD</a></li>
+<ol type=i>
+<li><a href="#adminlog">The Logs</a></li>
+<li><a href="#adminlogconfig">Configuration/Utilization of the MOD</a></li>
+</ol>
+<li><a href="#disclaimer">Copyright and Disclaimer</a></li>
+</ol>
+
+<a name="#introduction"></a><h2><u>1. Introduction</u></h2>
+
+This Guide have been written to help you to understand how work the Log Action MOD. It will also try to explain how to install it and how to use the different features of the MOD. Like Log Action MOD is still in development, i will try to keep this document up-to-date.<br />
+If you need more help on the Log Actions MOD, or if you have feature requests, you can post them at <a href="http://morpheus.2037.biz">http://morpheus.2037.biz</a> or at the following thread : <a href="http://www.phpbb.com/phpBB/viewtopic.php?t=73523">http://www.phpbb.com/phpBB/viewtopic.php?t=73523</a> on <a href="http://www.phpbb.com">phpBB.com</a>. They are the two only officials site for the Log Actions MOD Support.<br />
+<br />
+Thanks for your support.<br /><br />
+
+Morpheus.
+<br /><br /><br />
+
+<a name="#features"></a><h2><u>2. Features List</u></h2>
+
+Here is a list of the Log Actions MOD features :
+<ol type="square">
+<li>All actions logged :<br />All the possible actions done by your administrators/moderators throught the Moderator Control Panel are logged. Editing a post is also logged.</li>
+<li>Possibilities to delete one or more than one log.</li>
+<li>A prune function of the logs can be used</li>
+<li>A explanation of the actions is given in a pop-up if you click on the name of one of these.</li>
+<li>Admin Panel Part :
+<ol type="circle">
+<li>See all the logged actions.</li>
+<li>Specify if all administrators can see the logs.</li>
+<li>You can choose which administrators can see or not the logs.</li>
+</ol>
+<li>Complete installer script for modify your database.</li>
+<li>An uninstaller can be used to undo the changes done to the database.</li>
+<li>Language Packs :<br />
+For the moment, only English Language is supported. If you want to be a translator of the Log Actions MOD, post your translated files at the <a href="http://morpheus.2037.biz/viewforum.php?f=13">Log Actions MOD Support Forum</a></li>
+<li>Database-support: mysql, mysql4, postgresql (need testers for this one)</li>
+</ol>
+<br /><br />
+
+<a name="#installation"></a><h2><u>3. Installation</u></h2>
+
+<a name="#installeasymod"></a><h3>3.1 Installed the MOD with EasyMOD</h3>
+To install the Log Actions MOD by using EasyMod, it's very simple : upload all the files of the MOD into a directory called log/ onto your EasyMod directory. So the complete full path should be : <b>phpBB/admin/mods/log/</b>. Once this is done, go into your administration panel, and clic on the link "Install MODs" under MOD Center. Then, follow the instructions given by EasyMod, but <b>don't forget to run the file log_actions_db_update.php and then, delete it immediately !</b>
+<br /><br /><br />
+
+<a name="#installyourself"></a><h3>3.2 Installed the MOD yourself</h3>
+Installing the MOD yourself is not really hard because there is not a lot of modifications to do in the phpBB core files.
+To install the MOD, you've just to follow the instructions wich are written in the file docs/Install_log_action_mod.txt.
+
+For example, in this file, you will find :<br /><br />
+
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code">
+#<br />
+#-----[ OPEN ]------------------------------------------------<br />
+#
+modcp.php<br />
+<br />
+#<br />
+#-----[ FIND ]------------------------------------------------<br />
+#<br />
+include($phpbb_root_path . 'includes/functions_admin.'.$phpEx);<br />
+<br />
+#<br />
+#-----[ AFTER, ADD ]------------------------------------------<br />
+#<br />
+<br />
+// Log actions MOD Start<br />
+include($phpbb_root_path . 'includes/functions_log.'.$phpEx);<br />
+// Log actions MOD End<br />
+</td></tr></tbody></table>
+<br />
+What does that mean ? Very simple ;-) In fact, this part of code explain you what you have to do for modified the file.<br />
+So, if you follow the instructions correctly, you need to open the file modcp.php, find a part of code and then, add another part of new code after the first one, so your final code will be :<br /><br />
+
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code">
+include($phpbb_root_path . 'includes/functions_admin.'.$phpEx);<br />
+// Log actions MOD Start<br />
+include($phpbb_root_path . 'includes/functions_log.'.$phpEx);<br />
+// Log actions MOD End<br />
+</td></tr></tbody></table>
+<br />
+This is a basic action for modding the file. Once you've done ALL the modifications in ALL the files, <b>don't forget to run the file install_tables.php and then, delete it immediately !</b><br /><br />
+
+Here is a tutorial on <u><b>"How-To Install a MOD"</b></u> :<br /><br />
+
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="quote">
+The first thing to do before all, is <u>to backup your files and your database.</u><br />
+Then, open the install file of the MOD and see what is written (it's depend of the MOD you are trying to install) :<br />
+<br />
+<b><u>1) The "COPY" action :</b></u><br />
+<br />
+If in a MOD, you see something like that :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+#<br />
+#-----[ COPY ]------------------------------------------<br />
+#<br />
+file.php -> phpBB/<br />
+file.tpl -> phpBB/templates/subSilver/<br />
+</td></tr></tbody></table><br />
+<br />
+This just mean that you have to upload the file "file.php" into the phpBB root dir, and the file "file.tpl" into the template directory, directly without modify them.<br />
+<br />
+<br />
+<b><u>2) The "OPEN" action :</b></u><br />
+<br />
+This is the first basic action to do :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+#<br />
+#-----[ OPEN ]------------------------------------------<br />
+#<br />
+common.php<br />
+</td></tr></tbody></table><br />
+<br />
+Not hard to do : open the specify file into a text editor (notepad, wordpad, editplus,......)<br />
+<br />
+<br />
+<b><u>3) The "FIND" action :</b></u><br />
+<br />
+After the "OPEN" action, it's the most used.<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+#<br />
+#-----[ FIND ]------------------------------------------<br />
+# around line 184<br />
+//<br />
+// Show 'Board is disabled' message if needed.<br />
+//<br />
+</td></tr></tbody></table><br />
+<br />
+After you have opened a file in your text edit editor, search for what the MOD say to search.<br />
+<br />
+<br />
+<b><u>4) The "BEFORE ADD" action :</b></u><br />
+<br />
+In the install file, you should see :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ BEFORE, ADD ]-------------------------------------- <br />
+# <br />
+include($phpbb_root_path . 'attach_mod/attachment_mod.'.$phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+so, after you hav find the code to search, add before what the MOD say to add. In my example, the result will be :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+include($phpbb_root_path . 'attach_mod/attachment_mod.'.$phpEx); // -> Test to add before<br />
+<br />
+//<br />
+// Show 'Board is disabled' message if needed. -> Text to search<br />
+//<br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+<b><u>5) The "AFTER ADD" action :</b></u><br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+#<br />
+#-----[ AFTER, ADD ]------------------------------------------<br />
+#<br />
+include($phpbb_root_path . 'attach_mod/attachment_mod.'.$phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+It's the same thing of the "BEFORE" action, but instead of adding your code <u>before</u> the text to search, you have to add it [u}after</u><br />
+<br />
+Example :<br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/' . $lang_file . '.' . $phpEx); // -> Text to search<br />
+include($phpbb_root_path . 'attach_mod/attachment_mod.'.$phpEx); // -> Test to add after<br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+<b><u>6) The "REPLACE WITH" action :</b></u><br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+#<br />
+#-----[ REPLACE WITH ]------------------------------------------<br />
+#<br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/' . $lang_file . '.' . $phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+This action is always used with the "FIND" action. I mean : you have a code to search, then the code to used instead of the previous code.<br />
+But you have to be careful with this action if you have others MOD's installed on your forum.<br />
+<br />
+Example :<br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ FIND ]---------------------------------------------<br />
+# around line 225<br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/' . $lang_file . '.' . $phpEx);<br />
+<br />
+# <br />
+#-----[ REPLACE WITH ]---------------------------------------<br />
+# <br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_admin.' . $phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+In this example, i have to search for (This is in my original file) :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/' . $lang_file . '.' . $phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+and to remplace by (This will be in my modded file) :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_admin.' . $phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+so, in my modded file, i will have :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_admin.' . $phpEx);<br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+<b><u>7) The "IN-LINE FIND" action :</b></u><br />
+<br />
+This is, with the "IN-LINE AFTER, ADD" and "IN-LINE BEFORE, ADD" actions (see the next actions), the best action to use by the MOD's authors (i think that but it's just my opinion).<br />
+This action is, again, always used with the "FIND" action<br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+#<br />
+#-----[ IN LINE FIND ]------------------------------------------<br />
+#<br />
+t.topic_title,<br />
+</td></tr></tbody></table><br />
+<br />
+Like it's a little hard to understand like this, i give you a example<br />
+<br />
+Example :<br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ FIND ]------------------------------------------ <br />
+# <br />
+$select_sql = ( !$submit ) ? ", t.topic_title, p.enable_bbcode, p.enable_html, p.enable_smilies, p.enable_sig, p.post_username, pt.post_subject, pt.post_text, pt.bbcode_uid, u.username, u.user_id, u.user_sig" : ''; <br />
+# <br />
+#-----[ IN LINE FIND ]------------------------------------------ <br />
+# <br />
+t.topic_title,<br />
+</td></tr></tbody></table><br />
+<br />
+You have just to search for " t.topic_title, " and to prepare you for the action which will arrive.<br />
+<br />
+<br />
+<b><u>8 ) The "IN LINE AFTER ADD" action :</b></u><br />
+<br />
+Looks like this :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ IN LINE AFTER ADD ]------------------------------------------ <br />
+#<br />
+t.topic_desc,<br />
+</td></tr></tbody></table><br />
+<br />
+In fact, it's a better way to use the "REMPLACE" action (in the case that you have others MOD's installed)<br />
+This action is used with the "FIND" action and the "IN LINE FIND" action.<br />
+<br />
+Example :<br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ FIND ]------------------------------------------ <br />
+# <br />
+$select_sql = ( !$submit ) ? ", t.topic_title, p.enable_bbcode, p.enable_html, p.enable_smilies, p.enable_sig, p.post_username, pt.post_subject, pt.post_text, pt.bbcode_uid, u.username, u.user_id, u.user_sig" : ''; <br />
+# <br />
+#-----[ IN LINE FIND ]------------------------------------------ <br />
+# <br />
+t.topic_title,<br />
+# <br />
+#-----[ IN LINE AFTER ADD ]------------------------------------------ <br />
+#<br />
+t.topic_desc,<br />
+</td></tr></tbody></table><br />
+<br />
+Here, you have to search for an entire line (original line) :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+$select_sql = ( !$submit ) ? ", t.topic_title, p.enable_bbcode, p.enable_html, p.enable_smilies, p.enable_sig, p.post_username, pt.post_subject, pt.post_text, pt.bbcode_uid, u.username, u.user_id, u.user_sig" : ''; <br />
+</td></tr></tbody></table><br />
+<br />
+in this line, you have to search something :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+t.topic_title,<br />
+</td></tr></tbody></table><br />
+<br />
+and to add that, <b>directly after</b> :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+t.topic_desc,<br />
+</td></tr></tbody></table><br />
+<br />
+so your line will become (modded line) :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+$select_sql = ( !$submit ) ? ", t.topic_title, t.topic_desc, p.enable_bbcode, p.enable_html, p.enable_smilies, p.enable_sig, p.post_username, pt.post_subject, pt.post_text, pt.bbcode_uid, u.username, u.user_id, u.user_sig" : ''; <br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+<b><u>9) The "IN LINE BEFORE ADD" action :</b></u><br />
+<br />
+It's the same thing that the "IN LINE AFTER ADD" action but you have just to add the code <b>before</b> what you have to search instead of after.<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ IN LINE BEFORE, ADD ]------------------------------------------ <br />
+#<br />
+, $topic_desc<br />
+</td></tr></tbody></table><br />
+<br />
+Example :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ FIND ]------------------------------------------ <br />
+# <br />
+prepare_post($mode, $post_data, $bbcode_on, $html_on, $smilies_on, $error_msg, $username, $bbcode_uid, $subject, $message, $poll_title, $poll_options, $poll_length); <br />
+# <br />
+#-----[ IN LINE FIND ]------------------------------------------ <br />
+# <br />
+$poll_length)<br />
+# <br />
+#-----[ IN LINE BEFORE, ADD ]------------------------------------------ <br />
+#<br />
+$topic_desc,<br />
+</td></tr></tbody></table><br />
+<br />
+You have to search for an entire line (original line) :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+prepare_post($mode, $post_data, $bbcode_on, $html_on, $smilies_on, $error_msg, $username, $bbcode_uid, $subject, $message, $poll_title, $poll_options, $poll_length); <br />
+</td></tr></tbody></table><br />
+<br />
+in this line, you have to search :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+$poll_length)<br />
+</td></tr></tbody></table><br />
+<br />
+and to add that, <b>directly before</b> :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+$topic_desc,<br />
+</td></tr></tbody></table><br />
+<br />
+so your line will become (modded line) :<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+prepare_post($mode, $post_data, $bbcode_on, $html_on, $smilies_on, $error_msg, $username, $bbcode_uid, $subject, $message, $poll_title, $poll_options, $topic_desc, $poll_length); <br />
+</td></tr></tbody></table><br />
+<br />
+<br />
+<b><u>10 ) The "SQL" action :</b></u><br />
+<br />
+This is the action to do for altering the database(adding a fiels, a table,...).<br />
+<br />
+<table width="90%" cellspacing="1" cellpadding="3" border="0" align="center">
+<tbody><tr>
+<td class="code"><br />
+# <br />
+#-----[ SQL ]------------------------------------------ <br />
+# <br />
+ALTER TABLE phpbb_topics ADD topic_desc varchar(255) DEFAULT '' AFTER topic_title <br />
+</td></tr></tbody></table><br />
+<br />
+The best way for you to do this action is to use a basic management tool of database via Internet, like <a href="http://www.phpmyadmin.net">phpMyadmin</a><br />
+<br />
+Once you have installed phpMyadmin, it's simple : <br />
+<br />
+go into it, clic on the name of your database on the left. On the right, you will see a blank textarea : copy and paste the SQL query to do into this area, then clic on "Execute" and see the result<br />
+<br />
+<br />
+<b><u>11) The "SAVE/CLOSE ALL FILES" action :</b></u><br />
+<br />
+This is the last action. Once you have done all your modifications, save and close your files, thn upload tem onto your ftp server and go in your forum : see the result of your job.<br />
+<br />
+<br />
+<br />
+<br />
+But don't forget : <b><u>before all, backup your files and your database.</u></b><br />
+<br />
+<br />
+<br />
+I hope this tutorial will help you ;-)<br />
+</td></tr></tbody></table>
+<br /><br /><br />
+
+<a name="#installfiles"></a><h3>3.3 Installed the MOD using the pre-modified files</h3>
+Very simple, this method can be used by those who didn't want to install the MOD by editing the files themself. But be careful if you have others MOD's installed on your forum : this way will replace some files so if you have differents MOD's which need to altered this files, this MOD's should stop to worked.
+
+To install the MOD by using the pre-modified file, just upload the files which are in the contrib/ folder on your FTP. After that, <b>don't forget to run the file install_tables.php and then, delete it immediately !</b>
+<br /><br /><br />
+
+<a name="#uninstallation"></a><h2><u>4. Uninstallation</u></h2>
+For uninstalling the MOD, you have just to follow this instructions :<br />
+<ol type="square">
+<li>Delete the files that you've uploaded for the MOD.</li>
+<li>Undo the modifications tht have been made in the files during the installation of the MOD.</li>
+<li>Run the script log_actions_uninstall_tables.php (and then <b>delete it immediately</b>) or delete, with phpMyadmin or your shell access to your database, the tables which have been created for the MOD : phpbb_logs and phpbb_logs_config.</li>
+</ol>
+
+That's All.
+<br /><br /><br />
+
+<a name="#logaction"></a><h2><u>5. The Log Actions MOD</u></h2>
+
+<a name="#adminlog"></a><h3>5.1 The Logs</h3>
+Here is the screen that you get in the Log Action part of your Admin Control Panel<br />
+<img src="images/logs.jpg" border="0" title="Log Action part" alt="Log Action part"><br /><br />
+Like you can see, the MOD will allow you to log the action that have been done by the admin or moderator, the address IP of the one who execute the action and the topic ID of the topic where the action have been executed.<br />
+The name of the admin or moderator is display in color to give you the possibility to more find which level has this user.<br />
+If you click on the name of an action, you will get a pop-up that will give you some informations on what is this action and what it does.<br />
+Here, you have also the ability to delete the logs, or to sort them.
+<br /><br /><br />
+
+<a name="#adminlogconfig"></a><h3>5.2 Configuration/Utilization of the MOD</h3>
+This is the configuation part of the MOD : <br />
+<br />
+<h1>Configuration of the Log</h1>
+
+<p>Here, you will be able to configure some options of the Log Actions MOD.</p>
+
+<table width="99%" cellpadding="4" cellspacing="1" border="0" align="center" class="forumline">
+	<tbody><tr>
+	  <th class="thHead" colspan="2">General Configuration of Log Action MOD</th>
+	</tr>
+	<tr>
+		<td class="row1">Allow other Admins to see the Log Actions ?<br><span class="gensmall">This option will allow you to choose if only the first admin of the board will be able to see the Log</span></td>
+		<td class="row2"><input type="radio" name="all_admin" value="0" checked="checked">Disabled&nbsp; &nbsp;<input type="radio" name="all_admin" value="1">Enabled</td>
+
+	</tr>
+	<tr>
+		<td class="row1">Choose an username to add<br><span class="gensmall">Choose the name of another Admin that you want to allow to see the logged actions</span></td>
+		<td class="row2"><select name="add_admin_select"><option value="">No other Admins to choose</option></select>&nbsp;<input type="submit" name="add_admin" value="Add" class="liteoption"></td>
+	</tr>
+	<tr>
+		<td class="row1">Choose an username to delete<br><span class="gensmall">Choose the name of another Admin that you don't want to allow to see the logged actions</span></td>
+
+		<td class="row2"><select name="delete_admin_select[]" multiple="multiple" size="4"><option value=""> No others Admins authorized</option></select>&nbsp;<input type="submit" name="delete_admin" value="Delete" class="liteoption"></td>
+	</tr>
+		<tr>
+		<td class="catBottom" colspan="2" align="center"><input type="submit" name="submit" value="Submit" class="mainoption">&nbsp;&nbsp;<input type="reset" value="Reset" class="liteoption">
+		</td>
+	</tr>
+</tbody></table>
+
+<br /><br />
+
+<table width="99%" cellpadding="4" cellspacing="1" border="0" align="center" class="forumline">
+	<tbody><tr>
+	  <th class="thHead" colspan="2">Prune of the Logs</th>
+	</tr>
+	<tr>
+		<td class="row1">Prune Logs<br><span class="gensmall">Enter the number of days that you want to prune the logs. 0 = all the logs</span></td>
+		<td class="row2"><input type="text" name="prune_days" size="5" class="liteoption">&nbsp;<input type="submit" name="do_prune" value="Prune !" class="mainoption"></td>
+	</tr>
+
+</tbody></table>
+<br clear="all" />
+
+Ok, let's stat the explanations ;-)<br />
+The first line allow you to give the permissions to all the others admins to see the logs and to modify the configuraion of the Log Actions MOD.<br />
+The two other lines are useful only if you choose to disable the first line. Indeed, with this two one, you can choose which Admin will be able to see the logs and to modify the configuration. You can also to choose an username that you no longer want to allow to do some modifications on the Log Action MOD config or to see the logs.<br />
+<br />
+Finally, the last part allow you to prune the logs : this work on the same system as the prune function of the forum of phpBB. Enter a number of days and then, click on the button "Prune !". This will delete all the log which have been created before the x last days (x = number of days you've entered).
+<br /><br /><br />
+
+<a name="#disclaimer"></a><h2><u>6. Copyright and Disclaimer</u></h2>
+<p>
+<ol type="square">
+<li>This Guide have been written by <a href="http://morpheus.2037.biz">Morpheus</a>, author of the Log Actions MOD. This Application (Log Action MOD) is OpenSource Software, released under the GPL.
+<br />This Document is Copyright &copy; 2003 <a href="mailto:morpheus@2037.biz">Morpheus</a>, All Rights Reserved.
+<br /><br />
+<li>Some parts of this document are taken from the Attachment Mod User Guide of <a href="http://www.opentools.de">Acyd Burn</a>. The template have been written by <a href="http://www.subblue.com">subBlue design</a> for the forum <a href="http://www.phpbb.com">phpBB</a>. Thanks to them for what they have done.</li>
+</p>
+
+</body>
+</html>
