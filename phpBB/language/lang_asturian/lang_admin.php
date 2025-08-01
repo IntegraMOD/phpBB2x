@@ -327,6 +327,7 @@ $lang['Cookie_path'] = "Ruta de la Cookie";
 $lang['Cookie_secure'] = "Cookie segura [ https ]";
 $lang['Cookie_secure_explain'] = "Si el so servior ta corriendu via SSL escueya esta opción d'otra mena déxelu deshabilitau";
 $lang['Session_length'] = "Duración de la sesión [ segundos ]";
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

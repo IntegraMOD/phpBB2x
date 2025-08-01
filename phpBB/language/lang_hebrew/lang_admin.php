@@ -397,6 +397,7 @@ $lang['Cookie_secure'] = 'אבטחת עוגיה [ https ]';
 $lang['Cookie_secure_explain'] = 'אם השרת שלך פועל דרך SSL סמן אופצייה זו 
 אחרת אשר אותה מבוטלת';
 $lang['Session_length'] = 'אורך הריצה [בשניות]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 
 //

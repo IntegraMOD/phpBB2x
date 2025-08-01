@@ -326,6 +326,7 @@ $lang['Cookie_path'] = "Shtegu i Cookie";
 $lang['Session_length'] = "Zgjatja e sesionit [ në sekonda ]";
 $lang['Cookie_secure'] = "Cookie e sigurtë [ https ]";
 $lang['Session_length'] = "Session length [ seconds ]";
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 
 //

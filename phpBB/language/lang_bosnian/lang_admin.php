@@ -334,7 +334,7 @@ $lang['Cookie_path'] = "Pozicija Cookie (<i>path</i>)";
 $lang['Session_length'] = "Dužina trajanja pojedinaène sesije [ u sekundama ]";
 $lang['Cookie_secure'] = "Cookie secure [ http ]";
 $lang['Cookie_secure_explain'] = "Ukoliko Vaš server koristi SSL, osposobite ovu fukciju. U protivnom, ostavite neaktivirano.";
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Kontrola Foruma

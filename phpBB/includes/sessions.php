@@ -29,11 +29,14 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	global $db, $board_config;
 	global $_COOKIE, $_GET, $SID;
 
-	$cookiename = $board_config['cookie_name'];
-	$cookiepath = $board_config['cookie_path'];
+    $SameSite     = 'Lax'; // 'Strict' or 'None' are valid too
+	$cookiename   = $board_config['cookie_name'];
+	$cookiepath   = $board_config['cookie_path'];
 	$cookiedomain = $board_config['cookie_domain'];
 	$cookiesecure = $board_config['cookie_secure'];
-    $SameSite =  'SameSite=lax';
+	$current_time = time();
+
+
 
 	if ( isset($_COOKIE[$cookiename . '_sid']) || isset($_COOKIE[$cookiename . '_data']) )
 	{
@@ -256,8 +259,28 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 
 	if (PHP_VERSION_ID < 70300) {
 	    // For PHP versions before 7.3
-	    setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath . '; SameSite=' . $SameSite, $cookiedomain, $cookiesecure, true);
-	    setcookie($cookiename . '_sid', $session_id, 0, $cookiepath . '; SameSite=' . $SameSite, $cookiedomain, $cookiesecure, true);
+		if (PHP_VERSION_ID >= 70300) {
+			setcookie($cookiename . '_data', serialize($sessiondata), array(
+				'expires'  => $current_time + 31536000,
+				'path'     => $cookiepath,
+				'domain'   => $cookiedomain,
+				'secure'   => $cookiesecure,
+				'httponly' => true,
+				'samesite' => $SameSite
+			));
+			setcookie($cookiename . '_sid', $session_id, array(
+				'expires'  => 0,
+				'path'     => $cookiepath,
+				'domain'   => $cookiedomain,
+				'secure'   => $cookiesecure,
+				'httponly' => true,
+				'samesite' => $SameSite
+			));
+		} else {
+			setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath, $cookiedomain, $cookiesecure, true);
+			setcookie($cookiename . '_sid', $session_id, 0, $cookiepath, $cookiedomain, $cookiesecure, true);
+		}
+
 	} else {
 	    // For PHP 7.3 and later
 	    setcookie($cookiename . '_data', serialize($sessiondata), [
@@ -268,14 +291,18 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	        'secure' => $cookiesecure,
 	        'httponly' => true
 	    ]);
-	    setcookie($cookiename . '_sid', $session_id, [
-	        'expires' => 0,
-	        'path' => $cookiepath,
-	        'domain' => $cookiedomain,
-	        'samesite' => $SameSite,
-	        'secure' => $cookiesecure,
-	        'httponly' => true
-	    ]);
+		if (PHP_VERSION_ID >= 70300) {
+			setcookie($cookiename . '_sid', $session_id, array(
+				'expires'  => 0,
+				'path'     => $cookiepath,
+				'domain'   => $cookiedomain,
+				'secure'   => $cookiesecure,
+				'httponly' => true,
+				'samesite' => $SameSite
+			));
+		} else {
+			setcookie($cookiename . '_sid', $session_id, 0, $cookiepath, $cookiedomain, $cookiesecure, true);
+		}
 	}
 	
 	$SID = 'sid=' . $session_id;
@@ -296,7 +323,7 @@ function session_pagestart($user_ip, $thispage_id)
 	$cookiepath = $board_config['cookie_path'];
 	$cookiedomain = $board_config['cookie_domain'];
 	$cookiesecure = $board_config['cookie_secure'];
-    $SameSite =  'SameSite=lax';
+    $SameSite =  'SameSite=Lax';
 	
 	$current_time = time();
 	unset($userdata);
@@ -392,14 +419,14 @@ function session_pagestart($user_ip, $thispage_id)
                     setcookie($cookiename . '_data', serialize($sessiondata), $current_time + 31536000, $cookiepath, $cookiedomain, $cookiesecure, true);
 					if (PHP_VERSION_ID >= 70300) 
 					{
-					setcookie($cookiename . '_sid', $session_id, [
+					setcookie($cookiename . '_sid', $session_id, array(
 						'expires' => 0,
 						'path' => $cookiepath,
 						'domain' => $cookiedomain,
 						'samesite' => $SameSite,
 						'secure' => $cookiesecure,
 						'httponly' => true
-						]);
+					));
 					} 
 					else 
 					{
@@ -499,18 +526,21 @@ function session_end($session_id, $user_id)
 	}
 	$db->sql_freeresult($result);
  
-    $cookie_options = [
-        'expires' => $current_time - 31536000,
-        'path' => $cookiepath,
-        'domain' => $cookiedomain,
-        'secure' => $cookiesecure,
-        'httponly' => true,
-        'samesite' => $SameSite
-    ];
- 
-    setcookie($cookiename . '_data', '', $cookie_options);
-    setcookie($cookiename . '_sid', '', $cookie_options);
- 
+	if (PHP_VERSION_ID >= 70300) {
+		$cookie_options = array(
+			'expires'  => $current_time - 31536000,
+			'path'     => $cookiepath,
+			'domain'   => $cookiedomain,
+			'secure'   => $cookiesecure,
+			'httponly' => true,
+			'samesite' => $SameSite
+		);
+		setcookie($cookiename . '_data', '', $cookie_options);
+		setcookie($cookiename . '_sid', '', $cookie_options);
+	} else {
+		setcookie($cookiename . '_data', '', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure, true);
+		setcookie($cookiename . '_sid', '', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure, true);
+	}
     return true;
 }
 

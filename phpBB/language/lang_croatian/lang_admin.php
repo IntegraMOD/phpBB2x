@@ -345,6 +345,7 @@ $lang['Cookie_path'] = 'Putanja Kolaèiæa';
 $lang['Cookie_secure'] = 'Sigurnost Kolaèiæa';
 $lang['Cookie_secure_explain'] = '<i>Ako Vaš server radi preko SSL-a - omoguæite ovu opciju; u suprotnom ju onemoguæite.</i>';
 $lang['Session_length'] = 'Vremensko trajanje [sec]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 

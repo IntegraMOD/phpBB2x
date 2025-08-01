@@ -325,7 +325,7 @@ $lang['Cookie_path'] = 'Katalogas kur galioja sausainëlis';
 $lang['Cookie_secure'] = 'Saugus sausainëlis';
 $lang['Cookie_secure_explain'] = 'Galima ájungti tik jeigu jûsø HTTP serveris dirba su SSL';
 $lang['Session_length'] = 'Sesijos galiojimo laikas [ sekundëmis ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

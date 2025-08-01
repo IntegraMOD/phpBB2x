@@ -106,6 +106,17 @@ function validate_username($username)
 		return array('error' => true, 'error_msg' => $lang['Username_invalid']);
 	}
 
+    // StopForumSpam.com API, Username Check
+    $sfs_check = stopforumspam($username, "username");
+    if ($sfs_check === true)
+    {
+        return array('error' => true, 'error_msg' => $lang['Username_disallowed']);
+    }
+    elseif (is_array($sfs_check) && isset($sfs_check['error_msg']))
+    {
+        return $sfs_check;
+    }
+	
 	return array('error' => false, 'error_msg' => '');
 }
 
@@ -153,6 +164,18 @@ function validate_email($email)
 			{
 				return array('error' => true, 'error_msg' => $lang['Email_taken']);
 			}
+			
+			// StopForumSpam.com API, Email Check
+			$sfs_check = stopforumspam($email, "email");
+			if ($sfs_check === true)
+			{
+				return array('error' => true, 'error_msg' => $lang['Email_banned']);
+			}
+			elseif (is_array($sfs_check) && isset($sfs_check['error_msg']))
+			{
+				return $sfs_check;
+			}
+			
 			$db->sql_freeresult($result);
 
 			return array('error' => false, 'error_msg' => '');
@@ -206,4 +229,60 @@ function validate_optional_fields(&$icq, &$fb, &$ig, &$pt, &$twr, &$skp, &$tg, &
 	}
 
 	return;
+}
+
+// StopForumSpam.com API, IP validator
+function validate_address($addr)
+{
+    global $lang;
+
+    $sfs_result = stopforumspam($addr, 'ip');
+    if ($sfs_result === true)
+    {
+        return array('error' => true, 'error_msg' => $lang['You_been_banned']);
+    }
+    elseif (is_array($sfs_result) && isset($sfs_result['error_msg']))
+    {
+        return $sfs_result;
+    }
+
+    return array('error' => false);
+}
+
+// StopForumSpam.com API connector
+function stopforumspam($value, $type)
+{
+    $url = "https://api.stopforumspam.org/api?" . $type . "=" . urlencode($value) . "&xml";
+
+    if (function_exists('file_get_contents') && class_exists('DOMDocument'))
+    {
+        $xml = @file_get_contents($url);
+
+        if ($xml === false)
+        {
+            return array('error' => true, 'error_msg' => 'SFS service unreachable. Please try again later.');
+        }
+
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        if (!$dom->loadXML($xml))
+        {
+            return array('error' => true, 'error_msg' => 'Invalid response from SFS API.');
+        }
+
+        $tags = $dom->getElementsByTagName('appears');
+        foreach ($tags as $node)
+        {
+            if (trim($node->nodeValue) === 'yes')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    else
+    {
+        return array('error' => true, 'error_msg' => 'Server lacks required PHP extensions for SFS check.');
+    }
 }

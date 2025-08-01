@@ -1,0 +1,248 @@
+/* 
+Responsive Attributes
+By Matthew James Taylor
+
+Full documentation:
+https://matthewjamestaylor.com/responsive-attributes
+*/
+
+[data-sm], [data-md], [data-lg] {
+    /* padding */
+    --pad:calc(8px + 1.5625vw);
+    --pad2:calc(var(--pad) * 2);
+
+    /* gutters */
+    --gap:calc(8px + 1.5625vw);
+    --gap2:calc(var(--gap) * 2);
+}
+
+/* default to one column */
+[data-sm*="column"], [data-md*="column"], [data-lg*="column"] {
+  display:grid;
+  grid-template-columns:1fr;
+  margin:0;
+}
+
+/* remove leading/trailing margins on columns */
+[data-sm*="column"] >*,
+[data-md*="column"] >*,
+[data-lg*="column"] >* {
+    margin:0;
+}
+
+/* remove leading/trailing margins on content within columns */
+[data-sm*="column"] >* >:first-child,
+[data-md*="column"] >* >:first-child,
+[data-lg*="column"] >* >:first-child {
+    margin-top:0;
+}
+[data-sm*="column"] >* >:last-child,
+[data-md*="column"] >* >:last-child,
+[data-lg*="column"] >* >:last-child {
+    margin-bottom:0;
+}
+
+/* mobile padding */
+[data-sm~="pad"] {padding:var(--pad)}
+[data-sm~="pad2"] {padding:var(--pad2)}
+
+[data-sm] >[data-sm~="nopad"],
+[data-sm~="nopad"] {padding:0}
+
+[data-sm~="childpad"] >* {padding:var(--pad)}
+[data-sm~="childpad2"] >* {padding:var(--pad2)}
+
+/* mobile gutter */
+[data-sm~="gap"] {gap:var(--gap)}
+[data-sm~="gap2"] {gap:var(--gap2)}
+
+/* mobile columns */
+[data-sm~="1column"] {grid-template-columns:1fr}
+[data-sm~="2column"] {grid-template-columns:repeat(2, 1fr)}
+[data-sm~="3column"] {grid-template-columns:repeat(3, 1fr)}
+[data-sm~="4column"] {grid-template-columns:repeat(4, 1fr)}
+[data-sm~="5column"] {grid-template-columns:repeat(5, 1fr)}
+[data-sm~="6column"] {grid-template-columns:repeat(6, 1fr)}
+[data-sm~="7column"] {grid-template-columns:repeat(7, 1fr)}
+[data-sm~="8column"] {grid-template-columns:repeat(8, 1fr)}
+
+/* mobile column spans */
+[data-sm~="colspan2"] {grid-column:span 2}
+[data-sm~="colspan3"] {grid-column:span 3}
+[data-sm~="colspan4"] {grid-column:span 4}
+[data-sm~="colspan5"] {grid-column:span 5}
+[data-sm~="colspan6"] {grid-column:span 6}
+[data-sm~="colspan7"] {grid-column:span 7}
+[data-sm~="colspan8"] {grid-column:span 8}
+
+/* mobile row spans */
+[data-sm~="rowspan2"] {grid-row:span 2}
+[data-sm~="rowspan3"] {grid-row:span 3}
+[data-sm~="rowspan4"] {grid-row:span 4}
+[data-sm~="rowspan5"] {grid-row:span 5}
+[data-sm~="rowspan6"] {grid-row:span 6}
+[data-sm~="rowspan7"] {grid-row:span 7}
+[data-sm~="rowspan8"] {grid-row:span 8}
+
+/* mobile order */
+[data-sm~="order1"] {order:-8}
+[data-sm~="order2"] {order:-7}
+[data-sm~="order3"] {order:-6}
+[data-sm~="order4"] {order:-5}
+[data-sm~="order5"] {order:-4}
+[data-sm~="order6"] {order:-3}
+[data-sm~="order7"] {order:-2}
+[data-sm~="order8"] {order:-1}
+
+/* mobile horizontal align */
+[data-sm~="left"] {justify-self:start}
+[data-sm~="center"] {justify-self:center}
+[data-sm~="right"] {justify-self:end}
+
+/* mobile vertical align */
+[data-sm~="top"] {align-self:start}
+[data-sm~="middle"] {align-self:center}
+[data-sm~="bottom"] {align-self:end}
+
+/* mobile text align */
+[data-sm~="textl"] {text-align:left}
+[data-sm~="textc"] {text-align:center}
+[data-sm~="textr"] {text-align:right}
+
+@media (min-width:768px) {
+    /* tablet padding */
+    [data-md~="pad"] {padding:var(--pad)}
+    [data-md~="pad2"] {padding:var(--pad2)}
+
+    [data-md] >[data-md~="nopad"],
+    [data-md~="nopad"] {padding:0}
+
+    [data-md~="childpad"] >* {padding:var(--pad)}
+    [data-md~="childpad2"] >* {padding:var(--pad2)}
+
+    /* tablet gutter */
+    [data-md~="gap"] {gap:var(--gap)}
+    [data-md~="gap2"] {gap:var(--gap2)}
+
+    /* tablet columns */
+    [data-md~="1column"] {grid-template-columns:1fr}
+    [data-md~="2column"] {grid-template-columns:repeat(2, 1fr)}
+    [data-md~="3column"] {grid-template-columns:repeat(3, 1fr)}
+    [data-md~="4column"] {grid-template-columns:repeat(4, 1fr)}
+    [data-md~="5column"] {grid-template-columns:repeat(5, 1fr)}
+    [data-md~="6column"] {grid-template-columns:repeat(6, 1fr)}
+    [data-md~="7column"] {grid-template-columns:repeat(7, 1fr)}
+    [data-md~="8column"] {grid-template-columns:repeat(8, 1fr)}
+    
+    /* tablet column spans */
+    [data-md~="colspan2"] {grid-column:span 2}
+    [data-md~="colspan3"] {grid-column:span 3}
+    [data-md~="colspan4"] {grid-column:span 4}
+    [data-md~="colspan5"] {grid-column:span 5}
+    [data-md~="colspan6"] {grid-column:span 6}
+    [data-md~="colspan7"] {grid-column:span 7}
+    [data-md~="colspan8"] {grid-column:span 8}
+
+    /* tablet row spans */
+    [data-md~="rowspan2"] {grid-row:span 2}
+    [data-md~="rowspan3"] {grid-row:span 3}
+    [data-md~="rowspan4"] {grid-row:span 4}
+    [data-md~="rowspan5"] {grid-row:span 5}
+    [data-md~="rowspan6"] {grid-row:span 6}
+    [data-md~="rowspan7"] {grid-row:span 7}
+    [data-md~="rowspan8"] {grid-row:span 8}
+
+    /* tablet order */
+    [data-md~="order1"] {order:-8}
+    [data-md~="order2"] {order:-7}
+    [data-md~="order3"] {order:-6}
+    [data-md~="order4"] {order:-5}
+    [data-md~="order5"] {order:-4}
+    [data-md~="order6"] {order:-3}
+    [data-md~="order7"] {order:-2}
+    [data-md~="order8"] {order:-1}
+
+    /* tablet horizontal align */
+    [data-md~="left"] {justify-self:start}
+    [data-md~="center"] {justify-self:center}
+    [data-md~="right"] {justify-self:end}
+
+    /* tablet vertical align */
+    [data-md~="top"] {align-self:top}
+    [data-md~="middle"] {align-self:center}
+    [data-md~="bottom"] {align-self:bottom}
+
+    /* tablet text align */
+    [data-md~="textl"] {text-align:left}
+    [data-md~="textc"] {text-align:center}
+    [data-md~="textr"] {text-align:right}
+}
+
+@media (min-width:1024px) {
+    /* desktop padding */
+    [data-lg~="pad"] {padding:var(--pad)}
+    [data-lg~="pad2"] {padding:var(--pad2)}
+
+    [data-lg] >[data-lg~="nopad"],
+    [data-lg~="nopad"] {padding:0}
+
+    [data-lg~="childpad"] >* {padding:var(--pad)}
+    [data-lg~="childpad2"] >* {padding:var(--pad2)}
+
+    /* desktop gutter */
+    [data-lg~="gap"] {gap:var(--gap)}
+    [data-lg~="gap2"] {gap:var(--gap2)}
+
+    /* desktop columns */
+    [data-lg~="1column"] {grid-template-columns:1fr}
+    [data-lg~="2column"] {grid-template-columns:repeat(2, 1fr)}
+    [data-lg~="3column"] {grid-template-columns:repeat(3, 1fr)}
+    [data-lg~="4column"] {grid-template-columns:repeat(4, 1fr)}
+    [data-lg~="5column"] {grid-template-columns:repeat(5, 1fr)}
+    [data-lg~="6column"] {grid-template-columns:repeat(6, 1fr)}
+    [data-lg~="7column"] {grid-template-columns:repeat(7, 1fr)}
+    [data-lg~="8column"] {grid-template-columns:repeat(8, 1fr)}
+    
+    /* desktop column spans */
+    [data-lg~="colspan2"] {grid-column:span 2}
+    [data-lg~="colspan3"] {grid-column:span 3}
+    [data-lg~="colspan4"] {grid-column:span 4}
+    [data-lg~="colspan5"] {grid-column:span 5}
+    [data-lg~="colspan6"] {grid-column:span 6}
+    [data-lg~="colspan7"] {grid-column:span 7}
+    [data-lg~="colspan8"] {grid-column:span 8}
+
+    /* desktop row spans */
+    [data-lg~="rowspan2"] {grid-row:span 2}
+    [data-lg~="rowspan3"] {grid-row:span 3}
+    [data-lg~="rowspan4"] {grid-row:span 4}
+    [data-lg~="rowspan5"] {grid-row:span 5}
+    [data-lg~="rowspan6"] {grid-row:span 6}
+    [data-lg~="rowspan7"] {grid-row:span 7}
+    [data-lg~="rowspan8"] {grid-row:span 8}
+
+    /* desktop order */
+    [data-lg~="order1"] {order:-8}
+    [data-lg~="order2"] {order:-7}
+    [data-lg~="order3"] {order:-6}
+    [data-lg~="order4"] {order:-5}
+    [data-lg~="order5"] {order:-4}
+    [data-lg~="order6"] {order:-3}
+    [data-lg~="order7"] {order:-2}
+    [data-lg~="order8"] {order:-1}
+
+    /* desktop horizontal align */
+    [data-lg~="left"] {justify-self:start}
+    [data-lg~="center"] {justify-self:center}
+    [data-lg~="right"] {justify-self:end}
+
+    /* desktop vertical align */
+    [data-lg~="top"] {align-self:top}
+    [data-lg~="middle"] {align-self:center}
+    [data-lg~="bottom"] {align-self:bottom}
+
+    /* desktop text align */
+    [data-lg~="textl"] {text-align:left}
+    [data-lg~="textc"] {text-align:center}
+    [data-lg~="textr"] {text-align:right}
+}

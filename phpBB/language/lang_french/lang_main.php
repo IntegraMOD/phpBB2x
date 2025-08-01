@@ -1020,15 +1020,25 @@ $lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and co
 $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 
 //
+// cookie_consent
+//
+$lang['cookie_consent_msg']    = 'Ce site utilise des cookies afin de vous garantir la meilleure expérience possible.';
+$lang['cookie_consent_link']   = 'privacy.php'; // ou votre propre page de politique de confidentialité
+$lang['cookie_consent_button'] = 'Accepter';
+$lang['L_PRIVACY']             = 'Politique de confidentialité';
+$lang['L_PRIVACY_POLICY']      = 'Ce système de forum utilise des cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiennent aucune des données que vous avez saisies dans votre compte ; ils servent uniquement à améliorer votre expérience utilisateur. <br>Votre adresse e-mail est utilisée uniquement pour confirmer vos informations d’inscription et votre mot de passe (ainsi que pour envoyer un nouveau mot de passe si vous oubliez l’actuel).';
+$lang['L_COOKIE_ACCEPT']       = 'Accepter';
+
+//
 // language buttons
 //
-$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
-$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
-$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
-$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
-$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
-$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
-$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
+$lang['button_pm_new']        = 'Nouveau<span class="bld">MP</span>';
+$lang['button_pm_reply']      = 'Envoyer<span class="bld">réponse</span>';
+$lang['button_topic_locked']  = '<span class="bld">Verrouillé</span>';
+$lang['button_topic_new']     = 'Nouveau<span class="bld">sujet</span>';
+$lang['button_topic_reply']   = 'Publier<span class="bld">réponse</span>';
+$lang['icon_post_edit']       = '<span class="sml bld">Modifier</span>';
+$lang['icon_post_quote']      = '<span class="sml bld">Citer</span>';
 
 //
 // Social media

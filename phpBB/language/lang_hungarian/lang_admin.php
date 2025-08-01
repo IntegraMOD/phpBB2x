@@ -334,6 +334,7 @@ $lang['Cookie_path'] = 'Cookie elérési út';
 $lang['Cookie_secure'] = 'Cookie biztonság';
 $lang['Cookie_secure_explain'] = 'Ha a szerver SSL titkosítással fut, akkor kapcsold be ezt az opciót; különben hagyd kikapcsolva';
 $lang['Session_length'] = 'Session hossz [ másodperc ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 $lang['Visual_confirm'] = 'Regisztráció vizuális megerõsítése';

@@ -330,7 +330,7 @@ $lang['Cookie_path'] = 'Cookie bidea';
 $lang['Cookie_secure'] = 'Cookie ziurra';
 $lang['Cookie_secure_explain'] = 'Zure Zerbitzaria SSL bitartez badabil gaitu ezazu, bestela desgaituta utzi';
 $lang['Session_length'] = 'Saioaren iraupena [ segunduetan ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

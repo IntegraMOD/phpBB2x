@@ -325,7 +325,7 @@ $lang['Cookie_path'] = 'Putanja kolaèiæa';
 $lang['Cookie_secure'] = 'Bezbednost kolaèiæa';
 $lang['Cookie_secure_explain'] = 'Ako vaš server radi preko SSL-a podesite ovu opciju na Dozvoljeno a u suprotnom ostavite kao zabranjeno';
 $lang['Session_length'] = 'Dužina sesije [ sekunde ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

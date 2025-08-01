@@ -1,0 +1,533 @@
+/*
+  Bootstrap subIce Theme for phpBB version 2x.
+  Created by Helter (integramod.com)
+*/
+
+
+html{
+	font-size:100%;
+	margin-bottom:1px;
+}
+
+body{
+	font-family:Verdana,Helvetica,Arial,sans-serif;
+	font-size:13px;
+	background-color: #E5E5E5;
+}
+
+html,body{
+	color:#000000;
+	background-color:#E5E5E5;
+	line-height: normal;
+	line-height: 1em;
+}
+
+/* 
+div.col, div.col-4, div.col-8, div.col-12 {border: 1px #000000 solid !important; }
+.row  {border: 1px #41b829 solid !important; }
+*/
+
+/* General font families for common tags */
+font,th,td,p { font-family: Verdana, Arial, Helvetica, sans-serif }
+a:link,a:active,a:visited,a.postlink{color:#32475f;text-decoration:none}
+a:hover     {color:#31465E;text-decoration:underline}
+.hov		{ text-decoration: none; color : #587DA3; }
+hr, .hr		{ border-top:1px solid #587DA3;  }
+.hr1 	    { border-top:1px solid #FFF;  }       
+.hr2 	    { border-top: 1px solid #FFFFFF;  }       
+.hr3 	    { border-right:1px solid #FFFFFF !important;  } 
+.hr4 	    { border-width: 1px 0px 1px 0px; border: solid #FFFFFF !important;  } 
+.hr5        { border-left:1px solid #FFFFFF !important;  } 
+
+/* This is the border line & background colour round the entire page */
+.bodyline	{ background:#f7f8fc;border:1px solid #98aab1 !important; }
+
+/* This is the outline round the main forum tables */
+.forumline	{ background:#ffffff;border:1px solid #486386; }
+
+
+/* Main table cell colours and backgrounds */
+.row1 {background:#f4f6fb;}
+.row2, .helpline {background:#e1e9f2;}
+.row3 {background:#d7e2ef;}
+
+.spacerow{background:#cad9ea;}
+
+
+/*
+  This is for the table cell above the Topics, Post & Last posts on the index.php page
+  By default this is the fading out gradiated silver background.
+  However, you could replace this with a bitmap specific for each forum
+*/
+.rowpic{
+    height: 3.2em !important;    
+	color:#516a88;
+	background: #e2e9f1; /* Old browsers */
+	background: -moz-linear-gradient(top, #e2e9f1 0%, #becde0 75%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #e2e9f1 0%,#becde0 75%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #e2e9f1 0%,#becde0 75%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e9f1', endColorstr='#becde0',GradientType=0 ); /* IE6-9 */border-color:#91a0ae;
+	border-color:#0850BD;
+}
+
+/* Header cells - the blue and silver gradient backgrounds */
+th, .th {
+    font-size: 1em; 
+    font-weight : bold;
+    height: 2.1em !important;
+	color:#516a88;
+	background: #e2e9f1; /* Old browsers */
+	background: -moz-linear-gradient(top, #e2e9f1 0%, #becde0 75%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #e2e9f1 0%,#becde0 75%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #e2e9f1 0%,#becde0 75%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e9f1', endColorstr='#becde0',GradientType=0 ); /* IE6-9 */border-color:#91a0ae;
+}
+
+.cat, .catHead, .cathead, .catSides, .catLeft, .catRight, .catBottom {
+	color:#516a88;
+	border: #FFFFFF;
+	border-style: solid;
+	height: 2.1em !important;
+	background: #b4c5d5; /* Old browsers */
+	background: -moz-linear-gradient(top, #b4c5d5 0%, #dbe3ee 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #b4c5d5 0%,#dbe3ee 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #b4c5d5 0%,#dbe3ee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4c5d5', endColorstr='#dbe3ee',GradientType=0 ); /* IE6-9 */
+}
+
+
+.bdr {border: 1px solid black !important;}
+.bdrw {border: 1px solid #FFFFFF !important;}
+
+.topbkg{
+  color: #839FBC !important;
+  background: #B6C6D6;
+  background-image: -webkit-linear-gradient(top, #B6C6D6, #DCE5EC);
+  background-image: -moz-linear-gradient(top, #B6C6D6, #DCE5EC);
+  background-image: -ms-linear-gradient(top, #B6C6D6, #DCE5EC);
+  background-image: -o-linear-gradient(top, #B6C6D6, #DCE5EC);
+  background-image: linear-gradient(to bottom, #B6C6D6, #DCE5EC);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#B6C6D6', endColorstr='#DCE5EC',GradientType=0 ); /* IE6-9 */
+  border-top: solid #98AAB1 1px;
+  border-bottom: solid #98AAB1 1px;
+}	
+
+/*
+  Setting additional nice inner borders for the main table cells.
+  The names indicate which sides the border will be on.
+  Don't worry if you don't understand this, just ignore it :-)
+*/
+.cat, .catHead, .catBottom {
+	height: 2.1em;
+	border-width: 0px 0px 0px 0px;
+}
+.thHead,.thSides,.thTop,.thLeft,.thRight,.thBottom,.thCornerL,.thCornerR {
+	font-weight: bold; border: #FFFFFF; border-style: solid; height: 2.1em; }
+.thH {line-height: 2em; vertical-align:middle !important;}
+.row3Right, .spaceRow {
+	background-color: #D1D7DC; border: #FFFFFF; border-style: solid; }
+
+.thHead,.catHead { font-size: 0.923em; border-width: 1px 1px 0px 1px; }
+.thSides,.catSides,.spaceRow	 { border-width: 0px 1px 0px 1px; }
+.thRight,.catRight,.row3Right	 { border-width: 0px 1px 0px 0px; }
+.thLeft,.catLeft	  { border-width: 0px 0px 0px 1px; }
+.thBottom,.catBottom  { border-width: 0px 1px 1px 1px; }
+.thTop	 { border-width: 1px 0px 0px 0px; }
+.thCornerL { border-width: 1px 0px 0px 1px; }
+.thCornerR { border-width: 1px 1px 0px 0px; }
+
+/* The largest text used in the index page title and toptic title etc. */
+.maintitle,h1,h2	{
+			font-weight: bold; font-size: 1.692em; font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+			text-decoration: none; line-height : 120%; color:#839fbc;;
+}
+
+
+/* General text */
+.gen { font-size : 1em !important; }
+.genmed { font-size : 0.923em !important; }
+.gensmall { font-size : 0.846em !important; }
+.gen,.genmed,.gensmall { color : #000000; }
+a.gen,a.genmed,a.gensmall { color: #6A89A9; text-decoration: none; }
+a.gen:hover,a.genmed:hover,a.gensmall:hover	{ color: #31465E !important; text-decoration: underline; }
+.qb a, .qb a:hover, .qb a:focus {text-transform: capitalize !important; font-size : 0.923em !important; text-decoration: none !important; margin: 0 2px;}
+
+/* The register, login, search etc links at the top of the page */
+.mainmenu	{ font-size : 1em; color : #000000;}
+a.mainmenu		{ text-decoration: none; color : #6A89A9;  }
+a.mainmenu:hover{ text-decoration: underline; color : #31465E; }
+
+/* Forum category titles */
+.cattitle		{ font-weight: bold; font-size: 1em ; letter-spacing: 1px; color : #006699}
+a.cattitle		{ text-decoration: none; color : #6A89A9; }
+a.cattitle:hover{ text-decoration: underline; }
+
+
+/* Forum title: Text and link to the forums used in: index.php */
+.forumlink		{ font-weight: bold; font-size: 0.91em; color : #006699; }
+a.forumlink 	{ text-decoration: none; color : #6A89A9; }
+a.forumlink:hover{ text-decoration: underline; color : #31465E; }
+
+
+/* Used for the navigation text, (Page 1,2,3 etc) and the navigation bar when in a forum */
+.nav			{ font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif !important; font-weight: bold; font-size: 1em !important; color : #000000;}
+a.nav			{ text-decoration: none; color : #31465E; }
+a.nav:hover		{ text-decoration: underline; }
+
+.navbr			{ font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif !important; font-weight: bold; font-size: 1em !important; color : #000000;}
+a.navbr			{ text-decoration: none; color : #6A89A9 !important; }
+a.navbr:hover   { text-decoration: none; color : #31465E !important; }
+
+/* titles for the topics: could specify viewed link colour too */
+.topictitle			{ font-weight: bold; font-size: 0.91em; color : #000000; }
+a.topictitle:link   { text-decoration: none; color : #6A89A9; }
+a.topictitle:visited { text-decoration: none; color:#496687; }
+a.topictitle:hover	{ text-decoration: underline; color : #31465E; }
+
+
+/* Name of poster in viewmsg.php and viewtopic.php and other places */
+.name			{ font-size : 0.846em; color : #000000;}
+
+/* Location, number of posts, post date etc */
+.postdetails		{ font-size : 0.769em; color : #000000; }
+
+
+/* The content of the posts (body of text) */
+.postbody { font-size : 0.923em;}
+a.postlink:link	{ text-decoration: none; color : #6A89A9 }
+a.postlink:visited { text-decoration: none; color : #5493B4; }
+a.postlink:hover { text-decoration: underline; color : #31465E}
+
+.faimg   {height:2.1em !important; width:2.1em !important;}
+
+
+/* Quote & Code blocks */
+.code {
+	font-family: Courier, 'Courier New', sans-serif; font-size: 0.846em !important; color: #006600 !important; background-color: #FAFAFA !important; border:1px solid #D1D7DC !important;
+}
+
+.quote {
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.846em !important; color: #444444 !important; line-height: 125% !important; background-color: #FAFAFA !important; border:1px solid #D1D7DC !important;
+}
+
+/* Copyright and bottom info */
+.copyright		{ font-size: 0.769em; font-family: Verdana, Arial, Helvetica, sans-serif; color: #444444; letter-spacing: -1px;}
+a.copyright		{ color: #444444; text-decoration: none;}
+a.copyright:hover { color: #31465E; text-decoration: underline;}
+
+
+/* Form elements */
+input,textarea, select {
+	color : #000000;
+	font: normal 0.846em Verdana, Arial, Helvetica, sans-serif;
+	border-color : #000000;
+}
+
+/* The text input fields background colour */
+input.post, textarea.post, select {
+	background-color : #FFFFFF;
+}
+
+input { text-indent : 2px; }
+
+/* The buttons used for bbCode styling in message post */
+input.button {
+	background-color : #EFEFEF;
+	color : #000000;
+	font-size: 0.846em; font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* The main submit button option */
+input.mainoption {
+	background-color : #FAFAFA;
+	font-weight : bold;
+}
+
+/* None-bold submit button */
+input.liteoption {
+	background-color : #FAFAFA;
+	font-weight : normal;
+}
+
+/* This is the line in the posting page which shows the rollover
+  help line. This is actually a text box, but if set to be the same
+  colour as the background no one will know ;)
+*/
+.helpline { background-color: #DEE3E7; border-style: none; }
+
+.pbtn {font-family: 'BellotaText-Bold', cursive; text-transform: lowercase; text-decoration: none !important;}
+
+.pbtn {
+  background: #FFFFFF;
+  background-image: -webkit-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: -moz-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: -ms-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: -o-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: linear-gradient(to bottom, #FFFFFF, #BDCBD6);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#BDCBD6',GradientType=0 ); /* IE6-9 */
+  border: solid #6A89A9 1px !important;
+  -webkit-border-radius: 20;
+  -moz-border-radius: 20;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1em;
+  padding: 3px 15px 4px 10px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+
+.pbtn:hover {
+  background: #E1E8EF;
+  background-image: -webkit-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: -moz-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: -ms-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: -o-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: linear-gradient(to bottom, #E1E8EF, #BDCBD6);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1E8EF', endColorstr='#BDCBD6',GradientType=0 ); /* IE6-9 */
+  border: solid #6A89A9 1px;
+}
+a.pbtn:hover     {color:#839FBC !important;}
+
+.cl1 {
+  min-width: 40px !important;
+  padding-left: 0px;
+}
+
+button {
+  border: none !important;
+  border-radius: 2em !important;
+  color: #6A89A9;
+  padding: .2em .1em .2em .1em !important;
+  font-size: 1em !important;
+  cursor: pointer;
+  width: 2em;
+  text-decoration: none !important;
+}
+
+.pb {
+  padding: 1px 0px 1px 8px !important;
+  width: 100% !important;
+  max-width: 110px;
+  min-width: 100px;
+}
+        
+.btx {
+  font-family: Verdana, Arial, Helvetica, sans-serif ;
+  font-size : .9em !important;
+  font-weight: normal;
+  white-space: nowrap !important;
+}
+
+.bw {padding: 4px 8px 4px 8px !important;}      
+.ptx {padding: 0px 4px 0px 4px !important;}      
+.btn, .fa- {color: #6A89A9;}
+.btn, .fa-:hover {color: #31465E;}
+.bld	{font-weight : bold; text-decoration: none; color: #31465E !important; }
+.bld:hover {color: #31465E !important;}
+.bt {font-size: .98em !important;}
+.nw {white-space: nowrap !important;}
+      
+button:hover {
+  color: #31465E;
+  background: #E1E8EF;
+  background-image: -webkit-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: -moz-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: -ms-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: -o-linear-gradient(top, #E1E8EF, #BDCBD6);
+  background-image: linear-gradient(to bottom, #E1E8EF, #BDCBD6);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1E8EF', endColorstr='#BDCBD6',GradientType=0 ); /* IE6-9 */
+  border: solid #6A89A9 1px;
+}
+
+.btn {
+  background: #FFFFFF;
+  background-image: -webkit-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: -moz-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: -ms-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: -o-linear-gradient(top, #FFFFFF, #BDCBD6);
+  background-image: linear-gradient(to bottom, #FFFFFF, #BDCBD6);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#BDCBD6',GradientType=0 ); /* IE6-9 */
+  border: solid #6A89A9 1px !important;
+}
+
+/* responsive navbar */
+     .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: left;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+    
+.offcanvas-body ul, .offcanvas-body li {
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+.offcanvas-body ul {
+	width: 100%;
+	text-align: left;
+}
+.offcanvas-body li {
+	display: inline-block;
+	position: relative;
+}
+.offcanvas-body li.vertbar :after {
+  content: '  \000a0  \0007c';
+}
+.offcanvas-body a {
+	display: inline-block;
+	line-height: 25px;
+	text-decoration: none;
+	font-size: 1em;
+}
+.offcanvas-body a.dropdown-arrow:after {
+	content: "\25BE";
+	margin-left: 5px;
+}
+.offcanvas-body li a:hover {
+	
+}
+.offcanvas-body input {
+	display: none;
+	margin: 0;
+	padding: 0;
+	height: 27px;
+	width: 100%;
+	opacity: 0;
+	cursor: pointer
+}
+.offcanvas-body label {
+	display: none;
+	line-height: 25px;
+	text-align: center;
+	position: absolute;
+}
+.offcanvas-body label:before {
+	font-size: 1.6em;
+	content: "\2261"; 
+}
+.offcanvas-body ul.sub-menus{
+	height: auto;
+	overflow: hidden;
+	width: 200px;
+	background: #CBD7E3;
+	border: 1px solid #98AAB1;
+	position: absolute;
+	z-index: 99;
+	display: none;
+}
+.offcanvas-body ul.sub-menus li {
+	display: block;
+	text-align: left;
+	width: 100%;
+	line-height:1.5em;
+}
+.offcanvas-body ul.sub-menus a {
+	font-size: 1.2em;
+}
+li:hover ul.sub-menus {
+	display: block;
+}
+ul.sub-menus a:hover{
+	display: block;
+	background-color: #B9C8D8;	
+}
+@media screen and (max-width: 900px){
+    .offcanvas-body ul.sub-menus {width:98%;position:static;border:0px;}
+	.offcanvas-body ul.sub-menus a {padding-left:0px;}
+	.offcanvas-body li {display:block;float:left;width:auto;margin-left:0px}
+	.offcanvas-body input, .offcanvas-body label {position:absolute;top:0;left:0;display:block}
+	.offcanvas-body input {z-index:4}
+	.offcanvas-body input:checked + label {}
+	.offcanvas-body input:checked + label:before {content:"\00d7"}
+	.offcanvas-body input:checked ~ ul {display:block}
+}
+
+.topp {
+  padding-top: 8px;
+}
+
+.topp2 {
+  padding-top: 12px;
+}
+	
+@media only screen and (max-width: 767px) {
+    html { 
+        -webkit-text-size-adjust: 100%;
+    }
+	.px-xs-0 {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+	.topics, .posts, .views, .replies, .searchbar {
+	  display: none;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.author {display: none;}
+}

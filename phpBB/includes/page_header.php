@@ -28,6 +28,20 @@ if ( !defined('IN_PHPBB') )
 define('HEADER_INC', TRUE);
 
 //
+// cookie_consent
+//
+if (!isset($_COOKIE['cookie_consent']) && $board_config['cookie_consent_enable']) {
+    $template->assign_block_vars('switch_cookie_consent', []);
+    $template->assign_vars([
+        'cookie_consent_msg'   => $lang['cookie_consent_msg'],
+        'cookie_consent_link'  => $lang['cookie_consent_link'],
+        'L_PRIVACY_POLICY'     => $lang['L_PRIVACY_POLICY'],
+        'L_PRIVACY'            => $lang['L_PRIVACY'],
+		'L_COOKIE_ACCEPT'      => $lang['L_COOKIE_ACCEPT'],
+    ]);
+}
+
+//
 // gzip_compression
 //
 $do_gzip_compress = FALSE;

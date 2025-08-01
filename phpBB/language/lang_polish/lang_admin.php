@@ -331,6 +331,7 @@ $lang['Cookie_path'] = '¦cie¿ka Cookie';
 $lang['Cookie_secure'] = 'Bezpieczne Cookie [ https ]';
 $lang['Cookie_secure_explain'] = 'Je¶li twój serwer dzia³a na SSL ustaw to na w³±czone, inaczej pozostaw wy³±czone';
 $lang['Session_length'] = 'D³ugo¶æ Sesji [ sekundy ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

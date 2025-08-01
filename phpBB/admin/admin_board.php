@@ -72,6 +72,24 @@ else
 			}
 		}
 
+		if (isset($HTTP_POST_VARS['sfs_enable']))
+		{
+			$sfs_enable = intval($HTTP_POST_VARS['sfs_enable']);
+			$sql = "UPDATE " . CONFIG_TABLE . "
+					SET config_value = '$sfs_enable'
+					WHERE config_name = 'sfs_enable'";
+			$db->sql_query($sql);
+		}
+
+		if (isset($HTTP_POST_VARS['cookie_consent_enable']))
+		{
+			$cookie_consent_enable = intval($HTTP_POST_VARS['cookie_consent_enable']);
+			$sql = "UPDATE " . CONFIG_TABLE . "
+					SET config_value = '$cookie_consent_enable'
+					WHERE config_name = 'cookie_consent_enable'";
+			$db->sql_query($sql);
+		}
+		
 		if( isset($HTTP_POST_VARS['submit']) )
 		{
 			$sql = "UPDATE " . CONFIG_TABLE . " SET
@@ -102,6 +120,9 @@ $disable_board_no = ( !$new['board_disable'] ) ? "checked=\"checked\"" : "";
 $cookie_secure_yes = ( $new['cookie_secure'] ) ? "checked=\"checked\"" : "";
 $cookie_secure_no = ( !$new['cookie_secure'] ) ? "checked=\"checked\"" : "";
 
+$cookie_consent_yes = ($new['cookie_consent_enable']) ? "checked=\"checked\"" : "";
+$cookie_consent_no  = (!$new['cookie_consent_enable']) ? "checked=\"checked\"" : "";
+
 $html_tags = $new['allow_html_tags'];
 
 $override_user_style_yes = ( $new['override_user_style'] ) ? "checked=\"checked\"" : "";
@@ -119,6 +140,11 @@ $activation_admin = ( $new['require_activation'] == USER_ACTIVATION_ADMIN ) ? "c
 
 $confirm_yes = ($new['enable_confirm']) ? 'checked="checked"' : '';
 $confirm_no = (!$new['enable_confirm']) ? 'checked="checked"' : '';
+
+$new['sfs_enable'] = isset($board_config['sfs_enable']) ? intval($board_config['sfs_enable']) : 0;
+
+$sfs_enable_yes = ($new['sfs_enable']) ? 'checked="checked"' : '';
+$sfs_enable_no  = (!$new['sfs_enable']) ? 'checked="checked"' : '';
 
 $allow_autologin_yes = ($new['allow_autologin']) ? 'checked="checked"' : '';
 $allow_autologin_no = (!$new['allow_autologin']) ? 'checked="checked"' : '';
@@ -275,7 +301,11 @@ $template->assign_vars(array(
 	"L_SMTP_PASSWORD_EXPLAIN" => $lang['SMTP_password_explain'], 
 	"L_SUBMIT" => $lang['Submit'], 
 	"L_RESET" => $lang['Reset'], 
-	
+	"L_SFS_ENABLE" => $lang['sfs_enable'],
+	"L_SFS_ENABLE_EXPLAIN" => $lang['sfs_enable_explain'],
+		
+	"SFS_ENABLE_YES" => $sfs_enable_yes,
+	"SFS_ENABLE_NO"  => $sfs_enable_no,	
 	"SERVER_NAME" => $new['server_name'], 
 	"SCRIPT_PATH" => $new['script_path'], 
 	"SERVER_PORT" => $new['server_port'], 
@@ -320,6 +350,9 @@ $template->assign_vars(array(
 	"SESSION_LENGTH" => $new['session_length'], 
 	"S_COOKIE_SECURE_ENABLED" => $cookie_secure_yes, 
 	"S_COOKIE_SECURE_DISABLED" => $cookie_secure_no, 
+	"COOKIE_CONSENT_YES" => $cookie_consent_yes,
+	"COOKIE_CONSENT_NO"  => $cookie_consent_no,
+	"L_COOKIE_CONSENT_ENABLE" => $lang['cookie_consent_enable'],
 	"GZIP_YES" => $gzip_yes,
 	"GZIP_NO" => $gzip_no,
 	"PRUNE_YES" => $prune_yes,

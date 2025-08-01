@@ -329,7 +329,7 @@ $lang['Cookie_path'] = "Ruta da Cookie";
 $lang['Cookie_secure'] = "Cookie segura [ https ]";
 $lang['Cookie_secure_explain'] = "Se o seu servidor está correndo vía SSL marque esta opción, se non déixeo deshabilitado";
 $lang['Session_length'] = "Duración da sesión [ segundos ]";
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Xestión do Foro

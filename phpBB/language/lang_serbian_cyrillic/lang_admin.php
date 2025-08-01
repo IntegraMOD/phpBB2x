@@ -335,7 +335,7 @@ $lang['Cookie_path'] = 'Путања Cookie';
 $lang['Cookie_secure'] = 'Безбедност Cookie';
 $lang['Cookie_secure_explain'] = 'Ако ваш сервер ради преко ссла подесите ову опцију на дозвољено а у супротном оставите као забрањено';
 $lang['Session_length'] = 'Дужина сесије (секунде)';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

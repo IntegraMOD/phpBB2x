@@ -327,6 +327,7 @@ $lang['Cookie_domain'] = "Cookie 域名";
 $lang['Cookie_path'] = "Cookie 路径";
 $lang['Session_length'] = "Session 存活时间 [ 秒 ]";
 $lang['Cookie_secure'] = "Cookie 加密 [ https ]";
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 
 //

@@ -595,6 +595,7 @@ $lang['Cookie_secure_explain'] = 'Хэрэв танай сервер SSL-ээр 
 
 $lang['Session_length'] = 'Сешионий байх хугацаа [ секундээр ]';
 
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 $lang['Visual_confirm'] = 'Визуаль баталгаажуулалтыг идэвхжүүл';

@@ -326,6 +326,7 @@ $lang['Cookie_path'] = 'Local na árvore de directórios do \"Cookie\"';
 $lang['Cookie_secure'] = '\"Cookie\" seguro [ https ]';
 $lang['Cookie_secure_explain'] = 'Se o seu servidor se encontra a funcionar via SSL active isto, caso negativo deixe desligado';
 $lang['Session_length'] = 'Tempo da sessão [ segundos ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

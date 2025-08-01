@@ -328,7 +328,7 @@ $lang['Cookie_path'] = "Cesta k Cookie";
 $lang['Cookie_secure'] = "Zabezpeèení Cookie";
 $lang['Cookie_secure_explain'] = "Jestliže váš server bìží pøes SSL nastavte na povoleno, jesliže ne tak nastavte zakázáno";
 $lang['Session_length'] = "Délka platnosti Session [ vteøin ]";
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

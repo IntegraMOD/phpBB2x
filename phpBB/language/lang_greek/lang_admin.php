@@ -326,7 +326,7 @@ $lang['Cookie_path'] = "Cookie path";
 $lang['Cookie_secure'] = "Cookie secure";
 $lang['Cookie_secure_explain'] = "Εάν ο διακομιστής σας λειτουργεί μέσω SSL ενεργοποιήστε το, ειδάλλως αφήστε το ως έχει";
 $lang['Session_length'] = "Διάρκεια Session [ δευτερόλεπτα ]";
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

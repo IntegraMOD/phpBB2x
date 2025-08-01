@@ -330,7 +330,7 @@ $lang['Cookie_path'] = 'Kûkî-Rêç';
 $lang['Cookie_secure'] = 'Kûkîya Ewle';
 $lang['Cookie_secure_explain'] = 'Eger, servera te bi SSL dixebite, wê çaxê, tu dikarî aktîf bike, wekî din, aktîf neke, neaktîf bihêle';
 $lang['Session_length'] = 'Drêjî  -Session/Sezon-  [ Sanîye ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

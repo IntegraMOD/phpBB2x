@@ -338,6 +338,7 @@ $lang['Cookie_path'] = 'Calea pentru cookie';
 $lang['Cookie_secure'] = 'Securizare cookie';
 $lang['Cookie_secure_explain'] = 'Dacã serverul dumneavoastrã ruleazã via SSL, selectaþi <i>Activat</i> altfel selectaþi <i>Dezactivat</i>';
 $lang['Session_length'] = 'Durata sesiunii [ secunde ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 
 // Visual Confirmation

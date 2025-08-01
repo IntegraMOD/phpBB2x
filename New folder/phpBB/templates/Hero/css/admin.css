@@ -1,0 +1,32 @@
+html{
+	font-size:100%;
+	margin-bottom:1px;
+}
+
+body{
+	font-family:Verdana,Helvetica,Arial,sans-serif;
+	font-size:13px;
+}
+
+/* General text */
+.forumline { font-size : 0.923em !important; }
+.gen, th, .th, .cattitle, .thHead, .catHead { font-size : 0.88em !important; }
+.genmed { font-size : 0.833em !important; }
+.gensmall { font-size : 0.795em !important; }
+.gen,.genmed,.gensmall { color : #000000; }
+a.gen,a.genmed,a.gensmall { color: #006699; text-decoration: none; }
+a.gen:hover,a.genmed:hover,a.gensmall:hover	{ color: #DD6900; text-decoration: underline; }
+ 
+ul{list-style:disc;margin:0 0 1em 2em}
+#menu{width:100%;font-size:1em;padding:0;border-right:1px solid #CCCFD3}
+.rtl #menu{float:right;border:none;border-left:1px solid #CCCFD3}
+#menu p{font-size:0.85em}
+#menu ul{list-style:none;margin:0;padding:0}
+#menu li{padding:0;margin:0;font-size:0.85em;font-weight:bold;display:inline}
+#menu li span{display:block;padding:3px 3px 3px 8px;margin:1px 0;text-decoration:none;font-weight:normal;color:#138ECB}
+.rtl #menu li span{padding:3px 8px 3px 3px}
+#menu li a:hover,#menu li a:hover span{text-decoration:none;background-color:#FFF;color:#BC2A4D}
+#menu li a:active,#menu li a:active span{color:#F632A0}
+#menu li a:active,#menu li a:active span{color:#F632A0}
+#menu li.header{font-family:Tahoma,Helvetica,sans-serif;display:block;font-weight:bold;color:#115098;border-bottom:1px solid #327AA5;padding:4px 0 2px;margin-top:15px;text-transform:uppercase;font-size:0.75em}
+ 

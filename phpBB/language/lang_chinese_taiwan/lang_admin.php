@@ -339,7 +339,7 @@ $lang['Cookie_path'] = 'Cookie 路徑';
 $lang['Cookie_secure'] = 'Cookie 加密 [ https ]';
 $lang['Cookie_secure_explain'] = '如果您的主機使用 SSL 通訊協定, 請開啟這項設定, 否則請保持關閉的狀態';
 $lang['Session_length'] = 'Session 存活時間 [ 秒 ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

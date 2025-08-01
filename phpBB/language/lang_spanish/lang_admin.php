@@ -324,7 +324,7 @@ $lang['Cookie_path'] = "Ruta de la Cookie";
 $lang['Cookie_secure'] = "Cookie segura [ https ]";
 $lang['Cookie_secure_explain'] = "Si su servidor está corriendo via SSL marque esta opción de otra manera déjelo deshabilitado";
 $lang['Session_length'] = "Duración de la sesión [ segundos ]";
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management
@@ -733,6 +733,12 @@ $lang['Max_login_attempts'] = 'Allowed login attempts';
 $lang['Max_login_attempts_explain'] = 'The number of allowed board login attempts.';
 $lang['Login_reset_time'] = 'Login lock time';
 $lang['Login_reset_time_explain'] = 'Time in minutes the user have to wait until he is allowed to login again after exceeding the number of allowed login attempts.';
+
+//
+// Stop Forum Spam
+//
+$lang['sfs_enable'] = 'Activar verificación StopForumSpam en el registro';
+$lang['sfs_enable_explain'] = 'Utiliza la API de stopforumspam.com para validar nombre de usuario, correo electrónico e IP durante el registro.';
 
 //
 // Eso es todo amigos!!!!

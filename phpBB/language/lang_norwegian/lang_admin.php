@@ -323,6 +323,7 @@ $lang['Cookie_domain'] = "Cookie Domene";
 $lang['Cookie_path'] = "Cookie Sti";
 $lang['Session_length'] = "Session Tid [ sekunder ]";
 $lang['Cookie_secure'] = "Cookie Sikker [ https ]";
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 
 //

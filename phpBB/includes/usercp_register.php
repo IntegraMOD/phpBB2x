@@ -387,6 +387,19 @@ if (isset($_POST['submit']))
     }
 
     //
+    // StopForumSpam.com API, IP Check
+    //
+    if ($mode === 'register')
+    {
+        $sfs_ip_check = validate_address($_SERVER['REMOTE_ADDR']);
+        if (!empty($sfs_ip_check['error']))
+        {
+            $error = TRUE;
+            $error_msg .= ((isset($error_msg)) ? '<br />' : '') . $sfs_ip_check['error_msg'];
+        }
+    }
+
+    //
     // Do a ban check on this email address
     //
     if ($email != $userdata['user_email'] || $mode == 'register') 

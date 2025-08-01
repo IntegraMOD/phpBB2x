@@ -326,7 +326,7 @@ $lang['Cookie_path'] = "Cookie path'i";
 $lang['Cookie_secure'] = "Cookie güvenliði [ https ]";
 $lang['Cookie_secure_explain'] = "Serverýnýz SSL modunda çalýþýyorsa açýn, aksi halde açmayýn";
 $lang['Session_length'] = "Oturum uzunluðu [ saniye ]";
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

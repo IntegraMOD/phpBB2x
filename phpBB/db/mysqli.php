@@ -120,16 +120,15 @@ if(!defined("SQL_LAYER"))
 			if( $query != "" )
 			{
 				$this->num_queries++;
-				if( $transaction == BEGIN_TRANSACTION && !$this->in_transaction )
+				if ($transaction == BEGIN_TRANSACTION && !$this->in_transaction)
 				{
-					$result = mysqli_commit($this->db_connect_id);
-					if(!$result)
+					if (!mysqli_begin_transaction($this->db_connect_id))
 					{
 						return false;
 					}
 					$this->in_transaction = true;
 				}
-			
+
 				$qstart = microtime(true);
 				try {
 						$this->count++;

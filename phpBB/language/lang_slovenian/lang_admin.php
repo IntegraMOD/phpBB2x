@@ -332,7 +332,7 @@ $lang['Cookie_path'] = 'Pot piškotka';
 $lang['Cookie_secure'] = 'Zašèita piškotka';
 $lang['Cookie_secure_explain'] = 'Èe vaš server teèe preko SSL, nastavi na Omogoèeno, drugaèe pusti kot Ni omogoèeno';
 $lang['Session_length'] = 'Dolžina seje [ sekunde ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

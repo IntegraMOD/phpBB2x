@@ -339,6 +339,7 @@ $lang['Cookie_path'] = '쿠키 경로';
 $lang['Cookie_secure'] = '쿠키 보안';
 $lang['Cookie_secure_explain'] = '서버가 SSL을 통하여 동작하면 이것을 사용가능으로, 아닌 경우에는 사용불가능으로 설정하십시오';
 $lang['Session_length'] = '세션 길이 [ 초 ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 $lang['Visual_confirm'] = 'Visual 확인 가능';

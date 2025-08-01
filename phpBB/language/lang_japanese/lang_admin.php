@@ -325,7 +325,7 @@ $lang['Cookie_path'] = "Cookieパス";
 $lang['Cookie_secure'] = "Cookieセキュア （https）"; 
 $lang['Cookie_secure_explain'] = "サーバーがSSLを経由している場合のみ有効にしてください。それ以外の場合は無効のままにしてください"; 
 $lang['Session_length'] = "セッションの長さ （秒単位）"; 
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

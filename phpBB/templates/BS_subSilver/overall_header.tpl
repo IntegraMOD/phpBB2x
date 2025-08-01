@@ -12,7 +12,6 @@
 <link href="templates/BS_subSilver/{T_HEAD_STYLESHEET}" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <title>{SITENAME} :: {PAGE_TITLE}</title>
-<script src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js"></script>
 <!-- BEGIN switch_enable_pm_popup -->
 <script>
 <!--
@@ -97,3 +96,15 @@
 		</div>
 <br />
 
+		<!-- BEGIN switch_cookie_consent -->
+		<div id="cookie_notice" style="text-align: center; background-color: #fdf4e3; border-bottom: 1px solid #ccc; padding: 8px;">
+		  <span class="gensmall">
+			  {cookie_consent_msg}
+			[ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]
+		  </span>
+		  <div id="privacy_dropdown" style="display: none; margin: 8px auto; width: 80%; text-align: left; background-color: #f5f5f5; border: 1px solid #ccc; padding: 8px;" class="gensmall">
+			{L_PRIVACY_POLICY}
+		  </div>
+		  <input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+		</div>
+		<!-- END switch_cookie_consent -->

@@ -974,15 +974,25 @@ $lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and co
 $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 
 //
+// cookie_consent
+//
+$lang['cookie_consent_msg']    = 'Цей сайт використовує файли cookie, щоб забезпечити найкращий досвід користування.';
+$lang['cookie_consent_link']   = 'privacy.php'; // або ваша власна сторінка політики конфіденційності
+$lang['cookie_consent_button'] = 'Прийняти';
+$lang['L_PRIVACY']             = 'Політика конфіденційності';
+$lang['L_PRIVACY_POLICY']      = 'Ця система форуму використовує файли cookie для збереження інформації на вашому комп’ютері. Ці файли не містять даних, які ви ввели у своєму обліковому записі; вони служать лише для покращення взаємодії з користувачем. <br>Адреса електронної пошти використовується лише для підтвердження реєстраційних даних та пароля (а також для надсилання нового пароля, якщо ви забудете поточний).';
+$lang['L_COOKIE_ACCEPT']       = 'Прийняти';
+
+//
 // language buttons
 //
-$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
-$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
-$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
-$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
-$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
-$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
-$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
+$lang['button_pm_new']        = 'Нове<span class="bld">ПП</span>';
+$lang['button_pm_reply']      = 'Надіслати<span class="bld">відповідь</span>';
+$lang['button_topic_locked']  = '<span class="bld">Закрито</span>';
+$lang['button_topic_new']     = 'Нова<span class="bld">тема</span>';
+$lang['button_topic_reply']   = 'Додати<span class="bld">відповідь</span>';
+$lang['icon_post_edit']       = '<span class="sml bld">Редагувати</span>';
+$lang['icon_post_quote']      = '<span class="sml bld">Цитата</span>';
 
 //
 // Social media

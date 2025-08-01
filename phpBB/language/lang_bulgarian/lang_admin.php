@@ -334,8 +334,7 @@ $lang['Cookie_path'] = "Път на Cookie";
 $lang['Cookie_secure'] = "Secure Cookie (по https)";
 $lang['Cookie_secure_explain'] = "Ако сървърът ви поддържа SSL, можете да включите тази опция; в противен случай я оставете изключена.";
 $lang['Session_length'] = "Дължина на сесията (в секунди)";
-
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

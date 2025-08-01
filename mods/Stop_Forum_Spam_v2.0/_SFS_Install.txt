@@ -1,0 +1,366 @@
+################################################################################
+##
+## Mod Title:        Stop Forum Spam
+## Mod Author:       gat0r < info@alexdoolittle.com > (Alex Doolittle)
+##                   Updated and ACP-enabled by Helter @ IntegraMOD
+##
+## Mod Description:  Built from gat0r's SFS Anti-Spam Registration Mod
+##                   Adds IP, email, and username validation using the
+##                   StopForumSpam.com API during registration. 
+##                   Prevents registration on match. 
+##                   Fully updated for phpBB2.0.25 and PHP 5.4–8.3 compatibility. 
+##                   ACP control added via acp configuration tab.
+##
+## Mod Version:      2.1
+##
+## Compatibility:    phpBB2.0.25, PHP 5.4–8.3
+##
+## Installation Level: Easy
+## Installation Time:   ~15 Minutes
+##
+## Files To Edit:
+##   admin/admin_board.php
+##   admin/page_header_admin.php
+##   includes/functions_validate.php
+##   includes/usercp_register.php
+##   language/lang_english/lang_admin.php
+##   templates/subSilver/admin/board_config_body.tpl
+##   templates/BS_subSilver/admin/board_config_body.tpl
+##
+################################################################################
+##
+## BACK UP ALL FILES BEFORE APPLYING
+##
+################################################################################
+
+#
+#----------[ SQL ]-------------------------------------
+#
+INSERT INTO phpbb_config (config_name, config_value) VALUES ('sfs_enable', '1');
+
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+admin/admin_board.php
+
+#
+#----------[ FIND ]-------------------------------------
+#
+				$new['avatar_path'] = $default_config['avatar_path'];
+			}
+		}
+
+#
+#----------[ AFTER, ADD ]-------------------------------
+#
+		if (isset($HTTP_POST_VARS['sfs_enable']))
+		{
+			$sfs_enable = intval($HTTP_POST_VARS['sfs_enable']);
+			$sql = "UPDATE " . CONFIG_TABLE . "
+					SET config_value = '$sfs_enable'
+					WHERE config_name = 'sfs_enable'";
+			$db->sql_query($sql);
+		}
+
+
+#
+#----------[ FIND ]-------------------------------------
+#
+$allow_autologin_yes = ($new['allow_autologin']) ? 'checked="checked"' : '';
+$allow_autologin_no = (!$new['allow_autologin']) ? 'checked="checked"' : '';
+
+#
+#----------[ BEFORE, ADD ]-------------------------------
+#
+$new['sfs_enable'] = isset($board_config['sfs_enable']) ? intval($board_config['sfs_enable']) : 0;
+
+$sfs_enable_yes = ($new['sfs_enable']) ? 'checked="checked"' : '';
+$sfs
+
+#
+#----------[ FIND ]-------------------------------------
+#
+	"SERVER_NAME" => $new['server_name'], 
+
+#
+#----------[ BEFORE, ADD ]-------------------------
+#
+	"L_SFS_ENABLE" => $lang['sfs_enable'],
+	"L_SFS_ENABLE_EXPLAIN" => $lang['sfs_enable_explain'],
+		
+	"SFS_ENABLE_YES" => $sfs_enable_yes,
+	"SFS_ENABLE_NO"  => $sfs_enable_no,	
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+admin/page_header_admin.php
+
+#
+#----------[ FIND ]-------------------------------------
+#
+$l_timezone = explode('.', $board_config['board_timezone']);
+$l_timezone = ((is_countable($l_timezone) ? count($l_timezone) : 0) > 1 && $l_timezone[(is_countable($l_timezone) ? count($l_timezone) : 0)-1] != 0) ? $lang[sprintf('%.1f', $board_config['board_timezone'])] : $lang[number_format($board_config['board_timezone'])];
+
+#
+#----------[ AFTER, ADD ]-------------------------
+#  
+
+if ($board_config['sfs_enable']) {
+    $template->assign_block_vars('switch_sfs_check', []);
+    $template->assign_vars([
+        'L_SFS_ENABLE'          => $lang['sfs_enable'],
+        'L_SFS_ENABLE_EXPLAIN'  => $lang['sfs_enable_explain'],
+		// 'SFS_CHECK_MSG' => $lang['sfs_check_msg'],
+		// 'SFS_HELP_LINK' => $lang['sfs_help_link'],
+    ]);
+}
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+includes/usercp_register.php
+
+#
+#----------[ FIND ]-------------------------------------
+#
+
+   //
+   // Do a ban check on this email address
+   //
+
+#
+#----------[ BEFORE, ADD ]------------------------------
+#
+
+    //
+    // StopForumSpam.com API, IP Check
+    //
+    if ($mode === 'register')
+    {
+        $sfs_ip_check = validate_address($_SERVER['REMOTE_ADDR']);
+        if (!empty($sfs_ip_check['error']))
+        {
+            $error = TRUE;
+            $error_msg .= ((isset($error_msg)) ? '<br />' : '') . $sfs_ip_check['error_msg'];
+        }
+    }
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+includes/functions_validate.php
+
+#
+#----------[ FIND ]-------------------------------------
+#
+
+	// Don't allow " and ALT-255 in username.
+	if (strstr($username, '"') || strstr($username, '&quot;') || strstr($username, chr(160)) || strstr($username, chr(173)))
+	{
+		return array('error' => true, 'error_msg' => $lang['Username_invalid']);
+	}
+
+#
+#----------[ AFTER, ADD ]-------------------------------
+#
+
+    // StopForumSpam.com API, Username Check
+    $sfs_check = stopforumspam($username, "username");
+    if ($sfs_check === true)
+    {
+        return array('error' => true, 'error_msg' => $lang['Username_disallowed']);
+    }
+    elseif (is_array($sfs_check) && isset($sfs_check['error_msg']))
+    {
+        return $sfs_check;
+    }
+
+#
+#----------[ FIND ]-------------------------------------
+#
+
+			$db->sql_freeresult($result);
+
+			return array('error' => false, 'error_msg' => '');
+		}
+	}
+
+	return array('error' => true, 'error_msg' => $lang['Email_invalid']);
+
+#
+#----------[ BEFORE, ADD ]------------------------------
+#
+
+			// StopForumSpam.com API, Email Check
+			$sfs_check = stopforumspam($email, "email");
+			if ($sfs_check === true)
+			{
+				return array('error' => true, 'error_msg' => $lang['Email_banned']);
+			}
+			elseif (is_array($sfs_check) && isset($sfs_check['error_msg']))
+			{
+				return $sfs_check;
+			}
+#
+#----------[ FIND ]-------------------------------------
+#
+		if (!preg_match('#^http[s]?\\:\\/\\/[a-z0-9\-]+\.([a-z0-9\-]+\.)?[a-z]+#i', isset($website) ? $website : ''))
+		{
+			$website = '';
+		}
+	}
+
+	return;
+}
+
+#
+#----------[ AFTER, ADD ]------------------------------
+#
+
+// StopForumSpam.com API, IP validator
+function validate_address($addr)
+{
+    global $lang;
+
+    $sfs_result = stopforumspam($addr, 'ip');
+    if ($sfs_result === true)
+    {
+        return array('error' => true, 'error_msg' => $lang['You_been_banned']);
+    }
+    elseif (is_array($sfs_result) && isset($sfs_result['error_msg']))
+    {
+        return $sfs_result;
+    }
+
+    return array('error' => false);
+}
+
+// StopForumSpam.com API connector
+function stopforumspam($value, $type)
+{
+    $url = "https://api.stopforumspam.org/api?" . $type . "=" . urlencode($value) . "&xml";
+
+    if (function_exists('file_get_contents') && class_exists('DOMDocument'))
+    {
+        $xml = @file_get_contents($url);
+
+        if ($xml === false)
+        {
+            return array('error' => true, 'error_msg' => 'SFS service unreachable. Please try again later.');
+        }
+
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        if (!$dom->loadXML($xml))
+        {
+            return array('error' => true, 'error_msg' => 'Invalid response from SFS API.');
+        }
+
+        $tags = $dom->getElementsByTagName('appears');
+        foreach ($tags as $node)
+        {
+            if (trim($node->nodeValue) === 'yes')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    else
+    {
+        return array('error' => true, 'error_msg' => 'Server lacks required PHP extensions for SFS check.');
+    }
+}
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+language/lang_english/lang_admin.php
+
+#
+#----------[ FIND ]-------------------------------------
+#
+//
+// That's all Folks!
+#
+#----------[ BEFORE, ADD ]----------------------------
+#
+//
+// Stop Forum Spam
+//
+$lang['sfs_enable'] = 'Enable StopForumSpam registration check';
+$lang['sfs_enable_explain'] = 'Uses the stopforumspam.com API to validate username, email and IP address during user registration.';
+
+#
+#----------[ ADDITIONAL TRANSLATIONS ]----------------------------
+#
+// German [DE]
+$lang['sfs_enable'] = 'StopForumSpam-Überprüfung bei Registrierung aktivieren';
+$lang['sfs_enable_explain'] = 'Verwendet die API von stopforumspam.com zur Prüfung von Benutzername, E-Mail und IP-Adresse während der Registrierung.';
+
+// Dutch [NL]
+$lang['sfs_enable'] = 'StopForumSpam-controle bij registratie inschakelen';
+$lang['sfs_enable_explain'] = 'Gebruikt de API van stopforumspam.com om gebruikersnaam, e-mail en IP te controleren bij registratie.';
+
+// Spanish [ES]
+$lang['sfs_enable'] = 'Activar verificación StopForumSpam en el registro';
+$lang['sfs_enable_explain'] = 'Utiliza la API de stopforumspam.com para validar nombre de usuario, correo electrónico e IP durante el registro.';
+
+// British English [UK]
+$lang['sfs_enable'] = 'Enable StopForumSpam registration check';
+$lang['sfs_enable_explain'] = 'Uses the stopforumspam.com API to validate username, email and IP address during user registration.';
+
+// Russian [RU]
+$lang['sfs_enable'] = 'Включить проверку StopForumSpam при регистрации';
+$lang['sfs_enable_explain'] = 'Использует API stopforumspam.com для проверки имени пользователя, email и IP-адреса во время регистрации.';
+
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+templates/subSilver/admin/board_config_body.tpl
+
+#
+#----------[ FIND ]-------------------------------------
+#
+	<tr>
+		<td class="row1">{L_VISUAL_CONFIRM}<br /><span class="gensmall">{L_VISUAL_CONFIRM_EXPLAIN}</span></td>
+		<td class="row2"><input type="radio" name="enable_confirm" value="1" {CONFIRM_ENABLE} />{L_YES}&nbsp; &nbsp;<input type="radio" name="enable_confirm" value="0" {CONFIRM_DISABLE} />{L_NO}</td>
+	</tr>
+
+#
+#----------[ AFTER, ADD ]-------------------------------
+#
+	<tr>
+		<td class="row1"><span class="gen">{L_SFS_ENABLE}</span><br /><span class="gensmall">{L_SFS_ENABLE_EXPLAIN}</span></td>
+		<td class="row2"><input type="radio" name="sfs_enable" value="1" {SFS_ENABLE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="sfs_enable" value="0" {SFS_ENABLE_NO} /> {L_NO}</td>
+	</tr>
+
+#
+#----------[ OPEN ]-------------------------------------
+#
+templates/BS_subSilver/admin/board_config_body.tpl
+
+#
+#----------[ FIND ]-------------------------------------
+#
+					<dl>
+						<dt><label>{L_VISUAL_CONFIRM}:</label><br /><span>{L_VISUAL_CONFIRM_EXPLAIN}</span></dt>
+						<dd><input type="radio" class="radio" name="enable_confirm" value="1" {CONFIRM_ENABLE} /> {L_YES}&nbsp; <input type="radio" class="radio" name="enable_confirm" value="0" {CONFIRM_DISABLE} /> {L_NO}</dd>
+					</dl>
+
+#
+#----------[ AFTER, ADD ]-------------------------------
+#
+					<dl>
+						<dt><label>{L_SFS_ENABLE}:</label><br /><span>{L_SFS_ENABLE_EXPLAIN}</span></dt>
+						<dd><input type="radio" class="radio" name="sfs_enable" value="1" {SFS_ENABLE_YES} /> {L_YES}&nbsp;	<input type="radio" class="radio" name="sfs_enable" value="0" {SFS_ENABLE_NO} /> {L_NO}</dd>
+					</dl>
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]--------------------------
+#
+# EoM

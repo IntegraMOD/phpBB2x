@@ -730,3 +730,34 @@ a.top2{
 	text-decoration:none;
 	padding-left:15px;
 }
+
+.cookie-consent {
+  background-color: #fdf4e3;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.cookie-consent p.responsive-center {
+  padding-top: 14px;
+  text-align: center;	
+}	
+.cookie-consent a.cookie-link {
+  color: #006699;
+  text-decoration: underline;
+}
+
+.cookie-accept {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 0.9em;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #333;
+  text-decoration: none;
+}
+.cookie-accept:hover {
+  background-color: #ddd;
+}

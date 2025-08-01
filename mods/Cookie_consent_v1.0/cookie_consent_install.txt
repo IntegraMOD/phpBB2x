@@ -1,0 +1,335 @@
+##############################################################
+## MOD Title: Cookie Consent for phpBB2x / phpBB2.0.23
+## MOD Author: Helter
+## MOD Version: 1.0.0
+## phpBB Version: 2.0.23
+## Description: Adds a Cookie Consent Notice with an enable/disable toggle for cookie consent display logic via ACP
+##############################################################
+
+## Before Adding This MOD:
+## - Backup all affected files.
+## - Tested with phpBB2x; manual adjustment may be needed for other versions.
+
+##############################################################
+## Files To Edit:
+##   admin/admin_board.php
+##   includes/page_header.php
+##   templates/subSilver/admin/admin_board.tpl
+##   templates/subSilver/overall_header.tpl
+##   templates/BS_subSilver/admin/admin_board.tpl
+##   templates/BS_subSilver/overall_header.tpl
+##   templates/BS_subSilver/BS_subSilver.css
+## Language Files To Edit:
+##   language/lang_english/lang_admin.php
+##   language/lang_english/lang_main.php
+##############################################################
+## Included Files:
+##   None
+##############################################################
+
+#
+#-----[ SQL ]------------------------------------------
+#
+INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_consent_enable', '1');
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+admin/admin_board.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+$cookie_secure_yes = ( $new['cookie_secure'] ) ? "checked=\"checked\"" : "";
+$cookie_secure_no = ( !$new['cookie_secure'] ) ? "checked=\"checked\"" : "";
+
+#
+#-----[ AFTER, ADD ]-----------------------------------
+#
+$cookie_consent_yes = ($new['cookie_consent_enable']) ? "checked=\"checked\"" : "";
+$cookie_consent_no  = (!$new['cookie_consent_enable']) ? "checked=\"checked\"" : "";
+
+#
+#-----[ FIND ]------------------------------------------
+#
+#
+		if( isset($HTTP_POST_VARS['submit']) )
+		{
+			$sql = "UPDATE " . CONFIG_TABLE . " SET
+
+#
+#-----[ BEFORE, ADD ]------------------------------------
+#
+		if (isset($HTTP_POST_VARS['cookie_consent_enable']))
+		{
+			$cookie_consent_enable = intval($HTTP_POST_VARS['cookie_consent_enable']);
+			$sql = "UPDATE " . CONFIG_TABLE . "
+					SET config_value = '$cookie_consent_enable'
+					WHERE config_name = 'cookie_consent_enable'";
+			$db->sql_query($sql);
+		}
+		
+#
+#-----[ FIND ]------------------------------------------
+# Inside assign_vars(...) array
+#
+	"S_COOKIE_SECURE_ENABLED" => $cookie_secure_yes, 
+	"S_COOKIE_SECURE_DISABLED" => $cookie_secure_no, 
+
+#
+#-----[ AFTER, ADD ]------------------------------
+#
+	"COOKIE_CONSENT_YES" => $cookie_consent_yes,
+	"COOKIE_CONSENT_NO"  => $cookie_consent_no,
+	"L_COOKIE_CONSENT_ENABLE" => $lang['cookie_consent_enable'],
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+includes/page_header.php
+
+#
+#-----[ FIND ]------------------------------------------
+#
+//
+// gzip_compression
+//
+
+#
+#-----[ BEFORE, ADD ]-------------------------------------------
+#
+//
+// cookie_consent
+//
+if (!isset($_COOKIE['cookie_consent']) && $board_config['cookie_consent_enable']) {
+    $template->assign_block_vars('switch_cookie_consent', []);
+    $template->assign_vars([
+        'cookie_consent_msg'   => $lang['cookie_consent_msg'],
+        'cookie_consent_link'  => $lang['cookie_consent_link'],
+        'L_PRIVACY_POLICY'     => $lang['L_PRIVACY_POLICY'],
+        'L_PRIVACY'            => $lang['L_PRIVACY'],
+		'L_COOKIE_ACCEPT'      => $lang['L_COOKIE_ACCEPT'],
+    ]);
+}
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/BS_subSilver/admin/board_config_body.tpl
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+# 
+					<dl>
+						<dt><label>{L_SESSION_LENGTH}:</label></dt>
+						<dd><input type="text" maxlength="5" size="5" name="session_length" value="{SESSION_LENGTH}" /></dd>
+					</dl>
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+					<dl>
+					  <dt><label for="cookie_consent_enable">{L_COOKIE_CONSENT_ENABLE}:</label></dt>
+					  <dd>
+						<label><input type="radio" name="cookie_consent_enable" id="cookie_consent_enable1" value="1" {COOKIE_CONSENT_YES}> {L_YES}</label>
+						<label><input type="radio" name="cookie_consent_enable" id="cookie_consent_enable0" value="0" {COOKIE_CONSENT_NO}> {L_NO}</label>
+					  </dd>
+					</dl>
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/BS_subSilver/css/BS_subSilver.css
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+.topp2 {
+  padding-top: 12px;
+}
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+
+.cookie-consent {
+  background-color: #fdf4e3;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.cookie-consent p.responsive-center {
+  padding-top: 14px;
+  text-align: center;	
+}	
+.cookie-consent a.cookie-link {
+  color: #006699;
+  text-decoration: underline;
+}
+
+.cookie-accept {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 0.9em;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #333;
+  text-decoration: none;
+}
+.cookie-accept:hover {
+  background-color: #ddd;
+}
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/BS_subSilver/overall_header.tpl
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+		      <div class="col text-center mb-3"><span class="maintitle align-text-bottom">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}</span></div>
+		  </div>
+		</div>
+<br />
+		
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+	<!-- BEGIN switch_cookie_consent -->
+	<div id="cookie_notice" style="text-align: center; background-color: #fdf4e3; border-bottom: 1px solid #ccc; padding: 8px;">
+	  <span class="gensmall">
+		  {cookie_consent_msg}
+		[ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]
+	  </span>
+	  <div id="privacy_dropdown" style="display: none; margin: 8px auto; width: 80%; text-align: left; background-color: #f5f5f5; border: 1px solid #ccc; padding: 8px;" class="gensmall">
+		{L_PRIVACY_POLICY}
+	  </div>
+	  <input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+	</div>
+	<!-- END switch_cookie_consent -->
+#
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/admin/admin_board.tpl
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+#
+	<tr>
+		<td class="row1">{L_SESSION_LENGTH}</td>
+		<td class="row2"><input class="post" type="text" maxlength="5" size="5" name="session_length" value="{SESSION_LENGTH}" /></td>
+	</tr>
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+	<tr>
+	  <td class="row1">{L_COOKIE_CONSENT_ENABLE}</td>
+	  <td class="row2">
+		<input type="radio" name="cookie_consent_enable" value="1" {COOKIE_CONSENT_YES}> {L_YES}
+		<input type="radio" name="cookie_consent_enable" value="0" {COOKIE_CONSENT_NO}> {L_NO}
+	  </td>
+	</tr>
+
+#-----[ OPEN ]------------------------------------------
+#
+templates/subSilver/overall_header.tpl
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+.helpline { background-color: {T_TR_COLOR2}; border-style: none; }
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+
+.cookie-notice {
+  padding: 6px;
+  font-size: 0.95em;
+  text-align: center;
+  background-color: #fdf4e3;
+  border-bottom: 1px solid #ccc;
+}
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+#
+				</table></td>
+			</tr>
+		</table>
+
+		<br />
+		
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+		<!-- BEGIN switch_cookie_consent -->
+		<div id="cookie_notice">
+		  <table width="100%" cellspacing="0" cellpadding="4" border="0" align="center" class="forumline" style="background-color: #fdf4e3; border-bottom: 1px solid #ccc;">
+			<tr>
+			  <td align="center" class="row1">
+				<span class="gensmall">
+				  {cookie_consent_msg}
+				  [ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]
+				</span>
+				<br />
+				<div id="privacy_dropdown" style="display: none; margin: 8px auto; width: 80%; text-align: left; background-color: #f5f5f5; border: 1px solid #ccc; padding: 8px;" class="gensmall">
+				  {L_PRIVACY_POLICY}
+				</div>
+				<br />
+				<input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+			  </td>
+			</tr>
+		  </table>
+		</div>
+		<!-- END switch_cookie_consent -->
+
+
+
+
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+language/lang_english/lang_admin.php
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+$lang['Session_length'] = 'Session length [ seconds ]';
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+language/lang_english/lang_main.php
+
+#
+#-----[ FIND ]------------------------------------------
+# 
+$lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
+#
+#-----[ AFTER, ADD ]-------------------------------------------
+#
+
+//
+// cookie_consent
+//
+$lang['cookie_consent_msg']    = 'This site uses cookies to ensure you get the best experience.';
+$lang['cookie_consent_link']   = 'privacy.php'; // or your custom policy page
+$lang['cookie_consent_button'] = 'Accept';
+$lang['L_PRIVACY']             = 'Privacy Policy';
+$lang['L_PRIVACY_POLICY']      = 'This forum system uses cookies to store information on your local computer. These cookies do not contain any of the information you have entered in your account; they serve only to improve your user experience. <br>The e-mail address is used only for confirming your registration details and password (and for sending new passwords should you forget your current one).';
+$lang['L_COOKIE_ACCEPT']       = 'Accept';
+#
+#-----[ SAVE/CLOSE ALL FILES ]--------------------------
+#
+# Done.

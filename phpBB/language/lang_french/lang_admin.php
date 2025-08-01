@@ -332,7 +332,7 @@ $lang['Cookie_path'] = 'Chemin du cookie';
 $lang['Cookie_secure'] = 'Cookie sécurisé';
 $lang['Cookie_secure_explain'] = 'Si votre serveur fonctionne via SSL, activez cette fonction, sinon laissez là désactivée';
 $lang['Session_length'] = 'Durée de la session [ secondes ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

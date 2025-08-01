@@ -330,7 +330,7 @@ $lang['Cookie_path'] = 'Đường dẫn Cookie';
 $lang['Cookie_secure'] = 'Bảo mật Cookie';
 $lang['Cookie_secure_explain'] = 'Nếu máy chủ chạy bằng SSL (với địa chỉ web bắt đầu bằng <b>https://</b>), thiết lập là Mở, nếu không hãy để nó Tắt';
 $lang['Session_length'] = 'Khoảng thời gian Session [ giây ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 $lang['Visual_confirm'] = 'Cho hiển thị mã xác nhận';

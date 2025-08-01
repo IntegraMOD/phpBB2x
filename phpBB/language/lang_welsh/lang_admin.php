@@ -334,7 +334,7 @@ $lang['Cookie_path'] = 'Llwybr cwci';
 $lang['Cookie_secure'] = 'Cwci diogel';
 $lang['Cookie_secure_explain'] = 'Os ydy\'ch gweinydd yn rhedeg trwy SSL, gosodwch hwn i \'ie\' - fel arall, gadewch yn \'nage\'';
 $lang['Session_length'] = 'Hyd sesiwn [ eiliadau ]';
-
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

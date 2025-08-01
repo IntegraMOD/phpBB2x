@@ -345,6 +345,7 @@ $lang['Cookie_path'] = 'Slóð fyrir vefkökur';
 $lang['Cookie_secure'] = 'Vefkökur á SSL';
 $lang['Cookie_secure_explain'] = 'Ef vefþjónninn þinn er keyrður yfir SSL þá á að virkja þessa stillingu, annars ekki';
 $lang['Session_length'] = 'Lengd innskráningar [ sekúndur ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

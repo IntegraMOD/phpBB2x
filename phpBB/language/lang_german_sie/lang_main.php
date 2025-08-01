@@ -1008,15 +1008,25 @@ $lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and co
 $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 
 //
+// cookie_consent
+//
+$lang['cookie_consent_msg']    = 'Diese Website verwendet Cookies, um Ihnen das bestmögliche Nutzererlebnis zu bieten.';
+$lang['cookie_consent_link']   = 'privacy.php'; // oder Ihre eigene Datenschutzseite
+$lang['cookie_consent_button'] = 'Akzeptieren';
+$lang['L_PRIVACY']             = 'Datenschutzrichtlinie';
+$lang['L_PRIVACY_POLICY']      = 'Dieses Forumsystem verwendet Cookies zur Speicherung von Informationen auf Ihrem Computer. Diese Cookies enthalten keine persönlichen Daten aus Ihrem Benutzerkonto; sie dienen ausschließlich zur Verbesserung Ihrer Nutzererfahrung. <br>Die E-Mail-Adresse wird nur zur Bestätigung Ihrer Registrierungsdaten und Ihres Passworts verwendet (sowie zum Versand neuer Passwörter, falls Sie Ihr aktuelles vergessen sollten).';
+$lang['L_COOKIE_ACCEPT']       = 'Akzeptieren';
+
+//
 // language buttons
 //
-$lang['button_pm_new'] = 'New<span class="bld">PM</span>';
-$lang['button_pm_reply'] = 'Send<span class="bld">Reply</span>';
-$lang['button_topic_locked'] = '<span class="bld">Locked</span>';
-$lang['button_topic_new'] = 'New<span class="bld">Topic</span>';
-$lang['button_topic_reply'] = 'Post<span class="bld">Reply</span>';
-$lang['icon_post_edit'] = '<span class="sml bld">Edit</span>';
-$lang['icon_post_quote'] = '<span class="sml bld">Quote</span>';
+$lang['button_pm_new']        = 'Neue<span class="bld">PN</span>';
+$lang['button_pm_reply']      = 'Antwort<span class="bld">senden</span>';
+$lang['button_topic_locked']  = '<span class="bld">Geschlossen</span>';
+$lang['button_topic_new']     = 'Neues<span class="bld">Thema</span>';
+$lang['button_topic_reply']   = 'Antwort<span class="bld">verfassen</span>';
+$lang['icon_post_edit']       = '<span class="sml bld">Bearbeiten</span>';
+$lang['icon_post_quote']      = '<span class="sml bld">Zitieren</span>';
 
 //
 // Social media

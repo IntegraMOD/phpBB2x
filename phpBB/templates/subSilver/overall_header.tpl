@@ -206,6 +206,14 @@ input.liteoption {
 */
 .helpline { background-color: {T_TR_COLOR2}; border-style: none; }
 
+.cookie-notice {
+  padding: 6px;
+  font-size: 0.95em;
+  text-align: center;
+  background-color: #fdf4e3;
+  border-bottom: 1px solid #ccc;
+}
+
 /* Import the fancy styles for IE only (NS4.x doesn't use the @import function) */
 @import url("templates/subSilver/formIE.css"); 
 -->
@@ -247,3 +255,24 @@ input.liteoption {
 		</table>
 
 		<br />
+
+		<!-- BEGIN switch_cookie_consent -->
+		<div id="cookie_notice">
+		  <table width="100%" cellspacing="0" cellpadding="4" border="0" align="center" class="forumline" style="background-color: #fdf4e3; border-bottom: 1px solid #ccc;">
+			<tr>
+			  <td align="center" class="row1">
+				<span class="gensmall">
+				  {cookie_consent_msg}
+				  [ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]
+				</span>
+				<br />
+				<div id="privacy_dropdown" style="display: none; margin: 8px auto; width: 80%; text-align: left; background-color: #f5f5f5; border: 1px solid #ccc; padding: 8px;" class="gensmall">
+				  {L_PRIVACY_POLICY}
+				</div>
+				<br />
+				<input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+			  </td>
+			</tr>
+		  </table>
+		</div>
+		<!-- END switch_cookie_consent -->

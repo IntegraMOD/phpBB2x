@@ -301,7 +301,7 @@ $lang['Cookie_path'] = 'Шлях Cookie';
 $lang['Cookie_secure'] = 'Захищені Cookie';
 $lang['Cookie_secure_explain'] = 'Якщо ваш сервер працює через SSL, увімкніть цю опцію, інакше - ні';
 $lang['Session_length'] = 'Термін активності cookie [ секунд ]';
-
+$lang['cookie_consent_enable'] = 'Увімкнути сповіщення про використання файлів cookie?';
 
 //
 // Forum Management
@@ -711,6 +711,12 @@ $lang['Max_login_attempts'] = 'Allowed login attempts';
 $lang['Max_login_attempts_explain'] = 'The number of allowed board login attempts.';
 $lang['Login_reset_time'] = 'Login lock time';
 $lang['Login_reset_time_explain'] = 'Time in minutes the user have to wait until he is allowed to login again after exceeding the number of allowed login attempts.';
+
+//
+// Stop Forum Spam
+//
+$lang['sfs_enable'] = 'Увімкнути перевірку реєстрації через StopForumSpam';
+$lang['sfs_enable_explain'] = 'Використовує API stopforumspam.com для перевірки імені користувача, електронної пошти та IP-адреси під час реєстрації.';
 
 //
 // That's all Folks!

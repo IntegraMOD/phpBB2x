@@ -68,6 +68,16 @@ $template->set_filenames(array(
 $l_timezone = explode('.', $board_config['board_timezone']);
 $l_timezone = ((is_countable($l_timezone) ? count($l_timezone) : 0) > 1 && $l_timezone[(is_countable($l_timezone) ? count($l_timezone) : 0)-1] != 0) ? $lang[sprintf('%.1f', $board_config['board_timezone'])] : $lang[number_format($board_config['board_timezone'])];
 
+if ($board_config['sfs_enable']) {
+    $template->assign_block_vars('switch_sfs_check', []);
+    $template->assign_vars([
+        'L_SFS_ENABLE'          => $lang['sfs_enable'],
+        'L_SFS_ENABLE_EXPLAIN'  => $lang['sfs_enable_explain'],
+		// 'SFS_CHECK_MSG' => $lang['sfs_check_msg'],
+		// 'SFS_HELP_LINK' => $lang['sfs_help_link'],
+    ]);
+}
+
 //
 // The following assigns all _common_ variables that may be used at any point
 // in a template. Note that all URL's should be wrapped in append_sid, as

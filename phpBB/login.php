@@ -42,6 +42,8 @@ init_userprefs($userdata);
 //
 // End session management
 //
+$redirect_raw = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+$redirect_clean = str_replace('&amp;', '&', htmlspecialchars($redirect_raw, ENT_COMPAT, 'UTF-8'));
 
 // session id check
 if (!empty($HTTP_POST_VARS['sid']) || !empty($HTTP_GET_VARS['sid']))
@@ -95,15 +97,52 @@ if( isset($HTTP_POST_VARS['login']) || isset($HTTP_GET_VARS['login']) || isset($
 					$autologin = ( isset($_POST['autologin']) ) ? TRUE : 0;
 
 					$admin = (isset($HTTP_POST_VARS['admin'])) ? 1 : 0;
-					$session_id = session_begin($row['user_id'], $user_ip, PAGE_INDEX, FALSE, $autologin, $admin);
+					$session_data = session_begin($row['user_id'], $user_ip, PAGE_INDEX, FALSE, $autologin, $admin);
+                    $session_id = (is_array($session_data) && isset($session_data['session_id'])) ? $session_data['session_id'] : '';
 
 					// Reset login tries
 					$db->sql_query('UPDATE ' . USERS_TABLE . ' SET user_login_tries = 0, user_last_login_try = 0 WHERE user_id = ' . $row['user_id']);
 
 					if( $session_id )
 					{
-						$url = ( !empty($HTTP_POST_VARS['redirect']) ) ? str_replace('&amp;', '&', htmlspecialchars($HTTP_POST_VARS['redirect'], ENT_COMPAT, 'UTF-8')) : "index.$phpEx";
-						redirect(append_sid($url, true));
+
+					$url = (!empty($HTTP_POST_VARS['redirect']) && is_string($HTTP_POST_VARS['redirect'])) ? $HTTP_POST_VARS['redirect'] : "index.$phpEx";
+
+					// Normalize ampersands
+					$url = str_replace('&amp;', '&', htmlspecialchars($url, ENT_COMPAT, 'UTF-8'));
+
+					// Ensure query string starts with '?'
+					if (strpos($url, '?') === false && strpos($url, '&') !== false) {
+						$url = preg_replace('/&/', '?', $url, 1);
+					}
+
+					// Inject SID if admin context is detected
+					if (
+						isset($HTTP_POST_VARS['admin']) ||
+						strpos($url, 'admin/') === 0 ||
+						strpos($url, 'admin.') === 0 ||
+						strpos($url, 'admin=1') !== false
+					) {
+						$url = append_sid($url, true);
+					}
+
+					redirect($url);
+
+					// Normalize redirect target
+					$url = str_replace('&amp;', '&', htmlspecialchars($url, ENT_COMPAT, 'UTF-8'));
+					$url = str_replace('?', '&', $url);
+
+					// Force SID injection if admin=1 is present or target is admin panel
+					if (
+						isset($_POST['admin']) ||
+						strpos($url, 'admin/') === 0 ||
+						strpos($url, 'admin.') === 0 ||
+						strpos($url, 'admin=1') !== false
+					) {
+						$url = append_sid($url, true);
+					}
+
+					redirect($url);
 					}
 					else
 					{
@@ -204,7 +243,9 @@ else
 			'body' => 'login_body.tpl')
 		);
 
-		$forward_page = '';
+		if (empty($forward_page)) {
+			$forward_page = $redirect_clean;
+		}
 
 		if( isset($HTTP_POST_VARS['redirect']) || isset($HTTP_GET_VARS['redirect']) )
 		{
@@ -239,7 +280,7 @@ else
 
 		$username = ( $userdata['user_id'] != ANONYMOUS ) ? $userdata['username'] : '';
 
-		$s_hidden_fields = '<input type="hidden" name="redirect" value="' . $forward_page . '" />';
+		$s_hidden_fields = '';
 		$s_hidden_fields .= (isset($HTTP_GET_VARS['admin'])) ? '<input type="hidden" name="admin" value="1" />' : '';
 
 		make_jumpbox('viewforum.'.$phpEx);
@@ -252,7 +293,8 @@ else
 
 			'U_SEND_PASSWORD' => append_sid("profile.$phpEx?mode=sendpassword"),
 
-			'S_HIDDEN_FIELDS' => $s_hidden_fields)
+			'S_HIDDEN_FIELDS' => $s_hidden_fields,
+			'S_LOGIN_REDIRECT' => append_sid($forward_page))
 		);
 
 		$template->pparse('body');

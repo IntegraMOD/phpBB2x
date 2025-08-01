@@ -40,6 +40,10 @@
 		<td class="row2"><input type="radio" name="enable_confirm" value="1" {CONFIRM_ENABLE} />{L_YES}&nbsp; &nbsp;<input type="radio" name="enable_confirm" value="0" {CONFIRM_DISABLE} />{L_NO}</td>
 	</tr>
 	<tr>
+		<td class="row1"><span class="gen">{L_SFS_ENABLE}</span><br /><span class="gensmall">{L_SFS_ENABLE_EXPLAIN}</span></td>
+		<td class="row2"><input type="radio" name="sfs_enable" value="1" {SFS_ENABLE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="sfs_enable" value="0" {SFS_ENABLE_NO} /> {L_NO}</td>
+	</tr>
+	<tr>
 		<td class="row1">{L_ALLOW_AUTOLOGIN}<br /><span class="gensmall">{L_ALLOW_AUTOLOGIN_EXPLAIN}</span></td>
 		<td class="row2"><input type="radio" name="allow_autologin" value="1" {ALLOW_AUTOLOGIN_YES} />{L_YES}&nbsp; &nbsp;<input type="radio" name="allow_autologin" value="0" {ALLOW_AUTOLOGIN_NO} />{L_NO}</td>
 	</tr>
@@ -132,6 +136,10 @@
 	<tr>
 		<td class="row1">{L_SESSION_LENGTH}</td>
 		<td class="row2"><input class="post" type="text" maxlength="5" size="5" name="session_length" value="{SESSION_LENGTH}" /></td>
+	</tr>
+	<tr>
+	  <td class="row1">{L_COOKIE_CONSENT_ENABLE}</td>
+	  <td class="row2"><input type="radio" name="cookie_consent_enable" value="1" {COOKIE_CONSENT_YES}> {L_YES}&nbsp; &nbsp;<input type="radio" name="cookie_consent_enable" value="0" {COOKIE_CONSENT_NO}> {L_NO}</td>
 	</tr>
 	<tr>
 		<th class="thHead" colspan="2">{L_PRIVATE_MESSAGING}</th>

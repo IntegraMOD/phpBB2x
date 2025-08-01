@@ -328,6 +328,7 @@ $lang['Cookie_path'] = 'Path Cookie';
 $lang['Cookie_secure'] = 'Secure Cookie';
 $lang['Cookie_secure_explain'] = 'Jika server menggunakan SSL, gunakan pilihan ini, jika tidak biarkan pilihan Tidak';
 $lang['Session_length'] = 'Lama session [ detik ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 $lang['Visual_confirm'] = 'Aktifkan Konfirmasi Visual';

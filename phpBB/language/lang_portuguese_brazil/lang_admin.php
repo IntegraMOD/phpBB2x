@@ -345,6 +345,7 @@ $lang['Cookie_path'] = 'Pasta do Cookie';
 $lang['Cookie_secure'] = 'Cookie Seguro [ https:// ]';
 $lang['Cookie_secure_explain'] = 'Se o seu servidor estiver rodando através de SSL ative isto, caso contrário deixe desligado';
 $lang['Session_length'] = 'Tempo da sessão [ segundos ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 //
 // Forum Management

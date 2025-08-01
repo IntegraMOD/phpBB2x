@@ -322,6 +322,7 @@ $lang['Cookie_path'] = 'Путь куки';
 $lang['Cookie_secure'] = 'Безопасные куки [ https ]';
 $lang['Cookie_secure_explain'] = 'Если ваш сервер работает через SSL, то включите эту установку, в противном случае оставьте выключенной.';
 $lang['Session_length'] = 'Длина сессии [ в секундах ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 
 // Visual Confirmation
@@ -745,6 +746,12 @@ $lang['Max_login_attempts'] = 'Allowed login attempts';
 $lang['Max_login_attempts_explain'] = 'The number of allowed board login attempts.';
 $lang['Login_reset_time'] = 'Login lock time';
 $lang['Login_reset_time_explain'] = 'Time in minutes the user have to wait until he is allowed to login again after exceeding the number of allowed login attempts.';
+
+//
+// Stop Forum Spam
+//
+$lang['sfs_enable'] = 'Включить проверку StopForumSpam при регистрации';
+$lang['sfs_enable_explain'] = 'Использует API stopforumspam.com для проверки имени пользователя, email и IP-адреса во время регистрации.';
 
 //
 // That's all Folks!

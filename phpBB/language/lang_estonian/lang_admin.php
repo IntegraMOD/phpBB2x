@@ -330,6 +330,7 @@ $lang['Cookie_path'] = 'Küpsise asukoht';
 $lang['Cookie_secure'] = 'Turvaline Küpsis';
 $lang['Cookie_secure_explain'] = 'Kui su server kasutab SSL-i, võimalda see funktsioon. Muidu ära muuda.';
 $lang['Session_length'] = 'Sessiooni pikkus [ sekundit ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation
 $lang['Visual_confirm'] = 'Võimalda Visuaalne Kinnitus';

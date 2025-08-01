@@ -329,6 +329,7 @@ $lang['Cookie_path'] = 'Kuketa vojo';
 $lang['Cookie_secure'] = 'Sekuriga Kuketo';
 $lang['Cookie_secure_explain'] = 'Se la cia servilo rulas per SSL, agordu ĉi tiun al aktivigita, alikaze lasu ĝin malaktivigita';
 $lang['Session_length'] = 'Seanca daŭro [ sekundoj ]';
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Vida konfirmo
 $lang['Visual_confirm'] = 'Aktivigu vidan konfirmon';

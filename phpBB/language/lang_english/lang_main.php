@@ -1022,6 +1022,16 @@ $lang['Please_remove_install_contrib'] = 'Please ensure both the install/ and co
 $lang['Session_invalid'] = 'Invalid Session. Please resubmit the form.';
 
 //
+// cookie_consent
+//
+$lang['cookie_consent_msg']    = 'This site uses cookies to ensure you get the best experience.';
+$lang['cookie_consent_link']   = 'privacy.php'; // or your custom policy page
+$lang['cookie_consent_button'] = 'Accept';
+$lang['L_PRIVACY']             = 'Privacy Policy';
+$lang['L_PRIVACY_POLICY']      = 'This forum system uses cookies to store information on your local computer. These cookies do not contain any of the information you have entered in your account; they serve only to improve your user experience. <br>The e-mail address is used only for confirming your registration details and password (and for sending new passwords should you forget your current one).';
+$lang['L_COOKIE_ACCEPT']       = 'Accept';
+
+//
 // language buttons
 //
 $lang['button_pm_new'] = 'New<span class="bld">PM</span>';

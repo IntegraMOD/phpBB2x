@@ -334,6 +334,7 @@ $lang['Cookie_path'] = "Cookie Pfad";
 $lang['Cookie_secure'] = "Cookie Secure";
 $lang['Cookie_secure_explain'] = "Falls Ihr Server auf SSL läuft, aktivieren Sie diese Funktion, ansonsten lassen Sie sie deaktiviert";
 $lang['Session_length'] = "Sessionlänge [ Sekunden ]";
+$lang['cookie_consent_enable'] = 'Enable cookie consent notice?';
 
 // Visual Confirmation 
 $lang['Visual_confirm'] = 'Aktiviere visuelle Bestätigung'; 

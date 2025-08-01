@@ -1,0 +1,27 @@
+html{
+	font-size:100%;
+	margin-bottom:1px;
+}
+
+body{
+	font-family:Verdana,Helvetica,Arial,sans-serif;
+	font-size:13px;
+	background-color: #E5E5E5;
+}
+
+html,body{
+	color:#000000;
+	background-color:#E5E5E5;
+	line-height: normal;
+	line-height: 1em;
+}
+
+/* General text */
+.forumline { font-size : 0.923em !important; }
+.gen, th, .th, .cattitle, .thHead, .catHead  { font-size : 12px; }
+.genmed { font-size : 11px; }
+.gensmall { font-size : 10px; }
+.gen,.genmed,.gensmall { color : #000000; }
+a.gen,a.genmed,a.gensmall { color: #006699; text-decoration: none; }
+a.gen:hover,a.genmed:hover,a.gensmall:hover	{ color: #DD6900; text-decoration: underline; }
+   
