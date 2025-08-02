@@ -1,7 +1,0 @@
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-	dd.lastpost span {display:none;}
-	dd.topics, dd.posts {width:15%;}
-	span.res::before { content: "\A"; white-space: pre;}
-}
