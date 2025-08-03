@@ -41,7 +41,13 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	if ( isset($_COOKIE[$cookiename . '_sid']) || isset($_COOKIE[$cookiename . '_data']) )
 	{
 		$session_id = isset($_COOKIE[$cookiename . '_sid']) ? $_COOKIE[$cookiename . '_sid'] : '';
-		$sessiondata = isset($_COOKIE[$cookiename . '_data']) ? unserialize(stripslashes($_COOKIE[$cookiename . '_data'])) : array();
+		$raw_cookie = isset($_COOKIE[$cookiename . '_data']) ? $_COOKIE[$cookiename . '_data'] : '';
+		$sessiondata = array();
+
+		if (is_string($raw_cookie) && strlen($raw_cookie) > 0) {
+			$unserialized = @unserialize(stripslashes($raw_cookie));
+			$sessiondata = is_array($unserialized) ? $unserialized : array();
+		}
 		$sessionmethod = SESSION_METHOD_COOKIE;
 	}
 	else
@@ -128,7 +134,11 @@ function session_begin($user_id, $user_ip, $page_id, $auto_create = 0, $enable_a
 	//
     if (!isset($userdata) || !is_array($userdata) || empty($userdata)) 
     {
-        $sessiondata['autologinid'] = '';
+		if (!is_array($sessiondata)) {
+			$sessiondata = array();
+		}
+
+		$sessiondata['autologinid'] = '';
         $sessiondata['userid'] = $user_id = ANONYMOUS;
         $enable_autologin = $login = 0;
      
@@ -330,7 +340,15 @@ function session_pagestart($user_ip, $thispage_id)
 
 	if ( isset($_COOKIE[$cookiename . '_sid']) || isset($_COOKIE[$cookiename . '_data']) )
 	{
-		$sessiondata = isset( $_COOKIE[$cookiename . '_data'] ) ? unserialize(stripslashes($_COOKIE[$cookiename . '_data'])) : array();
+		$raw_cookie = isset($_COOKIE[$cookiename . '_data']) ? $_COOKIE[$cookiename . '_data'] : '';
+		$sessiondata = array();
+
+		if (is_string($raw_cookie) && strlen($raw_cookie) > 0) {
+			$unserialized = @unserialize(stripslashes($raw_cookie));
+			if (is_array($unserialized)) {
+				$sessiondata = $unserialized;
+			}
+		}
         $session_id = isset($_COOKIE[$cookiename . '_sid']) ? $_COOKIE[$cookiename . '_sid'] : '';
 		$sessionmethod = SESSION_METHOD_COOKIE;
 	}

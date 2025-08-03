@@ -17,10 +17,19 @@ if (!defined('IN_PHPBB'))
 if( !empty($setmodules) )
 {
 	$file = basename(__FILE__);
-	$module['Download'][$lang['Acat']] = "$file?category=add";
-	$module['Download'][$lang['Ecat']] = "$file?category=edit";
-	$module['Download'][$lang['Dcat']] = "$file?category=delete";
-	$module['Download'][$lang['Rcat']] = "$file?category=order";
+
+	if( isset($lang['Acat']) )
+		$module['Download'][$lang['Acat']] = "$file?category=add";
+
+	if( isset($lang['Ecat']) )
+		$module['Download'][$lang['Ecat']] = "$file?category=edit";
+
+	if( isset($lang['Dcat']) )
+		$module['Download'][$lang['Dcat']] = "$file?category=delete";
+
+	if( isset($lang['Rcat']) )
+		$module['Download'][$lang['Rcat']] = "$file?category=order";
+
 	return;
 }
 

@@ -1,0 +1,129 @@
+<div style="display: none;" id="ver">
+<h2>This version of phpBB is the official release of pbpBB 2.0.23 with some updates</h2> 
+<br />
+<ol>
+	<li>added the unreleased phpBB 2.0.24 update by the <b>phpBB</b> developers</b></li>
+	<li>added phpBB 2 fixes by <b>achaab & BoBmArLeY</b></li>
+	<li>added mysql and PHP version information to Admin Index</li>
+	<li>added prosilver template added as default for aesthetics</li>
+	<li>added mysqli database option</li>
+	<li>removed the obsolete mysql 3 databse option</li>
+	<li>updated to run on modern versions of php and mysql/mysqli by the <b>IntegraMOD</b> developers</li>
+</ol>
+<br />
+<p>phpBB 2.0.23 template edits:
+<ul>
+	<li>bbcode.tpl</li>
+	<li>admin/index_body.tpl</li>
+	<li>admin/page_header.tpl</li>
+</ul>
+</p>
+<p>phpBB 2.0.23 language file edits
+<ul>
+	<li>lang_admin.php</li>
+	<li>lang_main.php</li>
+</ul>
+</p>
+<textarea rows="16" style="width:100%;">
+#
+#-----[ OPEN ]---------------------------------------------
+#
+templates/YOUR TEMPLATE/bbcode.tpl
+#
+#-----[ FIND ]---------------------------------------------
+#
+<!-- BEGIN img --><img src="{URL}" border="0" /><!-- END img -->
+#
+#-----[ AFTER, ADD ]---------------------------------------------
+#
+<!-- BEGIN p_img -->{L_PRIV_IMG}:{URL}<!-- END p_img -->
+#
+#-----[ OPEN ]---------------------------------------------
+#
+templates/YOUR TEMPLATE/admin/index_body.tpl
+#
+#-----[ FIND ]---------------------------------------------
+#
+	<td class="row1" nowrap="nowrap">{L_GZIP_COMPRESSION}:</td>
+	<td class="row2"><b>{GZIP_COMPRESSION}</b></td>
+  </tr>
+#
+#-----[ AFTER, ADD ]---------------------------------------------
+#
+  <tr> 
+	<td class="row1" nowrap="nowrap">{L_PHP_VERSION}:</td>
+	<td class="row2"><b>{PHP_VERSION}</b></td>
+	<td class="row1" nowrap="nowrap">{L_MYSQL_VERSION}:</td>
+	<td class="row2"><b>{MYSQL_VERSION}</b></td>
+  </tr>
+#
+#-----[ OPEN ]---------------------------------------------
+#
+templates/YOUR TEMPLATE/admin/page_header.tpl
+#
+#-----[ FIND ]---------------------------------------------
+#
+</head>
+#
+#-----[ BEFORE, ADD ]---------------------------------------------
+#
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+
+#
+#-----[ OPEN ]---------------------------------------------
+#
+language/ALL LANGUAGES/lang_admin.php
+#
+#-----[ FIND the full line]---------------------------------------------
+#
+$lang['Version_information'] = '
+#
+#-----[ REPLACE WITH]---------------------------------------------
+#
+$lang['Version_information'] = '<a href="#" onclick="toggle_visibility( \'ver\' );" title="Click for more Information">Version Information</a>';
+$lang['Version_of_PHP'] = 'Version of PHP';
+$lang['Version_of_MySQL'] = 'Version of MySQL';
+#
+#-----[ OPEN ]---------------------------------------------
+#
+language/ALL LANGUAGES/lang_main.php
+#
+#-----[ FIND ]---------------------------------------------
+#
+//
+// That's all, Folks!
+// 
+#
+#-----[ BEFORE, ADD ]---------------------------------------------
+#
+//
+// language buttons
+//
+$lang['button_pm_new'] = 'New<div class="bld">PM</div>';
+$lang['button_pm_reply'] = 'Send<div class="bld">Reply</div>';
+$lang['button_topic_locked'] = '<div class="bld">Locked</div>';
+$lang['button_topic_new'] = 'New<div class="bld">Topic</div>';
+$lang['button_topic_reply'] = 'Post<div class="bld">Reply</div>';
+$lang['icon_post_edit'] = '<div class="sml bld">Edit</div>';
+$lang['icon_post_quote'] = '<div class="sml bld">Quote</div>';
+
+# 
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------ 
+#
+</textarea>
+
+
+<p>Support for this version of phpBB may be found at <a href="http://www.phpbb2refugees.com/">phpBB2 Refugees</a> or <a href="http://www.integramod.com">IntegraMOD</a></p>
+<a href="#" onclick="toggle_visibility('ver');"><span style="color:red; margin-bottom:20px">CLOSE</span></a>
+<br /><br />
+</div>

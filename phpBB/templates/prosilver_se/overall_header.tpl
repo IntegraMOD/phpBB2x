@@ -62,47 +62,46 @@
         			<span class="corners-bottom"><span></span></span></div>
         		</div>
         
-		<div class="navbar">
-			<div class="inner"><span class="corners-top"><span></span></span>
-			<ul class="linklist navlinks">
-				<li class="icon-home"><a href="{U_INDEX}">{L_INDEX}</a><span class="breadcrumbs">&nbsp;&bull;&nbsp;{PAGE_TITLE}</span></li>
-			</ul>
-			<!-- BEGIN switch_user_logged_in -->
-			<ul class="linklist leftside">
-				<li class="icon-ucp">
-					<a href="{U_PROFILE}" title="{L_PROFILE}">{L_PROFILE}</a>
-					 (<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a>) &bull; 
-					<a href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>
-				</li>
-			</ul>
-			<!-- END switch_user_logged_in -->
-			<ul class="linklist rightside">
-				<li class="icon-faq"><a href="{U_FAQ}">{L_FAQ}</a></li>
-				<li class="icon-search"><a href="{U_SEARCH}">{L_SEARCH}</a</li>
-				<!-- BEGIN switch_user_logged_in -->
-				<li class="icon-members"><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
-				<!-- END switch_user_logged_in -->
-				<!-- BEGIN switch_user_logged_out -->
-				<li class="icon-register"><a href="{U_REGISTER}">{L_REGISTER}</a></li>
-				<!-- END switch_user_logged_out -->
-				<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
-			</ul>
-			<span class="corners-bottom"><span></span></span></div>
-		    </div>
-			
-			<!-- BEGIN switch_cookie_consent -->
-			<div id="cookie_notice" style="text-align: center; background-color: #fdf4e3; border-bottom: 1px solid #ccc; padding: 8px;">
-			  <span class="gensmall">
-				  {cookie_consent_msg}
-				[ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]
-			  </span>
-			  <div id="privacy_dropdown" style="display: none; margin: 8px auto; width: 80%; text-align: left; background-color: #f5f5f5; border: 1px solid #ccc; padding: 8px;" class="gensmall">
-				{L_PRIVACY_POLICY}
-			  </div>
-			  <input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+				<div class="navbar">
+					<div class="inner"><span class="corners-top"><span></span></span>
+					<ul class="linklist navlinks">
+						<li class="icon-home"><a href="{U_INDEX}">{L_INDEX}</a><span class="breadcrumbs">&nbsp;&bull;&nbsp;{PAGE_TITLE}</span></li>
+					</ul>
+					<!-- BEGIN switch_user_logged_in -->
+					<ul class="linklist leftside">
+						<li class="icon-ucp">
+							<a href="{U_PROFILE}" title="{L_PROFILE}">{L_PROFILE}</a>
+							 (<a href="{U_PRIVATEMSGS}">{PRIVATE_MESSAGE_INFO}</a>) &bull; 
+							<a href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>
+						</li>
+					</ul>
+					<!-- END switch_user_logged_in -->
+					<ul class="linklist rightside">
+						<li class="icon-faq"><a href="{U_FAQ}">{L_FAQ}</a></li>
+						<li class="icon-search"><a href="{U_SEARCH}">{L_SEARCH}</a</li>
+						<!-- BEGIN switch_user_logged_in -->
+						<li class="icon-members"><a href="{U_MEMBERLIST}">{L_MEMBERLIST}</a></li>
+						<!-- END switch_user_logged_in -->
+						<!-- BEGIN switch_user_logged_out -->
+						<li class="icon-register"><a href="{U_REGISTER}">{L_REGISTER}</a></li>
+						<!-- END switch_user_logged_out -->
+						<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
+					</ul>
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+				
+				<!-- BEGIN switch_cookie_consent -->
+				<div id="cookie_notice" class="notice">
+					<div class="inner"><span class="corners-top"><span></span></span>
+						<ul class="linklist navlinks">
+							<li>{cookie_consent_msg}	[ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]</li>
+							<li id="privacy_dropdown" style="display: none;" class="gensmall">{L_PRIVACY_POLICY}</li>
+							<input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+						</ul>
+						<span class="corners-bottom"><span></span></span>
+					</div>
+				</div>
+				<!-- END switch_cookie_consent -->
 			</div>
-			<!-- END switch_cookie_consent -->
 
-		</div>
-
-	<div id="page-body">
+	        <div id="page-body">

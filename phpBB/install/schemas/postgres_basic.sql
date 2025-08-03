@@ -72,7 +72,7 @@ INSERT INTO phpbb_config (config_name, config_value) VALUES ('script_path', '/ph
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('version', '.0.23');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('rand_seed', '0');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('sfs_enable', '0');
-INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_consent', '1');
+INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_consent_enable', '1');
 -- Categories
 INSERT INTO phpbb_categories (cat_id, cat_title, cat_order) VALUES (1, 'Test category 1', 10);
 

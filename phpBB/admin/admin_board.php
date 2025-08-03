@@ -120,8 +120,9 @@ $disable_board_no = ( !$new['board_disable'] ) ? "checked=\"checked\"" : "";
 $cookie_secure_yes = ( $new['cookie_secure'] ) ? "checked=\"checked\"" : "";
 $cookie_secure_no = ( !$new['cookie_secure'] ) ? "checked=\"checked\"" : "";
 
-$cookie_consent_yes = ($new['cookie_consent_enable']) ? "checked=\"checked\"" : "";
-$cookie_consent_no  = (!$new['cookie_consent_enable']) ? "checked=\"checked\"" : "";
+$cookie_consent_enable = isset($new['cookie_consent_enable']) ? $new['cookie_consent_enable'] : 0;
+$cookie_consent_yes = ($cookie_consent_enable) ? 'checked="checked"' : '';
+$cookie_consent_no  = (!$cookie_consent_enable) ? 'checked="checked"' : '';
 
 $html_tags = $new['allow_html_tags'];
 

@@ -8,6 +8,7 @@ INSERT INTO phpbb_config (config_name, config_value) VALUES ('config_id','1');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('board_disable','0');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('sitename','yourdomain.com');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('site_desc','A _little_ text to describe your forum');
+INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_consent_enable', '1');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_name','phpbb2mysql');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_path','/');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_domain','');
@@ -71,7 +72,7 @@ INSERT INTO phpbb_config (config_name, config_value) VALUES ('script_path', '/ph
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('version', '.0.25');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('rand_seed', '0');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('sfs_enable', '0');
-INSERT INTO phpbb_config (config_name, config_value) VALUES ('cookie_consent', '1');
+
 
 
 

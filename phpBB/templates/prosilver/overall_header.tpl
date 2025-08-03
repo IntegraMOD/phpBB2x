@@ -74,20 +74,18 @@
 				<li class="icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></li>
 			</ul>
 			<span class="corners-bottom"><span></span></span></div>
-		    </div>
-			
-			<!-- BEGIN switch_cookie_consent -->
-			<div id="cookie_notice" style="text-align: center; background-color: #fdf4e3; border-bottom: 1px solid #ccc; padding: 8px;">
-			  <span class="gensmall">
-				  {cookie_consent_msg}
-				[ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]
-			  </span>
-			  <div id="privacy_dropdown" style="display: none; margin: 8px auto; width: 80%; text-align: left; background-color: #f5f5f5; border: 1px solid #ccc; padding: 8px;" class="gensmall">
-				{L_PRIVACY_POLICY}
-			  </div>
-			  <input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
-			</div>
-			<!-- END switch_cookie_consent -->
-			
 		</div>
-	<div id="page-body">
+		<!-- BEGIN switch_cookie_consent -->
+		<div id="cookie_notice" class="notice">
+			<div class="inner"><span class="corners-top"><span></span></span>
+                <ul class="linklist navlinks">
+					<li>{cookie_consent_msg}	[ <a href="#" onclick="document.getElementById('privacy_dropdown').style.display = (document.getElementById('privacy_dropdown').style.display == 'none') ? 'block' : 'none'; return false;" class="gensmall">{L_PRIVACY}</a> ]</li>
+					<li id="privacy_dropdown" style="display: none;" class="gensmall">{L_PRIVACY_POLICY}</li>
+					<input type="button" class="mainoption" value="{L_COOKIE_ACCEPT}" onclick="document.cookie='cookie_consent=1; path=/; max-age=31536000'; document.getElementById('cookie_notice').style.display='none'; return false;" />
+                </ul>
+				<span class="corners-bottom"><span></span></span>
+			</div>
+		</div>
+        <!-- END switch_cookie_consent -->
+	</div>
+<div id="page-body">

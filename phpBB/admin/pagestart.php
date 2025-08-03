@@ -47,12 +47,12 @@ else if ($userdata['user_level'] != ADMIN)
 	message_die(GENERAL_MESSAGE, $lang['Not_admin']);
 }
 
-if ($HTTP_GET_VARS['sid'] != $userdata['session_id'])
+if (isset($_GET['sid']) && $_GET['sid'] != $userdata['session_id'])
 {
-	redirect("index.$phpEx?sid=" . $userdata['session_id']);
+    redirect("index.$phpEx?sid=" . $userdata['session_id']);
 }
 
-$p_sid = (isset($HTTP_GET_VARS['p_sid'])) ? $HTTP_GET_VARS['p_sid'] : ((isset($HTTP_POST_VARS['p_sid'])) ? $HTTP_POST_VARS['p_sid'] : '');
+$p_sid = (isset($_GET['p_sid'])) ? $_GET['p_sid'] : ((isset($_POST['p_sid'])) ? $_POST['p_sid'] : '');
 
 if ($p_sid !== $userdata['priv_session_id'])
 {

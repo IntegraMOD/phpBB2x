@@ -30,7 +30,7 @@ define('HEADER_INC', TRUE);
 //
 // cookie_consent
 //
-if (!isset($_COOKIE['cookie_consent']) && $board_config['cookie_consent_enable']) {
+if (!isset($_COOKIE['cookie_consent']) && isset($board_config['cookie_consent_enable']) && $board_config['cookie_consent_enable']) {
     $template->assign_block_vars('switch_cookie_consent', []);
     $template->assign_vars([
         'cookie_consent_msg'   => $lang['cookie_consent_msg'],
@@ -82,6 +82,10 @@ $admin_short_link = ( $userdata['user_level'] == ADMIN ) ? '<a class="adm" href=
 $template->set_filenames(array(
 	'overall_header' => ( empty($gen_simple_header) ) ? 'overall_header.tpl' : 'simple_header.tpl')
 );
+
+// Assign SCRIPT_NAME using pathinfo for clean filename
+$script_name = pathinfo($_SERVER['SCRIPT_NAME'], PATHINFO_FILENAME);
+$template->assign_var('SCRIPT_NAME', $script_name);
 
 //
 // Generate logged in/logged out status
@@ -381,7 +385,8 @@ $template->assign_vars(array(
 	'PRIVATE_MESSAGE_NEW_FLAG' => $s_privmsg_new,
 
 	'PRIVMSG_IMG' => $icon_pm,
-
+//  'SCRIPT_NAME' => basename($_SERVER['SCRIPT_NAME'], '.' . $phpEx),
+	
 	'L_USERNAME' => $lang['Username'],
 	'L_PASSWORD' => $lang['Password'],
 	'L_LOGIN_LOGOUT' => $l_login_logout,

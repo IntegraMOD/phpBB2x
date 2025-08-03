@@ -120,7 +120,7 @@
 					</dl>
 					<dl>
 						<dt><label>{L_COOKIE_PATH}:</label></dt>
-						<dd><input type="text" maxlength="255" size="40" name="server_name" value="{SERVER_NAME}" /></dd>
+						<dd><input type="text" maxlength="255" size="40" name="cookie_path" value="{COOKIE_PATH}" /></dd>
 					</dl>
 					<dl>
 						<dt><label>{L_COOKIE_SECURE}:</label><br /><span>{L_COOKIE_SECURE_EXPLAIN}</span></dt>
