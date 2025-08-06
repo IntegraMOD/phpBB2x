@@ -62,8 +62,15 @@ if(!defined("SQL_LAYER"))
 			
 			if( $this->db_connect_id && $database != '')
 			{
-				mysqli_query($this->db_connect_id, "SET NAMES 'utf8'");
-				
+				if (version_compare(mysqli_get_server_info($this->db_connect_id), '5.5.3', '>=')) 
+				{
+					mysqli_set_charset($this->db_connect_id, 'utf8mb4');
+				} 
+				else 
+				{
+					mysqli_set_charset($this->db_connect_id, 'utf8');
+				}
+
 				$this->dbname = $database;
 				$dbselect = mysqli_select_db($this->db_connect_id, $this->dbname);
  
