@@ -13,32 +13,35 @@
 						<!-- BEGIN switch_namechange_disallowed -->
 						<dl>
 							<dt><label>{L_USERNAME}:</label></dt>
-							<dd><strong>{USERNAME}</strong></dd>
+							<dd>
+								<input type="hidden" name="username" value="{USERNAME}" autocomplete="username" />
+								<strong>{USERNAME}</strong>
+							</dd>
 						</dl>
 						<!-- END switch_namechange_disallowed -->
 						<!-- BEGIN switch_namechange_allowed -->
 						<dl>
 							<dt><label>{L_USERNAME}:</label></dt>
-							<dd><input type="text" name="username" value="{USERNAME}" class="inputbox" title="{L_USERNAME}" /></dd>
+							<dd><input type="text" name="username" value="{USERNAME}" class="inputbox" title="{L_USERNAME}" autocomplete="username" /></dd>
 						</dl>
 						<!-- END switch_namechange_allowed -->
 						<dl>
 							<dt><label>{L_EMAIL_ADDRESS}:</label></dt>
-							<dd><input type="text" name="email" maxlength="100" value="{EMAIL}" class="inputbox" title="{L_EMAIL_ADDRESS}" /></dd>
+							<dd><input type="email" name="email" maxlength="100" value="{EMAIL}" class="inputbox" title="{L_EMAIL_ADDRESS}" autocomplete="email" /></dd>
 						</dl>
 						<!-- BEGIN switch_edit_profile -->
 						<dl>
 							<dt><label>{L_CURRENT_PASSWORD}:</label><br /><span>{L_CONFIRM_PASSWORD_EXPLAIN}</span></dt>
-							<dd><input type="password" name="cur_password" maxlength="255" value="{CUR_PASSWORD}" class="inputbox" title="{L_CURRENT_PASSWORD}" /></dd>
+							<dd><input type="password" name="cur_password" maxlength="255" value="{CUR_PASSWORD}" class="inputbox" title="{L_CURRENT_PASSWORD}" autocomplete="current-password" /></dd>
 						</dl>
 						<!-- END switch_edit_profile -->
 						<dl>
 							<dt><label>{L_NEW_PASSWORD}:</label><br /><span>{L_PASSWORD_IF_CHANGED}</span></dt>
-							<dd><input type="password" name="new_password" maxlength="255" value="{NEW_PASSWORD}" class="inputbox" title="{L_NEW_PASSWORD}" /></dd>
+							<dd><input type="password" name="new_password" maxlength="255" value="{NEW_PASSWORD}" class="inputbox" title="{L_NEW_PASSWORD}" autocomplete="new-password" /></dd>
 						</dl>
 						<dl>
 							<dt><label>{L_CONFIRM_PASSWORD}:</label><br /><span>{L_PASSWORD_CONFIRM_IF_CHANGED}</span></dt>
-							<dd><input type="password" name="password_confirm" maxlength="255" value="{PASSWORD_CONFIRM}" class="inputbox" title="{L_CONFIRM_PASSWORD}" /></dd>
+							<dd><input type="password" name="password_confirm" maxlength="255" value="{PASSWORD_CONFIRM}" class="inputbox" title="{L_CONFIRM_PASSWORD}" autocomplete="new-password" /></dd>
 						</dl>
 						<!-- BEGIN switch_user_logged_out -->
 						<hr />
