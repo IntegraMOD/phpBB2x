@@ -214,8 +214,53 @@ input.liteoption {
   border-bottom: 1px solid #ccc;
 }
 
-/* Import the fancy styles for IE only (NS4.x doesn't use the @import function) */
-@import url("templates/subSilver/formIE.css"); 
+@media only screen and (max-width: 800px) {
+  /* Collapse topics and posts columns */
+  .forumline th.topics,
+  .forumline th.posts,
+  .forumline td.topics,
+  .forumline td.posts,
+  .forumline td.replies, .forumline th.replies, 
+  .forumline td.author, .forumline th.author,
+  .forumline td.views, .forumline th.views{
+    display: none;
+  }
+  
+  .forumline th.lastpost,
+  .forumline td.lastpost {
+    width: 30%;
+  }
+  
+ .header-logo {
+   text-align: center;
+   vertical-align: middle;
+ }
+
+ .header-logo img {
+   vertical-align: middle;
+   max-width: 100%;
+   height: auto;
+ }
+
+  .header-logo,
+  .header-center {
+    display: block;
+    width: 100%;
+	margin: 0 auto;
+  }
+
+  .header-center table {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  /* Collapse lastpost column */
+  .forumline th.lastpost,
+  .forumline td.lastpost {
+    display: none;
+  }
+}
 -->
 </style>
 <!-- BEGIN switch_enable_pm_popup -->
@@ -237,8 +282,8 @@ input.liteoption {
 	<tr> 
 		<td class="bodyline"><table width="100%" cellspacing="0" cellpadding="0" border="0">
 			<tr> 
-				<td><a href="{U_INDEX}"><img src="templates/subSilver/images/logo_phpBB.gif" border="0" alt="{L_INDEX}" vspace="1" /></a></td>
-				<td align="center" width="100%" valign="middle"><span class="maintitle">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}<br />&nbsp; </span> 
+				<td class="header-logo"><a href="{U_INDEX}"><img src="templates/subSilver/images/logo_phpBB.gif" border="0" alt="{L_INDEX}" vspace="1" /></a></td>
+				<td class="header-center" align="center" width="100%" valign="middle"><span class="maintitle">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}<br />&nbsp; </span> 
 				<table cellspacing="0" cellpadding="2" border="0">
 					<tr> 
 						<td align="center" valign="top" nowrap="nowrap"><span class="mainmenu">&nbsp;<a href="{U_FAQ}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_faq.gif" width="12" height="13" border="0" alt="{L_FAQ}" hspace="3" />{L_FAQ}</a>&nbsp; &nbsp;<a href="{U_SEARCH}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_search.gif" width="12" height="13" border="0" alt="{L_SEARCH}" hspace="3" />{L_SEARCH}</a>&nbsp; &nbsp;<a href="{U_MEMBERLIST}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_members.gif" width="12" height="13" border="0" alt="{L_MEMBERLIST}" hspace="3" />{L_MEMBERLIST}</a>&nbsp; &nbsp;<a href="{U_GROUP_CP}" class="mainmenu"><img src="templates/subSilver/images/icon_mini_groups.gif" width="12" height="13" border="0" alt="{L_USERGROUPS}" hspace="3" />{L_USERGROUPS}</a>&nbsp; 

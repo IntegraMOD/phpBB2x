@@ -205,6 +205,61 @@ input.liteoption {
 */
 .helpline { background-color: #DEE3E7; border-style: none; }
 
+.cookie-notice {
+  padding: 6px;
+  font-size: 0.95em;
+  text-align: center;
+  background-color: #fdf4e3;
+  border-bottom: 1px solid #ccc;
+}
+
+@media only screen and (max-width: 800px) {
+  /* Collapse topics and posts columns */
+  .forumline th.topics,
+  .forumline th.posts,
+  .forumline td.topics,
+  .forumline td.posts,
+  .forumline td.replies, .forumline th.replies, 
+  .forumline td.author, .forumline th.author,
+  .forumline td.views, .forumline th.views{
+    display: none;
+  }
+  
+  .forumline th.lastpost,
+  .forumline td.lastpost {
+    width: 30%;
+  }
+  
+ .header-logo {
+   text-align: center;
+   vertical-align: middle;
+ }
+
+ .header-logo img {
+   vertical-align: middle;
+   max-width: 100%;
+   height: auto;
+ }
+
+  .header-logo,
+  .header-center {
+    display: block;
+    width: 100%;
+	margin: 0 auto;
+  }
+
+  .header-center table {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  /* Collapse lastpost column */
+  .forumline th.lastpost,
+  .forumline td.lastpost {
+    display: none;
+  }
+}
 
 /* Import the fancy styles for IE only (NS4.x doesn't use the @import function) */
 @import url("formIE.css");
