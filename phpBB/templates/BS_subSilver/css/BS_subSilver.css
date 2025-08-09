@@ -380,11 +380,11 @@ button:hover {
     html { 
         -webkit-text-size-adjust: 100%;
     }
-	.topics, .posts, .views, .replies, .searchbar {
+	.px-xs-0 {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+	.topics, .posts, .views, .replies, .searchbar, .author {
 	  display: none;
 	}
-}
-
-@media only screen and (max-width: 400px) {
-	.author {display: none;}
 }

@@ -32,7 +32,7 @@
 		<div class="headerbar">
 			<div class="inner"><span class="corners-top"><span></span></span>
 			<div id="site-description">
-				<a href="{U_INDEX}" title="{L_INDEX}" id="logo"><img src="templates/prosilver/images/site_logo.gif" width="139" height="52" alt="" title="{SITENAME}" /></a>
+        		<a href="{U_INDEX}" title="" id="logo"><img src="{ROOT_PATH}images/PhpBB_logo_w.svg" alt="{I_INDEX}" title="{I_INDEX}" width="139" height="52"></a>
 				<h1>{SITENAME}</h1>
 				<p>{SITE_DESCRIPTION}</p>
 			</div>

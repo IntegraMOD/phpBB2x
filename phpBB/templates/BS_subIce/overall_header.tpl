@@ -60,8 +60,8 @@
 						  	<li><a class="nav-link" href="{U_THISUSER}"><i class="fa-solid fa-user-circle"></i>&nbsp;{THISUSER}</a></li>
 							<li><a class="nav-link" href="{U_PROFILE}"><i class="fa-solid fa-user-gear"></i>&nbsp;{L_PROFILE}</a></li>
 							<li><a class="nav-link" href="{U_SEARCH_SELF}"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;{L_SEARCH_SELF}</a></li>
-							<li class="px-0"><span class="py-4 ps-2">{ADMIN_SHORT_LINK}</span></li>
 							<li><a class="nav-link" href="{U_LOGIN_LOGOUT}"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;{L_LOGIN_LOGOUT}</a></li>
+							<li><span class="nav-link">{ADMIN_SHORT_LINK}</span></li>
 						  </ul>
 						</li>
 						<!-- END switch_user_logged_in -->
@@ -86,7 +86,7 @@
 			
             <div class="container-fluid topbkg">
              <div class="row d-flex align-items-center">
-               <div class="col"><a class="navbar-brand" href="{U_INDEX}"><img src="templates/BS_subIce/images/phpbb2_logo.png" alt="{L_INDEX}"></a></div>
+               <div class="col my-4"><a class="navbar-brand" href="{U_INDEX}"><img src="{ROOT_PATH}images/PhpBB_logo_i.svg" alt="{I_INDEX}" title="{I_INDEX}" width="139" height="52"></a></div>
                <div class="col text-start"><span class="maintitle align-text-bottom">{SITENAME}</span><br /><span class="gen">{SITE_DESCRIPTION}</span></div>
 		     </div>
 		    </div>

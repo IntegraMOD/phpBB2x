@@ -44,7 +44,7 @@
         			<div class="inner"><span class="corners-top"><span></span></span>
         
         			<div id="site-description">
-        				<a href="{U_INDEX}" title="" id="logo"><img src="./templates/prosilver_se/theme/images/site_logo.gif" alt="" title="" width="139" height="52"></a>
+        				<a href="{U_INDEX}" title="" id="logo"><img src="{ROOT_PATH}images/PhpBB_logo_w.svg" alt="{I_INDEX}" title="{I_INDEX}" width="139" height="52"></a>
         				<h1>{SITENAME}</h1>
         				<p>{SITE_DESCRIPTION}</p>
         				<p style="display: none;"><a href="#start_here">#start_here</a></p>

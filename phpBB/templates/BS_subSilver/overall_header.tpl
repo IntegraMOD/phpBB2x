@@ -34,7 +34,7 @@
 <!-- Navbar start -->
               <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="{U_INDEX}"><img src="templates/BS_subSilver/images/logo_phpBB.gif" alt="{L_INDEX}"></a>
+                  <a class="navbar-brand p-4" href="{U_INDEX}"><img src="{ROOT_PATH}images/PhpBB_logo_g.svg" alt="{I_INDEX}" title="{I_INDEX}" width="139" height="52"></a>
                   <div class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </div>

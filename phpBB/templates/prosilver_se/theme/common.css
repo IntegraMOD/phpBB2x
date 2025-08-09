@@ -145,9 +145,11 @@ p.right {
 ---------------------------------------- */
 #wrap {
 	padding: 0 20px;
-	min-width: 650px;
-	width: 900px;
+	width: 80%;
+	max-width: 1200px;
+	min-width: 320px;
 	margin: 0 auto;
+	box-sizing: border-box;
 }
 
 #simple-wrap {
