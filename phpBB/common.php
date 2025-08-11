@@ -24,14 +24,15 @@ if ( !defined('IN_PHPBB') )
 	die("Hacking attempt");
 }
 
+//
+
+// Uncomment these and comment out "error_reporting" to debug errors
+//ini_set('display_startup_errors',1); 
+//ini_set('display_errors',1);
+//error_reporting (E_ALL);
+
 error_reporting  (E_ERROR | E_WARNING | E_PARSE); // This will NOT report uninitialized variables
 
-// Uncomment these and comment out the previous "error_reporting" to debug errors
-// ini_set('display_startup_errors',1); 
-// ini_set('display_errors',1);
-// error_reporting  (E_ALL);
-
-// Page generation time
 $starttime = 0;
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
@@ -97,7 +98,6 @@ if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals
 	unset($input['input']);
 	unset($input['not_unset']);
 
-//	while (list($var,) = @each($input))
 	foreach($input as $item)
 	{
         $var = $item;
@@ -108,7 +108,7 @@ if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals
         unset(${$var});
     }
 
-unset($input);
+	unset($input);
 }
 
 //
@@ -116,7 +116,7 @@ unset($input);
 // this is a security precaution to prevent someone
 // trying to break out of a SQL statement.
 //
-if( true )
+if (version_compare(PHP_VERSION, '7.4.0', '<') && function_exists('get_magic_quotes_gpc') && !get_magic_quotes_gpc())
 {
 	if( is_array($HTTP_GET_VARS) )
 	{
@@ -245,3 +245,5 @@ if( $board_config['board_disable'] && !defined("IN_ADMIN") && !defined("IN_LOGIN
 {
 	message_die(GENERAL_MESSAGE, 'Board_disable', 'Information');
 }
+
+?>
