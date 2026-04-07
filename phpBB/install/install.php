@@ -403,7 +403,7 @@ else
 }
 
 $board_email = (!empty($_POST['board_email'])) ? $_POST['board_email'] : '';
-$script_path = (!empty($_POST['script_path'])) ? $_POST['script_path'] : str_replace('install', '', dirname($_SERVER['PHP_SELF']));
+$script_path = (!empty($HTTP_POST_VARS) && !empty($HTTP_POST_VARS['script_path'])) ? $HTTP_POST_VARS['script_path'] : str_replace('install', '', dirname(!empty($HTTP_SERVER_VARS['PHP_SELF']) ? $HTTP_SERVER_VARS['PHP_SELF'] : $_SERVER['PHP_SELF']));
 
 if (!empty($_POST['server_name']))
 {

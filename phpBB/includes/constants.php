@@ -25,6 +25,8 @@ if ( !defined('IN_PHPBB') )
 	die("Hacking attempt");
 }
 
+if (!isset($table_prefix)) $table_prefix = '';
+
 // User Levels <- Do not change the values of USER or ADMIN
 define('DELETED', -1);
 define('ANONYMOUS', -1);
