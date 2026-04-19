@@ -323,13 +323,6 @@ $available_dbms = array(
       'DELIM_BASIC'   => ';',
       'COMMENTS'      => 'remove_remarks'
    ),
-   'pdo' => array(
-      'LABEL'         => 'PDO   php8.x',
-      'SCHEMA'      => 'mysql',
-      'DELIM'         => ';',
-      'DELIM_BASIC'   => ';',
-      'COMMENTS'      => 'remove_remarks'
-   ),
    'postgres' => array(
       'LABEL'         => 'PostgreSQL 7.x',
       'SCHEMA'      => 'postgres',
@@ -781,11 +774,6 @@ else
             break;
 			
          case 'mysqli':
-            $check_exts = 'mysqli';
-            $check_other = 'mysqli';
-            break;
-			
-         case 'pdo':
             $check_exts = 'mysqli';
             $check_other = 'mysqli';
             break;

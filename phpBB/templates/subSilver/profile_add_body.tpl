@@ -74,12 +74,20 @@
 	<tr> 
 	  <td class="row2" colspan="2"><span class="gensmall">{L_PROFILE_INFO_NOTICE}</span></td>
 	</tr>
+	<!--
 	<tr> 
 	  <td class="row1"><span class="gen">{L_ICQ_NUMBER}:</span></td>
 	  <td class="row2"> 
 		<input type="text" name="icq" class="post" style="width: 100px"  size="10" maxlength="15" value="{ICQ}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
 	  </td>
 	</tr>
+	-->
+	<tr> 
+	  <td class="row1"><span class="gen">{L_DISCORD}:</span></td>
+	  <td class="row2"> 
+		<input type="text" class="post" style="width: 150px"  name="dc" size="20" maxlength="255" value="{DC}" />
+	  </td>
+	</tr>	
 	<tr> 
 	  <td class="row1"><span class="gen">{L_FACEBOOK}:</span></td>
 	  <td class="row2"> 
@@ -93,15 +101,15 @@
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_PINTEREST}:</span></td>
+	  <td class="row1"><span class="gen">{L_LINKEDIN}:</span></td>
 	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="pt" size="20" maxlength="255" value="{PT}" />
+		<input type="text" class="post" style="width: 150px"  name="li" size="20" maxlength="255" value="{LI}" />
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_TWITTER}:</span></td>
+	  <td class="row1"><span class="gen">{L_PINTEREST}:</span></td>
 	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="twr" size="20" maxlength="255" value="{TWR}" />
+		<input type="text" class="post" style="width: 150px"  name="pt" size="20" maxlength="255" value="{PT}" />
 	  </td>
 	</tr>
 	<tr> 
@@ -117,23 +125,17 @@
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_LINKEDIN}:</span></td>
-	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="li" size="20" maxlength="255" value="{LI}" />
-	  </td>
-	</tr>
-	<tr> 
 	  <td class="row1"><span class="gen">{L_TIKTOK}:</span></td>
 	  <td class="row2"> 
 		<input type="text" class="post" style="width: 150px"  name="tt" size="20" maxlength="255" value="{TT}" />
 	  </td>
 	</tr>
 	<tr> 
-	  <td class="row1"><span class="gen">{L_DISCORD}:</span></td>
+	  <td class="row1"><span class="gen">{L_TWITTER}:</span></td>
 	  <td class="row2"> 
-		<input type="text" class="post" style="width: 150px"  name="dc" size="20" maxlength="255" value="{DC}" placeholder="&nbsp;{L_USER_ID_EXPLAIN}" />
+		<input type="text" class="post" style="width: 150px"  name="twr" size="20" maxlength="255" value="{TWR}" />
 	  </td>
-	</tr>	
+	</tr>
 	<tr> 
 	  <td class="row1"><span class="gen">{L_WEBSITE}:</span></td>
 	  <td class="row2"> 

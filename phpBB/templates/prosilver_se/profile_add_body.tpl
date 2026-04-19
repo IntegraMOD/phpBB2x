@@ -71,13 +71,15 @@
 				<div class="panel">
 					<div class="inner"><span class="corners-top"><span></span></span>
 					<fieldset>
+					    <!--
 						<dl>
 							<dt><label>{L_ICQ_NUMBER}:</label></dt>
 							<dd><input type="text" name="icq" maxlength="15" value="{ICQ}" class="inputbox" placeholder="{L_USER_ID_EXPLAIN}" /></dd>
 						</dl>
+						-->
 						<dl>
 							<dt><label>{L_DISCORD}:</label></dt>
-							<dd><input type="text" name="dc" maxlength="255" value="{DC}" class="inputbox" placeholder="{L_USER_ID_EXPLAIN}" /></dd>
+							<dd><input type="text" name="dc" maxlength="255" value="{DC}" class="inputbox" /></dd>
 						</dl>
 						<dl>
 							<dt><label>{L_FACEBOOK}:</label></dt>
