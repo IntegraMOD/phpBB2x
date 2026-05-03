@@ -300,19 +300,22 @@ CREATE TABLE phpbb_search_wordmatch (
 #
 
 CREATE TABLE phpbb_sessions (
-   session_id char(32) DEFAULT '' NOT NULL,
-   session_user_id mediumint(8) DEFAULT '0' NOT NULL,
-   session_start int(11) DEFAULT '0' NOT NULL,
-   session_time int(11) DEFAULT '0' NOT NULL,
-   session_ip char(32) DEFAULT '0' NOT NULL,
-   session_page int(11) DEFAULT '0' NOT NULL,
-   session_logged_in tinyint(1) DEFAULT '0' NOT NULL,
-   session_admin tinyint(2) DEFAULT '0' NOT NULL,
-   priv_session_id char(32) DEFAULT '' NOT NULL,
-   PRIMARY KEY (session_id),
-   KEY session_user_id (session_user_id),
-   KEY session_id_ip_user_id (session_id, session_ip, session_user_id)
+  session_id varchar(32) NOT NULL default '',
+  session_user_id mediumint(8) NOT NULL default '0',
+  session_start int(11) NOT NULL default '0',
+  session_time int(11) NOT NULL default '0',
+  session_ip varchar(32) NOT NULL default '0',
+  session_page int(11) NOT NULL default '0',
+  session_logged_in tinyint(1) NOT NULL default '0',
+  session_robot varchar(32) default NULL,
+  session_admin tinyint(2) DEFAULT '0' NOT NULL,
+  priv_session_id char(32) NOT NULL DEFAULT '',
+  PRIMARY KEY (session_id),
+  KEY session_user_time (session_user_id, session_time),
+  KEY session_user_id_ip (session_user_id, session_ip),
+  KEY session_user_id (session_user_id)
 );
+
 
 # --------------------------------------------------------
 #
