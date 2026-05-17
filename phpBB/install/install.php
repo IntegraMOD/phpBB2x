@@ -202,13 +202,13 @@ function guess_lang()
 	   for ($i = 0; $i < sizeof($accept_lang_ary); $i++)
        {
            @reset($match_lang);
-           foreach((Array) $match_lang as list ($lang => $match)) 
+           foreach((array) $match_lang as $lang_key => $match)
 		   {
                if (preg_match('#' . $match . '#i', trim($accept_lang_ary[$i])))
                {
-                   if (file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $lang)))
+                   if (file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $lang_key)))
                    {
-                       return $lang;
+                       return $lang_key;
                    }
                }
            }
