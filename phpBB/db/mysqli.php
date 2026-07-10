@@ -403,7 +403,13 @@ if(!defined("SQL_LAYER"))
 			}
 		}
  
+		public function sql_escape($string)
+		{
+			return mysqli_real_escape_string($this->db_connect_id, $string);
+		}
+
 		public function sql_error()
+
 		{
 			$result['message'] = mysqli_error($this->db_connect_id);
 			$result['code'] = mysqli_errno($this->db_connect_id);

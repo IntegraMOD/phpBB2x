@@ -248,6 +248,10 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		$post_id = $db->sql_nextid();
 	}
 
+	$post_subject = $db->sql_escape($post_subject);
+	$post_message = $db->sql_escape($post_message);
+	$bbcode_uid = $db->sql_escape($bbcode_uid);
+
 	$sql = ($mode != 'editpost') ? "INSERT INTO " . POSTS_TEXT_TABLE . " (post_id, post_subject, bbcode_uid, post_text) VALUES ($post_id, '$post_subject', '$bbcode_uid', '$post_message')" : "UPDATE " . POSTS_TEXT_TABLE . " SET post_text = '$post_message',  bbcode_uid = '$bbcode_uid', post_subject = '$post_subject' WHERE post_id = $post_id";
 	if (!$db->sql_query($sql))
 	{

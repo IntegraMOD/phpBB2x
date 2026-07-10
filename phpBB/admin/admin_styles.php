@@ -165,7 +165,7 @@ switch( $mode )
  
                                 $sql = "SELECT themes_id 
                                     FROM " . THEMES_TABLE . " 
-                                    WHERE style_name = '" . str_replace("\'", "''", $style_name) . "'";
+                                    WHERE style_name = '" . $db->sql_escape($style_name) . "'";
                                 if(!$result = $db->sql_query($sql))
                                 {
                                     message_die(GENERAL_ERROR, "Could not query themes table!", "", __LINE__, __FILE__, $sql);
@@ -314,7 +314,7 @@ switch( $mode )
 					// I don't like this but it'll keep MSSQL from throwing
 					// an error and save me alot of typing
 					//
-					$sql .= ( stristr($key, "fontsize") ) ? "$key = $val" : "$key = '" . str_replace("\'", "''", $val) . "'";
+					$sql .= ( stristr($key, "fontsize") ) ? "$key = $val" : "$key = '" . $db->sql_escape($val) . "'";
 					$count++;
 				}
 				
@@ -365,7 +365,7 @@ switch( $mode )
 					foreach ($updated_name as $key => $val) 
 					{
 						$fields[] = $key;
-						$vals[] = str_replace("\'", "''", $val);
+						$vals[] = $db->sql_escape($val);
 					}
 					 
 					for ($i = 0; $i < count($fields); $i++) 
@@ -405,7 +405,7 @@ switch( $mode )
 				//
 				$sql = "SELECT themes_id 
 					FROM " . THEMES_TABLE . " 
-					WHERE style_name = '" . str_replace("\'", "''", $updated['style_name']) . "'";
+					WHERE style_name = '" . $db->sql_escape($updated['style_name']) . "'";
 				if(!$result = $db->sql_query($sql))
 				{
 					message_die(GENERAL_ERROR, "Could not query themes table", "", __LINE__, __FILE__, $sql);
@@ -757,7 +757,7 @@ switch( $mode )
 
 			$sql = "SELECT * 
 				FROM " . THEMES_TABLE . " 
-				WHERE template_name = '" . str_replace("\'", "''", $template_name) . "'";
+				WHERE template_name = '" . $db->sql_escape($template_name) . "'";
 			if(!$result = $db->sql_query($sql))
 			{
 				message_die(GENERAL_ERROR, "Could not get theme data for selected template", "", __LINE__, __FILE__, $sql);

@@ -401,7 +401,7 @@ if( !empty($mode) )
 
 			// There is no problem having duplicate forum names so we won't check for it.
 			$sql = "INSERT INTO " . FORUMS_TABLE . " (forum_id, forum_name, cat_id, forum_desc, forum_order, forum_status, prune_enable" . $field_sql . ")
-            VALUES ('" . $next_id . "', '" . str_replace("\'", "''", $HTTP_POST_VARS['forumname']) . "', " . intval($HTTP_POST_VARS[POST_CAT_URL]) . ", '" . str_replace("\'", "''", $HTTP_POST_VARS['forumdesc']) . "', $next_order, " . intval($HTTP_POST_VARS['forumstatus']) . ", " . intval(isset($HTTP_POST_VARS['prune_enable']) ? $HTTP_POST_VARS['prune_enable'] : null) . $value_sql . ")";
+            VALUES ('" . $next_id . "', '" . $db->sql_escape($HTTP_POST_VARS['forumname']) . "', " . intval($HTTP_POST_VARS[POST_CAT_URL]) . ", '" . $db->sql_escape($HTTP_POST_VARS['forumdesc']) . "', $next_order, " . intval($HTTP_POST_VARS['forumstatus']) . ", " . intval(isset($HTTP_POST_VARS['prune_enable']) ? $HTTP_POST_VARS['prune_enable'] : null) . $value_sql . ")";
 			if( !$result = $db->sql_query($sql) )
 			{
 				message_die(GENERAL_ERROR, "Couldn't insert row in forums table", "", __LINE__, __FILE__, $sql);
@@ -440,7 +440,7 @@ if( !empty($mode) )
 			}
 
 			$sql = "UPDATE " . FORUMS_TABLE . "
-                SET forum_name = '" . str_replace("\'", "''", $HTTP_POST_VARS['forumname']) . "', cat_id = " . intval($HTTP_POST_VARS[POST_CAT_URL]) . ", forum_desc = '" . str_replace("\'", "''", $HTTP_POST_VARS['forumdesc']) . "', forum_status = " . intval($HTTP_POST_VARS['forumstatus']) . ", prune_enable = " . intval(isset($HTTP_POST_VARS['prune_enable']) ? $HTTP_POST_VARS['prune_enable'] : 0) . "
+                SET forum_name = '" . $db->sql_escape($HTTP_POST_VARS['forumname']) . "', cat_id = " . intval($HTTP_POST_VARS[POST_CAT_URL]) . ", forum_desc = '" . $db->sql_escape($HTTP_POST_VARS['forumdesc']) . "', forum_status = " . intval($HTTP_POST_VARS['forumstatus']) . ", prune_enable = " . intval(isset($HTTP_POST_VARS['prune_enable']) ? $HTTP_POST_VARS['prune_enable'] : 0) . "
 				WHERE forum_id = " . intval($HTTP_POST_VARS[POST_FORUM_URL]);
 			if( !$result = $db->sql_query($sql) )
 			{
@@ -508,7 +508,7 @@ if( !empty($mode) )
 			// There is no problem having duplicate forum names so we won't check for it.
 			//
 			$sql = "INSERT INTO " . CATEGORIES_TABLE . " (cat_title, cat_order)
-				VALUES ('" . str_replace("\'", "''", $HTTP_POST_VARS['categoryname']) . "', $next_order)";
+				VALUES ('" . $db->sql_escape($HTTP_POST_VARS['categoryname']) . "', $next_order)";
 			if( !$result = $db->sql_query($sql) )
 			{
 				message_die(GENERAL_ERROR, "Couldn't insert row in categories table", "", __LINE__, __FILE__, $sql);
@@ -556,7 +556,7 @@ if( !empty($mode) )
 		case 'modcat':
 			// Modify a category in the DB
 			$sql = "UPDATE " . CATEGORIES_TABLE . "
-				SET cat_title = '" . str_replace("\'", "''", $HTTP_POST_VARS['cat_title']) . "'
+				SET cat_title = '" . $db->sql_escape($HTTP_POST_VARS['cat_title']) . "'
 				WHERE cat_id = " . intval($HTTP_POST_VARS[POST_CAT_URL]);
 			if( !$result = $db->sql_query($sql) )
 			{

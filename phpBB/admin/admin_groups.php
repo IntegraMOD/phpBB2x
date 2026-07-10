@@ -330,7 +330,7 @@ else if ( isset($_POST['group_update']) )
 			}
 
 			$sql = "UPDATE " . GROUPS_TABLE . "
-				SET group_type = $group_type, group_name = '" . str_replace("\'", "''", $group_name) . "', group_description = '" . str_replace("\'", "''", $group_description) . "', group_moderator = $group_moderator 
+				SET group_type = $group_type, group_name = '" . $db->sql_escape($group_name) . "', group_description = '" . $db->sql_escape($group_description) . "', group_moderator = $group_moderator 
 				WHERE group_id = $group_id";
 			if ( !$db->sql_query($sql) )
 			{
@@ -344,7 +344,7 @@ else if ( isset($_POST['group_update']) )
 		else if( $mode == 'newgroup' )
 		{
 			$sql = "INSERT INTO " . GROUPS_TABLE . " (group_type, group_name, group_description, group_moderator, group_single_user) 
-				VALUES ($group_type, '" . str_replace("\'", "''", $group_name) . "', '" . str_replace("\'", "''", $group_description) . "', $group_moderator,	'0')";
+				VALUES ($group_type, '" . $db->sql_escape($group_name) . "', '" . $db->sql_escape($group_description) . "', $group_moderator,	'0')";
 			if ( !$db->sql_query($sql) )
 			{
 				message_die(GENERAL_ERROR, 'Could not insert new group', '', __LINE__, __FILE__, $sql);
