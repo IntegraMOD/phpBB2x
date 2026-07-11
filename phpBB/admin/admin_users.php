@@ -89,7 +89,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 			$row = $db->sql_fetchrow($result);
 			
 			$sql = "UPDATE " . POSTS_TABLE . "
-				SET poster_id = " . DELETED . ", post_username = '" . $db->sql_escape($this_userdata['username']) . "' 
+				SET poster_id = " . DELETED . ", post_username = '" . str_replace("\\'", "''", addslashes($this_userdata['username'])) . "' 
 				WHERE poster_id = $user_id";
 			if( !$db->sql_query($sql) )
 			{
@@ -642,7 +642,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 				$error_msg = ( !empty($error_msg) ) ? $error_msg . "<br />" . $l_avatar_size : $l_avatar_size;
 			}
 		}
-				else if( $user_avatar_remoteurl != "" && $avatar_sql == "" && !$error )
+		else if( $user_avatar_remoteurl != "" && $avatar_sql == "" && !$error )
 		{
 			if( !preg_match("#^http:\/\/#i", $user_avatar_remoteurl) )
 			{
@@ -651,7 +651,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 
 			if( preg_match("#^(http:\/\/[a-z0-9\-]+?\.([a-z0-9\-]+\.)*[a-z]+\/.*?\.(gif|jpg|png)$)#is", $user_avatar_remoteurl) )
 			{
-				$avatar_sql = ", user_avatar = '" . $db->sql_escape($user_avatar_remoteurl) . "', user_avatar_type = " . USER_AVATAR_REMOTE;
+				$avatar_sql = ", user_avatar = '" . str_replace("\'", "''", $user_avatar_remoteurl) . "', user_avatar_type = " . USER_AVATAR_REMOTE;
 			}
 			else
 			{
@@ -661,7 +661,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		}
 		else if( $user_avatar_local != "" && $avatar_sql == "" && !$error )
 		{
-			$avatar_sql = ", user_avatar = '" . $db->sql_escape(phpbb_ltrim(basename($user_avatar_category), "'") . '/' . phpbb_ltrim(basename($user_avatar_local), "'")) . "', user_avatar_type = " . USER_AVATAR_GALLERY;
+			$avatar_sql = ", user_avatar = '" . str_replace("\'", "''", phpbb_ltrim(basename($user_avatar_category), "'") . '/' . phpbb_ltrim(basename($user_avatar_local), "'")) . "', user_avatar_type = " . USER_AVATAR_GALLERY;
 		}
 	
 		//
@@ -672,7 +672,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 			$username_sql = (isset($username_sql)) ? $username_sql : '';
 			$signature_bbcode_uid = (isset($signature_bbcode_uid)) ? $signature_bbcode_uid : '';			
 			$sql = "UPDATE " . USERS_TABLE . "
-				SET " . $username_sql . $passwd_sql . "user_email = '" . $db->sql_escape($email) . "', user_icq = '" . $db->sql_escape($icq) . "', user_website = '" . $db->sql_escape($website) . "', user_occ = '" . $db->sql_escape($occupation) . "', user_from = '" . $db->sql_escape($location) . "', user_interests = '" . $db->sql_escape($interests) . "', user_sig = '" . $db->sql_escape($signature) . "', user_viewemail = $viewemail, user_fb = '" . $db->sql_escape($fb) . "', user_ig = '" . $db->sql_escape($ig) . "', user_pt = '" . $db->sql_escape($pt) . "', user_twr = '" . $db->sql_escape($twr) . "', user_skp = '" . $db->sql_escape($skp) . "', user_tg = '" . $db->sql_escape($tg) . "', user_li = '" . $db->sql_escape($li) . "', user_tt = '" . $db->sql_escape($tt) . "', user_dc = '" . $db->sql_escape($dc) . "', user_attachsig = $attachsig, user_sig_bbcode_uid = '$signature_bbcode_uid', user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowavatar = $user_allowavatar, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_allow_pm = $user_allowpm, user_notify_pm = $notifypm, user_popup_pm = $popuppm, user_lang = '" . $db->sql_escape($user_lang) . "', user_style = $user_style, user_timezone = $user_timezone, user_dateformat = '" . $db->sql_escape($user_dateformat) . "', user_active = $user_status, user_rank = $user_rank" . $avatar_sql . "
+				SET " . $username_sql . $passwd_sql . "user_email = '" . str_replace("\'", "''", $email) . "', user_icq = '" . str_replace("\'", "''", $icq) . "', user_website = '" . str_replace("\'", "''", $website) . "', user_occ = '" . str_replace("\'", "''", $occupation) . "', user_from = '" . str_replace("\'", "''", $location) . "', user_interests = '" . str_replace("\'", "''", $interests) . "', user_sig = '" . str_replace("\'", "''", $signature) . "', user_viewemail = $viewemail, user_fb = '" . str_replace("\'", "''", $fb) . "', user_ig = '" . str_replace("\'", "''", $ig) . "', user_pt = '" . str_replace("\'", "''", $pt) . "', user_twr = '" . str_replace("\'", "''", $twr) . "', user_skp = '" . str_replace("\'", "''", $skp) . "', user_tg = '" . str_replace("\'", "''", $tg) . "', user_li = '" . str_replace("\'", "''", $li) . "', user_tt = '" . str_replace("\'", "''", $tt) . "', user_dc = '" . str_replace("\'", "''", $dc) . "', user_attachsig = $attachsig, user_sig_bbcode_uid = '$signature_bbcode_uid', user_allowsmile = $allowsmilies, user_allowhtml = $allowhtml, user_allowavatar = $user_allowavatar, user_allowbbcode = $allowbbcode, user_allow_viewonline = $allowviewonline, user_notify = $notifyreply, user_allow_pm = $user_allowpm, user_notify_pm = $notifypm, user_popup_pm = $popuppm, user_lang = '" . str_replace("\'", "''", $user_lang) . "', user_style = $user_style, user_timezone = $user_timezone, user_dateformat = '" . str_replace("\'", "''", $user_dateformat) . "', user_active = $user_status, user_rank = $user_rank" . $avatar_sql . "
 				WHERE user_id = $user_id";
 
 			if( $result = $db->sql_query($sql) )
@@ -680,8 +680,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 				if( isset($rename_user) )
 				{
 					$sql = "UPDATE " . GROUPS_TABLE . "
-						SET group_name = '" . $db->sql_escape($rename_user) . "'
-						WHERE group_name = '" . $db->sql_escape($this_userdata['username']) . "'";
+						SET group_name = '".str_replace("\'", "''", $rename_user)."'
+						WHERE group_name = '".str_replace("'", "''", $this_userdata['username'] )."'";
 					if( !$result = $db->sql_query($sql) )
 					{
 						message_die(GENERAL_ERROR, 'Could not rename users group', '', __LINE__, __FILE__, $sql);
@@ -757,7 +757,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 			$user_dateformat = htmlspecialchars(stripslashes($user_dateformat), ENT_COMPAT, 'utf-8');
 		}
 	}
-	else if( !isset( $_POST['submit'] ) && $mode != 'save' && !isset( $_POST['avatargallery'] ) && !isset( $_POST['submitavatar'] ) && !isset( $_POST['cancelavatar'] ) )	{
+	else if( !isset( $_POST['submit'] ) && $mode != 'save' && !isset( $_POST['avatargallery'] ) && !isset( $_POST['submitavatar'] ) && !isset( $_POST['cancelavatar'] ) )
+	{
 		if( isset( $_GET[POST_USERS_URL]) || isset( $_POST[POST_USERS_URL]) )
 		{
 			$user_id = ( isset( $_POST[POST_USERS_URL]) ) ? intval( $_POST[POST_USERS_URL]) : intval( $_GET[POST_USERS_URL]);

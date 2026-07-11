@@ -112,66 +112,32 @@ if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals
 }
 
 //
-// addslashes to vars if magic_quotes_gpc is off
-// this is a security precaution to prevent someone
-// trying to break out of a SQL statement.
+// addslashes to incoming request vars
+// Security precaution to prevent breaking out of SQL statements.
 //
-if (version_compare(PHP_VERSION, '7.4.0', '<') && function_exists('get_magic_quotes_gpc') && !get_magic_quotes_gpc())
+function phpbb_addslashes_recursive(&$var)
 {
-	if( is_array($HTTP_GET_VARS) )
+	if (is_array($var))
 	{
-		foreach ($HTTP_GET_VARS as $k => $v) {
-			if( is_array($HTTP_GET_VARS[$k]) )
-			{
-				foreach ($HTTP_GET_VARS[$k] as $k2 => $v2) {
-					$HTTP_GET_VARS[$k][$k2] = addslashes($v2);
-				}
-				@reset($HTTP_GET_VARS[$k]);
-			}
-			else
-			{
-				$HTTP_GET_VARS[$k] = addslashes($v);
-			}
+		foreach ($var as $k => &$v)
+		{
+			phpbb_addslashes_recursive($v);
 		}
-		@reset($HTTP_GET_VARS);
 	}
-
-	if( is_array($HTTP_POST_VARS) )
+	else
 	{
-		foreach ($HTTP_POST_VARS as $k => $v) {
-			if( is_array($HTTP_POST_VARS[$k]) )
-			{
-				foreach ($HTTP_POST_VARS[$k] as $k2 => $v2) {
-					$HTTP_POST_VARS[$k][$k2] = addslashes($v2);
-				}
-				@reset($HTTP_POST_VARS[$k]);
-			}
-			else
-			{
-				$HTTP_POST_VARS[$k] = addslashes($v);
-			}
-		}
-		@reset($HTTP_POST_VARS);
-	}
-
-	if( is_array($HTTP_COOKIE_VARS) )
-	{
-		foreach ($HTTP_COOKIE_VARS as $k => $v) {
-			if( is_array($HTTP_COOKIE_VARS[$k]) )
-			{
-				foreach ($HTTP_COOKIE_VARS[$k] as $k2 => $v2) {
-					$HTTP_COOKIE_VARS[$k][$k2] = addslashes($v2);
-				}
-				@reset($HTTP_COOKIE_VARS[$k]);
-			}
-			else
-			{
-				$HTTP_COOKIE_VARS[$k] = addslashes($v);
-			}
-		}
-		@reset($HTTP_COOKIE_VARS);
+		$var = addslashes($var);
 	}
 }
+
+// Ensure superglobals and legacy HTTP_*_VARS are both slashed
+phpbb_addslashes_recursive($_GET);
+phpbb_addslashes_recursive($_POST);
+phpbb_addslashes_recursive($_COOKIE);
+
+$HTTP_GET_VARS    = $_GET;
+$HTTP_POST_VARS   = $_POST;
+$HTTP_COOKIE_VARS = $_COOKIE;
 
 //
 // Define some basic configuration arrays this also prevents

@@ -57,7 +57,7 @@ if( isset($_POST['add_name']) )
 	else
 	{
 		$sql = "INSERT INTO " . DISALLOW_TABLE . " (disallow_username) 
-			VALUES('" . $db->sql_escape($disallowed_user) . "')";
+			VALUES('" . str_replace("\'", "''", $disallowed_user) . "')";
 		$result = $db->sql_query( $sql );
 		if ( !$result )
 		{

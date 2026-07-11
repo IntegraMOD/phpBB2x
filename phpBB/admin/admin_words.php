@@ -142,14 +142,14 @@ if( $mode != "" )
 		if( $word_id )
 		{
 			$sql = "UPDATE " . WORDS_TABLE . " 
-				SET word = '" . $db->sql_escape($word) . "', replacement = '" . $db->sql_escape($replacement) . "' 
+				SET word = '" . str_replace("\'", "''", $word) . "', replacement = '" . str_replace("\'", "''", $replacement) . "' 
 				WHERE word_id = $word_id";
 			$message = $lang['Word_updated'];
 		}
 		else
 		{
 			$sql = "INSERT INTO " . WORDS_TABLE . " (word, replacement) 
-				VALUES ('" . $db->sql_escape($word) . "', '" . $db->sql_escape($replacement) . "')";
+				VALUES ('" . str_replace("\'", "''", $word) . "', '" . str_replace("\'", "''", $replacement) . "')";
 			$message = $lang['Word_added'];
 		}
 
