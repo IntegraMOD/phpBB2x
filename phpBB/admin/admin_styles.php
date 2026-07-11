@@ -544,9 +544,9 @@ switch( $mode )
 					message_die(GENERAL_ERROR, "Could not get data from themes name table", "", __LINE__, __FILE__, $sql);
 				}
 				
-				if ( $selected_names = $db->sql_fetchrow($result) )
+				if ($selected_names = $db->sql_fetchrow($result))
 				{
-					while(list($key, $val) = @each($selected_names))
+					foreach ($selected_names as $key => $val)
 					{
 						$selected[$key] = $val;
 					}
