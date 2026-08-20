@@ -1,4 +1,9 @@
 <?php
+/*
+ * WARNING: This driver uses the mysql_* extension which was REMOVED in PHP 7.0.
+ * It is NOT compatible with PHP 7.0 or later.
+ * Use db/mysqli.php or db/pdo.php instead and update $dbms in config.php accordingly.
+ */
 /***************************************************************************
 *                                 mysql4.php
 *                            -------------------

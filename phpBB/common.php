@@ -42,8 +42,8 @@ $starttime = $mtime;
 // The following code (unsetting globals)
 // Thanks to Matt Kavanagh and Stefan Esser for providing feedback as well as patch files
 
-// PHP5 with register_long_arrays off?
-if (@phpversion() >= '5.0.0' && (!@ini_get('register_long_arrays') || @ini_get('register_long_arrays') == '0' || strtolower(@ini_get('register_long_arrays')) == 'off'))
+// PHP5+ with register_long_arrays off?
+if (version_compare(PHP_VERSION, '5.0.0', '>=') && (!@ini_get('register_long_arrays') || @ini_get('register_long_arrays') == '0' || strtolower(@ini_get('register_long_arrays')) == 'off'))
 {
 	$HTTP_POST_VARS = $_POST;
 	$HTTP_GET_VARS = $_GET;
@@ -59,58 +59,16 @@ if (@phpversion() >= '5.0.0' && (!@ini_get('register_long_arrays') || @ini_get('
 	}
 }
 
-// PHP5 with register_long_arrays off?
-if (@phpversion() >= '5.0.0' && (!@ini_get('register_long_arrays') || @ini_get('register_long_arrays') == '0' || strtolower(@ini_get('register_long_arrays')) == 'off'))
-{
-	$HTTP_POST_VARS = $_POST;
-	$HTTP_GET_VARS = $_GET;
-	$HTTP_SERVER_VARS = $_SERVER;
-	$HTTP_COOKIE_VARS = $_COOKIE;
-	$HTTP_ENV_VARS = $_ENV;
-	$HTTP_POST_FILES = $_FILES;
+// PHP 7+ removed ereg/split family; polyfills use '#' as delimiter to safely handle patterns containing '/'
+if(!function_exists('ereg'))            { function ereg($pattern, $subject, &$matches = []) { return preg_match('#'.str_replace('#','\#',$pattern).'#', $subject, $matches); } }
+if(!function_exists('eregi'))           { function eregi($pattern, $subject, &$matches = []) { return preg_match('#'.str_replace('#','\#',$pattern).'#i', $subject, $matches); } }
+if(!function_exists('ereg_replace'))    { function ereg_replace($pattern, $replacement, $string) { return preg_replace('#'.str_replace('#','\#',$pattern).'#', $replacement, $string); } }
+if(!function_exists('eregi_replace'))   { function eregi_replace($pattern, $replacement, $string) { return preg_replace('#'.str_replace('#','\#',$pattern).'#i', $replacement, $string); } }
+if(!function_exists('split'))           { function split($pattern, $subject, $limit = -1) { return preg_split('#'.str_replace('#','\#',$pattern).'#', $subject, $limit); } }
+if(!function_exists('spliti'))          { function spliti($pattern, $subject, $limit = -1) { return preg_split('#'.str_replace('#','\#',$pattern).'#i', $subject, $limit); } }
+// PHP 8.0 removed each(); polyfill retains internal array pointer behaviour
+if(!function_exists('each'))            { function each(&$arr) { $key = key($arr); if($key === null) { return false; } $val = current($arr); next($arr); return [1 => $val, 'value' => $val, 0 => $key, 'key' => $key]; } }
 
-	// _SESSION is the only superglobal which is conditionally set
-	if (isset($_SESSION))
-	{
-		$HTTP_SESSION_VARS = $_SESSION;
-	}
-}
-
-if(!function_exists('ereg')) { 
-    function ereg($pattern, $subject, &$matches = []) { 
-        // Escape the '#' delimiter if it exists in the pattern, then wrap in '#'
-        return preg_match('#' . str_replace('#', '\#', $pattern) . '#', $subject, $matches); 
-    } 
-}
-if(!function_exists('eregi')) { 
-    function eregi($pattern, $subject, &$matches = []) { 
-        return preg_match('#' . str_replace('#', '\#', $pattern) . '#i', $subject, $matches); 
-    } 
-}
-if(!function_exists('ereg_replace')) { 
-    function ereg_replace($pattern, $replacement, $string) { 
-        // Use '#' as delimiter and escape '#' within the pattern
-        return preg_replace('#' . str_replace('#', '\#', $pattern) . '#', $replacement, $string); 
-    } 
-}
-
-if(!function_exists('eregi_replace')) { 
-    function eregi_replace($pattern, $replacement, $string) { 
-        return preg_replace('#' . str_replace('#', '\#', $pattern) . '#i', $replacement, $string); 
-    } 
-}
-
-if(!function_exists('split')) { 
-    function split($pattern, $subject, $limit = -1) { 
-        return preg_split('#' . str_replace('#', '\#', $pattern) . '#', $subject, $limit); 
-    } 
-}
-
-if(!function_exists('spliti')) { 
-    function spliti($pattern, $subject, $limit = -1) { 
-        return preg_split('#' . str_replace('#', '\#', $pattern) . '#i', $subject, $limit); 
-    } 
-}
 // Protect against GLOBALS tricks
 if (isset($HTTP_POST_VARS['GLOBALS']) || isset($HTTP_POST_FILES['GLOBALS']) || isset($HTTP_GET_VARS['GLOBALS']) || isset($HTTP_COOKIE_VARS['GLOBALS']))
 {

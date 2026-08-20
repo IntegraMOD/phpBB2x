@@ -739,27 +739,11 @@ function bbcode_array_push(&$stack, $value)
  * however, to keep phpBB compatable with PHP 3 we had to come up with our own
  * method of doing it.
  * This function was deprecated in phpBB 2.0.18
+ * Updated: replaced each() (removed PHP 8.0) with native array_pop()
  */
 function bbcode_array_pop(&$stack)
 {
-   $arrSize = count($stack);
-   $x = 1;
-
-   while(list($key, $val) = each($stack))
-   {
-      if($x < count($stack))
-      {
-	 		$tmpArr[] = $val;
-      }
-      else
-      {
-	 		$return_val = $val;
-      }
-      $x++;
-   }
-   $stack = $tmpArr;
-
-   return($return_val);
+   return array_pop($stack);
 }
 
 //
