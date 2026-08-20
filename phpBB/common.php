@@ -5,6 +5,7 @@
  *   begin                : Saturday, Feb 23, 2001
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
+ *   version              : 2.0.26
  *
  *   $Id$
  *
