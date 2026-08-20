@@ -24,12 +24,12 @@
 				<div class="col pt-1 text-center">{L_MESSAGE}</div>
 			  </div>
 			  <!-- BEGIN postrow -->
-			  <div class="row mx-0"> 
-			    <div class="col-2 pb-1"><span class="pname"><a name="{postrow.U_POST_ID}"></a><b>{postrow.POSTER_NAME}</b></span><br /><span class="postdetails">{postrow.POSTER_RANK}<br />{postrow.RANK_IMAGE}{postrow.POSTER_AVATAR}<br /><br />{postrow.POSTER_JOINED}<br />{postrow.POSTER_POSTS}<br />{postrow.POSTER_FROM}</span><br /></div>
-				<div class="col hr4 rounded-2 pb-1">
+			  <div class="row mx-0 flex-nowrap"> 
+				<div class="col-3 col-sm-2 pb-1"><span class="pname"><a name="{postrow.U_POST_ID}"></a><b>{postrow.POSTER_NAME}</b></span><br /><span class="postdetails">{postrow.POSTER_RANK}<br />{postrow.RANK_IMAGE}{postrow.POSTER_AVATAR}<br /><br />{postrow.POSTER_JOINED}<br />{postrow.POSTER_POSTS}<br />{postrow.POSTER_FROM}</span><br /></div>
+				<div class="col hr4 rounded-2 pb-1" style="min-width:0">
 				  <div class="row d-flex align-items-center">
-				    <div class="col-9 text-start"><a href="{postrow.U_MINI_POST}"><img src="{postrow.MINI_POST_IMG}" height="9" alt="{postrow.L_MINI_POST_ALT}" title="{postrow.L_MINI_POST_ALT}" /></a><span class="postdetails">{L_POSTED}: {postrow.POST_DATE}<span class="gen">&nbsp;</span>&nbsp; &nbsp;{L_POST_SUBJECT}: {postrow.POST_SUBJECT}</span></div>
-					<div class="col pt-2 text-end">{postrow.QUOTE_IMG} {postrow.EDIT_IMG} {postrow.DELETE_IMG} {postrow.IP_IMG}</div>
+					<div class="col-12 col-sm-9 text-start"><a href="{postrow.U_MINI_POST}"><img src="{postrow.MINI_POST_IMG}" height="9" alt="{postrow.L_MINI_POST_ALT}" title="{postrow.L_MINI_POST_ALT}" /></a><span class="postdetails">{L_POSTED}: {postrow.POST_DATE}<span class="gen">&nbsp;</span>&nbsp; &nbsp;{L_POST_SUBJECT}: {postrow.POST_SUBJECT}</span></div>
+					<div class="col-12 col-sm-3 pt-2 text-start text-sm-end">{postrow.QUOTE_IMG} {postrow.EDIT_IMG} {postrow.DELETE_IMG} {postrow.IP_IMG}</div>
 				  </div>
 				  <div class="row"> 
 					<div class="col"><hr /></div>
@@ -40,8 +40,8 @@
 				</div>
 			  </div>
 			  <div class="row py-0 mx-0"> 
-			    <div class="col-2 pt-2 pb-1"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
-			    <div class="col pt-2 pb-1 gen text-start">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG}</div>
+				<div class="col-3 col-md-2 pt-2 pb-1"><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
+				<div class="col pt-2 pb-1 gen text-start d-flex flex-wrap align-items-center">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG}</div>
 			  </div>
 			  <!-- END postrow -->
 			</div>			  

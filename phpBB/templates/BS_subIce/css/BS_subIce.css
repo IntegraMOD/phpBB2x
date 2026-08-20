@@ -202,7 +202,7 @@ a.topictitle:hover	{ text-decoration: underline; color : #31465E; }
 
 
 /* The content of the posts (body of text) */
-.postbody { font-size : 0.923em;}
+.postbody { font-size : 0.923em; word-break: break-word; overflow-wrap: break-word; }
 a.postlink:link	{ text-decoration: none; color : #6A89A9 }
 a.postlink:visited { text-decoration: none; color : #5493B4; }
 a.postlink:hover { text-decoration: underline; color : #31465E}

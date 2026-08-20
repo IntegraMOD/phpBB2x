@@ -17,16 +17,16 @@
           </div>
           {POLL_DISPLAY} 
           <div class="row th hr1 mx-0 pt-1">
-        	<div style="height: 28px;" class="col-2 pt-1 hr3">{L_AUTHOR}</div>
-        	<div style="height: 28px;" class="col pt-1 text-center">{L_MESSAGE}</div>
+            <div style="height: 28px;" class="col-3 col-md-2 pt-1 hr3">{L_AUTHOR}</div>
+            <div style="height: 28px;" class="col pt-1 text-center">{L_MESSAGE}</div>
           </div>
         	<!-- BEGIN postrow -->
-        	<div class="row mx-0 row1"> 
-        	  <div class="col-2 hr4 pb-1 text-center"><span class="name"><a name="{postrow.U_POST_ID}"></a><b>{postrow.POSTER_NAME}</b></span><br /><span class="postdetails">{postrow.POSTER_RANK}<br />{postrow.RANK_IMAGE}{postrow.POSTER_AVATAR}<br /><br />{postrow.POSTER_JOINED}<br />{postrow.POSTER_POSTS}<br />{postrow.POSTER_FROM}</span><br /></div>
-        	  <div class="col hr4 pb-1">
-        	    <div class="row d-flex align-items-center">
-        	  	  <div class="col-9"><a href="{postrow.U_MINI_POST}"><img src="{postrow.MINI_POST_IMG}" height="9" alt="{postrow.L_MINI_POST_ALT}" title="{postrow.L_MINI_POST_ALT}" /></a><span class="postdetails">{L_POSTED}: {postrow.POST_DATE}<span class="gen">&nbsp;</span>&nbsp; &nbsp;{L_POST_SUBJECT}: {postrow.POST_SUBJECT}</span></div>
-        		  <div class="col pt-2 text-end">{postrow.QUOTE_IMG} {postrow.EDIT_IMG} {postrow.DELETE_IMG} {postrow.IP_IMG}</div>
+            <div class="row mx-0 row1 flex-nowrap"> 
+              <div class="col-3 col-sm-2 hr4 pb-1 text-center"><span class="name"><a name="{postrow.U_POST_ID}"></a><b>{postrow.POSTER_NAME}</b></span><br /><span class="postdetails">{postrow.POSTER_RANK}<br />{postrow.RANK_IMAGE}{postrow.POSTER_AVATAR}<br /><br />{postrow.POSTER_JOINED}<br />{postrow.POSTER_POSTS}<br />{postrow.POSTER_FROM}</span><br /></div>
+              <div class="col hr4 pb-1" style="min-width:0">
+                <div class="row d-flex align-items-center">
+                  <div class="col-12 col-sm-9"><a href="{postrow.U_MINI_POST}"><img src="{postrow.MINI_POST_IMG}" height="9" alt="{postrow.L_MINI_POST_ALT}" title="{postrow.L_MINI_POST_ALT}" /></a><span class="postdetails">{L_POSTED}: {postrow.POST_DATE}<span class="gen">&nbsp;</span>&nbsp; &nbsp;{L_POST_SUBJECT}: {postrow.POST_SUBJECT}</span></div>
+                  <div class="col-12 col-sm-3 pt-2 text-start text-sm-end">{postrow.QUOTE_IMG} {postrow.EDIT_IMG} {postrow.DELETE_IMG} {postrow.IP_IMG}</div>
         		</div>
         		<div class="row"> 
         		  <div class="col"><hr /></div>
@@ -36,9 +36,9 @@
         		</div>
         	  </div>
         	</div>
-        	<div class="row py-0 mx-0 row1"> 
-        	  <div class="col-2 pt-2 pb-1 hr3"><a class="navbr" href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
-        	  <div class="col pt-2 pb-1 gen">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG} {postrow.ICQ_IMG}</div>
+            <div class="row py-0 mx-0 row1"> 
+              <div class="col-3 col-md-2 pt-2 pb-1 hr3"><a class="navbr" href="#top" title="{L_BACK_TO_TOP}"><i class="fa-solid fa-circle-up fa-2x"></i></a></div>
+              <div class="col pt-2 pb-1 gen d-flex flex-wrap align-items-center">{postrow.PROFILE_IMG} {postrow.PM_IMG} {postrow.EMAIL_IMG} {postrow.WWW_IMG} {postrow.FB_IMG} {postrow.IG_IMG} {postrow.PT_IMG} {postrow.TWR_IMG} {postrow.SKP_IMG} {postrow.TG_IMG} {postrow.LI_IMG} {postrow.TT_IMG} {postrow.DC_IMG} {postrow.ICQ_IMG}</div>
         	</div>
          	<!-- END postrow -->
 		  <div class="row d-flex catBottom align-items-center text-center bdrw mx-0"> 
@@ -48,7 +48,7 @@
 		  </div>        	
 		</div>
 		<span class="row my-2 mx-0 align-items-center"> 
-          <span class="col-sm-7 col-md-7 my-2"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></span>
+          <span class="col-sm-7 col-md-7 my-2"><a href="{U_POST_NEW_TOPIC}" class="pbtn gen"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_NEW}</a>&nbsp;&nbsp;&nbsp;<a href="{U_POST_REPLY_TOPIC}" class="pbtn gen"><img src="{REPLY_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" />&nbsp;{L_BUTTON_TOPIC_REPLY}</a></span>
           <span class="col-sm-4 offset-sm-1 col-md-5 offset-md-0 my-2"><span class="navbr">&nbsp;&nbsp;&nbsp;<a href="{U_INDEX}">{L_INDEX}</a> -> <a href="{U_VIEW_FORUM}" class="navbr">{FORUM_NAME}</a></span></span>
 		</span>
 		<div class="row mx-0">
